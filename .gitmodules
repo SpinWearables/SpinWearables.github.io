@@ -1,0 +1,3 @@
+[submodule "websitesource"]
+	path = websitesource
+	url = https://github.com/SpinWearables/SpinWearablesWebsite.git
