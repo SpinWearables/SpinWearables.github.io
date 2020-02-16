@@ -16,41 +16,68 @@
   <style>
   </style>
   <style>
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="/custom.css" />
   <link rel="stylesheet" href="/custom_book.css" />
@@ -88,10 +115,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <main>
 <p>The human eye is a fairly special organ. On one hand, it is already a spectacular sensor that, by far, outperform all the other senses in the amount of information it gives us about our surroundings. On the other hand, it is a hacked together compromise that leaves so much of the richness of color and light imperceptible to us. Here we will explore the limitations of this important sensor and we will even find out a few ways in which we can trick that sensor into believing things that are not there.</p>
 <h2 id="colors">Colors</h2>
-<p>Light, as it is coming from the Sun or most other source of illumination, is a mixture of all colors. We perceive that mixture as lacking a hue, i.e. as being white. There are tools we can use to split all the colored rays in a beam of white light: for instance we can use a prism that changes the direction in which light goes depending on its color, hence turning the white beam on one side into a spread-out rainbow on the other side.</p>
-<p>The light-sensing tissue in the back of our eyes, the retina, has small cells that respond to some of these colors. They are called &quot;cone cells&quot; and there are three separate groups of them, sensing predominantly three different groups of colors: roughly separated in the red, green, and blue hues. For instance, the blue-sensing cones do not respond to red light, and vice versa. And our eyes do not really have the space to put any other types of cones in. This leads to a problem... If our eyes can sense only red, green, and blue, how come we can see yellow. The workaround that evolution has reached is to have both the &quot;predominantly red&quot; and &quot;predominantly green&quot; cones respond slightly to yellow. If our brain detects that both groups of cones are activated, it knows to interpret the color as yellow. And similar compromises are made for the other colors we can detect, e.g. purple activates both the red- and blue-sensing cones.</p>
-<p>::: further-reading There is an animal that can, unlike us, detect the difference between a true pure color, and a mixture of colors that fakes the presence of the given color. It is called a mantis shrimp and it has 12 different types of cone cells in its eye. The Oatmeal comics has <a href="https://theoatmeal.com/comics/mantis_shrimp">an informative and entertaining strip about it</a>. :::</p>
-<p>::: further-reading You can learn more about the spectrum of light in the section on <a href="/lightandcolor">light and color</a>. :::</p>
+<p>Light, as it is coming from the Sun or most other source of illumination, is a mixture of all colors. We perceive that mixture as lacking a hue, i.e. as being white. There are tools we can use to split all the colored rays in a beam of white light: for instance we can use a prism that changes the direction in which light goes depending on its color, hence turning the white beam on one side into a spread-out rainbow on the other side.</p>
+<p>The light-sensing tissue in the back of our eyes, the retina, has small cells that respond to some of these colors. They are called “cone cells” and there are three separate groups of them, sensing predominantly three different groups of colors: roughly separated in the red, green, and blue hues. For instance, the blue-sensing cones do not respond to red light, and vice versa. And our eyes do not really have the space to put any other types of cones in. This leads to a problem… If our eyes can sense only red, green, and blue, how come we can see yellow. The workaround that evolution has reached is to have both the “predominantly red” and “predominantly green” cones respond slightly to yellow. If our brain detects that both groups of cones are activated, it knows to interpret the color as yellow. And similar compromises are made for the other colors we can detect, e.g. purple activates both the red- and blue-sensing cones.</p>
+<div class="further-reading">
+<p>There is an animal that can, unlike us, detect the difference between a true pure color, and a mixture of colors that fakes the presence of the given color. It is called a mantis shrimp and it has 12 different types of cone cells in its eye. The Oatmeal comics has <a href="https://theoatmeal.com/comics/mantis_shrimp">an informative and entertaining strip about it</a>.</p>
+</div>
+<div class="further-reading">
+<p>You can learn more about the spectrum of light in the section on <a href="/lightandcolor">light and color</a>.</p>
+</div>
 <p>We can exploit this imperfection of our eyes to make rich colorful displays while using only three colors. If our eyes can not distinguish between true purple and a mixture of blue and red, then we do not need a purple light source, rather only blue and red (and green for the other color combinations). If you look with a magnifying glass at a TV screen displaying a white page, you will see it is made out of red, blue, and green dots. Below you can move the sliders in order to see how all the colors of the rainbow can be made by mixing just red, green, and blue (or at our eyes can be convinced of that, even if it is not true).</p>
 <style>
 #colortests {
@@ -152,21 +183,21 @@ changeColor();
 </div>
 <p>This however, is good enough for our purposes, which are to create beautiful colorful patterns while using only a small set of hardware components. We can try to do that directly on the SpinWheel now. This is why we had chosen the sliders to go from 0 to 255 instead a more obvious set of numbers like 0 to 100 - it is the representation used by the SpinWheel.</p>
 <p>If you have trouble understanding the commands below, be sure to read our <a href="/quickstart">quick start guide</a> and if necessary some of the Computer Science 101 sections. Pick a color you like by changing the sliders above (for instance, I like purple like <code>(195,0,255)</code>), and make the large LEDs on the SpinWheel show that color.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span>
-<span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;
-
-<span class="dt">void</span> setup() {
-  <span class="co">// Initialize all of the hardware on the SpinWheel.</span>
-  SpinWheel.begin();
-  <span class="co">// Ask the SpinWheel to prepare all large LEDs to</span>
-  <span class="co">// show a particular color.</span>
-  SpinWheel.setLargeLEDsUniform(<span class="dv">195</span>, <span class="dv">0</span>, <span class="dv">255</span>);
-  <span class="co">// Make the SpinWheel show the registered color.</span>
-  SpinWheel.drawFrame();
-}
-
-<span class="dt">void</span> loop() {
-}</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  SpinWheel.begin();</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="co">// Ask the SpinWheel to prepare all large LEDs to</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="co">// show a particular color.</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">195</span>, <span class="dv">0</span>, <span class="dv">255</span>);</span>
+<span id="cb1-10"><a href="#cb1-10"></a>  <span class="co">// Make the SpinWheel show the registered color.</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  SpinWheel.drawFrame();</span>
+<span id="cb1-12"><a href="#cb1-12"></a>}</span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-15"><a href="#cb1-15"></a>}</span></code></pre></div>
 <h2 id="persistence-of-vision">Persistence of Vision</h2>
 <p>There is another imperfection about our eyes. They are rather slow. And again, this leads to tricks we can employ in order to make interesting effects without using complicated hardware. Consider the example below, where you can select the speed at which a shade of blue and a shade of red switch between each other.</p>
 <style>
@@ -236,34 +267,33 @@ getT();
 </script>
 </div>
 <p>The flicker at high speeds is rather unpleasant, but you can start seeing the purple color emerging and the red and blue being less clearly noticeable. Web browsers are not particularly well adapted to this type of rapid color changes. On the other hand, the SpinWheel is very much up to the task. The following program will cycle between red and blue at variable delays. Experiment with the value for the delay and observer at what delay you stop distinguishing the two colors and start seeing only the purple?</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span>
-<span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;
-
-<span class="dt">void</span> setup() {
-  <span class="co">// Initialize all of the hardware on the SpinWheel.</span>
-  SpinWheel.begin();
-}
-
-<span class="co">// CHANGE THIS VALUE! EXPERIMENT!</span>
-<span class="dt">int</span> delay_time_in_milliseconds = <span class="dv">500</span>;
-
-<span class="dt">void</span> loop() {
-  <span class="co">// Show red...</span>
-  SpinWheel.setLargeLEDsUniform(<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);
-  SpinWheel.drawFrame();
-  <span class="co">// Wait...</span>
-  delay(delay_time_in_milliseconds);
-  <span class="co">// Show blue...</span>
-  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>);
-  SpinWheel.drawFrame();
-  <span class="co">// Wait...</span>
-  delay(delay_time_in_milliseconds);  
-}</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>  SpinWheel.begin();</span>
+<span id="cb2-7"><a href="#cb2-7"></a>}</span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">// CHANGE THIS VALUE! EXPERIMENT!</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="dt">int</span> delay_time_in_milliseconds = <span class="dv">500</span>;</span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="dt">void</span> loop() {</span>
+<span id="cb2-13"><a href="#cb2-13"></a>  <span class="co">// Show red...</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
+<span id="cb2-15"><a href="#cb2-15"></a>  SpinWheel.drawFrame();</span>
+<span id="cb2-16"><a href="#cb2-16"></a>  <span class="co">// Wait...</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>  delay(delay_time_in_milliseconds);</span>
+<span id="cb2-18"><a href="#cb2-18"></a>  <span class="co">// Show blue...</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>);</span>
+<span id="cb2-20"><a href="#cb2-20"></a>  SpinWheel.drawFrame();</span>
+<span id="cb2-21"><a href="#cb2-21"></a>  <span class="co">// Wait...</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a>  delay(delay_time_in_milliseconds);  </span>
+<span id="cb2-23"><a href="#cb2-23"></a>}</span></code></pre></div>
 <p>Right at the point where the red and blue stop being observable on their own, you can perform another experiment that showcases the persistence of vision effect. Instead of keeping the SpinWheel immobile, start shaking it back and forth rapidly. Now the light emitters will be in different locations when they emit red and when they emit blue, and this will let you again distinguish the two colors. But once you stop shaking the device, it will once again look purple.</p>
-<div class="figure">
-<img src="/images/bookpics/fast_pov_streak.jpg" title="Picture of a fast-moving SpinWheel" alt="If you move the SpinWheel rapidly in front of your eyes, you will see the purple color separete in two distinct streaks of red an blue." />
-<p class="caption">If you move the SpinWheel rapidly in front of your eyes, you will see the purple color separete in two distinct streaks of red an blue.</p>
-</div>
+<figure>
+<img src="/images/bookpics/fast_pov_streak.jpg" title="Picture of a fast-moving SpinWheel" alt="" /><figcaption>If you move the SpinWheel rapidly in front of your eyes, you will see the purple color separete in two distinct streaks of red an blue.</figcaption>
+</figure>
 <p>These two tools, of faking rich colors by combining just red, green, and blue, and of faking static images by very rapidly cycling through partial frames, are the basis for many of our technologies, and are indeed the tools used in the SpinWheel as well.</p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
