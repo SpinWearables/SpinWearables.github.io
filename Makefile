@@ -4,6 +4,7 @@ register_submodule_updates:
 	git submodule foreach git checkout master
 	git submodule foreach git pull origin master
 	git diff --exit-code websitesource || (git add websitesource && git commit -m "Update websitesource submodule.")
+	git diff --exit-code firmwaresource || (git add websitesource && git commit -m "Update firmwaresource submodule.")
 render_websitesource: register_submodule_updates
 	make -C ./websitesource html
 	cp -r ./websitesource/build/* .
