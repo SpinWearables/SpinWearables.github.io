@@ -1,0 +1,773 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="./custom.css" type="text/css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+<style>
+h1, h2, h3 {
+  margin: auto;
+}
+.flex-container {
+  padding: 1rem;
+  margin: auto;
+  max-width: 1400px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.wide-text {
+  flex: 0 1 900px;
+  margin: auto;
+}
+.side-text {
+  flex: 0 1 40%;
+  padding: 0 1em;
+}
+img {
+  max-width: 100%;
+}
+video {
+  max-width: 100%;
+}
+.code {
+  flex: 1 0 40%;
+  background-color: rgba(116, 116, 116, 0.40);
+  padding: 0 1em;
+  max-width: 50%;
+}
+</style>
+</head>
+<body>
+<div class="flex-container">
+<div class="wide-text">
+<h1 id="the-spinwheel-firmware-v0.0.1">The SpinWheel firmware v0.0.1</h1>
+<p>This code is at the heart of all of our educational materials. It is what lets you write short programs of just a few lines and still make wonderful and beautiful patterns. If you have only recently started programming this code might look somewhat intimidating, hence consider starting with something simpler before delving in this much deeper pond.</p>
+</div>
+<div class="side-text">
+
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"></code></pre></div>
+</div>
+<div class="side-text">
+<h2 id="libraries">Libraries</h2>
+<p>First we need to include a number of tools that are already provided by other people and that will simplify our work quite a bit. Such tools are usually called &quot;software libraries&quot;.</p>
+</div>
+<div class="code placeholder">
+
+</div>
+<div class="side-text">
+<p>The <code>NeoPixel</code> library from Adafruit provides the functions we will use to talk to the large LEDs.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&quot;Adafruit_NeoPixel.h&quot;</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>The <code>ICM_20948</code> library from Sparkfun provides the functions to talk to the motion sensor.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&quot;ICM_20948.h&quot;</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>And the <code>math</code> standard library gives us access to frequently used mathematical functions (e.g. trigonometrics and exponents).</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>Here the implementation of our own new library starts. We will call it <code>SpinWearables</code>, after the name of our volunteer organization.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">namespace</span> SpinWearables {</code></pre></div>
+</div>
+<div class="side-text">
+<h2 id="constants">Constants</h2>
+<p>We will define a couple of convenient constants that will be used throughout our code.</p>
+</div>
+<div class="code placeholder">
+
+</div>
+<div class="side-text">
+<p>In many parts of the code we use a <code>byte</code> to represent a position on a circle. One byte can contain any number between 0 and 255. Given that we have 12 small LEDs, we would frequently want to know what one 12th of 255 is, i.e. <span class="math inline">\(\left\lfloor\frac{255}{12}\right\rfloor=21\)</span>, hence we put it here as a easy-to-reuse constant.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#define ONETWELFTH 21</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>The maximum number of animation routines the firmware permits (an arbitrary limit, simply ensuring we do not reserve too much memory). See <code>addAnimationRoutine</code> for details.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#define MAXROUTINES 10</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>A parameter related to how many times we repeat a frame on the small LEDs. This is the main source of delay in our code. See <code>drawSmallLEDFrame</code>.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#define SMALLLEDTIMEDIV 1</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>Parameters for the smoothing filters we use in order to make the readings of the motion sensor less jittery.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#define FILTER_DIV 8</span>
+<span class="pp">#define FILTER_A 64</span>
+<span class="pp">#define FILTER_B ((1&lt;&lt;FILTER_DIV) - FILTER_A)</span></code></pre></div>
+</div>
+<div class="side-text">
+<h2 id="profiling-functions">Profiling functions</h2>
+<p>We use this function to measure how fast our code is. When you run it, it tells you how many milliseconds have passes since the previous time it was invoked.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">long</span> executionTime() {
+  <span class="at">static</span> <span class="dt">long</span> t = millis();
+  <span class="dt">long</span> r = millis()-t;
+  t = millis();
+  <span class="cf">return</span> r;
+}</code></pre></div>
+</div>
+<div class="side-text">
+<h2 id="drawing-convenience-functions">Drawing convenience functions</h2>
+<p>We have prepared a number of convenience functions to make drawing animations simpler.</p>
+</div>
+<div class="code placeholder">
+
+</div>
+<div class="side-text">
+<h4 id="color-encoding">Color encoding</h4>
+<p>Some of our code expects the value of a color to be provided as a 32-bit word of which the bottom 24 bits (3 bytes) contain information about the red, green, and blue components of the color. This function lets us turn 3 bytes, one for each component into a single 32-bit word.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">uint32_t</span> color(<span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {
+  <span class="cf">return</span> (((<span class="dt">uint32_t</span>)r)&lt;&lt;<span class="dv">16</span>)+(((<span class="dt">uint32_t</span>)g)&lt;&lt;<span class="dv">8</span>)+b;  
+}</code></pre></div>
+</div>
+<div class="side-text">
+<h4 id="color-wheel">Color wheel</h4>
+<p>Frequently one needs to access the color (or hue) wheel. It is particularly important when making rainbows for instance. This function takes a coordinate on the circle (a single byte, 0 to 255, where 255 denotes a whole turn), and turns it into the corresponding hue. <img src="./colorwheel.png" alt="Depiction of the colorwheel." /></p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">uint32_t</span> colorWheel(<span class="dt">uint8_t</span> wheelPos) {
+  wheelPos = <span class="dv">255</span> - wheelPos;
+  <span class="cf">if</span>(wheelPos &lt; <span class="dv">85</span>) {
+    <span class="cf">return</span> color(<span class="dv">255</span> - wheelPos * <span class="dv">3</span>, <span class="dv">0</span>, wheelPos * <span class="dv">3</span>);
+  }
+  <span class="cf">if</span>(wheelPos &lt; <span class="dv">170</span>) {
+    wheelPos -= <span class="dv">85</span>;
+    <span class="cf">return</span> color(<span class="dv">0</span>, wheelPos * <span class="dv">3</span>, <span class="dv">255</span> - wheelPos * <span class="dv">3</span>);
+  }
+  wheelPos -= <span class="dv">170</span>;
+  <span class="cf">return</span> color(wheelPos * <span class="dv">3</span>, <span class="dv">255</span> - wheelPos * <span class="dv">3</span>, <span class="dv">0</span>);
+}</code></pre></div>
+</div>
+<div class="side-text">
+<h4 id="triangular-wave">Triangular wave</h4>
+<p>This function takes a number between 0 and 255 and provides a periodic triangular pattern, particularly useful when one needs a pulsing brightness. <img src="./triangular_wave.png" alt="Depiction of the triangular wave." /></p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">uint8_t</span> triangularWave(<span class="dt">uint8_t</span> x) {
+  <span class="cf">if</span> (x&gt;<span class="bn">0x7f</span>) {
+    <span class="cf">return</span> (<span class="bn">0xff</span>-x)&lt;&lt;<span class="dv">1</span>;
+  } <span class="cf">else</span> {
+    <span class="cf">return</span> x&lt;&lt;<span class="dv">1</span>;
+  }
+}</code></pre></div>
+</div>
+<div class="side-text">
+<h4 id="parabolic-wave">Parabolic wave</h4>
+<p>Similarly to the triangular wave, this function is useful for periodically pulsating patterns. However, the profile of this function resembles a beating heart more closely and it can provide for more pleasing visuals. <img src="./parabola_wave.png" alt="Depiction of the parabolic wave." /></p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">uint8_t</span> parabolaWave(<span class="dt">uint8_t</span> x) {
+  <span class="dt">uint8_t</span> xm = x;
+  <span class="cf">if</span> (xm&gt;<span class="bn">0x7f</span>) {xm = <span class="bn">0xff</span>-xm;}
+  <span class="cf">return</span> (xm*xm)&gt;&gt;<span class="dv">6</span>;
+}</code></pre></div>
+</div>
+<div class="side-text">
+<h2 id="smoothing-functions">Smoothing functions</h2>
+<p>With these tools various measurements can be made smoother, for more easthetically pleasing look.</p>
+</div>
+<div class="code placeholder">
+
+</div>
+<div class="side-text">
+<h4 id="fast-on-slow-off-filter">Fast-on slow-off filter</h4>
+<p>Using this function you can very rapidly respond to a new non-zero measurement, but then slowly decay back to zero if the signal ends.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">float</span> faston_slowoff(<span class="dt">float</span> filtered_intensity, <span class="dt">float</span> current_intensity, <span class="dt">float</span> decay) {
+  <span class="cf">if</span> (current_intensity &gt; filtered_intensity) {
+      <span class="cf">return</span> current_intensity;
+  } <span class="cf">else</span> {
+      <span class="cf">return</span> decay*current_intensity + (<span class="dv">1</span>-decay)*filtered_intensity;
+  }
+}</code></pre></div>
+</div>
+<div class="side-text">
+<h2 id="forward-declarations">Forward declarations</h2>
+<p>Occasionally we need to use a function in the definition of another function, before we have had a chance to properly implement the first function. We list these functions here, in what is called a &quot;forward declaration&quot;, in order to tell the computer to reserve space for them.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> cycleAnimationRoutine();</code></pre></div>
+</div>
+<div class="side-text">
+<h2 id="the-main-spinwheel-class.">The main <code>SpinWheel</code> class.</h2>
+<p>In the following &quot;class&quot; we encapsulate all of the functionality that works directly with the SpinWheel hardware.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">class</span> SpinWheelClass {
+  <span class="kw">public</span>:</code></pre></div>
+</div>
+<div class="side-text">
+<h3 id="the-constructor">The constructor</h3>
+<p>This is the &quot;constructor&quot; for our <code>SpinWheel</code> object. It ensure that any prerequisite objects are created before we initialize the main object.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">    SpinWheelClass() {
+      largeLEDs = Adafruit_NeoPixel(<span class="dv">8</span>, <span class="dv">15</span>, NEO_GRB + NEO_KHZ800); <span class="co">// XXX HARDWARE DETAIL: 8 LEDs on pin d15.</span>
+    };</code></pre></div>
+</div>
+<div class="side-text">
+<h3 id="the-hardware-initialization-function">The hardware initialization function</h3>
+<p>The <code>begin</code> function is called when we are ready to start talking to all of the SpinWheel hardware, usually in <code>setup()</code>.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">    <span class="dt">void</span> begin(<span class="dt">bool</span> button=<span class="kw">true</span>) {</code></pre></div>
+</div>
+<div class="side-text">
+<p>Initialize all of the pins we use to drive the grid of small LEDs.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">      PORTB &amp;= B00000011;
+      PORTD |= B11111100;
+      DDRB |= B11111100;
+      DDRD |= B11111100;</code></pre></div>
+</div>
+<div class="side-text">
+<p>Ensure that the large LEDs, controlled by the Adafruit NeoPixel library are also ready.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">      largeLEDs.begin(); 
+      largeLEDs.show();</code></pre></div>
+</div>
+<div class="side-text">
+<p>Prepare the hardware necessary for talking to the motion sensor.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">      Wire.begin();
+      Wire.setClock(<span class="dv">400000</span>);
+      IMU.begin(Wire, <span class="dv">1</span>); <span class="co">// XXX HARDWARE DETAIL; AD0 is pulled.</span>
+      <span class="co">// </span><span class="al">TODO</span><span class="co"> check that the IMU works.</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>If instructed, ensure that the button press is set to run a small routine that changes the current animation.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">      <span class="cf">if</span> (button) {
+        digitalWrite(<span class="dv">7</span>, INPUT_PULLUP); <span class="co">// XXX HARDWARE DETAIL: Pin D7 is connected to the button.</span>
+        attachInterrupt(digitalPinToInterrupt(<span class="dv">7</span>), cycleAnimationRoutine, FALLING);
+      }
+    }</code></pre></div>
+</div>
+<div class="side-text">
+<h3 id="we-store-the-current-state-of-the-leds-in-these-objects.">We store the current state of the LEDs in these objects.</h3>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">    <span class="dt">uint8_t</span> smallLEDs[<span class="dv">36</span>];
+    Adafruit_NeoPixel largeLEDs;
+    </code></pre></div>
+</div>
+<div class="side-text">
+<h3 id="we-store-various-motion-sensor-readings-in-these-variables.">We store various motion sensor readings in these variables.</h3>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">    ICM_20948_I2C IMU;
+    <span class="dt">float</span> ax, ay, az, gx, gy, gz, mx, my, mz;
+    <span class="dt">int8_t</span> ax_int, ay_int, az_int, gx_int, gy_int, gz_int, mx_int, my_int, mz_int;
+    <span class="dt">int32_t</span> taxsmooth, taysmooth, tazsmooth, tgxsmooth, tgysmooth, tgzsmooth, tmxsmooth, tmysmooth, tmzsmooth;</code></pre></div>
+</div>
+<div class="side-text">
+<h3 id="and-the-list-of-animations-and-the-currently-running-animation-is-tored-here.">And the list of animations and the currently running animation is tored here.</h3>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">    <span class="dt">void</span> (*animationroutines[MAXROUTINES]) (<span class="dt">void</span>);
+    <span class="dt">size_t</span> current_animation = <span class="dv">0</span>;
+    <span class="dt">size_t</span> registered_animations = <span class="dv">0</span>;
+    </code></pre></div>
+</div>
+<div class="side-text">
+<h3 id="the-functions-pushing-the-current-frame-to-the-leds.">The functions pushing the current frame to the LEDs.</h3>
+<p>It does so by running two subroutines, one for each set of LEDs.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">    <span class="dt">void</span> drawFrame() {
+      drawSmallLEDFrame();
+      drawLargeLEDFrame();
+    }</code></pre></div>
+</div>
+<div class="side-text">
+<p>The same function can be called with a timeout, ensuring that the hardware repeatedly redraws the image, and does nothing else for the duration of the timeout.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">    <span class="dt">void</span> drawFrame(<span class="dt">unsigned</span> <span class="dt">long</span> timeout) {
+      <span class="dt">unsigned</span> <span class="dt">long</span> t = millis();
+      drawLargeLEDFrame();
+      <span class="cf">while</span>(millis()-t&lt;timeout) {drawSmallLEDFrame();}
+    }</code></pre></div>
+</div>
+<div class="side-text">
+<h4 id="the-drawing-function-responsible-for-the-small-leds.">The drawing function responsible for the small LEDs.</h4>
+<p>This function employs persistence of vision: only a few LEDs flash at the same time, but in a rapid succession we loop through all of them, ensuring that to the human eye all of them seem on. We modulate the intensity of each color by turning it on for different durations.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">    <span class="dt">void</span> drawSmallLEDFrame() { <span class="co">// XXX HARDWARE DETAIL: B2-B7 and D2-D7 make up the small LEDs grid.</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>This loop specifies how many time we cycle through each LED before we exit the functions. We want to do it more times in order to have more vivid colors, but not too many times as to have this function take too long.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">      <span class="cf">for</span>(<span class="dt">int</span> frame=<span class="dv">0</span>; frame&lt;<span class="dv">2</span>&lt;&lt;SMALLLEDTIMEDIV; frame++) { <span class="co">// XXX: 2 repetitions lead to drawSmallLEDFrame taking 0.021 seconds.</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>And the following two loops go through each row and column of the small LED grid in order to address them efficiently.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">        <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">6</span>; i++) {
+          PORTB &amp;= B00000011;
+          PORTB |= B00000100 &lt;&lt; i;
+          <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">0</span>; j&lt;<span class="dv">6</span>; j++) {
+            <span class="dt">uint8_t</span> d = smallLEDs[i*<span class="dv">6</span>+j];</code></pre></div>
+</div>
+<div class="side-text">
+<p>On the delays in this inner loop depends how bright the color will be. A longer delay during for a turned-on LED implies a brighter color.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">            <span class="cf">if</span> (d) {
+              PORTD ^= B00000100 &lt;&lt; j;
+              delayMicroseconds(d&gt;&gt;SMALLLEDTIMEDIV);
+              PORTD |= B11111100;
+            }
+            delayMicroseconds((<span class="dv">255</span>-d)&gt;&gt;SMALLLEDTIMEDIV);
+          }
+        }
+      }
+    }</code></pre></div>
+</div>
+<div class="side-text">
+<h4 id="the-drawing-function-for-the-large-leds">The drawing function for the large LEDs</h4>
+<p>It simply calls into the Adafruit NeoPixel library.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">    <span class="dt">void</span> drawLargeLEDFrame() {
+      largeLEDs.show();  
+    }</code></pre></div>
+</div>
+<div class="side-text">
+<h3 id="talking-to-the-motion-sensor">Talking to the motion sensor</h3>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">    <span class="dt">void</span> readIMU() {</code></pre></div>
+</div>
+<div class="side-text">
+<p>Check that the sensor is ready, and read the current acceleration (A), rotation (G for gyroscope), magnetism (M), and temperature (T) data.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">      <span class="cf">if</span>( IMU.dataReady() ){
+        IMU.getAGMT();</code></pre></div>
+</div>
+<div class="side-text">
+<p>First smooth out the measurements using an exponential averaging filter. Each new value is used to slowly update the filtered value, through the formula <span class="math display">\[x_\text{filtered}=\alpha\times x_\text{newest reading} + (1-\alpha)\times
+x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> is between 0 and 1. If <span class="math inline">\(\alpha\)</span> is large we rapidly follow the sensor readings, but if it is small, only a smooth filtered signal is preserved.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">        taxsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.acc.axes.x)*FILTER_A + taxsmooth*FILTER_B)&gt;&gt;FILTER_DIV;
+        taysmooth = (((<span class="dt">int32_t</span>)IMU.agmt.acc.axes.y)*FILTER_A + taysmooth*FILTER_B)&gt;&gt;FILTER_DIV;
+        tazsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.acc.axes.z)*FILTER_A + tazsmooth*FILTER_B)&gt;&gt;FILTER_DIV;
+        tgxsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.gyr.axes.x)*FILTER_A + tgxsmooth*FILTER_B)&gt;&gt;FILTER_DIV;
+        tgysmooth = (((<span class="dt">int32_t</span>)IMU.agmt.gyr.axes.y)*FILTER_A + tgysmooth*FILTER_B)&gt;&gt;FILTER_DIV;
+        tgzsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.gyr.axes.z)*FILTER_A + tgzsmooth*FILTER_B)&gt;&gt;FILTER_DIV;
+        tmxsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.mag.axes.x)*FILTER_A + tmxsmooth*FILTER_B)&gt;&gt;FILTER_DIV;
+        tmysmooth = (((<span class="dt">int32_t</span>)IMU.agmt.mag.axes.y)*FILTER_A + tmysmooth*FILTER_B)&gt;&gt;FILTER_DIV;
+        tmzsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.mag.axes.z)*FILTER_A + tmzsmooth*FILTER_B)&gt;&gt;FILTER_DIV;
+        ax_int = taxsmooth&gt;&gt;<span class="dv">8</span>;
+        ay_int = taysmooth&gt;&gt;<span class="dv">8</span>;
+        az_int = tazsmooth&gt;&gt;<span class="dv">8</span>;
+        gx_int = tgxsmooth&gt;&gt;<span class="dv">8</span>;
+        gy_int = -tgysmooth&gt;&gt;<span class="dv">8</span>;
+        gz_int = -tgzsmooth&gt;&gt;<span class="dv">8</span>;
+        mx_int = tmxsmooth&gt;&gt;<span class="dv">3</span>;
+        my_int = -tmysmooth&gt;&gt;<span class="dv">3</span>;
+        mz_int = -tmzsmooth&gt;&gt;<span class="dv">3</span>;
+        ax = taxsmooth / <span class="fl">16384.</span>;
+        ay = taysmooth / <span class="fl">16384.</span>;
+        az = tazsmooth / <span class="fl">16384.</span>;
+        gx = tgxsmooth / <span class="fl">16384.</span>;
+        gy = tgysmooth / <span class="fl">16384.</span>;
+        gz = tgzsmooth / <span class="fl">16384.</span>;
+        mx = tmxsmooth / <span class="fl">16384.</span>;
+        my = tmysmooth / <span class="fl">16384.</span>;
+        mz = tmzsmooth / <span class="fl">16384.</span>;
+    
+      }
+    }</code></pre></div>
+</div>
+<div class="side-text">
+<h3 id="animation-routines">Animation routines</h3>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">    <span class="dt">void</span> runAnimationRoutine() {
+      <span class="cf">if</span> (registered_animations &amp;&amp; current_animation &lt; registered_animations &amp;&amp; animationroutines[current_animation]!=<span class="dv">0</span>) {
+        animationroutines[current_animation]();
+      }
+    }
+
+    <span class="dt">void</span> addAnimationRoutine(<span class="dt">void</span> (*routine) (<span class="dt">void</span>)) {
+      <span class="cf">if</span> (registered_animations&lt;MAXROUTINES) {
+        animationroutines[registered_animations] = routine;
+        registered_animations++;
+      }
+    }</code></pre></div>
+</div>
+<div class="side-text">
+<h3 id="all-of-the-functions-used-to-draw-to-the-upcoming-frame">All of the functions used to draw to the upcoming frame</h3>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">    <span class="dt">void</span> setSmallLEDsRainbow(<span class="dt">uint8_t</span> angle) {
+      <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {
+        setSmallLED(i, colorWheel(angle+i*ONETWELFTH));
+      }
+    }
+    
+    <span class="dt">void</span> setSmallLED(<span class="dt">int</span> i, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {
+      smallLEDs[i*<span class="dv">3</span>] = r;
+      smallLEDs[i*<span class="dv">3+1</span>] = g;
+      smallLEDs[i*<span class="dv">3+2</span>] = b;  
+    }
+    
+    <span class="dt">void</span> setSmallLED(<span class="dt">int</span> i, <span class="dt">uint32_t</span> rgb) {
+      smallLEDs[i*<span class="dv">3</span>] = rgb&gt;&gt;<span class="dv">16</span>;
+      smallLEDs[i*<span class="dv">3+1</span>] = rgb&gt;&gt;<span class="dv">8</span>;
+      smallLEDs[i*<span class="dv">3+2</span>] = rgb;  
+    }
+
+    <span class="dt">void</span> setSmallLEDs(<span class="dt">int</span> i, <span class="dt">int</span> j, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {
+      <span class="cf">for</span> (<span class="dt">int</span> ii=max(<span class="dv">0</span>,i); ii&lt;min(<span class="dv">12</span>,j); ii++) setSmallLED(ii,r,g,b);
+    }
+
+    <span class="dt">void</span> setSmallLEDs(<span class="dt">int</span> i, <span class="dt">int</span> j, <span class="dt">uint32_t</span> rgb) {
+      <span class="cf">for</span> (<span class="dt">int</span> ii=max(<span class="dv">0</span>,i); ii&lt;min(<span class="dv">12</span>,j); ii++) setSmallLED(ii,rgb);
+    }
+    
+    <span class="dt">void</span> setSmallLEDsUniform(<span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {
+      <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {
+        smallLEDs[i*<span class="dv">3</span>] = r;
+        smallLEDs[i*<span class="dv">3+1</span>] = g;
+        smallLEDs[i*<span class="dv">3+2</span>] = b;  
+      }
+    }
+    
+    <span class="dt">void</span> setSmallLEDsUniform(<span class="dt">uint32_t</span> rgb) {
+      <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {
+        smallLEDs[i*<span class="dv">3</span>] = rgb&gt;&gt;<span class="dv">16</span>;
+        smallLEDs[i*<span class="dv">3+1</span>] = rgb&gt;&gt;<span class="dv">8</span>;
+        smallLEDs[i*<span class="dv">3+2</span>] = rgb;
+      }
+    }
+
+    <span class="dt">void</span> setLargeLED(<span class="dt">int</span> i, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {
+      largeLEDs.setPixelColor(i,r,g,b);
+    }
+    
+    <span class="dt">void</span> setLargeLED(<span class="dt">int</span> i, <span class="dt">uint32_t</span> rgb) {
+      largeLEDs.setPixelColor(i,rgb);
+    }
+    
+    <span class="dt">void</span> setLargeLEDsUniform(<span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {
+      largeLEDs.fill(color(r,g,b), <span class="dv">0</span>, <span class="dv">8</span>);
+    }
+    
+    <span class="dt">void</span> setLargeLEDsUniform(<span class="dt">uint32_t</span> rgb) {
+      largeLEDs.fill(rgb, <span class="dv">0</span>, <span class="dv">8</span>);
+    }
+
+    <span class="dt">void</span> clearSmallLEDs() {
+      setSmallLEDsUniform(<span class="dv">0</span>);  
+    }
+
+    <span class="dt">void</span> clearLargeLEDs() {
+      largeLEDs.fill(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">8</span>);
+    }
+
+    <span class="dt">void</span> clearAllLEDs() {
+      setSmallLEDsUniform(<span class="dv">0</span>);  
+      setLargeLEDsUniform(<span class="dv">0</span>);      
+    }</code></pre></div>
+</div>
+<div class="side-text">
+<h3 id="some-slightly-more-advanced-drawing-functions">Some slightly more advanced drawing functions</h3>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">    <span class="dt">void</span> setSmallLEDsPointer(<span class="dt">uint8_t</span> angle, <span class="dt">int64_t</span> decay, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {
+      <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {
+        <span class="dt">uint8_t</span> rel = angle-i*ONETWELFTH;
+        <span class="cf">if</span> (rel&gt;=<span class="dv">128</span>) rel = <span class="dv">255</span>-rel;
+        <span class="dt">uint32_t</span> arel = max(<span class="dv">255</span>-rel*decay*<span class="dv">2l</span>/<span class="dv">255</span>,<span class="dv">0</span>);
+        <span class="dt">uint8_t</span> <span class="fu">tr</span> = r*arel/<span class="dv">255</span>;
+        <span class="dt">uint8_t</span> tg = g*arel/<span class="dv">255</span>;
+        <span class="dt">uint8_t</span> tb = b*arel/<span class="dv">255</span>;
+        setSmallLED(i,<span class="fu">tr</span>,tg,tb);
+      }
+    }
+    
+    <span class="dt">void</span> setSmallLEDsPointer(<span class="dt">uint8_t</span> angle, <span class="dt">int64_t</span> decay, <span class="dt">uint32_t</span> rgb) {
+      setSmallLEDsPointer(angle, decay, rgb&gt;&gt;<span class="dv">16</span>, rgb&gt;&gt;<span class="dv">8</span>, rgb);
+    }
+    
+    <span class="dt">void</span> setSmallLEDsProgress(<span class="dt">uint8_t</span> angle, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {
+      <span class="dt">int</span> i;
+      <span class="cf">for</span> (i=<span class="dv">0</span>; i&lt;angle/ONETWELFTH; i++) {
+        setSmallLED(i, r, g, b);
+      }
+      <span class="cf">if</span> (i==<span class="dv">12</span>) <span class="cf">return</span>;
+      <span class="dt">uint32_t</span> br = angle%ONETWELFTH;
+      setSmallLED(i, br*r/ONETWELFTH, br*g/ONETWELFTH, br*b/ONETWELFTH);
+    }
+
+    <span class="dt">void</span> setSmallLEDsProgress(<span class="dt">uint8_t</span> angle, <span class="dt">uint32_t</span> rgb) {
+      setSmallLEDsProgress(angle, rgb&gt;&gt;<span class="dv">16</span>, rgb&gt;&gt;<span class="dv">8</span>, rgb);
+    }
+};
+
+SpinWheelClass SpinWheel;
+
+<span class="dt">void</span> cycleAnimationRoutine() { <span class="co">// called from interrupt</span>
+  <span class="at">static</span> <span class="dt">unsigned</span> <span class="dt">long</span> last_interrupt_time = <span class="dv">0</span>;
+  <span class="dt">unsigned</span> <span class="dt">long</span> interrupt_time = millis();
+  <span class="cf">if</span> (interrupt_time - last_interrupt_time &gt; <span class="dv">200</span>){
+    SpinWheel.clearAllLEDs();
+    SpinWheel.current_animation++;
+    SpinWheel.current_animation %= SpinWheel.registered_animations;
+  }
+  last_interrupt_time = interrupt_time;
+}</code></pre></div>
+</div>
+<div class="side-text">
+<h2 id="preloaded-animations">Preloaded animations</h2>
+<p>The SpinWheel comes with a number of preloaded animation routines.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="dt">void</span> bootAnimation() {
+  <span class="cf">for</span> (<span class="dt">uint8_t</span> i=<span class="dv">0</span>; i&lt;<span class="dv">252</span>; i+=<span class="dv">4</span>) {
+    SpinWheel.setSmallLEDsUniform(i,i,i);
+    SpinWheel.drawFrame();
+  }
+  <span class="cf">for</span> (<span class="dt">uint8_t</span> i=<span class="dv">252</span>; i&gt;<span class="dv">0</span>; i-=<span class="dv">4</span>) {
+    SpinWheel.setSmallLEDsUniform(i,i,i);
+    SpinWheel.drawFrame();
+  }
+  SpinWheel.clearSmallLEDs();
+  <span class="cf">for</span> (<span class="dt">uint8_t</span> i=<span class="dv">0</span>; i&lt;<span class="dv">32</span>; i++) {
+    SpinWheel.setLargeLEDsUniform(i,i,i);
+    SpinWheel.drawFrame();
+  }
+  <span class="cf">for</span> (<span class="dt">uint8_t</span> i=<span class="dv">32</span>; i&gt;<span class="dv">0</span>; i--) {
+    SpinWheel.setLargeLEDsUniform(i,i,i);
+    SpinWheel.drawFrame();
+  }
+  SpinWheel.clearLargeLEDs();  
+  SpinWheel.drawFrame();
+}</code></pre></div>
+</div>
+<div class="side-text">
+<h4 id="rotating">Rotating</h4>
+<p>A rotating pattern on the small LEDs. <video src="./preloaded_rotating.mp4" muted="" autoplay="" playsinline="" loop=""></video></p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> smallWhiteRotating() {
+  <span class="dt">uint8_t</span> angle = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;
+  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);
+}</code></pre></div>
+</div>
+<div class="side-text">
+<h4 id="breathing">Breathing</h4>
+<p>A pulsing pattern on all of the LEDs.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> allBreathing() {
+  <span class="dt">uint8_t</span> t = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;
+  <span class="dt">uint8_t</span> b1 = parabolaWave(t);
+  <span class="dt">uint8_t</span> b2 = parabolaWave(t<span class="dv">+20</span>);
+  <span class="dt">uint8_t</span> b3 = parabolaWave(t<span class="dv">+70</span>);
+  <span class="dt">uint8_t</span> b4 = parabolaWave(t<span class="dv">+90</span>);
+  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {
+    SpinWheel.largeLEDs.setPixelColor(i,b1,<span class="dv">0</span>,b1);
+  }
+  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">4</span>; i&lt;<span class="dv">8</span>; i++) {
+    SpinWheel.largeLEDs.setPixelColor(i,b2,<span class="dv">0</span>,b2);
+  }
+  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {
+    <span class="cf">if</span> (i%<span class="dv">2</span>==<span class="dv">1</span>) {
+      SpinWheel.setSmallLED(i,b3,<span class="dv">0</span>,b3);
+    } <span class="cf">else</span> {
+      SpinWheel.setSmallLED(i,b4,<span class="dv">0</span>,b4);
+    }
+  }
+}
+</code></pre></div>
+</div>
+<div class="side-text">
+<h4 id="tilt-sensor-1">Tilt sensor 1</h4>
+<p>The large LEDs are used as a tilt sensor. <video src="./preloaded_tilt.mp4" muted="" autoplay="" playsinline="" loop=""></video></p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> tiltSensor() {
+  <span class="dt">int8_t</span> x = SpinWheel.ax_int;  
+  <span class="dt">int8_t</span> y = SpinWheel.ay_int;
+  SpinWheel.clearLargeLEDs();
+  <span class="cf">if</span> (x&gt;<span class="dv">0</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x,<span class="dv">0</span>,x);
+  <span class="cf">else</span> SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x,<span class="dv">0</span>,-x);
+  <span class="cf">if</span> (y&gt;<span class="dv">0</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,y,<span class="dv">0</span>,y);
+  <span class="cf">else</span> SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,-y,<span class="dv">0</span>,-y);
+}</code></pre></div>
+</div>
+<div class="side-text">
+<h4 id="compass">Compass</h4>
+<p>A compass on the small LEDs, while the large LEDs are used as a tilt sensor.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> compass() {
+  <span class="dt">int8_t</span> x = SpinWheel.ax_int;  
+  <span class="dt">int8_t</span> y = SpinWheel.ay_int;
+  SpinWheel.clearLargeLEDs();
+  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x<span class="dv">-8</span>,<span class="dv">0</span>,<span class="dv">0</span>);
+  <span class="cf">else</span> <span class="cf">if</span> (x&lt;<span class="dv">-10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x<span class="dv">+8</span>,<span class="dv">0</span>,<span class="dv">0</span>);
+  <span class="cf">else</span> {
+    SpinWheel.largeLEDs.setPixelColor(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32-3</span>*abs(x));
+    SpinWheel.largeLEDs.setPixelColor(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32-3</span>*abs(x));
+  }
+  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,y<span class="dv">-8</span>,<span class="dv">0</span>,<span class="dv">0</span>);
+  <span class="cf">else</span> <span class="cf">if</span> (y&lt;<span class="dv">-10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,-y<span class="dv">+8</span>,<span class="dv">0</span>,<span class="dv">0</span>);
+  <span class="cf">else</span> {
+    SpinWheel.largeLEDs.setPixelColor(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32-3</span>*abs(y));
+    SpinWheel.largeLEDs.setPixelColor(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32-3</span>*abs(y));
+  }
+  <span class="dt">uint8_t</span> angle = (atan2(SpinWheel.my_int, SpinWheel.mx_int)<span class="dv">+3</span><span class="fl">.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;
+  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);
+}</code></pre></div>
+</div>
+<div class="side-text">
+<h4 id="tilt-sensor-2">Tilt sensor 2</h4>
+<p>The small LEDs are used as a tilt sensor.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> tiltSensor2() {
+  <span class="dt">uint8_t</span> angle = (atan2(SpinWheel.ay_int, SpinWheel.ax_int)<span class="dv">+3</span><span class="fl">.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;
+  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);
+}</code></pre></div>
+</div>
+<div class="side-text">
+<h4 id="tilt-sensor-3">Tilt sensor 3</h4>
+<p>Both the large and the small LEDs are used as a tilt sensor. <video src="./preloaded_tilt3.mp4" muted="" autoplay="" playsinline="" loop=""></video></p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> tiltSensor3() {
+  <span class="dt">int8_t</span> x = SpinWheel.ax_int;  
+  <span class="dt">int8_t</span> y = SpinWheel.ay_int;
+  SpinWheel.setLargeLEDsUniform(<span class="bn">0xffffff</span>);
+  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) {
+    SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x<span class="dv">-8</span>,<span class="dv">0</span>,x<span class="dv">-8</span>);
+    SpinWheel.largeLEDs.setPixelColor(<span class="dv">3</span>,x<span class="dv">-8</span>,<span class="dv">0</span>,x<span class="dv">-8</span>);
+  }
+  <span class="cf">else</span> <span class="cf">if</span> (x&lt;<span class="dv">-10</span>) {
+    SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x<span class="dv">+8</span>,<span class="dv">0</span>,-x<span class="dv">+8</span>);
+    SpinWheel.largeLEDs.setPixelColor(<span class="dv">1</span>,-x<span class="dv">+8</span>,<span class="dv">0</span>,-x<span class="dv">+8</span>);
+  }
+  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) {
+    SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,y<span class="dv">-8</span>,<span class="dv">0</span>,y<span class="dv">-8</span>);
+    SpinWheel.largeLEDs.setPixelColor(<span class="dv">0</span>,y<span class="dv">-8</span>,<span class="dv">0</span>,y<span class="dv">-8</span>);
+  }
+  <span class="cf">else</span> <span class="cf">if</span> (y&lt;<span class="dv">-10</span>) {
+    SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,-y<span class="dv">+8</span>,<span class="dv">0</span>,-y<span class="dv">+8</span>);
+    SpinWheel.largeLEDs.setPixelColor(<span class="dv">2</span>,-y<span class="dv">+8</span>,<span class="dv">0</span>,-y<span class="dv">+8</span>);
+  }
+  <span class="dt">uint8_t</span> angle = (atan2(SpinWheel.ay_int, SpinWheel.ax_int)<span class="dv">+3</span><span class="fl">.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;
+  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);
+}</code></pre></div>
+</div>
+<div class="side-text">
+<h4 id="flashlight">Flashlight</h4>
+<p>As the name suggests, this function turns all LEDs on to full brightness.</p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> flashlight() {
+  SpinWheel.setSmallLEDsUniform(<span class="bn">0xffffff</span>);  
+  SpinWheel.largeLEDs.fill(<span class="bn">0xffffff</span>, <span class="dv">0</span>, <span class="dv">8</span>);
+}</code></pre></div>
+</div>
+<div class="side-text">
+<h4 id="large-rainbow">Large Rainbow</h4>
+<p>Draw a rainbow on the larger LEDs and while the smaller ones are all white. <video src="./preloaded_rainbow.mp4" muted="" autoplay="" playsinline="" loop=""></video></p>
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> largeRainbow() {
+  <span class="dt">long</span> <span class="dt">int</span> angle = millis()/<span class="dv">20</span>;
+  SpinWheel.setSmallLEDsUniform(<span class="bn">0xffffff</span>);
+  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {
+    SpinWheel.setLargeLED(i, colorWheel(angle+i*<span class="dv">255</span>/<span class="dv">4</span>));
+    SpinWheel.setLargeLED(<span class="dv">7</span>-i, colorWheel(angle+i*<span class="dv">255</span>/<span class="dv">4</span>));
+  }
+</code></pre></div>
+</div>
+<div class="side-text">
+
+</div>
+<div class="code">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">}
+
+} <span class="co">// end namespace SpinWearables</span></code></pre></div>
+</div>
+</div>
+</body>
+</html>
