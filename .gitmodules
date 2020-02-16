@@ -3,4 +3,4 @@
 	url = https://github.com/SpinWearables/SpinWearablesWebsite.git
 [submodule "firmwaresource"]
 	path = firmwaresource
-	url = git@github.com:SpinWearables/SpinWearablesFirmware.git
+	url = https://github.com/SpinWearables/SpinWearablesFirmware.git
