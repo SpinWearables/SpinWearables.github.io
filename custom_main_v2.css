@@ -174,11 +174,16 @@ main h3 {
 }
 
 figure {
-  max-width: 450px;
+  max-width: 600px !important;
 }
 
 figure > img {
   width: 100%;
+}
+
+figure > figcaption {
+  font-size: 0.9em;
+  text-align: center;
 }
 
 header {
