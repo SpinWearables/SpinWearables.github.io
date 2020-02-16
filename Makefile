@@ -1,9 +1,6 @@
 register_submodule_updates:
 	git pull
-	$s=(git diff --exit-code)
-	ifeq ($s, 0)
-	    $(error You have uncommited local changes in! Commit everything here and in subrepositories before you try to compile the website!)
-	endif
+	git diff --exit-code || (echo "\n!!!\n" You have uncommited local changes in! Commit everything here and in subrepositories before you try to compile the website!; false)
 	git submodule update --init --recursive
 	git submodule foreach git checkout master
 	git submodule foreach git pull origin master
