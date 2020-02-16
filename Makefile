@@ -1,7 +1,8 @@
 register_submodule_updates:
-	$s=(git diff --exit-code websitesource)
+	git pull
+	$s=(git diff --exit-code)
 	ifeq ($s, 0)
-	    $(error You have uncommited local changes in websitesource! Finish your work in that repository before you try to compile the website!)
+	    $(error You have uncommited local changes in! Commit everything here and in subrepositories before you try to compile the website!)
 	endif
 	git submodule update --init --recursive
 	git submodule foreach git checkout master
@@ -12,3 +13,7 @@ render_websitesource: register_submodule_updates
 	cp -r ./websitesource/build/* .
 local_test_server: render_websitesource
 	python3 -m http.server
+publish: render_websitesource
+	git add .
+	git commit -m "Complete render of the entire website."
+	git push
