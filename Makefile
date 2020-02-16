@@ -6,3 +6,5 @@ register_submodule_updates:
 render_websitesource: register_submodule_updates
 	make -C ./websitesource html
 	cp -r ./websitesource/build/* .
+local_test_server: render_websitesource
+	python3 -m http.server
