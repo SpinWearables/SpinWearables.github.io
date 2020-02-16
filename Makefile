@@ -1,4 +1,8 @@
 register_submodule_updates:
+	$s=(git diff --exit-code websitesource)
+	ifeq ($s, 0)
+	    $(error You have uncommited local changes in websitesource! Finish your work in that repository before you try to compile the website!)
+	endif
 	git submodule update --init --recursive
 	git submodule foreach git checkout master
 	git submodule foreach git pull origin master
