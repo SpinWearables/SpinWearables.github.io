@@ -114,6 +114,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">Make a step counter</h1>
 </header>
 <main>
+<div class="intro-box">
+<p>In this adventure, you’ll learn how to use the motion sensor to turn the SpinWheel into a StepCounter.</p>
+</div>
 <p>A step counter needs to detect motion, add up each time motion is detected, and somehow display the cummulative value. The SpinWheel has a motion sensor that can deal with the first task, a small controller (computer) that can perform the addition, and a number of LEDs that can be used as a display. Here we will see how to put these features together to make our own custom step counter.</p>
 <p>To start, plug in the SpinWheel to your computer and open up an “empty” sketch in the Arduino software. If you need help remembering how to do this, you can get a recap of how to connect your SpinWheel to your computer in our <a href="/quickstart">“Quick Start Guide”</a>.</p>
 <p>We will build our Step Counter program in this empty sketch. First, copy the following into that empty sketch:</p>
@@ -139,7 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="further-reading">
 <p>If you want to learn more about what a vector is and how they are used by mathematicians and engineers, check out our lesson on <a href="/vectors">“Vectors”</a>.</p>
 </div>
-<p>One way to do it is to calculate <span class="math inline">\(\sqrt{a_x^2+a_y^2+a_z^2}\)</span> where <span class="math inline">\(a_x\)</span> is the acceleration in the x directions and so on. The code to do that operation looks like <code>sqrt(SpinWheel.ax*SpinWheel.ax + SpinWheel.ay*SpinWheel.ay + SpinWheel.az*SpinWheel.az)</code>. We will save this value in the variable <code>total_acceleration</code>.</p>
+<p>One way to do it is to calculate <span class="math display">\[\sqrt{a_x^2+a_y^2+a_z^2}\]</span> where <span class="math inline">\(a_x\)</span> is the acceleration in the x directions and so on. The code to do that operation looks like <code>sqrt(SpinWheel.ax*SpinWheel.ax + SpinWheel.ay*SpinWheel.ay + SpinWheel.az*SpinWheel.az)</code>. We will save this value in the variable <code>total_acceleration</code>.</p>
 <p>We will also send this value to the computer connected to the SpinWheel in order to confirm that everything is working. The command <code>Serial.print(total_acceleration)</code> does just that. In the Arduino software we can use <code>Tools -&gt; Serial Plotter</code> to visualize the results.</p>
 <video src="/images/bookpics/stepcounter_nolights.mp4" muted autoplay playsinline loop>
 </video>
@@ -196,7 +199,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-24"><a href="#cb3-24"></a>  <span class="co">// And we tell the SpinWheel to show the light pattern we registered on</span></span>
 <span id="cb3-25"><a href="#cb3-25"></a>  <span class="co">// the previous line.</span></span>
 <span id="cb3-26"><a href="#cb3-26"></a>  SpinWheel.drawFrame();</span>
-<span id="cb3-27"><a href="#cb3-27"></a>  Serial.print(total_acceleration);</span>
+<span id="cb3-27"><a href="#cb3-27"></a>  Serial.print(intensity);</span>
 <span id="cb3-28"><a href="#cb3-28"></a>  Serial.println();</span>
 <span id="cb3-29"><a href="#cb3-29"></a>}</span></code></pre></div>
 <p>Finally, we can work on our goal: using the SpinWheel to display all of our detected motion in order to show how much we have moved over time. We will simply add up the values for “kinematic_acceleration”. For this we don’t have to be particularly precise: we just want one number that contains some information about the total motion we have exerted. We can call that variable <code>total_motion</code> and each time we detect motion we update it with <code>total_motion = total_motion + conversion_factor * kinematic_acceleration</code>. We introduced the small number <code>conversion_factor</code> so that we keep the value of <code>total_motion</code> growing slowly.</p>

@@ -3,10 +3,11 @@
   --panel-margin: 1em 8% 1em 8%;
   --panel-fontsize: 0.8em;
   --panel-lineheight: 1.2em;
-  --color-warning:  rgba(255, 116, 116, 0.60);
-  --color-reading:  rgba(116, 255, 116, 0.60);
-  --color-educator: rgba(116, 116, 255, 0.60);
-  --color-code:     rgba(116, 116, 116, 0.40);
+  --color-intro-box: rgb(  90,  83, 119);
+  --color-warning:   rgba(255, 116, 116, 0.60);
+  --color-reading:   rgba(116, 255, 116, 0.60);
+  --color-educator:  rgba(116, 116, 255, 0.60);
+  --color-code:      rgba(116, 116, 116, 0.40);
 }
 
 main {
@@ -18,6 +19,25 @@ main {
 }
 
 /* Special Panels */
+
+div.intro-box {
+  background-color: var(--color-intro-box);
+  padding: 15px;
+  border-radius: var(--panel-padding);
+  margin: var(--panel-margin);
+  line-height: var(--panel-lineheight);
+  color: white;
+  text-align: center;
+  margin-bottom: 3em;
+}
+
+div.intro-box > p:first-child {
+  margin-top: 0;
+}
+
+div.intro-box > p:last-child {
+  margin-bottom: 0;
+}
 
 div.warning {
   background-color: var(--color-warning);
@@ -101,6 +121,12 @@ div.sourceCode > pre:before {
   content: "🤖";
   font-weight: bold;
   display: block;
+}
+
+p > code {
+  background-color: var(--color-code);
+  padding: 3px;
+  border-radius: 3px;
 }
 
 /* Figures */
