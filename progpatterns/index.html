@@ -156,11 +156,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-2"><a href="#cb8-2"></a>  <span class="dt">float</span> intermediate_value = sqrt(x);</span>
 <span id="cb8-3"><a href="#cb8-3"></a>  <span class="cf">return</span> sqrt(intermediate_value);</span>
 <span id="cb8-4"><a href="#cb8-4"></a>}</span></code></pre></div>
+<h1 id="functions-that-do-not-return-values">Functions that do not return values</h1>
+<p>Functions are occasionally used to change something in the environment of the device instead of as advanced calculators. Such functions do not return a value and so they do not need any extra variables in which to store their output. One example of such a function would be the <code>delay</code> function that simply pauses the computer for a specified time. The following example will stop everything and wait for 1000 milliseconds which is one second:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a>delay(<span class="dv">1000</span>);</span></code></pre></div>
+<p>When creating our own functions of this type, we mark them as <code>void</code>, instead of <code>int</code> or <code>float</code> or something else, to denote that their returned value is void or “empty”. For instance, here we define a function that always pauses the program for exactly half a second:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1"></a><span class="dt">void</span> delay_half_a_second() {</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  delay(<span class="dv">500</span>);</span>
+<span id="cb10-3"><a href="#cb10-3"></a>}</span></code></pre></div>
+<p>Notice how we did not need to use the <code>return</code> keyword. In this particular case we also did not have any parameters in the parentheses that defined our function, but we can very well have such parameters if we wish. For instance, this function takes numbers of seconds as its input and pauses the program for that long (by calculating the number of milliseconds corresponding to the given number of seconds and using the <code>delay</code> function).</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1"></a><span class="dt">void</span> delay_seconds(<span class="dt">int</span> number_of_seconds) {</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="dt">int</span> number_of_milliseconds = <span class="dv">1000</span> * number_of_seconds;</span>
+<span id="cb11-3"><a href="#cb11-3"></a>  delay(number_of_milliseconds);</span>
+<span id="cb11-4"><a href="#cb11-4"></a>}</span></code></pre></div>
+<h1 id="comments">Comments</h1>
+<p>As the code we write grows more and more, it helps to add notes in the code to ourselves and our friends. That way it is easier to understand the purpose of the code when we look at it again in the future. Such notes are usually called “comments”, and they are completely neglected by the computer. In the language we are using they are denoted by a double slash <code>//</code> – everything to the right of these symbols, until the end of the line, is a message for fellow humans. We will use such comments below in some more complicated examples of code.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">// I am writing this comment to remind me that the next</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">// line stores the number 5 in the variable named my_test_variable.</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="dt">int</span> my_test_variable = <span class="dv">5</span>;</span></code></pre></div>
 <h1 id="the-first-function-to-run-when-a-program-starts">The first function to run when a program starts</h1>
-<p><code>setup</code> and <code>loop</code> are functions you always have to define, because the computer searches for them when it starts a new program.</p>
-<h1 id="conditions-and-loops-are-for-the-next-lesson">conditions and loops are for the next lesson</h1>
-<h1 id="rename-the-lesson">rename the lesson</h1>
-<h1 id="link-to-httpswww.arduino.ccentutorialfoundations">link to https://www.arduino.cc/en/Tutorial/Foundations</h1>
+<p>After we have created all the variables we will need and all of our special functions that will help us do what we want, we need to actually start the program. But the program needs to know what to run first. In different languages this is done differently, but in our particular case we do it by defining two special functions: <code>setup</code> and <code>loop</code>. Our computer is instructed to run these functions first: It looks at the <code>setup</code> function and runs it first, before anything else. Usually this function is used to <strong>set up</strong> any settings we might need in advance. Then the computer repeatedly runs the <code>loop</code> function, which is named this way exactly because it <strong>runs in a loop</strong>.</p>
+<p>Here is a large example that includes all these features. It will use the <code>Serial.println()</code> function in order to send messages to the computer.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">// First we define a convenient pausing function</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">// that waits a given number of seconds</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="dt">void</span> delay_seconds(<span class="dt">int</span> number_of_seconds) {</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="dt">int</span> number_of_milliseconds = <span class="dv">1000</span> * number_of_seconds;</span>
+<span id="cb13-5"><a href="#cb13-5"></a>  delay(number_of_milliseconds);</span>
+<span id="cb13-6"><a href="#cb13-6"></a>}</span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co">// This is the setup function that will automatically run</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">// first when the device starts.</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="dt">void</span> setup() {</span>
+<span id="cb13-12"><a href="#cb13-12"></a>  <span class="co">// The next line ensures that the communication hardware</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a>  <span class="co">// on our device is ready to send messages.</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a>  <span class="co">// The name &quot;Serial&quot; is such for historical reasons</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a>  <span class="co">// (it is the name for this type of communication).</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a>  Serial.begin(<span class="dv">9600</span>); <span class="co">// The 9600 is the speed of the conection.</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a>}</span>
+<span id="cb13-18"><a href="#cb13-18"></a></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="co">// Define a variable in which we will store a counter that goes up by one on</span></span>
+<span id="cb13-20"><a href="#cb13-20"></a><span class="co">// each step.</span></span>
+<span id="cb13-21"><a href="#cb13-21"></a><span class="dt">int</span> counter = <span class="dv">1</span>;</span>
+<span id="cb13-22"><a href="#cb13-22"></a></span>
+<span id="cb13-23"><a href="#cb13-23"></a><span class="co">// This function runs repeatedly after the setup function finishes.</span></span>
+<span id="cb13-24"><a href="#cb13-24"></a><span class="dt">void</span> loop() {</span>
+<span id="cb13-25"><a href="#cb13-25"></a>  <span class="co">// Send a message to the connected computer.</span></span>
+<span id="cb13-26"><a href="#cb13-26"></a>  <span class="co">// The message will just be the value of the counter.</span></span>
+<span id="cb13-27"><a href="#cb13-27"></a>  Serial.println(counter);</span>
+<span id="cb13-28"><a href="#cb13-28"></a>  <span class="co">// Increment the value of the counter.</span></span>
+<span id="cb13-29"><a href="#cb13-29"></a>  counter = counter + <span class="dv">1</span>;</span>
+<span id="cb13-30"><a href="#cb13-30"></a>  <span class="co">// Wait for a second before you start the loop function again.</span></span>
+<span id="cb13-31"><a href="#cb13-31"></a>  delay_seconds(<span class="dv">1</span>);</span>
+<span id="cb13-32"><a href="#cb13-32"></a>}</span></code></pre></div>
+<div class="further-reading">
+<p>The Arduino community has very detailed resources on the programming language that we are using. You can start with their <a href="https://www.arduino.cc/en/Tutorial/Foundations">tutorial</a> for instance.</p>
+</div>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
 data-isso-require-author="true"
