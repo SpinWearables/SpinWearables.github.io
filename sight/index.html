@@ -118,7 +118,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>On one hand, the human eye is a spectacular sensor that, by far, outperforms all our other senses in the amount of information it gives us about our surroundings. On the other hand, it leaves much of the richness of color and light imperceptible to us. Here, we will explore the limitations of this important organ; we will even learn a few ways in which we can trick it into seeing colors that aren’t actually there.</p>
 <h2 id="colors">Colors</h2>
-<p>When light comes from the Sun (or most other sources of illumination), we perceive it as lacking a hue (or being white). In reality, white light is a mixture of many colors. One way we can see this mixture is by using a prism. A prism works by bending (“refracting”) light at different angles depending on its color, allowing us to see all of the colors that make up white light. This is why if you let sunlight shine through a prism, you can see a rainbow.</p>
+<p>When light comes from the Sun (or most other sources of illumination), we perceive it as lacking a hue (or being white). In reality, this light is a mixture of many colors. One way we can see this mixture is using a prism. A prism works by bending (“refracting”) light at different angles depending on its color, allowing us to see all of the colors that make up white light. This is why if you let sunlight shine through a prism, you can see a rainbow.</p>
 <p>The light-sensing tissue in the back of our eyes (the retina) has small cells that respond to some of these colors. They are called “cone cells” and there are three separate groups of them, sensing mainly three different groups of colors: roughly separated into red, green, and blue hues. For instance, the blue-sensing cones respond to blue light, but do not respond to red light, and vice versa.</p>
 <p>This leads to a problem… If our eyes can sense only red, green, and blue, how come we can see yellow? Our eyes and brains have evolved so that “predominantly red” and “predominantly green” cones respond slightly to yellow. If our brain detects that both groups of cones are activated, it knows to interpret the color as yellow. And similar compromises are made for the other colors we can detect, for instance, purple activates both the red- and blue-sensing cones.</p>
 <div class="further-reading">
@@ -185,10 +185,9 @@ document.getElementById("blue").oninput = changeColor;
 changeColor();
 </script>
 </div>
-<p>This will allow us to program the SpinWheel to display beautiful colorful patterns (while using only a small set of hardware components). This is why the sliders go from 0 to 255 instead of a more obvious set of numbers like 0 to 100 - this is the range used by the SpinWheel for the minimum and maximum of red, green, and blue allowed in the mixture.</p>
+<p>This will allow us to program the SpinWheel to display beautiful colorful patterns (while using only a small set of hardware components). This is why the sliders go from 0 to 255 instead a more obvious set of numbers like 0 to 100 - this is the range used by the SpinWheel.</p>
 <p>Now let’s start programming the SpinWheel to light up a specific color! Pick a color you like by changing the sliders above (for instance, I like this purple <code>(195,0,255)</code>), and make the large LEDs on the SpinWheel show that color.</p>
 <p>If you have trouble understanding the commands below, be sure to read our <a href="/quickstart">quick start guide</a> and if necessary some of the Computer Science 101 sections.</p>
-<p>One more quick point: depending on how bright it is in the room where you are programming the SpinWheel, you may want to change the brightness of the LEDs. For instance, something that seems blinding when working on it under artificial lights will seem dim in full sunlight. If you’d like to change the brightnes of the SpinWheel (for any reason!), you can add <code>SpinWheel.largeLEDs.setBrightness(X);</code> into the setup loop, and change the value of X how you wish.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
@@ -300,12 +299,7 @@ getT();
 <figure>
 <img src="/images/bookpics/fast_pov_streak.jpg" title="Picture of a fast-moving SpinWheel" alt="" /><figcaption>If you move the SpinWheel rapidly in front of your eyes, you will see the purple color separate in two distinct streaks of red and blue.</figcaption>
 </figure>
-<p>These two tools–faking rich colors by combining just red, green, and blue and faking a complete static image by very rapidly cycling through incomplete images–are the basis for many technologies , and are tools we’ll keep using as we program the SpinWheel in more complicated ways.</p>
-<div class="further-reading">
-<p>To keep exploring, you can try other color combinations!</p>
-<p>For instance, what happens if you mix red and green?</p>
-<p>Can you make orange?</p>
-</div>
+<p>These two tools, of faking rich colors by combining just red, green, and blue, and of faking static images by very rapidly cycling through partial frames, are the basis for many of our technologies, and are tools we’ll keep using as we program the SpinWheel in more complicated ways.</p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
 data-isso-require-author="true"
