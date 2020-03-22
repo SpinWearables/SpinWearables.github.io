@@ -96,6 +96,8 @@
     width: 95%;
     height: 30vh;
     min-height:400px;
+    border: black 1px solid;
+    border-radius: 1em;
   }
 </style>
 <script>
@@ -108,7 +110,7 @@
     i.parentElement.removeChild(i);
   }
 </script>
-<iframe src="/codedoc/examples/RNN/net.h.html" frameborder="0" scrolling="no" onload="cleanIframe(this)">
+<iframe src="/codedoc/examples/RNN/net.h.html" frameborder="0" scrolling="yes" onload="cleanIframe(this)">
 </iframe>
 <p>The <code>network()</code> function is the one that looks at the globally defined array <code>input</code>, computes one iteration of our recurrent neural network on it, and stores the results in the globally defined array <code>output</code>. It then finds which element of <code>output</code> is the largest, and reports it as the most probable gesture being recorded by the device.</p>
 <script data-isso="//comments.spinwearables.com/"
