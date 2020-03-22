@@ -31,6 +31,10 @@ div.intro-box {
   margin-bottom: 3em;
 }
 
+div.intro-box > ul {
+  text-align: left;
+}
+
 div.intro-box > p:first-child {
   margin-top: 0;
 }

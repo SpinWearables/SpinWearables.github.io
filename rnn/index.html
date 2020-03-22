@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="apple-touch-icon-precomposed" href="/colorwheel180.png">
+  <link rel="icon" href="/colorwheel196.png">
+  <meta property="og:title" content="The SpinWheel" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="Children have the natural curiosity and capacity to engineer a better world. Our kits just remind them." />
+  <meta property="og:image" content="https://spinwearables.com/hanging.jpg" />
+  <link rel="image_src" href="https://spinwearables.com/hanging.jpg" />
+  <meta name="keywords" content="neural network, gesture recognition, arduino" />
+  <title>Gesture Recognition and Recurrent Neural Networks on an Arduino</title>
+  <style>
+  </style>
+  <link rel="stylesheet" href="/custom.css" />
+  <link rel="stylesheet" href="/custom_book.css" />
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.spinwearables.com/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+<base target="_blank">
+</head>
+<body>
+<!-- Matomo Image Tracker-->
+<noscript><img src="https://matomo.spinwearables.com/matomo.php?idsite=1&amp;rec=1" style="border:0" alt="" /></noscript>
+<!-- End Matomo -->
+<header>
+<div class="nav">
+<a href="/">The SpinWheel</a>
+<a href="/book">The Field Guide</a>
+</div>
+<h1 class="title">Gesture Recognition and Recurrent Neural Networks on an Arduino</h1>
+</header>
+<main>
+<p>This lesson is part of the SpinWheel series. The <a href="https://www.kickstarter.com/projects/spinwheel/447670470">SpinWheel</a> is a small Arduino-compatible sensor-enabled wearable device, meant to be used for teaching physics and computer science through an artistic medium. You can support our non-profit <a href="https://www.kickstarter.com/projects/spinwheel/447670470">Kickstarter</a> to help us reach more curious young minds and to get the device and teaching kit showcased in this lesson.</p>
+<div class="intro-box">
+<p>For the majority of our lessons we use the <a href="https://www.kickstarter.com/projects/spinwheel/447670470">SpinWheel</a> and its <a href="https://spinwearables.com">engaging aesthetics</a> as a hook and introduction to many STEM topics accessible to K12 students without prior experience. Here we decided to do something different and show how that same platform can be used to study much more advanced topics. In this writeup we will see:</p>
+<ul>
+<li>simple linear algebra and neural networks on a microcontroller</li>
+<li>hardware speed testing to decide how big of a NN to use</li>
+<li>recurrent NN from scratch as a filter and a gesture recognizer</li>
+<li>recording training data from a microcontroller</li>
+<li>visualizing information propagating through the NN</li>
+</ul>
+</div>
+<div class="warning">
+<p>Lessons are still under development!</p>
+</div>
+<h2 id="brief-review-neural-networks-and-recurrent-neural-networks">Brief review: Neural Networks and Recurrent Neural Networks</h2>
+<div class="further-reading">
+<p>We will not attempt to teach what a neural network is from scratch, as there is a rich ecosystem of online resources on the topic. <a href="http://neuralnetworksanddeeplearning.com/index.html">Nielsen’s online book</a> is a great in-depth resource, but starting with <a href="https://jalammar.github.io/visual-interactive-guide-basics-neural-networks/">visual introductions like Alammar’s</a> might be more approachable, including a <a href="https://jalammar.github.io/feedforward-neural-networks-visual-interactive/">second part focusing on the simpler mathematical building blocks</a>. A lovely visual representation of the training process for a neural network can be seen on <a href="http://playground.tensorflow.org">Tensorflow’s playground</a>. Coursera and Stanford, among others, have online classes on the topic as well: <a href="https://www.coursera.org/learn/machine-learning">1</a>, <a href="https://cs230.stanford.edu/">2</a>, <a href="http://cs231n.stanford.edu/">3</a>. To delve deeper in <strong>recurrent</strong> neural networks, consider the <a href="https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-recurrent-neural-networks">Standford CS230 notes</a>, or <a href="https://karpathy.github.io/2015/05/21/rnn-effectiveness/">Karpathy’s writeup</a>.</p>
+</div>
+<p>As you can see in the detailed resources cited above, an artificial neuron is a small piece of code that:</p>
+<ul>
+<li>takes numerical input values (one value per “synapse”)</li>
+<li>sums them up with by giving each one varying degree of importance in the sum (its “weight” or the strength of the synapse)</li>
+<li>applies a “threshold function”, i.e. it responds differently if the sum is small or large</li>
+<li>outputs this final value</li>
+</ul>
+<p>Thus, by layering such artificial neurons we can input the motion sensor data and output, after a few layers, a number representing the gesture we have been performing while holding the device. A very important step would be to teach or “train” the neural network to made that decision. Just like in biology, this will be done by changing the strength of the connections between the neurons, i.e. by finding appropriate values for the aforementioned weights.</p>
+<p>By grouping the neurons in layers it becomes easier to write down the necessary computer code as standard linear algebra operations. Moreover, <strong>as gesture recognition requires understanding the entire history of a motion</strong>, we will dedicate a few neurons to work as a memory, turning our neural network into a recurrent neural network. This leads us to our architecture of choice.</p>
+<h3 id="the-recurrent-neural-network-of-choice-for-our-task">The Recurrent Neural Network of choice for our task</h3>
+<p>Our motion sensor can easily report measured acceleration and rotation 50 times a second. This will be the input for our recurrent neural network: a 6-dimensional vector containing the acceleration and rotation speed measurements for each of the 3 directions of space: <span class="math display">\[\text{input vector:}\ \ \ \vec{v}_\textrm{in}.\]</span> We will also reserver a vector <span class="math inline">\(\vec{s}\)</span> as a memory. With each new sensor measurement sent to the network (50 times a second), we will update that memory in the following way: <span class="math display">\[\text{memory update rule:}\ \ \ \vec{s}\leftarrow \sigma(W_s\cdot\vec{s}+U\cdot\vec{v}_\textrm{in}+\vec{b}_r),\]</span> Where the matrices <span class="math inline">\(W_s\)</span> and <span class="math inline">\(U\)</span> (synapse connection weights) as well as the vector <span class="math inline">\(\vec{b}_r\)</span> (bias) are parameters to be trained. <span class="math inline">\(\sigma\)</span> is the thresholding function, for which we have chosen to use <span class="math inline">\(relu\)</span>, because it is easy to compute on simple hardware.</p>
+<p>Out of this memory we can now compute the output of the recurrent layer of the neural network: <span class="math display">\[\text{recurrent layer output:}\ \ \ \vec{v}_\textrm{rec}=\sigma(W_o\cdot\vec{c}+\vec{b}_o),\]</span> where <span class="math inline">\(W_o\)</span> and <span class="math inline">\(\vec{b}_o\)</span> are more parameters that need to be trained.</p>
+<p>We can repeat multiple such recurrent layers, where the output of the previous layer is used as an input for the next layer with its own unique memory vector. We ended up using 2 recurrent layers for our implementation, but a typical 16MHz arduino can run quite a few more of them at a rate of 50Hz if necessary. Our memory vectors and our output vectors all have 6 dimensions.</p>
+<p>At the very end of the neural network, we need to take the output of the last recurrent layer and turn it into a decision of which gesture is being performed. For simplicity we will use only three rather simple gestures for our first network:</p>
+<ul>
+<li>keeping the device steady</li>
+<li>shaking the device in one direction</li>
+<li>shaking the device in the orthogonal direction</li>
+</ul>
+<p>Thus, our output vector <span class="math inline">\(\vec{v}_\textrm{out}\)</span> will have three components, each representing the probability (or certainty of belief) that the device is performing the corresponding gesture. As they need to sum up to one, it is natural to use the <span class="math inline">\(\textrm{softmax}\)</span> function on a final non-recurrent neural network layer: <span class="math display">\[\text{classification result:}\ \ \ \vec{v}_\textrm{out}=\textrm{softmax}(W\cdot\vec{v}_\textrm{rec}+\vec{b}),\]</span> where <span class="math inline">\(W\)</span> and <span class="math inline">\(\vec{b}\)</span> are the final set of parameters in need of training.</p>
+<h2 id="implementing-a-recurrent-neural-network-on-an-arduino">Implementing a Recurrent Neural Network on an Arduino</h2>
+<p>The typical Arduino hardware does not directly support floating point numbers. The compiler still lets you use them, but the generated machine code emulates them by using the underlying integer data types. This emulation is usually judged to be much too slow, as a simple multiplication of two floating point numbers will take many times more than the time for an integer numbers multiplication. If this significant overhead is making our network too slow for the 50Hz rate at which we want to run it, we can retrain the network to use only integers. This is, however, much more succeptible to bugs, so let us first benchmark the performance of a typical floating point network running on a 16MHz Arduino.</p>
+<p>We will need to implement a mock neural network to do these tests. This file (also embedded below) contains such an implementation, together with all the linear algebra operations that we will need.</p>
+<p>The <code>network()</code> function is the one that looks at the globally defined array <code>input</code>, computes one iteration of our recurrent neural network on it, and stores the results in the globally defined array <code>output</code>. It then finds which element of <code>output</code> is the largest, and reports it as the most probable gesture being recorded by the device.</p>
+<script data-isso="//comments.spinwearables.com/"
+data-isso-reply-to-self="false"
+data-isso-require-author="true"
+data-isso-require-email="true"
+data-isso-avatar="false"
+data-isso-vote="false"
+src="//comments.spinwearables.com/js/embed.min.js"></script>
+<section id="isso-thread"></section>
+<script>
+document.querySelector("#isso-thread").addEventListener(
+  "click",
+  function () {
+    document.querySelectorAll("#isso-thread > div").forEach(function (x) {x.style.display = "block";});
+  });
+</script>
+</main>
+<div id="license">
+<!--<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc-by-sa.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.-->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc-by-nc-sa.png" /></a></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. © SpinWearables LLC (<a href="/license">license and trademark details</a>)
+</div>
+</body>
+</html>
