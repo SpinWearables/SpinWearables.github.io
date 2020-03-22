@@ -122,6 +122,12 @@ long executionTime() {
   static long t = millis();
   long r = millis()-t;
   t = millis();
+}
+
+long executionTimeMicros() {
+  static long t = micros();
+  long r = micros()-t;
+  t = micros();
   return r;
 }
 
@@ -316,6 +322,8 @@ that changes the current animation.
         digitalWrite(7, INPUT_PULLUP); // XXX HARDWARE DETAIL: Pin D7 is connected to the button.
         attachInterrupt(digitalPinToInterrupt(7), cycleAnimationRoutine, FALLING);
       }
+      clearAllLEDs();
+      drawFrame();
     }
 
 ```

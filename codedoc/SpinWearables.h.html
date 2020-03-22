@@ -190,8 +190,14 @@ video {
 <span id="cb10-2"><a href="#cb10-2"></a>  <span class="at">static</span> <span class="dt">long</span> t = millis();</span>
 <span id="cb10-3"><a href="#cb10-3"></a>  <span class="dt">long</span> r = millis()-t;</span>
 <span id="cb10-4"><a href="#cb10-4"></a>  t = millis();</span>
-<span id="cb10-5"><a href="#cb10-5"></a>  <span class="cf">return</span> r;</span>
-<span id="cb10-6"><a href="#cb10-6"></a>}</span></code></pre></div>
+<span id="cb10-5"><a href="#cb10-5"></a>}</span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="dt">long</span> executionTimeMicros() {</span>
+<span id="cb10-8"><a href="#cb10-8"></a>  <span class="at">static</span> <span class="dt">long</span> t = micros();</span>
+<span id="cb10-9"><a href="#cb10-9"></a>  <span class="dt">long</span> r = micros()-t;</span>
+<span id="cb10-10"><a href="#cb10-10"></a>  t = micros();</span>
+<span id="cb10-11"><a href="#cb10-11"></a>  <span class="cf">return</span> r;</span>
+<span id="cb10-12"><a href="#cb10-12"></a>}</span></code></pre></div>
 </div>
 <section id="drawing-convenience-functions" class="side-text">
 <h2>Drawing convenience functions</h2>
@@ -335,7 +341,9 @@ video {
 <span id="cb23-2"><a href="#cb23-2"></a>        digitalWrite(<span class="dv">7</span>, INPUT_PULLUP); <span class="co">// XXX HARDWARE DETAIL: Pin D7 is connected to the button.</span></span>
 <span id="cb23-3"><a href="#cb23-3"></a>        attachInterrupt(digitalPinToInterrupt(<span class="dv">7</span>), cycleAnimationRoutine, FALLING);</span>
 <span id="cb23-4"><a href="#cb23-4"></a>      }</span>
-<span id="cb23-5"><a href="#cb23-5"></a>    }</span></code></pre></div>
+<span id="cb23-5"><a href="#cb23-5"></a>      clearAllLEDs();</span>
+<span id="cb23-6"><a href="#cb23-6"></a>      drawFrame();</span>
+<span id="cb23-7"><a href="#cb23-7"></a>    }</span></code></pre></div>
 </div>
 <section id="we-store-the-current-state-of-the-leds-in-these-objects." class="side-text">
 <h3>We store the current state of the LEDs in these objects.</h3>

@@ -79,7 +79,7 @@
 <p>By grouping the neurons in layers it becomes easier to write down the necessary computer code as standard linear algebra operations. Moreover, <strong>as gesture recognition requires understanding the entire history of a motion</strong>, we will dedicate a few neurons to work as a memory, turning our neural network into a recurrent neural network. This leads us to our architecture of choice.</p>
 <h3 id="the-recurrent-neural-network-of-choice-for-our-task">The Recurrent Neural Network of choice for our task</h3>
 <p>Our motion sensor can easily report measured acceleration and rotation 50 times a second. This will be the input for our recurrent neural network: a 6-dimensional vector containing the acceleration and rotation speed measurements for each of the 3 directions of space: <span class="math display">\[\text{input vector:}\ \ \ \vec{v}_\textrm{in}.\]</span> We will also reserver a vector <span class="math inline">\(\vec{s}\)</span> as a memory. With each new sensor measurement sent to the network (50 times a second), we will update that memory in the following way: <span class="math display">\[\text{memory update rule:}\ \ \ \vec{s}\leftarrow \sigma(W_s\cdot\vec{s}+U\cdot\vec{v}_\textrm{in}+\vec{b}_r),\]</span> Where the matrices <span class="math inline">\(W_s\)</span> and <span class="math inline">\(U\)</span> (synapse connection weights) as well as the vector <span class="math inline">\(\vec{b}_r\)</span> (bias) are parameters to be trained. <span class="math inline">\(\sigma\)</span> is the thresholding function, for which we have chosen to use <span class="math inline">\(relu\)</span>, because it is easy to compute on simple hardware.</p>
-<p>Out of this memory we can now compute the output of the recurrent layer of the neural network: <span class="math display">\[\text{recurrent layer output:}\ \ \ \vec{v}_\textrm{rec}=\sigma(W_o\cdot\vec{c}+\vec{b}_o),\]</span> where <span class="math inline">\(W_o\)</span> and <span class="math inline">\(\vec{b}_o\)</span> are more parameters that need to be trained.</p>
+<p>Out of this memory we can now compute the output of the recurrent layer of the neural network: <span class="math display">\[\text{recurrent layer output:}\ \ \ \vec{v}_\textrm{rec}=\sigma(W_o\cdot\vec{s}+\vec{b}_o),\]</span> where <span class="math inline">\(W_o\)</span> and <span class="math inline">\(\vec{b}_o\)</span> are more parameters that need to be trained.</p>
 <p>We can repeat multiple such recurrent layers, where the output of the previous layer is used as an input for the next layer with its own unique memory vector. We ended up using 2 recurrent layers for our implementation, but a typical 16MHz arduino can run quite a few more of them at a rate of 50Hz if necessary. Our memory vectors and our output vectors all have 6 dimensions.</p>
 <p>At the very end of the neural network, we need to take the output of the last recurrent layer and turn it into a decision of which gesture is being performed. For simplicity we will use only three rather simple gestures for our first network:</p>
 <ul>
@@ -91,6 +91,25 @@
 <h2 id="implementing-a-recurrent-neural-network-on-an-arduino">Implementing a Recurrent Neural Network on an Arduino</h2>
 <p>The typical Arduino hardware does not directly support floating point numbers. The compiler still lets you use them, but the generated machine code emulates them by using the underlying integer data types. This emulation is usually judged to be much too slow, as a simple multiplication of two floating point numbers will take many times more than the time for an integer numbers multiplication. If this significant overhead is making our network too slow for the 50Hz rate at which we want to run it, we can retrain the network to use only integers. This is, however, much more succeptible to bugs, so let us first benchmark the performance of a typical floating point network running on a 16MHz Arduino.</p>
 <p>We will need to implement a mock neural network to do these tests. This file (also embedded below) contains such an implementation, together with all the linear algebra operations that we will need.</p>
+<style>
+  iframe {
+    width: 95%;
+    height: 30vh;
+    min-height:400px;
+  }
+</style>
+<script>
+  function cleanIframe(obj) {
+    var l = obj.contentWindow.document.getElementById('license');
+    l.parentElement.removeChild(l);
+    var n = obj.contentWindow.document.getElementsByClassName('nav')[0];
+    n.parentElement.removeChild(n);
+    var i = obj.contentWindow.document.getElementById('isso-thread');
+    i.parentElement.removeChild(i);
+  }
+</script>
+<iframe src="/codedoc/examples/RNN/net.h.html" frameborder="0" scrolling="no" onload="cleanIframe(this)">
+</iframe>
 <p>The <code>network()</code> function is the one that looks at the globally defined array <code>input</code>, computes one iteration of our recurrent neural network on it, and stores the results in the globally defined array <code>output</code>. It then finds which element of <code>output</code> is the largest, and reports it as the most probable gesture being recorded by the device.</p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
