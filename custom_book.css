@@ -1,7 +1,7 @@
 :root {
   --panel-padding: 10px;
   --panel-margin: 1em 8% 1em 8%;
-  --panel-fontsize: 0.8em;
+  --panel-fontsize: 0.8rem;
   --panel-lineheight: 1.2em;
   --color-intro-box: rgb(  90,  83, 119);
   --color-warning:   rgba(255, 116, 116, 0.60);
@@ -131,6 +131,17 @@ p > code {
   background-color: var(--color-code);
   padding: 3px;
   border-radius: 3px;
+}
+
+div.ssw-container {
+  padding: var(--panel-padding);
+  border-radius: var(--panel-padding);
+  margin: var(--panel-margin);
+  font-size: var(--panel-fontsize);
+  line-height: 1em;
+}
+div.ssw-container * {
+  font-size: var(--panel-fontsize);
 }
 
 /* Figures */

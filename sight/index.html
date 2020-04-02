@@ -213,6 +213,21 @@ changeColor();
 <span id="cb1-13"><a href="#cb1-13"></a></span>
 <span id="cb1-14"><a href="#cb1-14"></a><span class="dt">void</span> loop() {</span>
 <span id="cb1-15"><a href="#cb1-15"></a>}</span></code></pre></div>
+<link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
+<script src='/simspinwheel/simspinwheel.js'></script>
+<div class="ssw-codecontent" data-markdown="0">
+<pre class="ssw-codeblock">
+void loop() {
+  int t = millis();
+</pre>
+<textarea class="ssw-codeblock">
+  SpinWheel.setLargeLEDsUniform((t/10)%255, 0, (t/10)%255);
+</textarea>
+<pre class="ssw-codeblock">
+  SpinWheel.drawFrame();
+}
+</pre>
+</div>
 <h2 id="persistence-of-vision">Persistence of Vision</h2>
 <p>Our eyes have another imperfection we can take advantage of while programming the SpinWheel: they are rather slow. Consider the example below, where you can select the speed at which a shade of blue and a shade of red switch between each other.</p>
 <style>
