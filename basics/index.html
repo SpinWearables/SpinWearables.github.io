@@ -120,6 +120,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="turn-on-all-the-large-leds">Turn on all the Large LEDs</h2>
 <p>In this section, we will teach you how to control all of the large LEDs together.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a>code will go here</span></code></pre></div>
+<link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
+<script src='/simspinwheel/simspinwheel.js'></script>
+<div class="ssw-codecontent" data-markdown="0">
+<pre class="ssw-codeblock">
+void loop() {
+  int t = millis();
+</pre>
+<textarea class="ssw-codeblock">
+  SpinWheel.setLargeLEDsUniform(255, 255, 0);
+</textarea>
+<pre class="ssw-codeblock">
+  SpinWheel.drawFrame();
+}
+</pre>
+</div>
 <h2 id="turn-on-all-the-small-leds">Turn on all the Small LEDs</h2>
 <p>In this section, we will teach you how to control all of the small LEDs together.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a>essentially the same code will go here but <span class="cf">for</span> the small LEDs</span></code></pre></div>
