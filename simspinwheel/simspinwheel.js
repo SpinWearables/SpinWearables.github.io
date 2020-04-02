@@ -44,7 +44,7 @@ class SpinWheelClass {
 
 function get_original_code(container) {
   return Array.from(container.getElementsByClassName("ssw-codeblock"))
-              .map(x => x.tagName=="DIV" ? x.innerHTML : x.value).join('');
+              .map(x => x.tagName!="TEXTAREA" ? x.innerHTML : x.value).join('');
 }
 
 function translate_code(code) {
