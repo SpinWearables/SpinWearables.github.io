@@ -1,0 +1,61 @@
+.ssw-container {
+  display: flex;
+  flex-direction: row;
+}
+.ssw-code {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.ssw-codecontent {
+  flex-grow: 1;
+}
+.ssw-codeblock {
+  font-family: monospace;
+  white-space: pre;
+  width: 100%;
+}
+div.ssw-codeblock {
+  padding: 0 2px 0 2px;
+  margin: 2px 0 2px 0;
+}
+textarea.ssw-codeblock {
+  padding: 0 1px 0 1px;
+  margin: 1px 0 1px 0;
+  border: 1px solid gray;
+  overflow-y: hidden;
+}
+.ssw-codecontrols {
+  flex-grow: 0;
+}
+.ssw-debug {
+  font-family: monospace;
+  white-space: pre;
+  width: 100%;
+}
+.ssw-vis {
+  flex-shrink: 1;
+}
+.ssw-vis > div {
+  max-width: 200px;
+  position: relative; left: 0; top: 0;
+}
+.ssw-vis > div > img {
+  position: relative; left: 0; top: 0;
+  width: 100%;
+}
+.ssw-large-led {
+  position: absolute;
+  width: 5%;
+  height: 5%;
+  border-radius: 50%;
+  background: black;
+}
+.ssw-large-led0 {left:49%;top:39%;}
+.ssw-large-led1 {left:57%;top:47%;}
+.ssw-large-led2 {left:49%;top:55%;}
+.ssw-large-led3 {left:41%;top:47%;}
+.ssw-large-led4 {left:49%;top:22%;}
+.ssw-large-led5 {left:74%;top:47%;}
+.ssw-large-led6 {left:49%;top:72.5%;}
+.ssw-large-led7 {left:23.5%;top:47%;}
