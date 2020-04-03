@@ -69,40 +69,54 @@ window.onload = function (){
       var img = li.querySelector('img');
       var a = li.querySelector('a');
       img.src = '/images/otherresourcespics/' + a.href.replace(/\//g,'.').replace(/:/g,'.') + '.png';
+      img.onclick = function() {window.location=a.href;};
     });
   })
 };
 </script>
 <style>
+.row-grid {
+  display: block !important;
+}
+.column-grid {
+  margin: 1rem !important;
+  text-align: center !important;
+}
 ul.other_resources {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(360px, 1fr));
+  grid-auto-rows: 1fr;
 }
 ul.other_resources > li {
   display: flex;
   flex-direction: row;
   margin: 10px 0;
   align-items: center;
-}
-.row-small-reverse ul.other_resources > li {
-  flex-direction: row-reverse;
+  flex-basis: 350px;
 }
 ul.other_resources > li > img {
-  max-width:30%;
-  margin: 1rem;
+  width:30%;
+  margin-right: 1rem;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
-.column {
-  justify-content: start;
+ul.other_resources > li > p {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  flex-grow: 1;
 }
 </style>
-<div class="row">
-<div class="column">
+<div class="row row-grid">
+<div class="column column-grid">
 <h2>
 Video Channels
 </h2>
 </div>
-<div class="column column-long">
+<div class="column column-grid column-long">
 <ul class="other_resources">
 <li>
 <img src="">
@@ -143,8 +157,13 @@ Video Channels
 </ul>
 </div>
 </div>
-<div class="row row-small-reverse">
-<div class="column column-long">
+<div class="row row-grid">
+<div class="column column-grid">
+<h2>
+Activity Lists and Orgs
+</h2>
+</div>
+<div class="column column-grid column-long">
 <ul class="other_resources">
 <li>
 <img src="">
@@ -190,19 +209,14 @@ Video Channels
 </li>
 </ul>
 </div>
-<div class="column">
-<h2>
-Activity Lists and Orgs
-</h2>
 </div>
-</div>
-<div class="row">
-<div class="column">
+<div class="row row-grid">
+<div class="column column-grid">
 <h2>
 Kits
 </h2>
 </div>
-<div class="column column-long">
+<div class="column column-grid column-long">
 <ul class="other_resources">
 <li>
 <img src="">
@@ -237,8 +251,13 @@ Kits
 </ul>
 </div>
 </div>
-<div class="row row-small-reverse">
-<div class="column column-long">
+<div class="row row-grid">
+<div class="column column-grid">
+<h2>
+Virtual Museums
+</h2>
+</div>
+<div class="column column-grid column-long">
 <ul class="other_resources">
 <li>
 <img src="">
@@ -254,19 +273,14 @@ Kits
 </li>
 </ul>
 </div>
-<div class="column">
-<h2>
-Virtual Museums
-</h2>
 </div>
-</div>
-<div class="row">
-<div class="column">
+<div class="row row-grid">
+<div class="column column-grid">
 <h2>
 Computer Games
 </h2>
 </div>
-<div class="column column-long">
+<div class="column column-grid column-long">
 <ul class="other_resources">
 <li>
 <img src="">
@@ -295,8 +309,13 @@ Computer Games
 </ul>
 </div>
 </div>
-<div class="row row-small-reverse">
-<div class="column column-long">
+<div class="row row-grid">
+<div class="column column-grid">
+<h2>
+Introductory CAD/Electronics Online Tools
+</h2>
+</div>
+<div class="column column-grid column-long">
 <ul class="other_resources">
 <li>
 <img src="">
@@ -318,20 +337,15 @@ Computer Games
 </li>
 </ul>
 </div>
-<div class="column">
-<h2>
-Introductory CAD/Electronics Online Tools
-</h2>
 </div>
-</div>
-<div class="row">
-<div class="column">
+<div class="row row-grid">
+<div class="column column-grid">
 <h2>
 Books
 </h2>
 <p>Read any and every well received book you can get your hands on. Read them all with a grain of salt. Glean from them advice and elements that resonate with you. No one “expert” has all of the answers. Some are just plain flat out wrong and dangerous, but many others are helpful, and some are just brilliant. You need to trust your own instincts to disregard the bad advice, use the good that pertains to your situation, and be inspired and transformed by the brilliant.</p>
 </div>
-<div class="column column-long">
+<div class="column column-grid column-long">
 <ul class="other_resources">
 <li>
 <img src="">
