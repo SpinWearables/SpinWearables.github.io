@@ -200,13 +200,9 @@ document.getElementById("blue").oninput = changeColor;
 changeColor();
 </script>
 </div>
-<p>This will allow us to program the SpinWheel (or the SpinWheel animation below) to display beautiful colorful patterns (while using only a small set of hardware components). This is why the sliders go from 0 to 255 instead of a more obvious set of numbers like 0 to 100 - this is the range used by the SpinWheel for the minimum and maximum of red, green, and blue allowed in the mixture.</p>
-<p>Now let’s start programming the SpinWheel to light up a specific color! You can use the code shown below. Pick a color you like by changing the sliders above (for instance, I like this purple <code>(195,0,255)</code>), and make the large LEDs on the SpinWheel show that color by editing the code and uploading it to the SpinWheel.</p>
-<p>To experiment with this without having a SpinWheel, then you can try the code below here on our animated SpinWheel. By changing the value of <code>SpinWheel.setLargeLEDsUniform()</code> you can have the animation light up as you would the real SpinWheel.</p>
+<p>This will allow us to program the SpinWheel to display beautiful colorful patterns (while using only a small set of hardware components). This is why the sliders go from 0 to 255 instead of a more obvious set of numbers like 0 to 100 - this is the range used by the SpinWheel for the minimum and maximum of red, green, and blue allowed in the mixture. If you do not have a SpinWheel at hand, you can program the virtual one further down on this page.</p>
+<p>Now let’s start programming the SpinWheel to light up a specific color! You can use the code shown below. Pick a color you like by changing the sliders above (for instance, I like this purple <code>(195,0,255)</code>), and make the large LEDs on the SpinWheel show that color by editing the code and uploading it to the SpinWheel or running it on the virtual SpinWheel below. By changing the values in <code>SpinWheel.setLargeLEDsUniform(...)</code> you can have the animation light up in the desired color.</p>
 <p>If you have trouble understanding the commands below, be sure to read our <a href="/quickstart">quick start guide</a> and if necessary some of the Computer Science 101 sections.</p>
-<div class="warning">
-<p>One more quick point: depending on how bright it is in the room where you are programming the SpinWheel, you may want to change the brightness of the LEDs. For instance, something that seems blinding when working on it under artificial lights will seem dim in full sunlight. If you’d like to change the brightness of the SpinWheel (for any reason!), you can add <code>SpinWheel.largeLEDs.setBrightness(X);</code> into the <code>setup</code> function, and change the value of X to any value you wish between 0 (off) and 255 (brightest).</p>
-</div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
@@ -222,15 +218,16 @@ changeColor();
 <span id="cb1-13"><a href="#cb1-13"></a></span>
 <span id="cb1-14"><a href="#cb1-14"></a><span class="dt">void</span> loop() {</span>
 <span id="cb1-15"><a href="#cb1-15"></a>}</span></code></pre></div>
+<p>You can try this code in this small simulator that lets you see directly from this page how the SpinWheel would respond if you run the code. Below you can change the brightness of each of the red, green, and blue components of the light emitters.</p>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
 <script src='/simspinwheel/simspinwheel.js'></script>
 <div class="ssw-codecontent" data-markdown="0">
 <pre class="ssw-codeblock">
-void loop() {
-  int t = millis();
+void setup() {
+  SpinWheel.begin();
 </pre>
 <textarea class="ssw-codeblock">
-  SpinWheel.setLargeLEDsUniform((t/10)%255, 0, (t/10)%255);
+  SpinWheel.setLargeLEDsUniform(195, 0, 255);
 </textarea>
 <pre class="ssw-codeblock">
   SpinWheel.drawFrame();
@@ -305,7 +302,7 @@ document.getElementById("stop").onclick = stopCycle;
 getT();
 </script>
 </div>
-<p>Since web browsers are not particularly well adapted to this type of rapid color change, the flicker at high speeds is rather unpleasant. However at these speeds, you will start to see purple and the red and blue will become less clearly noticeable. Unlike web browsers, the SpinWheel is up to this task, though. The following program will cycle between red and blue at variable delays. Experiment with the value for the delay. At what delay do you stop distinguishing the two colors and start seeing only purple?</p>
+<p>Since web browsers are not particularly well adapted to this type of rapid color change, the flicker at high speeds is rather unpleasant. However at these speeds, you will start to see purple and the red and blue will become less clearly noticeable. Unlike web browsers, the SpinWheel is up to this task. The following program will cycle between red and blue at variable delays. Experiment with the value for the delay. At what delay do you stop distinguishing the two colors and start seeing only purple?</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
 <span id="cb2-3"><a href="#cb2-3"></a></span>

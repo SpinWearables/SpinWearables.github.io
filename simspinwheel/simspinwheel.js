@@ -16,6 +16,9 @@ class SpinWheelClass {
     this._ssw_sLEDarray = new Uint8Array(this._ssw_sLEDdiv.length*3);
   }
 
+  begin() {
+  }
+
   drawLargeLEDFrame() {
     for (let i = 0; i<this._ssw_lLEDdiv.length; i++) {
       this._ssw_lLEDdiv[i].style.background = `rgb(${this._ssw_lLEDarray[3*i]},${this._ssw_lLEDarray[3*i+1]},${this._ssw_lLEDarray[3*i+2]})`;
@@ -55,10 +58,15 @@ function translate_code(code) {
     ${base_code}
     var c = 200;
     function _ssw_loop() {
-      loop();
-      c--;
-      if (c>0) {
-        setTimeout(_ssw_loop, 50);
+      if (typeof setup !== 'undefined') {
+        setup();
+      }
+      if (typeof loop !== 'undefined') {
+        loop();
+        c--;
+        if (c>0) {
+          setTimeout(_ssw_loop, 50);
+        }
       }
     };
     _ssw_loop();

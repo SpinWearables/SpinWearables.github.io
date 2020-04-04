@@ -28,6 +28,9 @@ textarea.ssw-codeblock {
 .ssw-codecontrols {
   flex-grow: 0;
 }
+.ssw-bt-debug {
+  display: none;
+}
 .ssw-debug {
   font-family: monospace;
   white-space: pre;
