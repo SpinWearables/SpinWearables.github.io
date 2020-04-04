@@ -25,11 +25,15 @@ class SpinWheelClass {
     }
   }
 
-  // TODO the drawSmallLEDFrame function (and add it to draw)
-  // TODO that also involves creating and placing the necessary divs in the template in unfinished_to_finished_html
+  drawSmallLEDFrame() {
+    for (let i = 0; i<this._ssw_sLEDdiv.length; i++) {
+      this._ssw_sLEDdiv[i].style.background = `rgb(${this._ssw_sLEDarray[3*i]},${this._ssw_sLEDarray[3*i+1]},${this._ssw_sLEDarray[3*i+2]})`;
+    }
+  }
 
   drawFrame() {
     this.drawLargeLEDFrame();
+    this.drawSmallLEDFrame();
   }
  
   setLargeLEDsUniform(r,g,b) {
@@ -38,6 +42,31 @@ class SpinWheelClass {
       this._ssw_lLEDarray[3*i+1] = g;
       this._ssw_lLEDarray[3*i+2] = b;
     }
+  }
+
+  setSmallLEDsUniform(r,g,b) {
+    for (let i = 0; i<this._ssw_sLEDdiv.length; i++) {
+      this._ssw_sLEDarray[3*i  ] = r;
+      this._ssw_sLEDarray[3*i+1] = g;
+      this._ssw_sLEDarray[3*i+2] = b;
+    }
+  }
+
+  setLargeLED(i, r,g,b) {
+    this._ssw_lLEDarray[3*i  ] = r;
+    this._ssw_lLEDarray[3*i+1] = g;
+    this._ssw_lLEDarray[3*i+2] = b;
+  }
+
+  setSmallLED(i, r,g,b) {
+    this._ssw_sLEDarray[3*i  ] = r;
+    this._ssw_sLEDarray[3*i+1] = g;
+    this._ssw_sLEDarray[3*i+2] = b;
+  }
+
+  clearAllLEDs() {
+    this.setLargeLEDsUniform(0,0,0);
+    this.setSmallLEDsUniform(0,0,0);
   }
 
   // TODO all of the set*** functions
@@ -54,7 +83,10 @@ function translate_code(code) {
   var base_code = code.replace('void','function')
                       .replace('int','var');
   var code = `
-    var SpinWheel = this;
+    var SpinWheel = this.SpinWheel;
+    var button = this.querySelector('.ssw-bt-run');
+    button.disabled = true;
+    button.innerHTML = 'Running...';
     ${base_code}
     var c = 200;
     function _ssw_loop() {
@@ -66,7 +98,13 @@ function translate_code(code) {
         c--;
         if (c>0) {
           setTimeout(_ssw_loop, 50);
+        } else {
+          button.disabled = false;
+          button.innerHTML = 'Run for 10 seconds';
         }
+      } else {
+        button.disabled = false;
+        button.innerHTML = 'Run for 10 seconds';
       }
     };
     _ssw_loop();
@@ -79,7 +117,7 @@ function show_in_debug(container) {
 }
 
 function run_sim(container) {
-  Function(translate_code(get_original_code(container))).apply(container.SpinWheel)
+  Function(translate_code(get_original_code(container))).apply(container);
 }
 
 function unfinished_to_finished_html(unfinished_html) {
@@ -96,7 +134,7 @@ ${unfinished_html}
 </div>
 <div class="ssw-vis">
 <div>
-<img src="/simspinwheel/spinwheel_invertgray.png">
+<img src="/simspinwheel/spinwheel_invertgray_nosmalls.png">
 <div class="ssw-large-led ssw-large-led0"></div>
 <div class="ssw-large-led ssw-large-led1"></div>
 <div class="ssw-large-led ssw-large-led2"></div>
@@ -105,6 +143,18 @@ ${unfinished_html}
 <div class="ssw-large-led ssw-large-led5"></div>
 <div class="ssw-large-led ssw-large-led6"></div>
 <div class="ssw-large-led ssw-large-led7"></div>
+<div class="ssw-small-led ssw-small-led0"></div>
+<div class="ssw-small-led ssw-small-led1"></div>
+<div class="ssw-small-led ssw-small-led2"></div>
+<div class="ssw-small-led ssw-small-led3"></div>
+<div class="ssw-small-led ssw-small-led4"></div>
+<div class="ssw-small-led ssw-small-led5"></div>
+<div class="ssw-small-led ssw-small-led6"></div>
+<div class="ssw-small-led ssw-small-led7"></div>
+<div class="ssw-small-led ssw-small-led8"></div>
+<div class="ssw-small-led ssw-small-led9"></div>
+<div class="ssw-small-led ssw-small-led10"></div>
+<div class="ssw-small-led ssw-small-led11"></div>
 </div>
 </div>
 </div>

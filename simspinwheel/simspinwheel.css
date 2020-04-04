@@ -62,3 +62,22 @@ textarea.ssw-codeblock {
 .ssw-large-led5 {left:74%;top:47%;}
 .ssw-large-led6 {left:49%;top:72.5%;}
 .ssw-large-led7 {left:23.5%;top:47%;}
+.ssw-small-led {
+  position: absolute;
+  width: 2%;
+  height: 2%;
+  border-radius: 50%;
+  background: black;
+}
+.ssw-small-led0  {left:64.0%;top:24.1%;}
+.ssw-small-led1  {left:70.0%;top:28.5%;}
+.ssw-small-led2  {left:75.0%;top:34.5%;}
+.ssw-small-led3  {left:75.0%;top:62.0%;}
+.ssw-small-led4  {left:70.2%;top:68.5%;}
+.ssw-small-led5  {left:64.0%;top:72.5%;}
+.ssw-small-led6  {left:36.5%;top:72.5%;}
+.ssw-small-led7  {left:30.5%;top:68.5%;}
+.ssw-small-led8  {left:25.5%;top:62.0%;}
+.ssw-small-led9  {left:25.5%;top:34.5%;}
+.ssw-small-led10 {left:30.5%;top:28.5%;}
+.ssw-small-led11 {left:36.5%;top:24.1%;}

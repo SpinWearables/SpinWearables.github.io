@@ -113,19 +113,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">Basic SpinWheel Commands</h1>
 </header>
 <main>
+<link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
+<script src='/simspinwheel/simspinwheel.js'></script>
 <div class="intro-box">
 <p>This adventure is an introduction to programming the SpinWheel that will teach you what you need to know to begin customizing the LED lattice however you imagine.</p>
 </div>
 <p>If you have never programmed with Arduino before, be sure to read our <a href="/quickstart">quick start guide</a> and if necessary some of the <a href="/progpatterns">Computer Science 101 sections</a>.</p>
 <h2 id="turn-on-all-the-large-leds">Turn on all the Large LEDs</h2>
 <p>In this section, we will teach you how to control all of the large LEDs together.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a>code will go here</span></code></pre></div>
-<link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
-<script src='/simspinwheel/simspinwheel.js'></script>
 <div class="ssw-codecontent" data-markdown="0">
 <pre class="ssw-codeblock">
 void loop() {
-  int t = millis();
 </pre>
 <textarea class="ssw-codeblock">
   SpinWheel.setLargeLEDsUniform(255, 255, 0);
@@ -137,16 +135,51 @@ void loop() {
 </div>
 <h2 id="turn-on-all-the-small-leds">Turn on all the Small LEDs</h2>
 <p>In this section, we will teach you how to control all of the small LEDs together.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a>essentially the same code will go here but <span class="cf">for</span> the small LEDs</span></code></pre></div>
+<div class="ssw-codecontent" data-markdown="0">
+<pre class="ssw-codeblock">
+void loop() {
+</pre>
+<textarea class="ssw-codeblock">
+  SpinWheel.setSmallLEDsUniform(255, 255, 0);
+</textarea>
+<pre class="ssw-codeblock">
+  SpinWheel.drawFrame();
+}
+</pre>
+</div>
 <h2 id="control-a-specific-large-led">Control a Specific Large LED</h2>
 <p>Learn how to turn on just one large LED at a time.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a>code will go here to light up one large LED</span></code></pre></div>
+<div class="ssw-codecontent" data-markdown="0">
+<pre class="ssw-codeblock">
+void loop() {
+</pre>
+<textarea class="ssw-codeblock">
+  SpinWheel.clearAllLEDs();
+  SpinWheel.setLargeLED(4, 255, 255, 0);
+</textarea>
+<pre class="ssw-codeblock">
+  SpinWheel.drawFrame();
+}
+</pre>
+</div>
 <h2 id="control-a-specific-small-led">Control a Specific Small LED</h2>
 <p>Learn how to turn on just one small LED at a time.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a>code will go here to light up one small LED</span></code></pre></div>
+<div class="ssw-codecontent" data-markdown="0">
+<pre class="ssw-codeblock">
+void loop() {
+</pre>
+<textarea class="ssw-codeblock">
+  SpinWheel.clearAllLEDs();
+  SpinWheel.setSmallLED(4, 255, 255, 0);
+</textarea>
+<pre class="ssw-codeblock">
+  SpinWheel.drawFrame();
+}
+</pre>
+</div>
 <h2 id="customize-each-led">Customize Each LED!</h2>
 <p>We’ll walk you through a more complicated example using what we learned above. Using this knowledge you can control the interface.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a>something more complicated!</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a>something more complicated!</span></code></pre></div>
 <p>Later lessons will explore how to have the LED display change in response to the device’s motion! For instance, you can even <a href="/stepcounter">turn the SpinWheel into a step counter</a></p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
