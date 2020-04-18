@@ -36,12 +36,15 @@ textarea.ssw-codeblock {
   white-space: pre;
   width: 100%;
 }
-.ssw-vis {
+.ssw-vis-out {
   flex-shrink: 1;
+}
+.ssw-vis {
 }
 .ssw-vis > div {
   max-width: 200px;
   position: relative; left: 0; top: 0;
+  cursor: move;
 }
 .ssw-vis > div > img {
   position: relative; left: 0; top: 0;

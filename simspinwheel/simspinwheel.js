@@ -14,9 +14,27 @@ class SpinWheelClass {
     this._ssw_sLEDdiv = Array.from(container.getElementsByClassName("ssw-small-led"));
     this._ssw_lLEDarray = new Uint8Array(this._ssw_lLEDdiv.length*3);
     this._ssw_sLEDarray = new Uint8Array(this._ssw_sLEDdiv.length*3);
+    this._dx = 0.0;
+    this._dy = 0.0;
+    this._ddx = 0.0;
+    this._ddy = 0.0;
+    this.ax = 0.0;
+    this.ay = 0.0;
+    this.az = 1.0;
+    this.gx = 0.0;
+    this.gy = 0.0;
+    this.gz = 0.0;
+    this.mx = 0.0;
+    this.my = 0.0;
+    this.mz = 0.0;
   }
 
   begin() {
+  }
+
+  readIMU() {
+    this.ax = this._ddx;
+    this.ay = this._ddy;
   }
 
   drawLargeLEDFrame() {
@@ -79,9 +97,18 @@ function get_original_code(container) {
               .map(x => x.tagName!="TEXTAREA" ? x.innerHTML : x.value).join('');
 }
 
+var dictionary = [
+["void", "function"],
+["int", "var"],
+["float", "var"],
+["abs", "Math.abs"],
+];
 function translate_code(code) {
-  var base_code = code.replace('void','function')
-                      .replace('int','var');
+  var base_code = " "+code+" ";
+  dictionary.forEach(function (pair) {
+    base_code = base_code.replace(RegExp('(?:[^\w])('+pair[0]+')(?:[^\w])','g'),
+                                  x=>x.replace(pair[0], pair[1]));
+  });
   var code = `
     var SpinWheel = this.SpinWheel;
     var button = this.querySelector('.ssw-bt-run');
@@ -132,6 +159,7 @@ ${unfinished_html}
 </div>
 </div>
 </div>
+<div class="ssw-vis-out">
 <div class="ssw-vis">
 <div>
 <img src="/simspinwheel/spinwheel_invertgray_nosmalls.png">
@@ -155,6 +183,7 @@ ${unfinished_html}
 <div class="ssw-small-led ssw-small-led9"></div>
 <div class="ssw-small-led ssw-small-led10"></div>
 <div class="ssw-small-led ssw-small-led11"></div>
+</div>
 </div>
 </div>
 </div>
@@ -185,7 +214,63 @@ function prep_containers() {
       text.resize = resize;
       text.addEventListener('input', resize, false);
     });
+    setTimeout(function (){
+      x.querySelector(".ssw-vis-out").style.width = x.querySelector(".ssw-vis").offsetWidth+'px';
+      x.querySelector(".ssw-vis").style.position = "absolute";
+      dragElement(x.querySelector(".ssw-vis"));
+      },
+      1000
+    ); // needs time to reflow so that offsetWidth is not 0
   });
 }
 
 addEventListener('load', prep_containers, false);
+
+// Dragging functions
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  var t = 0.0, dx = 0.0, dy = 0.0;
+  elmnt.onmousedown = dragMouseDown;
+  var SpinWheel = elmnt.parentNode.parentNode.SpinWheel;
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    t = new Date().getTime();
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    var tnew = new Date().getTime();
+    var dt = tnew-t;
+    t = tnew;
+    dx = pos1/dt*200;
+    dy = pos2/dt*200;
+    SpinWheel._ddx = 0.1*(dx-SpinWheel._dx)/dt + 0.9*SpinWheel._ddx;
+    SpinWheel._ddy = 0.1*(dy-SpinWheel._dy)/dt + 0.9*SpinWheel._ddy;
+    SpinWheel._dx = dx;
+    SpinWheel._dy = dy;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    elmnt.style.top = "auto";
+    elmnt.style.left = "auto";
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}

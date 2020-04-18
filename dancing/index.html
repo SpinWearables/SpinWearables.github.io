@@ -50,6 +50,26 @@
 <h1 class="title">Dancing Companion</h1>
 </header>
 <main>
+<link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
+<script src='/simspinwheel/simspinwheel.js'></script>
+<h1 id="test-of-motion-simulation">Test of motion simulation</h1>
+<p>After you click <code>Run</code>, grab the SpinWheel and shake it.</p>
+<div class="ssw-codecontent" data-markdown="0">
+<pre class="ssw-codeblock">
+void loop() {
+  SpinWheel.readIMU();
+  float ax = abs(SpinWheel.ax)*100;
+  float ay = abs(SpinWheel.ay)*100;
+</pre>
+<textarea class="ssw-codeblock">
+  SpinWheel.setLargeLEDsUniform(ax, ay, 0);
+</textarea>
+<pre class="ssw-codeblock">
+  SpinWheel.drawFrame();
+}
+</pre>
+</div>
+<h1 id="draft">Draft</h1>
 <p>Dancing Companion</p>
 <p>Intro bubble</p>
 <p>In this adventure, you will explore the ways we can describe motion mathematically and code colorful representations of that math.</p>
