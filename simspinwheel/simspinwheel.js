@@ -106,7 +106,7 @@ var dictionary = [
 function translate_code(code) {
   var base_code = " "+code+" ";
   dictionary.forEach(function (pair) {
-    base_code = base_code.replace(RegExp('(?:[^\w])('+pair[0]+')(?:[^\w])','g'),
+    base_code = base_code.replace(RegExp('(?:[^\\w])('+pair[0]+')(?:[^\\w])','g'),
                                   x=>x.replace(pair[0], pair[1]));
   });
   var code = `
