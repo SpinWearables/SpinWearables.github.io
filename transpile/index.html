@@ -123,7 +123,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 <p>This lesson is part of the SpinWheel series. The <a href="https://www.kickstarter.com/projects/spinwheel/447670470">SpinWheel</a> is a small Arduino-compatible sensor-enabled wearable device, meant to be used for teaching physics and computer science through an artistic medium. You can support our non-profit <a href="https://www.kickstarter.com/projects/spinwheel/447670470">Kickstarter</a> to help us reach more curious young minds and to get the device and teaching kit showcased in this lesson.</p>
 <div class="intro-box">
-<p>We built the <a href="https://www.kickstarter.com/projects/spinwheel/447670470">SpinWheel</a> and its <a href="https://spinwearables.com">engaging aesthetics</a> around the Arduino platform because of its low bariers to entry. We also want our online learning resources to be interactive, in the style of <a href="https://explorabl.es/">Explorable Explanations</a>, as this significantly improves learning outcomes. Thus, we needed to find a way to “compile” example C code in our webpages and show how it would affect the physical device. Moreover, the device has motion sensors which is central to many of the lessons we want to teach, hence the need to find a way to simulate that in a web page as well. Read on to see our misadventures into hacking together the most fragile C-to-Javascript transpiler: 100 lines of silly code that open up great pedagogical opportunities.</p>
+<p>We built the <a href="https://www.kickstarter.com/projects/spinwheel/447670470">SpinWheel</a> and its <a href="https://spinwearables.com">engaging aesthetics</a> around the Arduino platform because of its low barier to entry. We also want our online learning resources to be interactive, in the style of <a href="https://explorabl.es/">Explorable Explanations</a>, as this significantly improves learning outcomes. Thus, we needed to find a way to “compile” example C code in our webpages and show how it would affect the physical device. Since the device has motion sensors which are central to many of the lessons we want to teach, we sought a way to simulate that in a web page as well. Read on to see our misadventures in hacking together the most fragile C-to-Javascript transpiler: 100 lines of silly code that open up great pedagogical opportunities.</p>
 </div>
 <div class="warning">
 <p>Lessons are still under development!</p>
@@ -132,10 +132,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This is the SpinWheel:</p>
 <video src="/images/bookpics/preloaded_tilt3.mp4" muted autoplay playsinline loop>
 </video>
-<p>And this is the result of a <a href="/stepcounter">lesson</a> of how to turn this wearable keychanin/jewelry into a step counter. The large LEDs respond to the current motion, while the small LEDs accumulate the total motion, hence counting “steps”.</p>
+<p>And this is the result of a <a href="/stepcounter">lesson</a> which teaches how to turn this wearable keychanin/jewelry into a step counter. The large LEDs respond to the current motion, while the small LEDs accumulate the total motion, hence counting “steps”.</p>
 <video src="/images/bookpics/stepcounter_final.mp4" muted autoplay playsinline loop>
 </video>
-<p>The C++ code to do that is fairly simple (or it would be after you go through our lessons). We can show it here in its entirety, but even such a short piece of code can look intimidating to students. Instead, let us explore how we can present it in an <strong>interactive</strong> fashion inside of the browser.</p>
+<p>The C++ code to do that is fairly simple (or it would be after you go through our <a href="/book">lessons</a>). We can show it here in its entirety, but even such a short piece of code can look intimidating to those new to coding. Instead, let us explore how we can present it in an <strong>interactive</strong> fashion inside of the browser.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">float</span> total_motion = <span class="dv">0</span>;</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="dt">float</span> threshold = <span class="fl">0.1</span>;</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="dt">float</span> conversion_factor = <span class="fl">0.01</span>;</span>
@@ -164,9 +164,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol type="1">
 <li>Maybe we can send the code to a backend server which will compile it to a form executable in the browser (<a href="https://emscripten.org/">Emscripten</a> maybe?), then send it back to the page and hook it up to a mock rendering of the SpinWheel…
 <ul>
-<li>Definitely not something a group of volunteers with crazy schedules trying to prepare for their Thesis defenses want to spend weeks on!</li>
-<li>Just the idea of sandboxing the server is already unpleasant…</li>
-<li>And how do we hook in the motion sensor?</li>
+<li>Definitely not something a group of volunteers with crazy schedules trying to prepare for their thesis defenses want to spend weeks on!</li>
+<li>Just the idea of sandboxing the server is unpleasant…</li>
+<li>And how do we incorporate the motion sensor?</li>
 <li>Reporting compilation errors back to students!? Terrible idea that will immediately turn them away from programming!</li>
 </ul></li>
 <li>Have a much more restricted set of examples, where students can modify only a single variable and the rest of the code is rendered and immutable. The actual simulation of the device will then be a completely separate piece of Javascript code that we write case-by-case.
@@ -178,7 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Will we be able to live with the shame of such a hackish solution?</li>
 </ul></li>
 </ol>
-<p>Yes, we will find a way to live with the shame. We will incorporate some of 2 as well, so that the fragility of our “transpiler” is not too obvious. A silver lining is that separation between editable code and pre-rendered code will guide the attention of the student to the part of the code that is most important to the concept under study.</p>
+<p>Yes, we will find a way to live with the shame. We will incorporate some of option 2 as well, so that the fragility of our “transpiler” is not too obvious. A silver lining of this approach is that separation between editable code and pre-rendered code will guide the attention of the student to the part of the code that is most important to the concept under study.</p>
 <p>Without further ado, here is an example of what a humble version of the final result would look like. Click on <code>Run</code>! Does it do what you would expect given the code?</p>
 <div class="ssw-codecontent" data-markdown="0">
 <pre class="ssw-codeblock">
@@ -197,7 +197,7 @@ void loop() {
 }
 </pre>
 </div>
-<p>Play a bit with the modifiable part. It is still fragile, with many ways to break it, but it is sufficient for guided explorations. We will also explain the <code>Debug</code> button shortly.</p>
+<p>Play a bit with the modifiable part. It is still fragile, with many ways to break it, but it is sufficient for guided explorations. For an example of how it can be integrated into a lesson, check out our <a href="/sight">biology of sight activity</a>. If you are wondering about the <code>Debug</code> button, don’t worry, we will also explain it shortly.</p>
 <h2 id="editable-vs-immutable-parts-of-the-examples">Editable vs Immutable Parts of the Examples</h2>
 <p>As mentioned, we will let the students modify only small parts of the “C++” code. We do that by writing parts of the code snippets in preformatted <code>div</code>s, while the editable part is in <code>textarea</code> tags. The <strong>entirety</strong> of html or markdown that the lesson writer needs to write for the above example is this:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;ssw-codecontent&quot;</span><span class="ot"> markdown=</span><span class="st">0</span><span class="kw">&gt;</span></span>
@@ -239,7 +239,7 @@ void loop() {
 <span id="cb4-7"><a href="#cb4-7"></a>}</span>
 <span id="cb4-8"><a href="#cb4-8"></a><span class="fu">.ssw-large-led0</span> {<span class="kw">left</span>:<span class="dv">49</span><span class="dt">%</span><span class="op">;</span><span class="kw">top</span>:<span class="dv">39</span><span class="dt">%</span><span class="op">;</span>}</span>
 <span id="cb4-9"><a href="#cb4-9"></a>⋮</span></code></pre></div>
-<p>Finally, we just use Javascript to modify them. Each <code>&lt;div class="ssw-codecontent"&gt;</code> has its own <code>SpinWheel</code> Javascript class that has methods with the same names as the C++ methods, so that the “transpiler” has an easy time hooking up to the virtual SpinWheel. For example, here is the Javascript version of the <code>drawFrame()</code>, without any painful bit-fidling that the hardware version required. We also include the class constructor, as it is responsible for acquiring handles for all the <code>div</code>s whose colors we will be changing (the virtual LEDs)</p>
+<p>Finally, we just use Javascript to modify them. Each <code>&lt;div class="ssw-codecontent"&gt;</code> has its own <code>SpinWheel</code> Javascript class that has methods with the same names as the C++ methods, so that the “transpiler” has an easy time hooking up to the virtual SpinWheel. For example, here is the Javascript version of the <code>drawFrame()</code>, without any painful bit-fiddling that the hardware version required. We also include the class constructor, as it is responsible for acquiring handles for all the <code>div</code>s whose colors we will be changing (the virtual LEDs).</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a><span class="at">constructor</span>(container) <span class="op">{</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>  ⋮</span>
 <span id="cb5-3"><a href="#cb5-3"></a>  <span class="kw">this</span>.<span class="at">_ssw_lLEDdiv</span> <span class="op">=</span> <span class="va">Array</span>.<span class="at">from</span>(<span class="va">container</span>.<span class="at">getElementsByClassName</span>(<span class="st">&quot;ssw-large-led&quot;</span>))<span class="op">;</span></span>
@@ -262,7 +262,7 @@ void loop() {
 <p>It is embarrassingly simple, but quite effective:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a>base_code <span class="op">=</span> <span class="va">base_code</span>.<span class="at">replace</span>(<span class="at">RegExp</span>(<span class="st">&#39;(?:[^</span><span class="sc">\\</span><span class="st">w])(&#39;</span><span class="op">+</span>pair[<span class="dv">0</span>]<span class="op">+</span><span class="st">&#39;)(?:[^</span><span class="sc">\\</span><span class="st">w])&#39;</span><span class="op">,</span><span class="st">&#39;g&#39;</span>)<span class="op">,</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>                              x<span class="kw">=&gt;</span><span class="va">x</span>.<span class="at">replace</span>(pair[<span class="dv">0</span>]<span class="op">,</span> pair[<span class="dv">1</span>]))<span class="op">;</span></span></code></pre></div>
-<p><code>pair</code> is just the pair of keywords that we need to translate: the C++ one and the Javascript one. For instance one such pair would be <code>['int', 'var']</code>. Obviously, we are loosing some fidelity in the translation, especially around data types, and we can only use C++ constructs that close to the Javascript syntax, but for a well-controlled educational snippet of code that is all we need. A big part of engineering is to know when to not overengineer your solution.</p>
+<p><code>pair</code> is just the pair of keywords that we need to translate: the C++ one and the Javascript one. For instance one such pair would be <code>['int', 'var']</code>. Obviously, we are losing some fidelity in the translation, especially around data types, and we can only use C++ constructs close to the Javascript syntax, but for a well-controlled educational snippet of code that is all we need. A big part of engineering is to know when to not overengineer your solution.</p>
 <p>The regex needs to be a bit more carefully designed, as we want to turn <code>int intensity</code> into <code>var intensity</code>, not <code>var varensity</code> which a simple replace would have given us. We use non-capturing groups for that. Consider the <code>(?:[^\w])</code> piece in <code>(?:[^\w])(keyword)(?:[^\w])</code>. It matches everything that is not (<code>^</code>) a word-character (<code>\w</code>), i.e. not <code>a-zA-Z0-9_</code>. However, it does not capture it due to the <code>?:</code> prefix for the group. Thus, this regex captures only <code>keyword</code> as long as it is not a substring in another word. Now we just need to build up our dictionary of keywords…</p>
 <p>And we need to be a bit careful how we call that <code>loop</code> function - we need a timed callback, because a busy loop would cause the webpage to hang. The gist of our solutions is:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">var</span> c <span class="op">=</span> <span class="dv">200</span><span class="op">;</span> <span class="co">// counts number of executions</span></span>
