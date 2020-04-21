@@ -351,7 +351,7 @@ that changes the current animation.
 ```
 </div>
 <div class="side-text">
-### And the list of animations and the currently running animation is tored here.
+### And the list of animations and the currently running animation is stored here.
 </div>
 <div class="code">
 ```cpp
