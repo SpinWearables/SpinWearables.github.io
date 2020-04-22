@@ -12,7 +12,7 @@
   <meta property="og:image" content="https://spinwearables.com/hanging.jpg" />
   <link rel="image_src" href="https://spinwearables.com/hanging.jpg" />
   <meta name="keywords" content="transpile, javascript, C, emulate, simulate" />
-  <title>Turning Code Snippets from C to Javascript for In-page Demos</title>
+  <title>C++ to Javascript translation for interactive Arduino webpage lessons</title>
   <style>
   </style>
   <style>
@@ -111,7 +111,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="/book">The Field Guide</a>
 </div>
 <video src="/images/banners/linewheel_crossfade.mp4" muted autoplay playsinline></video>
-<h1 class="title">Turning Code Snippets from C to Javascript for In-page Demos</h1>
+<h1 class="title">C++ to Javascript translation for interactive Arduino webpage lessons</h1>
 </header>
 <main>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
@@ -293,7 +293,7 @@ void loop() {
 }
 </pre>
 </div>
-<p>We still need to figure out how to present the colors in a more noticeable fashion, but <strong>your virtual SpinWheel lit up with colors infered from your virtual motion sensor</strong>. This also ended being embarrassingly simple to implement. We just added a <code>onmousemove</code> handler to the <code>div</code> containing the image of the SpinWheel. Then we calculate the numerical second derivative of the positions in the <code>_ddx</code> and <code>_ddy</code> properties of the class. Note that we are also using an exponential decay filter <code>_ddx = 0.1*(dx-_dx)/dt + 0.9*_ddx</code> in order to smooth out the signal.</p>
+<p>We still need to figure out how to present the colors in a more noticeable fashion, but <strong>your virtual SpinWheel lits up with colors infered from your virtual motion sensor</strong>. This also ended being embarrassingly simple to implement. We just added a <code>onmousemove</code> handler to the <code>div</code> containing the image of the SpinWheel. Then we calculate the numerical second derivative of the positions in the <code>_ddx</code> and <code>_ddy</code> properties of the class. Note that we are also using an exponential decay filter <code>_ddx = 0.1*(dx-_dx)/dt + 0.9*_ddx</code> in order to smooth out the signal.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">function</span> <span class="at">elementDrag</span>(e) <span class="op">{</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>  e <span class="op">=</span> e <span class="op">||</span> <span class="va">window</span>.<span class="at">event</span><span class="op">;</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a>  <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></span>
