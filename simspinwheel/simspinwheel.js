@@ -162,7 +162,7 @@ ${unfinished_html}
 <div class="ssw-vis-out">
 <div class="ssw-vis">
 <div>
-<img src="/simspinwheel/spinwheel_invertgray_nosmalls.png">
+<img src="/simspinwheel/spinwheel.png">
 <div class="ssw-large-led ssw-large-led0"></div>
 <div class="ssw-large-led ssw-large-led1"></div>
 <div class="ssw-large-led ssw-large-led2"></div>
