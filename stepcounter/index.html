@@ -116,11 +116,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 <main>
 <div class="intro-box">
-<p>In this adventure, you’ll learn how to use the motion sensor to turn the SpinWheel into a StepCounter.</p>
-</div>
 <p>A step counter needs to detect motion, add up each time motion is detected, and somehow display the cummulative value. The SpinWheel has a motion sensor that can deal with the first task, a small controller (computer) that can perform the addition, and a number of LEDs that can be used as a display. Here we will see how to put these features together to make our own custom step counter.</p>
+</div>
 <p>To start, plug in the SpinWheel to your computer and open up an “empty” sketch in the Arduino software. If you need help remembering how to do this, you can get a recap of how to connect your SpinWheel to your computer in our <a href="/quickstart">“Quick Start Guide”</a>.</p>
-<p>We will build our Step Counter program in this empty sketch. First, copy the following into that empty sketch:</p>
+<p>We will build our Step Counter program in this empty sketch. A good first step is to write some simple test code that just prints a few messages, confirming that the device is not broken. For instance, copy the following code that repeatedly sends the message “I am working!” to the computer to which the SpinWheel is attached. As always, we will try to add comments to the code, so that the purpose of each line is explained.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
@@ -133,17 +132,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-10"><a href="#cb1-10"></a></span>
 <span id="cb1-11"><a href="#cb1-11"></a><span class="dt">void</span> loop() {</span>
 <span id="cb1-12"><a href="#cb1-12"></a>  <span class="co">// Send a confirmation message over and over.</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>  Serial.print(<span class="st">&quot;I am working!&quot;</span>); </span>
-<span id="cb1-14"><a href="#cb1-14"></a>  <span class="co">// Print a new line after each message.</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>  Serial.println(); </span>
-<span id="cb1-16"><a href="#cb1-16"></a>}</span></code></pre></div>
-<p>Now we’ll go through the code necessary to measure the motion of the SpinWheel. This is the first step in making our step counter. To see how this code can be written, just scroll down a bit farther.</p>
-<p>For every iteration of <code>loop</code> we need the motion sensor to report the new values: we do this by erasing th content inside of <code>loop</code> and calling <code>SpinWheel.readIMU()</code> where IMU stands for Inertial Measurement Unit, a fancy name for something that senses motion. To use these measurements, we need to add some more code.</p>
-<p>Since we don’t care in which direction the motion is strongest, we can use a single number to report the overall motion of the SpinWheel. One way to do that is using what mathematicians call “calculating the magnitude” or “calculating the norm” of a “vector.”</p>
+<span id="cb1-13"><a href="#cb1-13"></a>  Serial.println(<span class="st">&quot;I am working!&quot;</span>); </span>
+<span id="cb1-14"><a href="#cb1-14"></a>}</span></code></pre></div>
+<p>Now we can begin to add useful functionality to our sketch. The first step is to ensure that the SpinWheel can measure something related to the motion. The function <code>loop</code> is repeatedly being called by our SpinWheel and each time that happens we want to instruct the motion sensor to report the new values it has measured: we do that by calling <code>SpinWheel.readIMU()</code> where IMU stands for Inertial Measurement Unit, a fancy name for something that senses motion.</p>
+<p>We want to measure a single number related to the overall motion of the SpinWheel, i.e. we do not care on which of the 3 directions in space is the motion strongest. One way to do that is to combine the values describing the motion along each direction in one single number. Mathematicians call this “calculating the magnitude” or “calculating the norm” of a “vector”.</p>
 <div class="further-reading">
 <p>If you want to learn more about what a vector is and how they are used by mathematicians and engineers, check out our lesson on <a href="/vectors">“Vectors”</a>.</p>
 </div>
-<p>One way to do it is to calculate <span class="math display">\[\sqrt{a_x^2+a_y^2+a_z^2}\]</span> where <span class="math inline">\(a_x\)</span> is the acceleration in the x directions and so on. The code to do that operation looks like <code>sqrt(SpinWheel.ax*SpinWheel.ax + SpinWheel.ay*SpinWheel.ay + SpinWheel.az*SpinWheel.az)</code>. We will save this value in the variable <code>total_acceleration</code>.</p>
+<p>A convenient way to get this “magnitude” would be to calculate <span class="math inline">\(\sqrt{a_x^2+a_y^2+a_z^2}\)</span>, where <span class="math inline">\(a_x\)</span> is the acceleration in the x directions and so on. The code to do that operations looks like <code>sqrt(pow(SpinWheel.ax,2) + pow(SpinWheel.ay,2) + pow(SpinWheel.az,2))</code>. We will save this value in the variable <code>total_acceleration</code>.</p>
 <p>We will also send this value to the computer connected to the SpinWheel in order to confirm that everything is working. The command <code>Serial.print(total_acceleration)</code> does just that. In the Arduino software we can use <code>Tools -&gt; Serial Plotter</code> to visualize the results.</p>
 <video src="/images/bookpics/stepcounter_nolights.mp4" muted autoplay playsinline loop>
 </video>
@@ -161,18 +157,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-11"><a href="#cb2-11"></a>  <span class="co">// The &quot;sum of the squares&quot; is a common way to measure total ammount of</span></span>
 <span id="cb2-12"><a href="#cb2-12"></a>  <span class="co">// motion independent of direction. Mathematicians call it &quot;the norm of</span></span>
 <span id="cb2-13"><a href="#cb2-13"></a>  <span class="co">// the vector describing the motion&quot;.</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>  <span class="dt">float</span> total_acceleration = sqrt(SpinWheel.ax*SpinWheel.ax+SpinWheel.ay*SpinWheel.ay+SpinWheel.az*SpinWheel.az);</span>
+<span id="cb2-14"><a href="#cb2-14"></a>  <span class="dt">float</span> total_acceleration = sqrt(pow(SpinWheel.ax,<span class="dv">2</span>) + pow(SpinWheel.ay,<span class="dv">2</span>) + pow(SpinWheel.az,<span class="dv">2</span>));</span>
 <span id="cb2-15"><a href="#cb2-15"></a>  Serial.print(total_acceleration);</span>
 <span id="cb2-16"><a href="#cb2-16"></a>  Serial.println();</span>
 <span id="cb2-17"><a href="#cb2-17"></a>}</span></code></pre></div>
 <p>You might have noticed that we are only detecting motion; we are not actually counting steps yet. Since writing the code that turns the SpinWheel into a step counter is complicated, it is helpful to break it up into less complicated steps. Through programming the SpinWheel, we will help you learn how to split a big problem into small pieces for yourself. We hope you will find this skill useful not only when programming!</p>
-<p>Our next task is to change the SpinWheel’s LEDs based on this motion data. Having visual feedback at each stage of our work makes it easier to detect errors in our codee. We will use the <code>setLargeLEDsUniform</code> function to turn all 8 of the large LEDs on at the same time. We will use an equal mixture of red, green, and blue, in order to make them light up in white.</p>
+<p>Our next task is to change the SpinWheel’s LEDs based on this motion data. Having visual feedback at each stage of our work makes it easier to detect errors in our code. We will use the <code>setLargeLEDsUniform</code> function to turn all 8 of the large LEDs on at the same time. We will use an equal mixture of red, green, and blue, in order to make them light up in white.</p>
 <div class="further-reading">
 <p>To further explore why we can trick our brains to perceive a red, blue, and green LED really close together as white, check out the <a href="/sight">“Biology of Sight” activity</a>.</p>
 </div>
-<p>The intensity of each color will be proportional to the detected acceleration. However, you might have noticed that the <code>total_acceleration</code> value is 1, not 0, at rest. This is because the accelerometer cannot distinguish between the force of gravity acting on it at all times, and the forces of inertia acting on it when you shake it. To account for that, we subtract 1 from this value. This is how we obtain <code>kinematic_acceleration = total_acceleration - 1</code>. “Kinematic” is a fancy word physicists use to refer to things related to motion. We calculate intensity based on that value with <code>intensity = 20*kinematic_acceleration</code> and use it in the <code>setLargeLEDsUniform</code> function. We chose a factor of 20 in order to make the LEDs brighter. Below you can see the code in its entirety.</p>
+<p>The intensity of each color will be proportional to the detected acceleration. However, you might have noticed that the <code>total_acceleration</code> value is 1, not 0, at rest. This is because the accelerometer cannot distinguish between the force of gravity acting on it at all times, and the forces of inertia acting on it when you shake it. To account for that, we subtract 1 from this value. This is how we obtain <code>kinematic_acceleration = total_acceleration - 1</code>. “Kinematic” is a fancy word physicists use to refer to things related to motion. We calculate intensity based on that value with <code>intensity = 20*kinematic_acceleration</code> and use it in the <code>setLargeLEDsUniform</code> function. We chose a factor of 20 in order to make the LEDs brighter.</p>
+<p>Below you can see the code in its entirety, and <a href="#stepcounter-sim1"target="_self">at the bottom of the page</a> you can try running it on a virtual SpinWheel.</p>
 <div class="further-reading">
-<p>There are a lot of intricate facts about motion and gravity, related to the fact that our motion sensor can not distinguish between the two. You can read more about it in the section on <a href="./inertia">“Inertial reference frames and Free fall”</a>. Einstein himself was thinking about this everyday fact when he was developing the general theory of relativity.</p>
+<p>There are a lot of intricate facts about motion and gravity, related to the fact that our motion sensor can not distinguish between the two. You can read more about it in the section on <a href="./inertia">“Inertial reference frames and Free fall”</a>, which will also explain why <code>total_acceleration</code> at rest is 1g. Einstein himself was thinking about this everyday fact when he was developing the general theory of relativity.</p>
 </div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
@@ -184,25 +181,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-8"><a href="#cb3-8"></a></span>
 <span id="cb3-9"><a href="#cb3-9"></a><span class="dt">void</span> loop() {</span>
 <span id="cb3-10"><a href="#cb3-10"></a>  SpinWheel.readIMU();</span>
-<span id="cb3-11"><a href="#cb3-11"></a>  <span class="dt">float</span> total_acceleration = sqrt(SpinWheel.ax*SpinWheel.ax+SpinWheel.ay*SpinWheel.ay+SpinWheel.az*SpinWheel.az);</span>
-<span id="cb3-12"><a href="#cb3-12"></a>  <span class="co">// This `total_acceleration` includes the effect of the gravitational</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>  <span class="co">// field even at rest.  We want only the component of that measurement</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a>  <span class="co">// that is related to motion.</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a>  <span class="co">// Kinematic is a fancy word for &quot;related to moving&quot;.</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a>  <span class="dt">float</span> kinematic_acceleration = abs(total_acceleration - <span class="fl">1.0</span>); </span>
-<span id="cb3-17"><a href="#cb3-17"></a>  <span class="co">// Turn on the large LEDs when noticing motion.</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a>  <span class="co">// The intensity for each color goes from 0 to 255 on the SpinWheel,</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a>  <span class="co">// so we multiply the value of the kinematic_acceleration by a largish</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a>  <span class="co">// number, to make the light more noticeable.</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a>  <span class="dt">int</span> intensity = <span class="dv">20</span>*kinematic_acceleration;</span>
-<span id="cb3-22"><a href="#cb3-22"></a>  <span class="co">// We mix equal red, green, and blue for white light.</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a>  SpinWheel.setLargeLEDsUniform(intensity, intensity, intensity);</span>
-<span id="cb3-24"><a href="#cb3-24"></a>  <span class="co">// And we tell the SpinWheel to show the light pattern we registered on</span></span>
-<span id="cb3-25"><a href="#cb3-25"></a>  <span class="co">// the previous line.</span></span>
-<span id="cb3-26"><a href="#cb3-26"></a>  SpinWheel.drawFrame();</span>
-<span id="cb3-27"><a href="#cb3-27"></a>  Serial.print(intensity);</span>
-<span id="cb3-28"><a href="#cb3-28"></a>  Serial.println();</span>
-<span id="cb3-29"><a href="#cb3-29"></a>}</span></code></pre></div>
+<span id="cb3-11"><a href="#cb3-11"></a>  <span class="co">// `total_acceleration` includes the effect of the </span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>  <span class="co">// gravitational field even at rest. </span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>  <span class="dt">float</span> total_acceleration = sqrt(pow(SpinWheel.ax,<span class="dv">2</span>) + pow(SpinWheel.ay,<span class="dv">2</span>) + pow(SpinWheel.az,<span class="dv">2</span>));</span>
+<span id="cb3-14"><a href="#cb3-14"></a>  <span class="co">// For sensing motion, we want only the component of that measurement</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a>  <span class="co">// that is related to motion.</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>  <span class="co">// Kinematic is a fancy word for &quot;related to moving&quot;.</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>  <span class="dt">float</span> kinematic_acceleration = abs(total_acceleration - <span class="fl">1.0</span>); </span>
+<span id="cb3-18"><a href="#cb3-18"></a>  <span class="co">// Turn on the large LEDs when noticing motion.</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a>  <span class="co">// The intensity for each color goes from 0 to 255 on the SpinWheel,</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a>  <span class="co">// so we multiply the value of the kinematic_acceleration by a largish</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a>  <span class="co">// number, to make the light more noticeable.</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a>  <span class="dt">int</span> intensity = <span class="dv">20</span>*kinematic_acceleration;</span>
+<span id="cb3-23"><a href="#cb3-23"></a>  <span class="co">// We mix equal red, green, and blue for white light.</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a>  SpinWheel.setLargeLEDsUniform(intensity, intensity, intensity);</span>
+<span id="cb3-25"><a href="#cb3-25"></a>  <span class="co">// And we tell the SpinWheel to show the light pattern we registered on</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a>  <span class="co">// the previous line.</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a>  SpinWheel.drawFrame();</span>
+<span id="cb3-28"><a href="#cb3-28"></a>  Serial.print(intensity);</span>
+<span id="cb3-29"><a href="#cb3-29"></a>  Serial.println();</span>
+<span id="cb3-30"><a href="#cb3-30"></a>}</span></code></pre></div>
 <p>Finally, we can work on our goal: using the SpinWheel to display all of our detected motion in order to show how much we have moved over time. We will simply add up the values for “kinematic_acceleration”. For this we don’t have to be particularly precise: we just want one number that contains some information about the total motion we have exerted. We can call that variable <code>total_motion</code> and each time we detect motion we update it with <code>total_motion = total_motion + conversion_factor * kinematic_acceleration</code>. We introduced the small number <code>conversion_factor</code> so that we keep the value of <code>total_motion</code> growing slowly.</p>
 <p>We only want motions of a certain size to be counted as motion. We can do this by introducing a minimum <code>threshold</code> under which motion is not counted. We do that by using an <code>if</code> statement of the form <code>if (kinematic_acceleration&gt;threshold)</code>. Without this addition to our code, small vibrations would be falsely included in our count.</p>
 <p>Finally, we use the 12 smaller LEDs in order to show the value of <code>total_motion</code>. If <code>total_motion</code> is 1, we light up only the first LED. If it is 5, we light up the first five LEDs, and so on. We use the <code>SpinWheel.setSmallLEDs()</code> function to do that.</p>
@@ -220,7 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-12"><a href="#cb4-12"></a></span>
 <span id="cb4-13"><a href="#cb4-13"></a><span class="dt">void</span> loop() {</span>
 <span id="cb4-14"><a href="#cb4-14"></a>  SpinWheel.readIMU();</span>
-<span id="cb4-15"><a href="#cb4-15"></a>  <span class="dt">float</span> total_acceleration = sqrt(SpinWheel.ax*SpinWheel.ax+SpinWheel.ay*SpinWheel.ay+SpinWheel.az*SpinWheel.az);</span>
+<span id="cb4-15"><a href="#cb4-15"></a>  <span class="dt">float</span> total_acceleration = sqrt(pow(SpinWheel.ax,<span class="dv">2</span>) + pow(SpinWheel.ay,<span class="dv">2</span>) + pow(SpinWheel.az,<span class="dv">2</span>));</span>
 <span id="cb4-16"><a href="#cb4-16"></a>  <span class="dt">float</span> kinematic_acceleration = abs(total_acceleration - <span class="fl">1.0</span>); </span>
 <span id="cb4-17"><a href="#cb4-17"></a>  <span class="dt">int</span> intensity = <span class="dv">20</span>*kinematic_acceleration;</span>
 <span id="cb4-18"><a href="#cb4-18"></a>  SpinWheel.setLargeLEDsUniform(intensity, intensity, intensity);</span>
@@ -237,11 +235,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-29"><a href="#cb4-29"></a>  Serial.print(total_motion);</span>
 <span id="cb4-30"><a href="#cb4-30"></a>  Serial.println();</span>
 <span id="cb4-31"><a href="#cb4-31"></a>}</span></code></pre></div>
-<p>You might need to experiment with the value of <code>conversion_factor</code> in order to make your device present the total number of steps in a way you like. In the demo below we have also changed some of the colors. Can you do something similar?</p>
+<p>You might need to experiment with the value of <code>conversion_factor</code> in order to make your device present the total number of steps in a way you like. In the video below we have also changed some of the colors. Can you do something similar? Under the video there is a widget in which you can experiment with this code within your browser without needing a physical SpinWheel.</p>
 <video src="/images/bookpics/stepcounter_final.mp4" muted autoplay playsinline loop>
 </video>
 <div class="further-reading">
 <p>Other interesting features would be to show different colors when the detected acceleration is too small to be counted. Moreover, you can use the colors of the small LEDs to give more information.</p>
+</div>
+<link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
+<script src='/simspinwheel/simspinwheel.js'></script>
+<div id="stepcounter-sim1" class="ssw-codecontent" data-markdown="0">
+<pre class="ssw-codeblock">
+float total_motion = 0;
+float threshold = 0.1;
+float conversion_factor = 0.01;
+
+void loop() {
+  SpinWheel.readIMU();
+  float total_acceleration = sqrt(pow(SpinWheel.ax,2)
+                                 +pow(SpinWheel.ay,2)
+                                 +pow(SpinWheel.az,2));
+  float kinematic_acceleration = abs(total_acceleration - 1.0); 
+  int intensity = 20*kinematic_acceleration;
+  SpinWheel.setLargeLEDsUniform(intensity, intensity, intensity);
+</pre>
+<textarea class="ssw-codeblock">
+  if (kinematic_acceleration>threshold) {
+    total_motion = total_motion+conversion_factor*kinematic_acceleration;
+  }
+  SpinWheel.setSmallLEDs(0,total_motion,255,255,255);
+</textarea>
+<pre class="ssw-codeblock">
+  SpinWheel.drawFrame();
+}
+</pre>
 </div>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"

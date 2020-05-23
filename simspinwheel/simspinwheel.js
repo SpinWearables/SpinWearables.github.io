@@ -70,6 +70,22 @@ class SpinWheelClass {
     }
   }
 
+  setLargeLEDs(s,e,r,g,b) {
+    for (let i = Math.max(s,0); i<Math.min(e,this._ssw_lLEDdiv.length); i++) {
+      this._ssw_lLEDarray[3*i  ] = r;
+      this._ssw_lLEDarray[3*i+1] = g;
+      this._ssw_lLEDarray[3*i+2] = b;
+    }
+  }
+
+  setSmallLEDs(s,e,r,g,b) {
+    for (let i = Math.max(s,0); i<Math.min(e,this._ssw_sLEDdiv.length); i++) {
+      this._ssw_sLEDarray[3*i  ] = r;
+      this._ssw_sLEDarray[3*i+1] = g;
+      this._ssw_sLEDarray[3*i+2] = b;
+    }
+  }
+
   setLargeLED(i, r,g,b) {
     this._ssw_lLEDarray[3*i  ] = r;
     this._ssw_lLEDarray[3*i+1] = g;
@@ -90,6 +106,11 @@ class SpinWheelClass {
   // TODO all of the set*** functions
 }
 
+// Define mock serial instance
+
+var Serial = Object();
+Serial.println = function() {console.log(String.prototype.concat.apply(Array.from(arguments).map(String)));};
+
 // Processing functions
 
 function get_original_code(container) {
@@ -102,6 +123,7 @@ var dictionary = [
 ["int", "var"],
 ["float", "var"],
 ["abs", "Math.abs"],
+["sqrt", "Math.sqrt"],
 ];
 function translate_code(code) {
   var base_code = " "+code+" ";

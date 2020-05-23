@@ -128,9 +128,7 @@ div.sourceCode > pre:before {
 }
 
 p > code {
-  background-color: var(--color-code);
-  padding: 3px;
-  border-radius: 3px;
+  font-weight: bold;
 }
 
 div.ssw-container {
