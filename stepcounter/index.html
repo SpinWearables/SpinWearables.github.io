@@ -116,7 +116,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 <main>
 <div class="intro-box">
-<p>A step counter needs to detect motion, add up each time motion is detected, and somehow display the cummulative value. The SpinWheel has a motion sensor that can deal with the first task, a small controller (computer) that can perform the addition, and a number of LEDs that can be used as a display. Here we will see how to put these features together to make our own custom step counter.</p>
+<p>A step counter needs to detect motion, record each time that happens, and display the total count. The SpinWheel has a motion sensor that can deal with the first task, a small controller (computer) that can perform the recording, and a number of LEDs that can be used as a display. Here we will see how to put these features together to make our own custom step counter.</p>
 </div>
 <p>To start, plug in the SpinWheel to your computer and open up an “empty” sketch in the Arduino software. If you need help remembering how to do this, you can get a recap of how to connect your SpinWheel to your computer in our <a href="/quickstart">“Quick Start Guide”</a>.</p>
 <p>We will build our Step Counter program in this empty sketch. A good first step is to write some simple test code that just prints a few messages, confirming that the device is not broken. For instance, copy the following code that repeatedly sends the message “I am working!” to the computer to which the SpinWheel is attached. As always, we will try to add comments to the code, so that the purpose of each line is explained.</p>
