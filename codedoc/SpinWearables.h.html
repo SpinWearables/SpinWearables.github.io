@@ -779,30 +779,41 @@ x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> i
 <div class="code">
 <div class="sourceCode" id="cb47"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb47-1"><a href="#cb47-1"></a><span class="dt">void</span> flashlight() {</span>
 <span id="cb47-2"><a href="#cb47-2"></a>  SpinWheel.setSmallLEDsUniform(<span class="bn">0xffffff</span>);  </span>
-<span id="cb47-3"><a href="#cb47-3"></a>  SpinWheel.largeLEDs.fill(<span class="bn">0xffffff</span>, <span class="dv">0</span>, <span class="dv">8</span>);</span>
-<span id="cb47-4"><a href="#cb47-4"></a>}</span></code></pre></div>
+<span id="cb47-3"><a href="#cb47-3"></a>  SpinWheel.setLargeLEDsUniform(<span class="bn">0xffffff</span>);</span>
+<span id="cb47-4"><a href="#cb47-4"></a>}</span>
+<span id="cb47-5"><a href="#cb47-5"></a></span></code></pre></div>
+</div>
+<section id="teal-light" class="side-text">
+<h4>Teal Light</h4>
+<p>As the name suggests, this function turns all LEDs on to full brightness.</p>
+</section>
+<div class="code">
+<div class="sourceCode" id="cb48"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb48-1"><a href="#cb48-1"></a><span class="dt">void</span> tealLight() {</span>
+<span id="cb48-2"><a href="#cb48-2"></a>  SpinWheel.setSmallLEDsUniform(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">170</span>);  </span>
+<span id="cb48-3"><a href="#cb48-3"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">216</span>);</span>
+<span id="cb48-4"><a href="#cb48-4"></a>}</span></code></pre></div>
 </div>
 <section id="large-rainbow" class="side-text">
 <h4>Large Rainbow</h4>
 <p>Draw a rainbow on the larger LEDs and while the smaller ones are all white. <video src="./preloaded_rainbow.mp4" muted="" autoplay="" playsinline="" loop=""></video></p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb48"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb48-1"><a href="#cb48-1"></a><span class="dt">void</span> largeRainbow() {</span>
-<span id="cb48-2"><a href="#cb48-2"></a>  <span class="dt">long</span> <span class="dt">int</span> angle = millis()/<span class="dv">20</span>;</span>
-<span id="cb48-3"><a href="#cb48-3"></a>  SpinWheel.setSmallLEDsUniform(<span class="bn">0xffffff</span>);</span>
-<span id="cb48-4"><a href="#cb48-4"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {</span>
-<span id="cb48-5"><a href="#cb48-5"></a>    SpinWheel.setLargeLED(i, colorWheel(angle+i*<span class="dv">255</span>/<span class="dv">4</span>));</span>
-<span id="cb48-6"><a href="#cb48-6"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>-i, colorWheel(angle+i*<span class="dv">255</span>/<span class="dv">4</span>));</span>
-<span id="cb48-7"><a href="#cb48-7"></a>  }</span>
-<span id="cb48-8"><a href="#cb48-8"></a></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb49-1"><a href="#cb49-1"></a><span class="dt">void</span> largeRainbow() {</span>
+<span id="cb49-2"><a href="#cb49-2"></a>  <span class="dt">long</span> <span class="dt">int</span> angle = millis()/<span class="dv">20</span>;</span>
+<span id="cb49-3"><a href="#cb49-3"></a>  SpinWheel.setSmallLEDsUniform(<span class="bn">0xffffff</span>);</span>
+<span id="cb49-4"><a href="#cb49-4"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {</span>
+<span id="cb49-5"><a href="#cb49-5"></a>    SpinWheel.setLargeLED(i, colorWheel(angle+i*<span class="dv">255</span>/<span class="dv">4</span>));</span>
+<span id="cb49-6"><a href="#cb49-6"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>-i, colorWheel(angle+i*<span class="dv">255</span>/<span class="dv">4</span>));</span>
+<span id="cb49-7"><a href="#cb49-7"></a>  }</span>
+<span id="cb49-8"><a href="#cb49-8"></a></span></code></pre></div>
 </div>
 <div class="side-text">
 
 </div>
 <div class="code">
-<div class="sourceCode" id="cb49"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb49-1"><a href="#cb49-1"></a>}</span>
-<span id="cb49-2"><a href="#cb49-2"></a></span>
-<span id="cb49-3"><a href="#cb49-3"></a>} <span class="co">// end namespace SpinWearables</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb50-1"><a href="#cb50-1"></a>}</span>
+<span id="cb50-2"><a href="#cb50-2"></a></span>
+<span id="cb50-3"><a href="#cb50-3"></a>} <span class="co">// end namespace SpinWearables</span></span></code></pre></div>
 </div>
 </div>
 </body>
