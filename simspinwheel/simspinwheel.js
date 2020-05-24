@@ -118,18 +118,26 @@ function get_original_code(container) {
               .map(x => x.tagName!="TEXTAREA" ? x.innerHTML : x.value).join('');
 }
 
+var opdictionary = [
+["&gt;", ">"],
+["&lt;", "<"],
+];
 var dictionary = [
 ["void", "function"],
 ["int", "var"],
 ["float", "var"],
 ["abs", "Math.abs"],
 ["sqrt", "Math.sqrt"],
+["pow", "Math.pow"],
 ];
 function translate_code(code) {
   var base_code = " "+code+" ";
   dictionary.forEach(function (pair) {
     base_code = base_code.replace(RegExp('\\b'+pair[0]+'\\b','g'),
                                   pair[1]);
+  });
+  opdictionary.forEach(function (pair) {
+    base_code = base_code.replace(pair[0],pair[1]);
   });
   var code = `
     var SpinWheel = this.SpinWheel;
@@ -184,7 +192,7 @@ ${unfinished_html}
 <div class="ssw-vis-out">
 <div class="ssw-vis">
 <div>
-<img src="/simspinwheel/spinwheel.png">
+<img src="/simspinwheel/spinwheel_invertgray.png">
 <div class="ssw-large-led ssw-large-led0"></div>
 <div class="ssw-large-led ssw-large-led1"></div>
 <div class="ssw-large-led ssw-large-led2"></div>
@@ -228,6 +236,9 @@ function prep_containers() {
     var textareas = x.querySelectorAll('textarea')
     textareas.forEach(function (text) {
       text.value = text.innerHTML.replace(/^\n+|\n+$/g, '');
+      opdictionary.forEach(function (pair) {
+        text.value = text.value.replace(pair[0], pair[1]);
+      });
       function resize () {
           text.style.height = 'auto';
           text.style.height = (text.scrollHeight+3)+'px';
@@ -252,13 +263,14 @@ addEventListener('load', prep_containers, false);
 
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  var t = 0.0, dx = 0.0, dy = 0.0;
+  var t = 0.0, dx = 0.0, dy = 0.0, ddx = 0.0, ddy = 0.0;
   elmnt.onmousedown = dragMouseDown;
   var SpinWheel = elmnt.parentNode.parentNode.SpinWheel;
 
   function dragMouseDown(e) {
     e = e || window.event;
     e.preventDefault();
+    elmnt.style.transform = "scale(3)";
     // get the mouse cursor position at startup:
     pos3 = e.clientX;
     pos4 = e.clientY;
@@ -278,10 +290,18 @@ function dragElement(elmnt) {
     t = tnew;
     dx = pos1/dt*200;
     dy = pos2/dt*200;
-    SpinWheel._ddx = 0.1*(dx-SpinWheel._dx)/dt + 0.9*SpinWheel._ddx;
-    SpinWheel._ddy = 0.1*(dy-SpinWheel._dy)/dt + 0.9*SpinWheel._ddy;
+    dx = isNaN(dx)?0:dx;
+    dy = isNaN(dy)?0:dy;
+    ddx = (dx-SpinWheel._dx)/dt;
+    ddy = (dy-SpinWheel._dy)/dt;
+    ddx = isNaN(ddx)?0:ddx;
+    ddy = isNaN(ddy)?0:ddy;
+    ddx = ddx>2?2:ddx<-2?-2:ddx;
+    ddy = ddy>2?2:ddy<-2?-2:ddy;
     SpinWheel._dx = dx;
     SpinWheel._dy = dy;
+    SpinWheel._ddx = 0.1*ddx + 0.9*SpinWheel._ddx;
+    SpinWheel._ddy = 0.1*ddy + 0.9*SpinWheel._ddy;
     pos3 = e.clientX;
     pos4 = e.clientY;
     // set the element's new position:
@@ -292,6 +312,7 @@ function dragElement(elmnt) {
   function closeDragElement() {
     elmnt.style.top = "auto";
     elmnt.style.left = "auto";
+    elmnt.style.transform = "none";
     document.onmouseup = null;
     document.onmousemove = null;
   }
