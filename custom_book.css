@@ -7,7 +7,7 @@
   --color-warning:   rgba(255, 116, 116, 0.60);
   --color-reading:   rgba(116, 255, 116, 0.60);
   --color-educator:  rgba(116, 116, 255, 0.60);
-  --color-code:      rgba(116, 116, 116, 0.40);
+  --color-code:      rgb( 200, 200, 200);
 }
 
 main {
@@ -165,6 +165,35 @@ figure > figcaption {
   font-size: 0.9em;
 }
 
+/* TOC */
+
+#TOCbutton {
+  z-index: 10;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: var(--color-code);
+  padding: var(--panel-padding);
+  border-radius: 0 0 var(--panel-padding) 0;
+}
+
+#TOC {
+  z-index: 20;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: none;
+  background: var(--color-code);
+  padding: var(--panel-padding);
+  border-radius: 0 0 var(--panel-padding) 0;
+}
+
+#TOC:target {
+  display: block;
+}
+
+
+
 /* Header */
 
 header {
@@ -186,6 +215,11 @@ header > video {
   max-width: 1500px ;
   max-height: 484px;
   width: 90%;
+}
+
+#TOC ul {
+  list-style: none;
+  font-size: var(--panel-fontsize);
 }
 
 /* Comments */
