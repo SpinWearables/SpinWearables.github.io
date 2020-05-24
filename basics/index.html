@@ -59,9 +59,11 @@
 <li><a href="#control-a-specific-small-led-with-setsmallled">Control a Specific Small LED with <code>setSmallLED</code></a></li>
 <li><a href="#turn-on-a-range-of-large-leds-with-setlargeleds">Turn on a range of Large LEDs with <code>setLargeLEDs</code></a></li>
 <li><a href="#turn-on-a-range-of-small-leds-with-setsmallleds">Turn on a range of Small LEDs with <code>setSmallLEDs</code></a></li>
+<li><a href="#set-overall-brightness">Set overall brightness</a></li>
 </ul></li>
 <li><a href="#advanced-led-manipulation">Advanced LED Manipulation</a></li>
 <li><a href="#color-and-brightness-helpers">Color and Brightness Helpers</a></li>
+<li><a href="#motion-sensing-and-compass">Motion Sensing and Compass</a></li>
 </ul>
 </nav>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
@@ -161,14 +163,23 @@ void loop() {
 }
 </pre>
 </div>
+<h3 id="set-overall-brightness">Set overall brightness</h3>
+<div class="warning">
+<p><code>TODO</code> Needs to be implemented.</p>
+</div>
 <h2 id="advanced-led-manipulation">Advanced LED Manipulation</h2>
 <div class="warning">
-<p>TODO consider <code>setSmallLEDsPointer</code> and <code>setSmallLEDsProgress</code>. Create <code>setSmallLEDsRainbow</code> and <code>setLargeLEDsRainbow</code>.</p>
+<p><code>TODO</code> consider <code>setSmallLEDsPointer</code> and <code>setSmallLEDsProgress</code>. Create <code>setSmallLEDsRainbow</code> and <code>setLargeLEDsRainbow</code>.</p>
 </div>
 <h2 id="color-and-brightness-helpers">Color and Brightness Helpers</h2>
 <div class="warning">
-<p>TODO consider <code>colorWheel</code>, <code>triangularWave</code>, <code>parabolaWave</code>, and <code>faston_slowoff</code>.</p>
+<p><code>TODO</code> consider <code>colorWheel</code>, <code>triangularWave</code>, <code>parabolaWave</code>, and <code>faston_slowoff</code>.</p>
 </div>
+<h2 id="motion-sensing-and-compass">Motion Sensing and Compass</h2>
+<div class="warning">
+<p><code>TODO</code> Turn this into a detailed writeup.</p>
+</div>
+<p>To request measurements from the sensor you need to call <code>SpinWearables.readIMU</code>. Then the measurement data will be available in <code>ax,ay,az,gx,gy,gz,mx,my,mz</code> in some units. There is also a temperature sensor.</p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
 data-isso-require-author="true"
