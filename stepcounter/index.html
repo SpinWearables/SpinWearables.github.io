@@ -206,46 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-30"><a href="#cb3-30"></a>}</span></code></pre></div>
 <h2 id="counting-steps">Counting Steps</h2>
 <p>Finally, we can work on our goal: using the SpinWheel to display all of our detected motion in order to show how much we have moved over time. We will simply add up the values for “kinematic_acceleration”. For this we don’t have to be particularly precise: we just want one number that contains some information about the total motion we have exerted. We can call that variable <code>total_motion</code> and each time we detect motion we update it with <code>total_motion = total_motion + conversion_factor * kinematic_acceleration</code>. We introduced the small number <code>conversion_factor</code> so that we keep the value of <code>total_motion</code> growing slowly.</p>
-<p>We only want motions of a certain size to be counted as motion. We can do this by introducing a minimum <code>threshold</code> under which motion is not counted. We do that by using an <code>if</code> statement of the form <code>if (kinematic_acceleration&gt;threshold)</code>. Without this addition to our code, small vibrations would be falsely included in our count.</p>
-<p>Finally, we use the 12 smaller LEDs in order to show the value of <code>total_motion</code>. If <code>total_motion</code> is 1, we light up only the first LED. If it is 5, we light up the first five LEDs, and so on. We use the <code>SpinWheel.setSmallLEDs()</code> function to do that.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="dt">void</span> setup() {</span>
-<span id="cb4-5"><a href="#cb4-5"></a>  Serial.begin(<span class="dv">115200</span>);</span>
-<span id="cb4-6"><a href="#cb4-6"></a>  SpinWheel.begin();</span>
-<span id="cb4-7"><a href="#cb4-7"></a>}</span>
-<span id="cb4-8"><a href="#cb4-8"></a></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="dt">float</span> total_motion = <span class="dv">0</span>;</span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="dt">float</span> threshold = <span class="fl">0.1</span>;</span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="dt">float</span> conversion_factor = <span class="fl">0.01</span>;</span>
-<span id="cb4-12"><a href="#cb4-12"></a></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="dt">void</span> loop() {</span>
-<span id="cb4-14"><a href="#cb4-14"></a>  SpinWheel.readIMU();</span>
-<span id="cb4-15"><a href="#cb4-15"></a>  <span class="dt">float</span> total_acceleration = sqrt(pow(SpinWheel.ax,<span class="dv">2</span>) + pow(SpinWheel.ay,<span class="dv">2</span>) + pow(SpinWheel.az,<span class="dv">2</span>));</span>
-<span id="cb4-16"><a href="#cb4-16"></a>  <span class="dt">float</span> kinematic_acceleration = abs(total_acceleration - <span class="fl">1.0</span>); </span>
-<span id="cb4-17"><a href="#cb4-17"></a>  <span class="dt">int</span> intensity = <span class="dv">20</span>*kinematic_acceleration;</span>
-<span id="cb4-18"><a href="#cb4-18"></a>  SpinWheel.setLargeLEDsUniform(intensity, intensity, intensity);</span>
-<span id="cb4-19"><a href="#cb4-19"></a>  <span class="co">// Accumulate all of the motion readings over time in a single number.</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a>  <span class="co">// To avoid false readings, perform the accumulation only if the motion</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a>  <span class="co">// was sufficiently strong.</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a>  <span class="cf">if</span> (kinematic_acceleration&gt;threshold) {</span>
-<span id="cb4-23"><a href="#cb4-23"></a>    total_motion = total_motion+conversion_factor*kinematic_acceleration;</span>
-<span id="cb4-24"><a href="#cb4-24"></a>  }</span>
-<span id="cb4-25"><a href="#cb4-25"></a>  <span class="co">// Display how much you have moved, by turning on the corresponding</span></span>
-<span id="cb4-26"><a href="#cb4-26"></a>  <span class="co">// number of small LEDs.</span></span>
-<span id="cb4-27"><a href="#cb4-27"></a>  SpinWheel.setSmallLEDs(<span class="dv">0</span>,total_motion,<span class="dv">255</span>,<span class="dv">255</span>,<span class="dv">255</span>);</span>
-<span id="cb4-28"><a href="#cb4-28"></a>  SpinWheel.drawFrame();</span>
-<span id="cb4-29"><a href="#cb4-29"></a>  Serial.print(total_motion);</span>
-<span id="cb4-30"><a href="#cb4-30"></a>  Serial.println();</span>
-<span id="cb4-31"><a href="#cb4-31"></a>}</span></code></pre></div>
-<p>You might need to experiment with the value of <code>conversion_factor</code> in order to make your device present the total number of steps in a way you like. In the video below we have also changed some of the colors. Can you do something similar? Under the video there is a widget in which you can experiment with this code within your browser without needing a physical SpinWheel.</p>
-<video src="/images/bookpics/stepcounter_final.mp4" muted autoplay playsinline loop>
-</video>
-<div class="further-reading">
-<p>Other interesting features would be to show different colors when the detected acceleration is too small to be counted. Moreover, you can use the colors of the small LEDs to give more information.</p>
-</div>
-<h3 id="more-about-thresholding">More about thresholding</h3>
+<p>We only want motions of a certain size to be counted as motion. We can do this by introducing a minimum <code>threshold</code> under which motion is not counted. We do that by using an <code>if</code> statement of the form <code>if (kinematic_acceleration&gt;threshold)</code>. Without this addition to our code, small vibrations would be falsely included in our count. You can observe this effect in the interactive chart below. In the chart you can see the grey line depicting the values reported by the motion sensor. By manipulating the slider you can change the threshold at which values are counted in the total. If the threshold is too low all the small vibrations detected by the sensor are counted in, falsely inflating the total sum. However, by setting the threshold higher, we are able to count only the three very noticeable strong motions: they actually correspond to real steps and need to be counted in.</p>
 <script src='/chart/Chart.bundle.min.js'></script>
 <div>
 <input style="width:30%" type="range" min="0" max="100" value="20" id="thrSlider"> Use this slider to set the threshold.
@@ -312,7 +273,7 @@ var thrChart = new Chart(ctx, {
                 }
             }],
             yAxes: [{
-                scaleLabel: {labelString: 'acceleration value', display: true},
+                scaleLabel: {labelString: 'value', display: true},
                 ticks: {
                     min:0,
                     max:1
@@ -323,6 +284,44 @@ var thrChart = new Chart(ctx, {
 });
 thrUpdate();
 </script>
+<p>Finally, we use the 12 smaller LEDs in order to show the value of <code>total_motion</code>. If <code>total_motion</code> is 1, we light up only the first LED. If it is 5, we light up the first five LEDs, and so on. We use the <code>SpinWheel.setSmallLEDs()</code> function to do that.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  Serial.begin(<span class="dv">115200</span>);</span>
+<span id="cb4-6"><a href="#cb4-6"></a>  SpinWheel.begin();</span>
+<span id="cb4-7"><a href="#cb4-7"></a>}</span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="dt">float</span> total_motion = <span class="dv">0</span>;</span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="dt">float</span> threshold = <span class="fl">0.1</span>;</span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="dt">float</span> conversion_factor = <span class="fl">0.01</span>;</span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="dt">void</span> loop() {</span>
+<span id="cb4-14"><a href="#cb4-14"></a>  SpinWheel.readIMU();</span>
+<span id="cb4-15"><a href="#cb4-15"></a>  <span class="dt">float</span> total_acceleration = sqrt(pow(SpinWheel.ax,<span class="dv">2</span>) + pow(SpinWheel.ay,<span class="dv">2</span>) + pow(SpinWheel.az,<span class="dv">2</span>));</span>
+<span id="cb4-16"><a href="#cb4-16"></a>  <span class="dt">float</span> kinematic_acceleration = abs(total_acceleration - <span class="fl">1.0</span>); </span>
+<span id="cb4-17"><a href="#cb4-17"></a>  <span class="dt">int</span> intensity = <span class="dv">20</span>*kinematic_acceleration;</span>
+<span id="cb4-18"><a href="#cb4-18"></a>  SpinWheel.setLargeLEDsUniform(intensity, intensity, intensity);</span>
+<span id="cb4-19"><a href="#cb4-19"></a>  <span class="co">// Accumulate all of the motion readings over time in a single number.</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a>  <span class="co">// To avoid false readings, perform the accumulation only if the motion</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a>  <span class="co">// was sufficiently strong.</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a>  <span class="cf">if</span> (kinematic_acceleration&gt;threshold) {</span>
+<span id="cb4-23"><a href="#cb4-23"></a>    total_motion = total_motion+conversion_factor*kinematic_acceleration;</span>
+<span id="cb4-24"><a href="#cb4-24"></a>  }</span>
+<span id="cb4-25"><a href="#cb4-25"></a>  <span class="co">// Display how much you have moved, by turning on the corresponding</span></span>
+<span id="cb4-26"><a href="#cb4-26"></a>  <span class="co">// number of small LEDs.</span></span>
+<span id="cb4-27"><a href="#cb4-27"></a>  SpinWheel.setSmallLEDs(<span class="dv">0</span>,total_motion,<span class="dv">255</span>,<span class="dv">255</span>,<span class="dv">255</span>);</span>
+<span id="cb4-28"><a href="#cb4-28"></a>  SpinWheel.drawFrame();</span>
+<span id="cb4-29"><a href="#cb4-29"></a>  Serial.print(total_motion);</span>
+<span id="cb4-30"><a href="#cb4-30"></a>  Serial.println();</span>
+<span id="cb4-31"><a href="#cb4-31"></a>}</span></code></pre></div>
+<p>You might need to experiment with the value of <code>conversion_factor</code> in order to make your device present the total number of steps in a way you like. In the video below we have also changed some of the colors. Can you do something similar? Under the video there is a widget in which you can experiment with this code within your browser without needing a physical SpinWheel.</p>
+<video src="/images/bookpics/stepcounter_final.mp4" muted autoplay playsinline loop>
+</video>
+<div class="further-reading">
+<p>Other interesting features would be to show different colors when the detected acceleration is too small to be counted. Moreover, you can use the colors of the small LEDs to give more information.</p>
+</div>
 <h2 id="virtual-spinwheel">Virtual SpinWheel</h2>
 <p>You can use this simulation of a SpinWheel to play with the code without uploading it to a physical device. After clicking “Run”, you can grab the image of the SpinWheel and shake it to have the virtual device respond to that motion.</p>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
