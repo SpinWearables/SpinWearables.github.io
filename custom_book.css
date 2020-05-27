@@ -142,7 +142,7 @@ div.ssw-container * {
   font-size: var(--panel-fontsize);
 }
 
-/* Figures */
+/* Figures and tables */
 
 video {
   text-align: center;
@@ -163,6 +163,21 @@ figure > img {
 
 figure > figcaption {
   font-size: 0.9em;
+}
+
+table {
+  margin: 1rem auto;
+  border: solid 1px gray;
+  border-collapse: collapse;
+}
+
+th {
+  font-weight: bold;
+}
+
+th, td {
+  border: solid 1px gray;
+  padding: 0 0.5rem;
 }
 
 /* TOC */
