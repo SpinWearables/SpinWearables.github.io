@@ -49,7 +49,7 @@
 </header>
 <main>
 <div class="intro-box">
-<p>In this lesson, we’ll introduce the concept of waves and how this matters for understanding light.</p>
+<p>In this lesson, we’ll introduce the concept of colors. We will also describe how the properties of light make the colors that we see.</p>
 </div>
 <div class="warning">
 <p>This lesson is still under-development. Check back soon for more links and the full lesson!</p>
@@ -57,9 +57,191 @@
 <div class="further-reading">
 <p>todo: refer to the science of vision page, but focus on electromagnetism</p>
 </div>
-<p>You might have heard that light is “just” an electromagnetic wave. This statement is true, but on its own it simply replaces one mystery with another: what is an electromagnetic wave? For starters, a wave is some form of traveling repetitive motion in some medium. Interestingly, the wave can travel from one point to another without the need for the medium itself to travel that distance. For instance, the crests for a sea wave can be ridden all the way to the shore, but very little of the sea water actually travels along (similarly to the crest of a wave in a carpet). When our ears hear a sound, they are detecting the vibration caused by a wave traveling in the air.</p>
-<p>Waves are characterized by their frequency (how often the repetitive motion is repeated) and speed (how fast the waves moves forward to new parts of the medium in which it travels). The speed of sound waves is hundreds of meters per second (1m≈3ft). The frequency of vibrations we can hear is between 20 to 20000 Hz (one Hertz is one vibration per second). Anything vibrating more rapidly than that is called ultra sound and we have machines that can detect it, but our ears can not. Anything under 20 Hz is also not audible, but we might be able to feel the vibrations with our fingers.</p>
-<p>Electromagnetic waves are also waves, like sound waves, but instead of being made of traveling vibrations in matter, they are vibrations of… it is complicated. There are many metaphors we can use to describe the medium that electromagnetic waves vibrate in, and studying its inner workings has led to the greatest discoveries in Physics: general relativity and quantum mechanics. Instead of retracing the steps of physicists over two hundred years, we will give an engineer’s description of light, based what we can measure about it with the devices the physicists have created.</p>
+<h2 id="colors">Colors</h2>
+<p>Whether you’re walking through a lush forest or art museum, our world is full of colors. Colors make a painting beautiful and make our homes and schools much more fun. Colors also have practical uses such as the colors on a stoplight or color-coding your class notes. Let’s explore how colors are made, mixed, and emerge from light!</p>
+<p>(Colorful picture goes here)</p>
+<h3 id="mixing-colors-with-pigments">Mixing Colors with Pigments</h3>
+<p>If you’ve ever painted before, you’ve probably mixed colors on a pallet. In art class, you’ve learned about the difference between primary and secondary colors. Primary colors can be used to make all other colors (secondary colors). When painting, our primary colors are red, yellow, and blue. When we are paining, we are using the pigments in our paint to create the various colors. The idea of using pigments to create color is used in our clothes, painting our houses and even coloring our food.</p>
+<p>If you wanted to make green, what colors would you use?</p>
+<p>What ink colors does a typical printer have?</p>
+<style>
+#scolortests {
+  font-size: 2rem;
+}
+#scolortests input {
+  width: 20%;
+  margin: 0;
+}
+#scolortests span {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+#scolortests .spacer {
+  width:5%;
+}
+#scolortests .vis {
+  width: 20%;
+  height: 2em;
+  line-height: 2em;
+  border: solid 1px;
+  border-color: black;
+  color: black;
+}
+#sredshow {border-color: cyan !important;}
+#sgreenshow {border-color: magenta !important;}
+#sblueshow {border-color: yellow !important;}
+</style>
+<div id="scolortests">
+<div>
+<input type="range" min="0" max="255" value="255" id="sred"><span class="spacer"></span><input type="range" min="0" max="255" value="255" id="sgreen"><span class="spacer"></span><input type="range" min="0" max="255" value="255" id="sblue">
+</div>
+<div>
+<span id="sredshow" class="vis">255</span><span class="spacer">+</span><span id="sgreenshow" class="vis">255</span><span class="spacer">+</span><span id="sblueshow" class="vis">255</span><span class="spacer">=</span><span id="srgbshow" class="vis"> </span>
+</div>
+<script>
+function schangeColor(){
+  var complement_r = document.getElementById("sred").value;
+  var complement_g = document.getElementById("sgreen").value;
+  var complement_b = document.getElementById("sblue").value;
+  document.getElementById("srgbshow").style["background-color"]=`rgb(${255-complement_r},${255-complement_g},${255-complement_b})`;
+  document.getElementById("sredshow").innerHTML=complement_r;
+  document.getElementById("sredshow").style["background-color"]=`rgb(${255-complement_r},255,255)`;
+  document.getElementById("sgreenshow").innerHTML=complement_g;
+  document.getElementById("sgreenshow").style["background-color"]=`rgb(255,${255-complement_g},255)`;
+  document.getElementById("sblueshow").innerHTML=complement_b;
+  document.getElementById("sblueshow").style["background-color"]=`rgb(255,255,${255-complement_b})`;
+}
+document.getElementById("sred").oninput = schangeColor;
+document.getElementById("sgreen").oninput = schangeColor;
+document.getElementById("sblue").oninput = schangeColor;
+schangeColor();
+</script>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Pigments</strong></th>
+<th><strong>Digital displays</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Components</td>
+<td>Red, yellow, blue</td>
+<td>Red, green, blue</td>
+</tr>
+<tr class="even">
+<td>White</td>
+<td>No components</td>
+<td>All components</td>
+</tr>
+<tr class="odd">
+<td>Black</td>
+<td>All components</td>
+<td>No components</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mixing-colors-digitally">Mixing Colors Digitally</h3>
+<p>When we make colors digitally, such as the colors you see on this webpage, color mixing works differently. Here we create colors with an LED display. These displays works differently than when we color with pigments. The widget below shows the three digital primary colors, which we can combine in amounts from 0 to 255. Looking at the widget below, notice how with all three slide bars at 255, the box at the right is white. By adjusting the relative amount of green, red, and blue using the slide bars, you can change the color displayed.</p>
+<style>
+#acolortests {
+  font-size: 2rem;
+}
+#acolortests input {
+  width: 20%;
+  margin: 0;
+}
+#acolortests span {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+#acolortests .spacer {
+  width:5%;
+}
+#acolortests .vis {
+  width: 20%;
+  height: 2em;
+  line-height: 2em;
+  border: solid 1px;
+  border-color: black;
+  color: white;
+}
+#aredshow {border-color: red !important;}
+#agreenshow {border-color: green !important;}
+#ablueshow {border-color: blue !important;}
+</style>
+<div id="acolortests">
+<div>
+<input type="range" min="0" max="255" value="255" id="ared"><span class="spacer"></span><input type="range" min="0" max="255" value="255" id="agreen"><span class="spacer"></span><input type="range" min="0" max="255" value="255" id="ablue">
+</div>
+<div>
+<span id="aredshow" class="vis">255</span><span class="spacer">+</span><span id="agreenshow" class="vis">255</span><span class="spacer">+</span><span id="ablueshow" class="vis">255</span><span class="spacer">=</span><span id="argbshow" class="vis"> </span>
+</div>
+<script>
+function achangeColor(){
+  var r = document.getElementById("ared").value;
+  var g = document.getElementById("agreen").value;
+  var b = document.getElementById("ablue").value;
+  document.getElementById("argbshow").style["background-color"]=`rgb(${r},${g},${b})`;
+  document.getElementById("aredshow").innerHTML=r;
+  document.getElementById("aredshow").style["background-color"]=`rgb(${r},0,0)`;
+  document.getElementById("agreenshow").innerHTML=g;
+  document.getElementById("agreenshow").style["background-color"]=`rgb(0,${g},0)`;
+  document.getElementById("ablueshow").innerHTML=b;
+  document.getElementById("ablueshow").style["background-color"]=`rgb(0,0,${b})`;
+}
+document.getElementById("ared").oninput = achangeColor;
+document.getElementById("agreen").oninput = achangeColor;
+document.getElementById("ablue").oninput = achangeColor;
+achangeColor();
+</script>
+</div>
+<p>Take a moment to play around with these and see if you can make your favorite color!</p>
+<p>Did you notice how if you put the amount of blue at 0, but leave the red and green at 255 that you make yellow? This is different than mixing colors with paint!</p>
+<p>The reason this works has to do with how our eyes detect light and how our brains turn that into the image of the world that we see. To explore this more, go through the Biology of Sight Adventure.</p>
+<p>(Code to change color of LED on SpinWheel goes here)</p>
+<h3 id="rainbows-and-white-light">Rainbows and White Light</h3>
+<p>Now that we’ve explained colors and how to mix colors, let’s talk about white light and rainbows. When light travels from the Sun, or most other sources of illumination, we perceive it as lacking a hue. We call this white light. In reality, white light is a mixture of many colors of light. This mixture can be seen by using a prism to split out the different colors that make up the mixture.</p>
+<p>(Prism picture here)</p>
+<p>Do you see how white light goes into the prism, and the entire spectrum of colors emerges from the other side?</p>
+<p>But what is happening here? We are witnessing the process of dispersion when we see white light spread out into its different colors. Dispersion is a property of waves, and through this process, waves are separated by their wavelengths. Light is a wave, and different colors of light have different wavelengths.</p>
+<p>(Reflection, absorption, transmission (partial, by color) (super cool widget can be added here))</p>
+<p>When we look at an object, we see its color. But how does this happen? When the light in the room hits the object, some of the light is absorbed by the object, while the rest is reflected. If an object absorbs all colors of light except for blue, the blue light wave will reflect off of the object and travel until it hits another object. When it hits our eyes, we see the blue light and describe the object as blue. In order to see any object, some of the light must be reflected to your eye. The wavelengths of light that are reflected control what color we see.</p>
+<h2 id="light-is-an-electromagnetic-wave">Light is an Electromagnetic Wave</h2>
+<p>Now we know that light is a wave. More specifically, light is an electromagnetic wave, and we will get to that later. First, let’s explore the properties of a wave.</p>
+<p>Waves A wave is a repetitive motion traveling through a medium. Some examples are shown in the table below.</p>
+<table>
+<thead>
+<tr class="header">
+<th><strong>Type of Wave</strong></th>
+<th><strong>Medium</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ocean wave</td>
+<td>Water</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Sound wave</td>
+<td>Air</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Light</td>
+<td>?</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Interestingly, a wave can travel long distances without needing the medium itself to travel that full distance. For instance, the crests of an ocean wave can be ridden all the way to the shore, but very little of the water actually travels along, water mainly moves up and down at the same location. Similarly, when we hear a sound, our ears are detecting vibrations in nearby air, not air that traveled a long distance.</p>
+<p>(some pictures might be very helpful here)</p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
 data-isso-require-author="true"
