@@ -97,6 +97,38 @@
 #sredshow {border-color: cyan !important;}
 #sgreenshow {border-color: magenta !important;}
 #sblueshow {border-color: yellow !important;}
+#scolortests .svganim {
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  position: relative;
+}
+#scolortests .svganim > span {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  mix-blend-mode: multiply;
+}
+#scolortests .svganim > #cblob {
+  left: 50px;
+  top: 30px;
+  background-color: cyan;
+  border-radius: 32% 58% 69% 43% / 48% 32% 59% 55%;
+}
+#scolortests .svganim > #yblob {
+  left: 40px;
+  top: 40px;
+  background-color: yellow;
+  border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+}
+#scolortests .svganim > #mblob {
+  left: 60px;
+  top: 40px;
+  background-color: magenta;
+  border-radius: 31% 45% 74% 35% / 38% 56% 51% 87%;
+}
 </style>
 <div id="scolortests">
 <div class="explain">
@@ -108,6 +140,9 @@
 <div>
 <span id="sredshow" class="vis">255</span><span class="spacer">+</span><span id="sgreenshow" class="vis">255</span><span class="spacer">+</span><span id="sblueshow" class="vis">255</span><span class="spacer">=</span><span id="srgbshow" class="vis"> </span>
 </div>
+<div class="svganim">
+<span id="cblob"></span><span id="yblob"></span><span id="mblob"></span>
+</div>
 <script>
 function schangeColor(){
   var complement_r = document.getElementById("sred").value;
@@ -116,10 +151,13 @@ function schangeColor(){
   document.getElementById("srgbshow").style["background-color"]=`rgb(${255-complement_r},${255-complement_g},${255-complement_b})`;
   document.getElementById("sredshow").innerHTML=complement_r;
   document.getElementById("sredshow").style["background-color"]=`rgb(${255-complement_r},255,255)`;
+  document.getElementById("cblob").style["background-color"]=`rgb(${255-complement_r},255,255)`;
   document.getElementById("sgreenshow").innerHTML=complement_g;
   document.getElementById("sgreenshow").style["background-color"]=`rgb(255,${255-complement_g},255)`;
+  document.getElementById("yblob").style["background-color"]=`rgb(255,${255-complement_g},255)`;
   document.getElementById("sblueshow").innerHTML=complement_b;
   document.getElementById("sblueshow").style["background-color"]=`rgb(255,255,${255-complement_b})`;
+  document.getElementById("mblob").style["background-color"]=`rgb(255,255,${255-complement_b})`;
 }
 document.getElementById("sred").oninput = schangeColor;
 document.getElementById("sgreen").oninput = schangeColor;
@@ -243,30 +281,27 @@ achangeColor();
 <p>When we look at an object, we see its color. But how does this happen? When the light in the room hits the object, some of the light is absorbed by the object, while the rest is reflected. If an object absorbs all colors of light except for blue, the blue light wave will reflect off of the object and travel until it hits another object. When it hits our eyes, we see the blue light and describe the object as blue. In order to see any object, some of the light must be reflected to your eye. The wavelengths of light that are reflected control what color we see.</p>
 <h2 id="light-is-an-electromagnetic-wave">Light is an Electromagnetic Wave</h2>
 <p>Now we know that light is a wave. More specifically, light is an electromagnetic wave, and we will get to that later. First, let’s explore the properties of a wave.</p>
-<p>Waves A wave is a repetitive motion traveling through a medium. Some examples are shown in the table below.</p>
+<h3 id="waves">Waves</h3>
+<p>A wave is a repetitive motion traveling through a medium. Some examples are shown in the table below.</p>
 <table>
 <thead>
 <tr class="header">
 <th><strong>Type of Wave</strong></th>
 <th><strong>Medium</strong></th>
-<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Ocean wave</td>
 <td>Water</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>Sound wave</td>
 <td>Air</td>
-<td></td>
 </tr>
 <tr class="odd">
 <td>Light</td>
 <td>?</td>
-<td></td>
 </tr>
 </tbody>
 </table>
