@@ -62,11 +62,17 @@
 <p>(Colorful picture goes here)</p>
 <h3 id="mixing-colors-with-pigments">Mixing Colors with Pigments</h3>
 <p>If you’ve ever painted before, you’ve probably mixed colors on a pallet. In art class, you’ve learned about the difference between primary and secondary colors. Primary colors can be used to make all other colors (secondary colors). When painting, our primary colors are red, yellow, and blue. When we are paining, we are using the pigments in our paint to create the various colors. The idea of using pigments to create color is used in our clothes, painting our houses and even coloring our food.</p>
+<p>(add a picture of a painting pallet or easel?)</p>
 <p>If you wanted to make green, what colors would you use?</p>
 <p>What ink colors does a typical printer have?</p>
 <style>
 #scolortests {
   font-size: 2rem;
+}
+#scolortests .explain {
+  font-size: 1rem;
+  width: 80%;
+  margin: 0 auto;
 }
 #scolortests input {
   width: 20%;
@@ -93,6 +99,9 @@
 #sblueshow {border-color: yellow !important;}
 </style>
 <div id="scolortests">
+<div class="explain">
+<p>Imagine a white sheet of paper (reflecting all colors of white light) on which we add pigments that absorb some colors. That would be cyan (absorbing red and reflecting green and blue), magenta (absorbing green), and yellow (absorbing blue). Adding up these pigments leads to absorbing all colors and reflecting none, making the page black.</p>
+</div>
 <div>
 <input type="range" min="0" max="255" value="255" id="sred"><span class="spacer"></span><input type="range" min="0" max="255" value="255" id="sgreen"><span class="spacer"></span><input type="range" min="0" max="255" value="255" id="sblue">
 </div>
@@ -150,6 +159,11 @@ schangeColor();
 #acolortests {
   font-size: 2rem;
 }
+#acolortests .explain {
+  font-size: 1rem;
+  width: 80%;
+  margin: 0 auto;
+}
 #acolortests input {
   width: 20%;
   margin: 0;
@@ -173,13 +187,26 @@ schangeColor();
 #aredshow {border-color: red !important;}
 #agreenshow {border-color: green !important;}
 #ablueshow {border-color: blue !important;}
+#acolortests .svganim {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
 </style>
 <div id="acolortests">
+<div class="explain">
+<p>Imagine a white sheet of paper (i.e. paper that does not absorb any of the colors of light falling on it) in a dark room. We shine three lights on it, with different intensity: a red, a green, and a blue light. If we shine them all together, we reflect all visible color components of the sheet of paper and see a white color.</p>
+</div>
 <div>
 <input type="range" min="0" max="255" value="255" id="ared"><span class="spacer"></span><input type="range" min="0" max="255" value="255" id="agreen"><span class="spacer"></span><input type="range" min="0" max="255" value="255" id="ablue">
 </div>
 <div>
 <span id="aredshow" class="vis">255</span><span class="spacer">+</span><span id="agreenshow" class="vis">255</span><span class="spacer">+</span><span id="ablueshow" class="vis">255</span><span class="spacer">=</span><span id="argbshow" class="vis"> </span>
+</div>
+<div class="svganim">
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+<filter id="alight"> <feDiffuseLighting id="asvgred" in="SourceGraphic" result="lightr" lighting-color="#f00" diffuseConstant="1.5"> <fePointLight x="50" y="150" z="80" /> <!--<feSpotLight x="15" y="20" z="40" limitingConeAngle="25" pointsAtX="50" pointsAtY="50" pointsAtZ="20"/>--> </feDiffuseLighting> <feDiffuseLighting id="asvggreen" in="SourceGraphic" result="lightg" lighting-color="#0f0" diffuseConstant="1.5"> <fePointLight x="100" y="30" z="80" /> <!--<feSpotLight x="100" y="-10" z="40" limitingConeAngle="25" pointsAtX="100" pointsAtY="60" pointsAtZ="0"/>--> </feDiffuseLighting> <feDiffuseLighting id="asvgblue" in="SourceGraphic" result="lightb" lighting-color="#00f" diffuseConstant="1.5"> <fePointLight x="150" y="150" z="80" /> <!--<feSpotLight x="185" y="20" z="40" limitingConeAngle="25" pointsAtX="150" pointsAtY="50" pointsAtZ="20"/>--> </feDiffuseLighting> <feComposite in="SourceGraphic" in2="lightr" result="sourceWithR" operator="arithmetic" k1="1" k2="0" k3="0" k4="0"/> <feComposite in="SourceGraphic" in2="lightg" result="sourceWithG" operator="arithmetic" k1="1" k2="0" k3="0" k4="0"/> <feComposite in="SourceGraphic" in2="lightb" result="sourceWithB" operator="arithmetic" k1="1" k2="0" k3="0" k4="0"/> <feComposite in="sourceWithR" in2="sourceWithG" result="sourceWithRG" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/> <feComposite in="sourceWithRG" in2="sourceWithB" result="sourceWithRGB" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/> </filter> <circle cx="100" cy="100" r="80" fill="white" stroke="black" stroke-opacity="1" filter="url(#alight)" />
+</svg>
 </div>
 <script>
 function achangeColor(){
@@ -189,10 +216,13 @@ function achangeColor(){
   document.getElementById("argbshow").style["background-color"]=`rgb(${r},${g},${b})`;
   document.getElementById("aredshow").innerHTML=r;
   document.getElementById("aredshow").style["background-color"]=`rgb(${r},0,0)`;
+  document.getElementById("asvgred").setAttribute("lighting-color",`rgb(${r},0,0)`);
   document.getElementById("agreenshow").innerHTML=g;
   document.getElementById("agreenshow").style["background-color"]=`rgb(0,${g},0)`;
+  document.getElementById("asvggreen").setAttribute("lighting-color",`rgb(0,${g},0)`);
   document.getElementById("ablueshow").innerHTML=b;
   document.getElementById("ablueshow").style["background-color"]=`rgb(0,0,${b})`;
+  document.getElementById("asvgblue").setAttribute("lighting-color",`rgb(0,0,${b})`);
 }
 document.getElementById("ared").oninput = achangeColor;
 document.getElementById("agreen").oninput = achangeColor;
@@ -242,6 +272,17 @@ achangeColor();
 </table>
 <p>Interestingly, a wave can travel long distances without needing the medium itself to travel that full distance. For instance, the crests of an ocean wave can be ridden all the way to the shore, but very little of the water actually travels along, water mainly moves up and down at the same location. Similarly, when we hear a sound, our ears are detecting vibrations in nearby air, not air that traveled a long distance.</p>
 <p>(some pictures might be very helpful here)</p>
+<p>Waves are characterized by their frequency, wavelength, and speed. Wavelength describes the length of one wave. You can use the widget below to change the wavelength of a wave.</p>
+<p>(To do: Add widget where the properties of a wave can be changed. When the wavelength changes have the wave change color, potentially add the sine function)</p>
+<p>The frequency of a wave describes how often the repetitive motion of a wave is repeated. We describe this motion in Hertz (Hz), which stands for the number of waves per second. For example, a wave with a frequency of 3 Hz, would repeat its motion 3 times in one second. Finally, the speed of a wave describes how fast the wave moves forward. Sound and light are both waves, and if you’ve ever watched a thunderstorm you know that you see lightning flash before you hear the boom of thunder. The speed of a sound wave is 343 m/s (meters per second), while the speed of light is 299,792,458 m/s.</p>
+<div class="Comparison">
+<p>A highway spped limit of 60 miles per hour is about 27 m/s.</p>
+</div>
+<p>Now that we’ve described all the properties of waves, let’s discuss how this relates to light and color. If you change the wavelength of the light wave in our widget, the wave changes color. This is an analogy to real life, because the wavelength of a light ray corresponds to its color.</p>
+<p>However, our eyes can only detect a small range of the possible wavelengths of light. This range is called the visible spectrum. Looking at the whole spectrum of light, called the Electromagnetic spectrum, you can see that different wavelengths of light create microwaves that help to heat your food, and radio waves, that allow you to listen to your favorite music. We interact with these waves in other ways, but we can’t see microwaves or radio waves like we can see visible light.</p>
+<p>(Insert picture of the electromagnetic spectrum)</p>
+<p>Finally, the question of what is an electromagnetic wave? Electromagnetic waves are waves, like sound waves or ocean waves. Instead of traveling vibrations in the air or water, they are vibrations of… it is complicated. There are many metaphors we can use to describe the medium of electromagnetic waves. Studying its inner workings has led to some of the greatest discoveries in Physics: general relativity and quantum mechanics. Instead of retracing the steps of physicists over two hundred years, we have focused on describing light, based on what we can measure about it, such as its wavelength.</p>
+<p>::: Electricity and Magnetism If you are interested in learning more about electricity and magnetism, two topics related to electromagnetic waves, go to their lessons. :::</p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
 data-isso-require-author="true"
