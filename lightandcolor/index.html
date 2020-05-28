@@ -111,22 +111,19 @@
   position: absolute;
   mix-blend-mode: multiply;
 }
-#scolortests .svganim > #cblob {
+#scolortests .svganim > #mblob {
   left: 50px;
   top: 30px;
-  background-color: cyan;
   border-radius: 32% 58% 69% 43% / 48% 32% 59% 55%;
 }
-#scolortests .svganim > #yblob {
+#scolortests .svganim > #cblob {
   left: 40px;
   top: 40px;
-  background-color: yellow;
   border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
 }
-#scolortests .svganim > #mblob {
+#scolortests .svganim > #yblob {
   left: 60px;
   top: 40px;
-  background-color: magenta;
   border-radius: 31% 45% 74% 35% / 38% 56% 51% 87%;
 }
 </style>
@@ -154,10 +151,10 @@ function schangeColor(){
   document.getElementById("cblob").style["background-color"]=`rgb(${255-complement_r},255,255)`;
   document.getElementById("sgreenshow").innerHTML=complement_g;
   document.getElementById("sgreenshow").style["background-color"]=`rgb(255,${255-complement_g},255)`;
-  document.getElementById("yblob").style["background-color"]=`rgb(255,${255-complement_g},255)`;
+  document.getElementById("mblob").style["background-color"]=`rgb(255,${255-complement_g},255)`;
   document.getElementById("sblueshow").innerHTML=complement_b;
   document.getElementById("sblueshow").style["background-color"]=`rgb(255,255,${255-complement_b})`;
-  document.getElementById("mblob").style["background-color"]=`rgb(255,255,${255-complement_b})`;
+  document.getElementById("yblob").style["background-color"]=`rgb(255,255,${255-complement_b})`;
 }
 document.getElementById("sred").oninput = schangeColor;
 document.getElementById("sgreen").oninput = schangeColor;
