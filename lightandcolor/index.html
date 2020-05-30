@@ -133,6 +133,7 @@ Pick a wavelength (it fades to black beyond the visible range):
 var waveSlider = document.getElementById('waveSlider');
 var waveView = document.getElementById('waveView');
 var waveSVG = document.querySelector("#svgwave");
+var waveAnim = document.querySelector("#wavewidget animate");
 var waveVis = document.querySelector("#wavewidget .vis");
 // From Spectra Lab Report
 function waveLengthToRGB(Wavelength){
@@ -188,7 +189,10 @@ function waveLengthToRGB(Wavelength){
 function waveUpdate() {
   var t = waveSlider.value;
   waveView.innerHTML = t;
-  waveSVG.style.transform = `scale(${t/800},1)`;
+  var s = t/800;
+  waveSVG.style.transform = `scale(${s},1)`;
+  waveAnim.setAttribute("to", `${-200*s}`);
+  waveAnim.setAttribute("dur",`${3*s}s`);
   var rgb = waveLengthToRGB(t);
   waveVis.style["background-color"]=`rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
 }
