@@ -57,12 +57,14 @@
 <p>Whether you’ve watched a dance, or are a dancer yourself, you know dancing is all about movement. Be it a pirouette, a leap, or a straight line, dancers gracefully move through space in exciting ways. Your SpinWheel can act as a dancer too! Mathematically we can represent this motion in many ways. In this lesson, we will write colorful visualizations of this math that you can explore with SpinWheel!</p>
 <h2 id="linear-motion-line-dancing">Linear Motion: Line Dancing</h2>
 <p>The first way we will think about motions is by moving along a line. We can move back and forth on a line but in no other direction. This is called one dimension motion. Below you can use your mouse to drag the circle along one dimension. Think of this like a dancer moving back and forth across the stage.</p>
+<!--TODO: Insert animation -->
 <h1 id="insert-animation">Insert animation:</h1>
 <p>I imagine a box with a line through it where there is a dot on the line, and you can drag the dot back and forth. The line always stays black and visible. When the dot is dragged to the right, the box is one color (maybe blue), and when the box is dragged to the left, it is a different color (maybe peach/pink). When the dot is dragged at a greater speed, whatever color is being displayed gets brighter. Instead of a box, we could just have a thick line with a dot where the line changes colors. Idk what will look better or be easier to code</p>
 <p>Notice when you dragged your mouse, your screen lit up at different brightnesses and colors! Try moving your mouse faster and slower! Also, in different directions!</p>
 <p>As you can see, when you drag the mouse faster, the line gets more colorful! How fast or slow the mouse is moving is called speed. Now, did you also notice that if you dragged the mouse forward, then backward, the overall color changed? This is because we can assign a direction to our speed, and call it velocity! In our one dimensional case left or right, or perhaps positive and negative, tell us the direction we are moving.</p>
 <h2 id="linear-motion-a-three-line-dance">Linear motion: A Three Line Dance</h2>
 <p>We’ve talked about motion in 1-D, but we don’t live and move and dance on a single line. We’re free to go forwards and back, left and right, up and down, and even along curves. Instead of one line, we can represent our everyday motions by moving along three lines. We call this three dimensional (3D) motion. Maybe you’ve seen an X Y Z grid before. This is called a cartesian coordinate system. If you click a point on the animation below, you can see how we could jump to any location in space with these three lines.</p>
+<!-- TODO: Insert animation -->
 <p>Insert animation: I am imagining a grid (I was thinking 3D, but we could move to 2D if needed) where you click on a point, and the animation draws how you move to that line in (x,y,z) coordinates. I was also hoping to display the point (x, y, z) as a title or the top corner. First, trace the x-direction in one color (maybe pink), and fill in the x coordinate in pink. Trace y in a light blue color (fill in coordinate too), and trace z in. Leave the colorful path there until another point is selected. I think the exact color depends on the color scheme!</p>
 <p>You’re SpinWheel can do the same! Inside your SpinWheel is a motion sensor. You can program your SpinWheel to light up different colors as it moves through space like this animation. Upload this sketch to your SpinWheel and explore how it can dance through 3D space.</p>
 <h1 id="test-of-motion-simulation">Test of motion simulation</h1>
@@ -83,12 +85,22 @@ void loop() {
 </pre>
 </div>
 <p>As you move the SpinWheel, do you notice the different colors and brightness? Just like in our one-dimensional line, could you see different colors representing directions? Now we have three lines and 6 directions to move. Did the speed you moved your SpinWheel change the brightness?</p>
-<p>Now think about dancer’s feet doing turn after turn and their arms outstretched in different configurations. Can you picture how their arms and feet move through space in small tight turns, like chaînés turns, and wide turns, like an attitude or a fouetté. There are many different ways we can describe all types of different dances mathematically!</p>
-<h1 id="insert-first-dancing-video-here">Insert first dancing video here</h1>
+<h2 id="turning-rotational-motion">Turning: Rotational Motion</h2>
+<p>We’ve talked about moving through space in line, but now imagine a dancer’s feet doing turn after turn and their arms outstretched in different configurations. Can you picture how their arms and feet move through space in small tight turns, like chaînés turns, and wide turns, like an attitude or a fouetté? Watch this video from — to see dancing path represented:</p>
+<!--TODO: Find out licence for video and upload it -->
+<!--TODO: Find videos that describe these different turns -->
+<p>The answer is yes! There are many different ways we can describe all types of different dances! Mathematically, we could say that there are many different coordinate systems to describe motion. A dancer turning is a type of rotational motion. Instead of describing each point by drawing three separate lines, we could think of this motion in terms of points along a circle. This system is called polar coordinates.</p>
+<p>In this coordinate system, we can represent points on a circle, first by describing how large the circle is, by its radius, r. Then we express how far to go along the circular path by some angle, theta. If a dancer is making small tight turns, like chaînés turns, r will be small. If a dancer is making a wide turn, an attitude or a fouetté, r would be bigger! The angle in this coordinate system describes how far along the dancer is in their turn. At the start of the turn, the angle would be small. As the turn continued, the angle would get larger.</p>
+<p>With this new system, we can describe points in space (or in a turn!) as (r, theta) instead of (x,y,z). In this animation, click anywhere in space to see how we could move there using this new coordinate system.</p>
+<!--TODO: Animation -->
+<p>Animation: Very similar to 2, but move to a point in space using a polar system. Trace out to r, then sweep to an angle theta, making an arc. Leave the colorful path there until another point is selected</p>
+<!--TODO: Picture or gif of a dancer turning that traces out the polar angle theta -->
+<p>To see this coordinate system in action, upload this sketch to SpinWheel.</p>
+<!--TODO: Have a program where the spinwheel responds to rotational motion -->
 <h2 id="the-grand-finale-showing-off-all-its-colors">The Grand Finale: Showing Off All Its Colors</h2>
 <p>You’ve explored motion so far in this adventure. To see the SpinWheel “dance” and show off all its colors, upload this final sketch of the adventure. You will program the SpinWheel LEDs to light up and turn and turn like a dancer.</p>
-<p>Write a program where the outer edges of the SpinWheel lights up in a snake at different speeds</p>
-<h1 id="insert-mariels-video-here">insert Mariel’s video here</h1>
+<!--TODO: Write a program where the outer edges of the SpinWheel lights up in a snake at different speeds -->
+<p>To see even more dances mathematically, you can watch Mariel Pettee’s, a physics graduate student who studies particle physics as well as physics and dance, AI-generated dances here: <!--TODO: insert Mariel's video here --></p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
 data-isso-require-author="true"

@@ -87,6 +87,57 @@
 </ol>
 <h2 id="community-rules">Community Rules</h2>
 <p>We are excited to provide you with this adventure guide, to be your companion on your journey of exploration with the SpinWheel. Each adventure and lesson includes a comment section in which you are encouraged to ask questions or help other adventurers understand the world around them. Comments will be moderated by our volunteers, so we ask you to be polite and helpful and to expect the same from others.</p>
+<h2 id="map">Map</h2>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script src="/springy/springy.js"></script>
+<script src="/springy/springyui.js"></script>
+<script>
+var graphJSON = {
+  "nodes": [
+    "Quick Start",
+    "Biology of Sight",
+    "Stroboscope",
+    "Animations and Patterns",
+    "Step Counter",
+    "Dancing Companion",
+    "Compass",
+    "Programming Patterns",
+    "Light and Color",
+    "Color Theory",
+    "Inertial Reference Frames",
+    "Rotation",
+    "Magnetism"
+  ],
+  "edges": [
+    ["Quick Start", "Biology of Sight"],
+    ["Quick Start", "Stroboscope"],
+    ["Quick Start", "Programming Patterns"],
+    ["Biology of Sight", "Light and Color"],
+    ["Biology of Sight", "Color Theory"],
+    ["Programming Patterns", "Step Counter"],
+    ["Programming Patterns", "Animations and Patterns"],
+    ["Animations and Patterns", "Dancing Companion"],
+    ["Dancing Companion", "Compass"],
+    ["Compass", "Magnetism"],
+    ["Dancing Companion", "Inertial Reference Frames"],
+    ["Dancing Companion", "Rotation"],
+    ["Step Counter", "Inertial Reference Frames"],
+  ]
+};
+
+jQuery(function(){
+  var graph = new Springy.Graph();
+  graph.loadJSON(graphJSON);
+
+  var springy = jQuery('#springymap').springy({
+    graph: graph,
+    stiffnes: 200,
+    repulsion: 2000,
+    damping: 0.5
+  });
+});
+</script>
+<canvas id="springymap" width="800" height="600" />
 </main>
 <div id="license">
 <!--<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc-by-sa.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.-->
