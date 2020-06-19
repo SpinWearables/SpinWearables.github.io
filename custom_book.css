@@ -170,6 +170,31 @@ figure > figcaption {
   display: block;
 }
 
+.footnote sup {
+  font-size: 0.7em;
+  text-decoration: underline black dotted;
+  position: relative;
+  color: #2244dd;
+}
+
+.footnote span {
+  visibility: hidden;
+  position: absolute;
+  background-color: white;
+  max-width: 200px;
+  font-size: 0.8em;
+  line-height: 1em;
+  padding: 0.5em;
+  text-align: left;
+  border-radius: 0.4em;
+  border: 1px solid black;
+  z-index: 10;
+}
+
+.footnote:hover span {
+  visibility: visible;
+}
+
 table {
   margin: 1rem auto;
   border: solid 1px gray;
