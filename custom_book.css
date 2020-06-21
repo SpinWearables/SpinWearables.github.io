@@ -170,11 +170,9 @@ figure > figcaption {
   display: block;
 }
 
-.footnote sup {
-  font-size: 0.7em;
+.footnote {
   text-decoration: underline black dotted;
   position: relative;
-  color: #2244dd;
 }
 
 .footnote span {
@@ -182,6 +180,7 @@ figure > figcaption {
   position: absolute;
   background-color: white;
   max-width: 200px;
+  min-width: 100px;
   font-size: 0.8em;
   line-height: 1em;
   padding: 0.5em;
