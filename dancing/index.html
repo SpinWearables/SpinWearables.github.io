@@ -57,9 +57,94 @@
 <p>Whether you’ve watched a dance, or are a dancer yourself, you know dancing is all about movement. Be it a pirouette, a leap, or a straight line, dancers gracefully move through space in exciting ways. Your SpinWheel can act as a dancer too! Mathematically we can represent this motion in many ways. In this lesson, we will write colorful visualizations of this math that you can explore with SpinWheel!</p>
 <h2 id="linear-motion-line-dancing">Linear Motion: Line Dancing</h2>
 <p>The first way we will think about motions is by moving along a line. We can move back and forth on a line but in no other direction. This is called one dimension motion. Below you can use your mouse to drag the circle along one dimension. Think of this like a dancer moving back and forth across the stage.</p>
-<!--TODO: Insert animation -->
-<h1 id="insert-animation">Insert animation:</h1>
-<p>I imagine a box with a line through it where there is a dot on the line, and you can drag the dot back and forth. The line always stays black and visible. When the dot is dragged to the right, the box is one color (maybe blue), and when the box is dragged to the left, it is a different color (maybe peach/pink). When the dot is dragged at a greater speed, whatever color is being displayed gets brighter. Instead of a box, we could just have a thick line with a dot where the line changes colors. Idk what will look better or be easier to code</p>
+<style>
+#move1d {
+  text-align: center;
+}
+#move1d #location {
+  width: 80%;
+  top:0.5rem;
+}
+
+#move1d .vis {
+  width: 40%;
+  font-size: 2rem;
+  height: 4rem;
+  line-height: 4rem;
+  border: solid 1px;
+  border-color: black;
+  display: block;
+  margin: auto;
+  text-shadow:
+    -1px -1px 0 white,
+    1px -1px 0  white,
+    -1px 1px 0  white,
+    1px 1px 0   white;
+}
+#move1d .spacer {
+
+  width:5%;
+}
+
+</style>
+<div id="move1d">
+<input type="range" min="0" max="2000" value="1000" id="location"> <span class="spacer"></span>
+<div>
+<span class="vis"><span id="waveView"></span></span>
+</div>
+<script>
+
+//extract desired elements
+var locElement = document.getElementById("location");
+var entireDiv = document.getElementById("move1d");
+var waveVis = document.querySelector("#move1d .vis");
+
+var xOld = 0;
+var tOld = new Date();
+
+// define event handler
+function getValue(){
+    // extract desired info
+    var x = locElement.value;
+    var t = new Date();
+    var v = (x - xOld)/(t-tOld);
+   
+    // do interesting things
+    
+
+    if (v < 0 ){
+        var r = 256;
+        var b = 0;
+        }
+    else {
+        var r = 0
+        var b = 256;
+        }
+  
+    var g = 0;
+    //console.log(Math.abs(v))
+    var op = Math.abs(v)/10;
+    if (op < 0.1){
+        op = 0.1;
+        }
+    if (op > 1){
+        op = 1;
+        }
+      
+    waveVis.style["background-color"]= `rgba(${r},${g},${b},${op})`;
+    
+    // update globals
+    xOld = x;
+    tOld = t;
+    
+}
+
+// decide what event handlers to use
+locElement.oninput = getValue;
+
+
+</script>
+</div>
 <p>Notice when you dragged your mouse, your screen lit up at different brightnesses and colors! Try moving your mouse faster and slower! Also, in different directions!</p>
 <p>As you can see, when you drag the mouse faster, the line gets more colorful! How fast or slow the mouse is moving is called speed. Now, did you also notice that if you dragged the mouse forward, then backward, the overall color changed? This is because we can assign a direction to our speed, and call it velocity! In our one dimensional case, left or right, or perhaps positive and negative, tell us the direction we are moving.</p>
 <h2 id="linear-motion-a-three-line-dance">Linear motion: A Three Line Dance</h2>
