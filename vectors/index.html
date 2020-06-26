@@ -17,6 +17,7 @@
   </style>
   <link rel="stylesheet" href="/custom.css" />
   <link rel="stylesheet" href="/custom_book.css" />
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -54,8 +55,111 @@
 <div class="warning">
 <p>This lesson is still under-development. Check back soon for the full lesson!</p>
 </div>
-<p>Elise’s Outline for the lesson</p>
-<p>Vectors are a method of describing motion such as displacement, velocity and acceleration. In vectors, a motion is defined by its magnitude and direction. For simplicity, lets study displacement, the amount an object has moved relative to it’s starting location.</p>
+<p>Universally, in every human endeavor, the most important tool that helps us progress as a technological civilization is doodling. Many great inventions, many ideas that have changed the world, have started as a scribble on a napkin, born out of a lively conversation between colleagues and friends. This process of rendering our thoughts in drawings lets us communicate better with our friends, and even more importantly, it lets us understand our own thoughts better.</p>
+<p>As the sophistication of our ideas grow, our drawings also grow more intricate and the tools and concepts we use in them become more formal. This formality brings us great powers, but with great power comes a lot of weird crap.</p>
+<p>Throughout science, the most important doodle is the arrow. We use arrows to denote directions, positions, orientations, flows, motions, tensions, and a myriad other properties and phenomena. We use longer arrows to denote faster movement or larger displacement or more intense tension. And we orient the arrows differently, to denote different orientations.</p>
+<p>We can start using numbers to describe these arrows, an important step if we want to use them for specific scientific purposes. We will indeed do that later in this lessons, but, as with any other scientific concept, it is important to first understand the soul of the arrow, to distil its essence, to doodle with it.</p>
+<p>For the rest of the lesson we will call these arrows “vectors”, because it is always useful to give special names to important concepts. It certainly helps, when searching in the library, to know to ask about vectors instead of “the type of arrows scientists use in their doodles”. As Ursula Le Guin writes, knowing one’s true name gives you power over them.</p>
+<p>A great way to see the power of vectors is to employ them to describe intricate motion. However, before we describe a journey, we need to describe its starting point. We need to be able to draw a vector corresponding to our own position:</p>
+<p><code>Add a drawing of an arrow here pointing to a point saying "you are here"</code></p>
+<p>Then we need to draw a vector describing our next step… And the next one, and the next one.</p>
+<p><code>Add an animation of multiple steps</code></p>
+<p>And by <em>adding</em> these steps together, we finally find our new position. This leads us to two important concepts. First is vector addition. Vector addition is easy to understand if you think of vectors as representing motion. Vector <span class="math inline">\(\vec{A}\)</span> represents displacement and … When we perform both displacements we denote the new compound displacement as <span class="math inline">\(\vec{C}\)</span> …</p>
+<p><code>An animation of the displacements being summed up.</code></p>
+<p><code>A drawing of all the steps and a new vector pointing to the "you ended here" point</code>.</p>
+<p>The second crucial concept is the idea of a rate of change. Steps… steps per second… velocity…</p>
+<p><code>A widget where you pick a velocity and you get a trajectory and a position vector. Click on the black dot and drag it around. A lot of prettifying left to do.</code></p>
+<style>
+.vslider {
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+.vhandle {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: black;
+  position: absolute;
+  left: 45px;
+  top: 45px;
+}
+</style>
+<div id="v_to_path">
+<div class="vslider">
+<span class="vhandle"></span>
+</div>
+<canvas class="trajectory" width="100" height="100">
+</canvas>
+</div>
+<script>
+const v_to_path = document.getElementById('v_to_path');
+const v2p_vhandle = v_to_path.getElementsByClassName('vhandle')[0];
+const v2p_ctx = v_to_path.getElementsByClassName('trajectory')[0].getContext('2d');
+
+function dragElement(elmnt, ctx) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  elmnt.onmousedown = dragMouseDown;
+  var ipos1 = 50, ipos2 = 50;
+  var intervalhandler;
+  
+  ctx.strokeStyle='black';
+  
+  function drawStep() {
+    ipos2 += 0.1*(elmnt.offsetTop-45);
+    ipos1 += 0.1*(elmnt.offsetLeft-45);
+    if (0<=ipos1 && ipos1<100 && 0<=ipos2 && ipos2<100) {
+      ctx.lineTo(ipos1, ipos2);
+    } else {
+      ipos1 = (ipos1+100)%100;
+      ipos2 = (ipos2+100)%100;
+      ctx.moveTo(ipos1, ipos2);
+    }
+    ctx.stroke();
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    ctx.beginPath();
+    ctx.moveTo(50,50);
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+    intervalhandler = setInterval(drawStep, 100);
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    clearInterval(intervalhandler);
+    elmnt.style.top = "45px";
+    elmnt.style.left = "45px";
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+dragElement(v2p_vhandle, v2p_ctx);
+</script>
+<p>Yada yada how the acceleration is the same but for velocity…</p>
+<p><code>A widget where you pick an acceleration and you get a velocity and a trajectory</code></p>
+<p>Now that we have mastered the essence of vectors, we will proceed to conquer their representation as pairs of numbers: an important tool if we are to use our new powers on a computer, as computers understand only numbers. Vectors have a length (mathematicians usually call it <em>magnitude</em> or <em>norm</em>) and orientation. We will see how to encode these properties as pairs of numbers.</p>
+<p>Stefan: <strong>I strongly believe we should use meters or steps, but definitely not feet</strong></p>
 <p>Imagine that you are standing in the middle of an empty school cafeteria. The floor is tiled with squares that are 1 foot wide. We will imagine that a giant coordinate system has been drawn on the floor and you are standing at the location x = 0 and y = 0.</p>
 <p>(add image)</p>
 <p>If you take a step forward, we can define the magnitude of your displacement vector by comparing your final and initial positions. In this case, the magnitude is 1 foot because you are 1 foot from your starting position. The direction of your movement is defined using an angle. This requires agreeing on how to describe the direction. If we were looking at a map, we might agree to describe the direction relative to North. For vector motion, scientists, mathematicians and others have agreed to describe the direction of a vector in terms of the angle relative to east, or the x-axis. In this case, if you have moved towards the door in the image, you have moved north, or with an angle of 90 degrees from the x-axis.</p>
