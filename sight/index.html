@@ -237,6 +237,9 @@ void setup() {
 </div>
 <h2 id="persistence-of-vision">Persistence of Vision</h2>
 <p>Our eyes have another imperfection that we can take advantage of while programming the SpinWheel: they are rather slow at perceiving changes when compared to the speed that electronics can operate at! This is often described as the persistence of vision. Consider the example below, where you can select the speed at which a shade of blue and a shade of red switch between each other.</p>
+<div class="warning">
+<p>Be careful with the next demo! It involves flashing colors and it might be inappropriate for people suffering from epilepsy!</p>
+</div>
 <style>
 #povtests {
   font-size: 2rem;
@@ -304,29 +307,31 @@ getT();
 </script>
 </div>
 <p>Since web browsers are not particularly well adapted to this type of rapid color change, the flicker at high speeds is rather unpleasant. However, as you speed up the color changes, you will start to see purple, and the original red and blue will become less clearly distinct. Unlike web browsers, the SpinWheel is up to this task. The following program will cycle between red and blue at variable delays. Experiment with the value for the delay time. At what delay time do you stop distinguishing the two original colors and start seeing only purple?</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">void</span> setup() {</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>  SpinWheel.begin();</span>
-<span id="cb2-7"><a href="#cb2-7"></a>}</span>
-<span id="cb2-8"><a href="#cb2-8"></a></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">// CHANGE THIS VALUE! EXPERIMENT!</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="dt">int</span> delay_time_in_milliseconds = <span class="dv">500</span>;</span>
-<span id="cb2-11"><a href="#cb2-11"></a></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="dt">void</span> loop() {</span>
-<span id="cb2-13"><a href="#cb2-13"></a>  <span class="co">// Show red...</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
-<span id="cb2-15"><a href="#cb2-15"></a>  SpinWheel.drawFrame();</span>
-<span id="cb2-16"><a href="#cb2-16"></a>  <span class="co">// Wait...</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a>  delay(delay_time_in_milliseconds);</span>
-<span id="cb2-18"><a href="#cb2-18"></a>  <span class="co">// Show blue...</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>);</span>
-<span id="cb2-20"><a href="#cb2-20"></a>  SpinWheel.drawFrame();</span>
-<span id="cb2-21"><a href="#cb2-21"></a>  <span class="co">// Wait...</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a>  delay(delay_time_in_milliseconds);  </span>
-<span id="cb2-23"><a href="#cb2-23"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">// BE CAREFUL IF YOU SUFFER FROM EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="dt">void</span> setup() {</span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>  SpinWheel.begin();</span>
+<span id="cb2-8"><a href="#cb2-8"></a>}</span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">// BE CAREFUL IF YOU SUFFER FROM EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">// Change this value! Experiment!</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="dt">int</span> delay_time_in_milliseconds = <span class="dv">500</span>;</span>
+<span id="cb2-13"><a href="#cb2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="dt">void</span> loop() {</span>
+<span id="cb2-15"><a href="#cb2-15"></a>  <span class="co">// Show red...</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
+<span id="cb2-17"><a href="#cb2-17"></a>  SpinWheel.drawFrame();</span>
+<span id="cb2-18"><a href="#cb2-18"></a>  <span class="co">// Wait...</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>  delay(delay_time_in_milliseconds);</span>
+<span id="cb2-20"><a href="#cb2-20"></a>  <span class="co">// Show blue...</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>);</span>
+<span id="cb2-22"><a href="#cb2-22"></a>  SpinWheel.drawFrame();</span>
+<span id="cb2-23"><a href="#cb2-23"></a>  <span class="co">// Wait...</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a>  delay(delay_time_in_milliseconds);  </span>
+<span id="cb2-25"><a href="#cb2-25"></a>}</span></code></pre></div>
 <p>Right at the point where the red and blue stop being observable on their own, you can perform another experiment that showcases the persistence of vision effect. Instead of keeping the SpinWheel still, start shaking it back and forth rapidly. By doing this, the light emitters will be in different locations in space when they emit either red or blue, and this will let you once again distinguish the two colors (and stop seeing purple). Once you stop shaking the device, it will once again look purple.</p>
 <figure>
 <img src="/images/bookpics/fast_pov_streak.jpg" title="Picture of a fast-moving SpinWheel" alt="" /><figcaption>If you move the SpinWheel rapidly in front of your eyes, you will see the purple color separate in two distinct streaks of red and blue.</figcaption>
