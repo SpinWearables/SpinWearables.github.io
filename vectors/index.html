@@ -70,10 +70,20 @@
 <p>The second crucial concept is the idea of a rate of change. Steps… steps per second… velocity…</p>
 <p><code>A widget where you pick a velocity and you get a trajectory and a position vector. Click on the black dot and drag it around. A lot of prettifying left to do.</code></p>
 <style>
-.vslider {
-  width: 100px;
-  height: 100px;
+#v_to_path {
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
   position: relative;
+}
+.vslider {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  border: solid 1px black;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 2px;
 }
 .vhandle {
   display: block;
@@ -82,41 +92,82 @@
   border-radius: 50%;
   background-color: black;
   position: absolute;
-  left: 45px;
-  top: 45px;
+  left: 95px;
+  top: 95px;
+}
+.trajectory {
+  border: solid 1px black;
+  margin: 2px;
 }
 </style>
 <div id="v_to_path">
 <div class="vslider">
+<canvas class="velocity" width="200" height="200">
+</canvas>
 <span class="vhandle"></span>
 </div>
-<canvas class="trajectory" width="100" height="100">
+<canvas class="trajectory" width="200" height="200">
 </canvas>
 </div>
 <script>
 const v_to_path = document.getElementById('v_to_path');
 const v2p_vhandle = v_to_path.getElementsByClassName('vhandle')[0];
 const v2p_ctx = v_to_path.getElementsByClassName('trajectory')[0].getContext('2d');
+const v2p_vctx = v_to_path.getElementsByClassName('velocity')[0].getContext('2d');
 
-function dragElement(elmnt, ctx) {
+function canvas_arrow(context, fromx, fromy, tox, toy) {
+  var headlen = 10;
+  var dx = tox - fromx;
+  var dy = toy - fromy;
+  var angle = Math.atan2(dy, dx);
+  context.moveTo(fromx, fromy);
+  context.lineTo(tox, toy);
+  context.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+  context.moveTo(tox, toy);
+  context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+}
+
+function dragElementVel(elmnt, ctx, vctx) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   elmnt.onmousedown = dragMouseDown;
-  var ipos1 = 50, ipos2 = 50;
+  var ipos1 = 100, ipos2 = 100;
   var intervalhandler;
+  var memorycanvas;
+  var m_canvas = document.createElement('canvas'); // A frame buffer for only the path
+  m_canvas.width = 200;
+  m_canvas.height = 200;
+  var m_ctx = m_canvas.getContext('2d');
   
-  ctx.strokeStyle='black';
+  m_ctx.strokeStyle='lightgrey';
   
   function drawStep() {
-    ipos2 += 0.1*(elmnt.offsetTop-45);
-    ipos1 += 0.1*(elmnt.offsetLeft-45);
-    if (0<=ipos1 && ipos1<100 && 0<=ipos2 && ipos2<100) {
-      ctx.lineTo(ipos1, ipos2);
+    var v1 = elmnt.offsetLeft-95;
+    var v2 = elmnt.offsetTop-95;
+    ipos1 += 0.05*v1;
+    ipos2 += 0.05*v2;
+    if (0<=ipos1 && ipos1<200 && 0<=ipos2 && ipos2<200) {
+      m_ctx.lineTo(ipos1, ipos2);
     } else {
-      ipos1 = (ipos1+100)%100;
-      ipos2 = (ipos2+100)%100;
-      ctx.moveTo(ipos1, ipos2);
+      ipos1 = (ipos1+200)%200;
+      ipos2 = (ipos2+200)%200;
+      m_ctx.moveTo(ipos1, ipos2);
     }
+    m_ctx.stroke();
+    ctx.clearRect(0,0,200,200);
+    ctx.drawImage(m_canvas,0,0);
+    ctx.strokeStyle='black';
+    ctx.beginPath();
+    canvas_arrow(ctx,100,100,ipos1,ipos2);
+    ctx.stroke()
+    ctx.strokeStyle='red';
+    ctx.beginPath();
+    canvas_arrow(ctx,ipos1,ipos2,ipos1+0.5*v1,ipos2+0.5*v2);
     ctx.stroke();
+    vctx.clearRect(0,0,200,200);
+    vctx.strokeStyle='red';
+    vctx.beginPath();
+    canvas_arrow(vctx,100,100,100+v1,100+v2);
+    vctx.stroke();
   }
 
   function dragMouseDown(e) {
@@ -125,11 +176,11 @@ function dragElement(elmnt, ctx) {
     // get the mouse cursor position at startup:
     pos3 = e.clientX;
     pos4 = e.clientY;
-    ctx.beginPath();
-    ctx.moveTo(50,50);
+    m_ctx.beginPath();
+    m_ctx.moveTo(100,100);
     document.onmouseup = closeDragElement;
     document.onmousemove = elementDrag;
-    intervalhandler = setInterval(drawStep, 100);
+    intervalhandler = setInterval(drawStep, 50);
   }
 
   function elementDrag(e) {
@@ -147,17 +198,161 @@ function dragElement(elmnt, ctx) {
 
   function closeDragElement() {
     clearInterval(intervalhandler);
-    elmnt.style.top = "45px";
-    elmnt.style.left = "45px";
+    elmnt.style.top = "95px";
+    elmnt.style.left = "95px";
+    m_ctx.clearRect(0,0,200,200);
+    ipos1 = 100;
+    ipos2 = 100;
     document.onmouseup = null;
     document.onmousemove = null;
   }
 }
 
-dragElement(v2p_vhandle, v2p_ctx);
+dragElementVel(v2p_vhandle, v2p_ctx, v2p_vctx);
 </script>
 <p>Yada yada how the acceleration is the same but for velocity…</p>
-<p><code>A widget where you pick an acceleration and you get a velocity and a trajectory</code></p>
+<style>
+#a_to_path {
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+.aslider {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  border: solid 1px black;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 2px;
+}
+.ahandle {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: black;
+  position: absolute;
+  left: 95px;
+  top: 95px;
+}
+</style>
+<div id="a_to_path">
+<div class="aslider">
+<canvas class="acceleration" width="200" height="200">
+</canvas>
+<span class="ahandle"></span>
+</div>
+<div class="vslider">
+<canvas class="velocity" width="200" height="200">
+</canvas>
+</div>
+<canvas class="trajectory" width="200" height="200">
+</canvas>
+</div>
+<script>
+const a_to_path = document.getElementById('a_to_path');
+const a2p_vhandle = a_to_path.getElementsByClassName('ahandle')[0];
+const a2p_ctx = a_to_path.getElementsByClassName('trajectory')[0].getContext('2d');
+const a2p_vctx = a_to_path.getElementsByClassName('velocity')[0].getContext('2d');
+const a2p_actx = a_to_path.getElementsByClassName('acceleration')[0].getContext('2d');
+
+function dragElementAcc(elmnt, ctx, vctx, actx) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  elmnt.onmousedown = dragMouseDown;
+  var ipos1 = 100, ipos2 = 100;
+  var v1 = 0, v2 = 0;
+  var intervalhandler;
+  var memorycanvas;
+  var m_canvas = document.createElement('canvas'); // A frame buffer for only the path
+  m_canvas.width = 200;
+  m_canvas.height = 200;
+  var m_ctx = m_canvas.getContext('2d');
+  
+  m_ctx.strokeStyle='lightgrey';
+  
+  function drawStep() {
+    var a1 = elmnt.offsetLeft-95;
+    var a2 = elmnt.offsetTop-95;
+    v1 += 0.1*a1;
+    v2 += 0.1*a2
+    ipos1 += 0.05*v1;
+    ipos2 += 0.05*v2;
+    if (0<=ipos1 && ipos1<200 && 0<=ipos2 && ipos2<200) {
+      m_ctx.lineTo(ipos1, ipos2);
+    } else {
+      ipos1 = (ipos1+200)%200;
+      ipos2 = (ipos2+200)%200;
+      m_ctx.moveTo(ipos1, ipos2);
+    }
+    m_ctx.stroke();
+    ctx.clearRect(0,0,200,200);
+    ctx.drawImage(m_canvas,0,0);
+    ctx.strokeStyle='black';
+    ctx.beginPath();
+    canvas_arrow(ctx,100,100,ipos1,ipos2);
+    ctx.stroke()
+    ctx.strokeStyle='red';
+    ctx.beginPath();
+    canvas_arrow(ctx,ipos1,ipos2,ipos1+0.5*v1,ipos2+0.5*v2);
+    ctx.stroke();
+    ctx.strokeStyle='green';
+    ctx.beginPath();
+    canvas_arrow(ctx,ipos1,ipos2,ipos1+0.5*a1,ipos2+0.5*a2);
+    ctx.stroke();
+    vctx.clearRect(0,0,200,200);
+    vctx.strokeStyle='red';
+    vctx.beginPath();
+    canvas_arrow(vctx,100,100,100+v1,100+v2);
+    vctx.stroke();
+    actx.clearRect(0,0,200,200);
+    actx.strokeStyle='green';
+    actx.beginPath();
+    canvas_arrow(actx,100,100,100+a1,100+a2);
+    actx.stroke();
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    m_ctx.beginPath();
+    m_ctx.moveTo(100,100);
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+    intervalhandler = setInterval(drawStep, 50);
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    clearInterval(intervalhandler);
+    elmnt.style.top = "95px";
+    elmnt.style.left = "95px";
+    m_ctx.clearRect(0,0,200,200);
+    ipos1 = 100;
+    ipos2 = 100;
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+dragElementAcc(a2p_vhandle, a2p_ctx, a2p_vctx, a2p_actx);
+</script>
 <p>Now that we have mastered the essence of vectors, we will proceed to conquer their representation as pairs of numbers: an important tool if we are to use our new powers on a computer, as computers understand only numbers. Vectors have a length (mathematicians usually call it <em>magnitude</em> or <em>norm</em>) and orientation. We will see how to encode these properties as pairs of numbers.</p>
 <p>Stefan: <strong>I strongly believe we should use meters or steps, but definitely not feet</strong></p>
 <p>Imagine that you are standing in the middle of an empty school cafeteria. The floor is tiled with squares that are 1 foot wide. We will imagine that a giant coordinate system has been drawn on the floor and you are standing at the location x = 0 and y = 0.</p>
