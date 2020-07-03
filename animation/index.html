@@ -15,6 +15,70 @@
   <title>Animations and patterns</title>
   <style>
   </style>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
   <link rel="stylesheet" href="/custom.css" />
   <link rel="stylesheet" href="/custom_book.css" />
   <!--[if lt IE 9]>
@@ -49,12 +113,47 @@
 </header>
 <main>
 <p>To create an animation or a video, we need a rapid sequence of still images, rapid enough that it looks like a smoothly changing pattern to our yes. This is true both for the computer screen playing a video and for the SpinWheel lights, changing their light patterns. For example, this is a short repeating animation of a rainbow pattern playing on the LEDs.</p>
-<div class="warning">
-<p>add the front page video</p>
-</div>
-<p>We will first start with a simpler animation. Teach parameterized animations, just change brightness.</p>
-<p>Then we will describe how the same way we parameterized with respect to time, we can parameterize with respect to position.</p>
-<p>Lastly, we will introduce a couple of convenience functions.</p>
+<video src="/images/behindthescenes/pretty_device.mp4" muted autoplay playsinline loop>
+</video>
+<p>There are two ways such a pattern can be animated on a given device or screen. The first approach is to just draw every single frame by hand, save that large collection of images, and display them one by one in a rapid succession. Frequently, this is the only possible way. For instance, in an animated movie, the majority of the frames are drawn by an artist, even if they use modern computer graphics technologies to automate some of their work. This method requires a lot of manual work, and a lot of computer memory to store the artwork.</p>
+<p>However, there is another type of art, called <em>generative art</em>, which does not have such taxing requirements. It does obey different constraints, and it requires a particular mindset, but its beauty comes from the fact that you tell a computer how to create art on its own, instead drawing the art yourself. The creative element moves from your hands and eyes, to deeper into your imagination, and it depends on your skill to instruct and teach a computer to do something. We will explore this type of art here. We will learn how to command a computer (the SpinWheel) to draw patterns of color that evolve in time. Along the way we might even learn a bit about how to write programs by accident.</p>
+<!--TODO: some warning that you need to have done the quick start and have the Arduino software.-->
+<h2 id="timing">Timing</h2>
+<p>Our first goal, before we are able to make something as advanced as the rainbow pattern above, would be to simply make our device blink.</p>
+<!--VIDEO: Blinking animation.-->
+<p><code>blinking animation video goes here</code></p>
+<p>The first thing we need to consider is how we time the frames of our animation. Thankfully our device has a built-in timer that can measure milliseconds (thousands of a second). One of the first things we will need to do in our generative art program, would be to ask for the time and save it for future calculations. The necessary command that we need to write looks like</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">int</span> time = millis();</span></code></pre></div>
+<p>Here, <code>millis()</code> is the <span class="footnote">command that reads the number of milliseconds since the device has started. <span> This command, together with many other useful commands comes built into the software we are using. We will later even learn how to make commands of our own. </span></span> The rest of the small piece code depicted above ensures that the… <!--TODO: Talk about variables--> <!--FIGURE: An image showing the type and name on the lhs, and the expression on the rhs, stressing the rigidity of this syntax.--> <code>talk about variables and have a figure about them</code></p>
+<p>The entirety of our animation will depend on the number stored in this <code>time</code> variable. Based on that number, another piece of code will decide when to shine red or green, when to be illuminating brightly or showing subdued colors, when to alternate hues from one LED to the other, and in this particular case, simply when to blink.</p>
+<h3 id="repeating-patterns-and-division-with-remainder">Repeating patterns and division with remainder</h3>
+<p>What follows is the most crucial concepts in the construction of our animations. If we want our animations to repeat, we will need to turn this ever-growing counter <code>time</code>, into a number that <em>wraps around</em>. For instance, if we want our animation to repeat every 2500 milliseconds (2.5 seconds), then the number on which the animation depends, should itself repeat in the same manner.</p>
+<p>The simplest way to do that is to subdivide the number of milliseconds into equal intervals, and see how many milliseconds have passed since the start of the current interval.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">int</span> time_repeating = time % <span class="dv">2500</span>;</span></code></pre></div>
+<!--VIDEO: Video that shows the difference between time and time_repeating-->
+<p><code>add a video</code> <!--TODO: More explanations about what this division with remainder is--></p>
+<h3 id="a-picture-that-depends-on-time">A picture that depends on time</h3>
+<p>Finally, we have all that we need.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">int</span> time = millis();</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="dt">int</span> time_repeating = time % <span class="dv">2500</span>;</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="dt">int</span> brightness = time_repeating / <span class="dv">10</span>;</span>
+<span id="cb3-4"><a href="#cb3-4"></a>SpinWheel.setSmallLEDsUniform(brightness, brightness, brightness);</span></code></pre></div>
+<!--TODO: Finish the code, add a simulator-->
+<p><code>finish the code and add a simulator</code></p>
+<h2 id="more-complicated-patterns">More complicated patterns</h2>
+<p>Here are some built-in tools to consider:</p>
+<!--TODO: Write the code for all these examples-->
+<ul>
+<li>Rainbow color based on a number</li>
+<li>Different brightness patterns based on a number (triangular wave, parabolic wave)</li>
+</ul>
+<h3 id="non-uniform-patterns">Non-uniform patterns</h3>
+<p>There are a few built-in functions for non-uniform patterns. Explain them here.</p>
+<h3 id="accessing-separate-leds">Accessing separate LEDs</h3>
+<p>Kinda like the thing used in the step counter</p>
+<p>Changing the color ever so slightly between neighboring LEDs. Do it by hand and then do it with a loop. Add a warning that this is very advanced stuff.</p>
+<!--TODO: further reading-->
+<p><code>links to dancing companion if we want to see how to incorporate not only time, but also sensor readings in our generative art</code></p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
 data-isso-require-author="true"
