@@ -81,6 +81,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </style>
   <link rel="stylesheet" href="/custom.css" />
   <link rel="stylesheet" href="/custom_book.css" />
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -112,6 +113,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">Animations and patterns</h1>
 </header>
 <main>
+<link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
+<script src='/simspinwheel/simspinwheel.js'></script>
 <p>To create an animation or a video, we need a rapid sequence of still images, rapid enough that it looks like a smoothly changing pattern to our yes. This is true both for the computer screen playing a video and for the SpinWheel lights, changing their light patterns. For example, this is a short repeating animation of a rainbow pattern playing on the LEDs.</p>
 <video src="/images/behindthescenes/pretty_device.mp4" muted autoplay playsinline loop>
 </video>
@@ -120,26 +123,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!--TODO: some warning that you need to have done the quick start and have the Arduino software.-->
 <h2 id="timing">Timing</h2>
 <p>Our first goal, before we are able to make something as advanced as the rainbow pattern above, would be to simply make our device blink.</p>
-<!--VIDEO: Blinking animation.-->
-<p><code>blinking animation video goes here</code></p>
+<video src="/images/bookpics/simple_blink.mp4" muted autoplay playsinline loop>
+</video>
 <p>The first thing we need to consider is how we time the frames of our animation. Thankfully our device has a built-in timer that can measure milliseconds (thousands of a second). One of the first things we will need to do in our generative art program, would be to ask for the time and save it for future calculations. The necessary command that we need to write looks like</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">int</span> time = millis();</span></code></pre></div>
-<p>Here, <code>millis()</code> is the <span class="footnote">command that reads the number of milliseconds since the device has started. <span> This command, together with many other useful commands comes built into the software we are using. We will later even learn how to make commands of our own. </span></span> The rest of the small piece code depicted above ensures that the… <!--TODO: Talk about variables--> <!--FIGURE: An image showing the type and name on the lhs, and the expression on the rhs, stressing the rigidity of this syntax.--> <code>talk about variables and have a figure about them</code></p>
-<p>The entirety of our animation will depend on the number stored in this <code>time</code> variable. Based on that number, another piece of code will decide when to shine red or green, when to be illuminating brightly or showing subdued colors, when to alternate hues from one LED to the other, and in this particular case, simply when to blink.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">int</span> t = millis();</span></code></pre></div>
+<p>Here, <code>millis()</code> is the <span class="footnote">command that reads the number of milliseconds since the device has started. <span> This command, together with many other useful commands comes built into the software we are using. We will later even learn how to make commands of our own. </span></span> The rest of the small piece code depicted above ensures that the number of milliseconds given by <code>millis()</code> is stored somewhere: in the variable we have named <code>t</code> (you can use more descriptive names if you wish). We also had to specify the type of the variable (<code>int</code> as in “integer”) because otherwise our computer will get confused.</p>
+<!--FIGURE: An image showing the type and name on the lhs, and the expression on the rhs, stressing the rigidity of this syntax.-->
+<p>The entirety of our animation will depend on the number stored in this <code>time</code> variable. Based on that number, another piece of code can decide when to shine a given color, when to be illuminating brightly or showing subdued colors, when to alternate hues from one LED to the other, and in this particular case, simply when to blink.</p>
 <h3 id="repeating-patterns-and-division-with-remainder">Repeating patterns and division with remainder</h3>
 <p>What follows is the most crucial concepts in the construction of our animations. If we want our animations to repeat, we will need to turn this ever-growing counter <code>time</code>, into a number that <em>wraps around</em>. For instance, if we want our animation to repeat every 2500 milliseconds (2.5 seconds), then the number on which the animation depends, should itself repeat in the same manner.</p>
-<p>The simplest way to do that is to subdivide the number of milliseconds into equal intervals, and see how many milliseconds have passed since the start of the current interval.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">int</span> time_repeating = time % <span class="dv">2500</span>;</span></code></pre></div>
-<!--VIDEO: Video that shows the difference between time and time_repeating-->
-<p><code>add a video</code> <!--TODO: More explanations about what this division with remainder is--></p>
+<p>The simplest way to do that is to subdivide the number of milliseconds into equal intervals, and see how many milliseconds have passed since the start of the current interval. We can do that by performing division with remainder. For example, if 5600 milliseconds have passed since the deviced was powered, then two full intervals of 2500 milliseconds have passed and we are 600 milliseconds into the third interval:</p>
+<p><span class="math display">\[5600 = 2\times2500 + 600.\]</span></p>
+<p>We can also consider different length intervals, but for now we will stick to 2.5 seconds as it is short enough for us to be able to see the animation we create without waiting too much, and long enough that our eyes can capture how things change during this interval.</p>
+<p>Lastly, we need to find how to tell the computer that we want it to compute a division with reminder for us. Thankfully, we can find in our dictionary of programming languages that the notation <code>a % b</code> is <span class="footnote">frequently used<span>Programmers have the bad habbit of taking established symbols like the percentage sign and using it for unrelated conceps, like its use here for division with remainder.</span></span> to mean “find the reminder of dividing <code>a</code> by <code>b</code>”. With all this knowledge, we now know how to store a new variable <code>t_repeat</code> which measures time in repeating intervals of (for example) 2500 milliseconds.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">int</span> t_repeat = t % <span class="dv">2500</span>;</span></code></pre></div>
+<video src="/images/bookpics/time_remainder.mp4" muted autoplay playsinline loop>
+</video>
+<!--TODO: More explanations about what this division with remainder is-->
 <h3 id="a-picture-that-depends-on-time">A picture that depends on time</h3>
-<p>Finally, we have all that we need.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">int</span> time = millis();</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="dt">int</span> time_repeating = time % <span class="dv">2500</span>;</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="dt">int</span> brightness = time_repeating / <span class="dv">10</span>;</span>
-<span id="cb3-4"><a href="#cb3-4"></a>SpinWheel.setSmallLEDsUniform(brightness, brightness, brightness);</span></code></pre></div>
-<!--TODO: Finish the code, add a simulator-->
-<p><code>finish the code and add a simulator</code></p>
+<p>Finally, we have all that we need to create our first animation. We will use the timing variable we have created <code>t_repeat</code>, and based on its value we will calculating a brightness value <code>b</code>. We will use this brightness variable to set all of the large LEDs (and each of their red, green, and blue colors) to the same time-dependent value. We had to divide <code>t_repeat</code>, because otherwise <code>b</code> will go beyond <code>255</code>, which is the maximal permitted brightness value for our software. You can see the full code in the simulator below, or you can find it in the Arduino software by navigating to <code>Examples → Animations_and_Patterns → Simple_Blink</code>. We also have a <a href="/codedoc/examples/Animations_and_Patterns/Simple_Blink/Simple_Blink.ino.html">webpage with detailed explanation of the code</a> if you prefer to copy it from there.</p>
+<div class="ssw-codecontent" data-markdown="0">
+<pre class="ssw-codeblock">
+void loop() {
+</pre>
+<textarea class="ssw-codeblock">
+  int t = millis();
+  int t_repeat = t % 2500;
+  int b = t_repeat / 10;
+  SpinWheel.setLargeLEDsUniform(b, b, b);
+  SpinWheel.drawFrame();
+</textarea>
+<pre class="ssw-codeblock">
+}
+</pre>
+</div>
 <h2 id="more-complicated-patterns">More complicated patterns</h2>
 <p>Here are some built-in tools to consider:</p>
 <!--TODO: Write the code for all these examples-->
