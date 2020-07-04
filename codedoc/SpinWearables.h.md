@@ -323,6 +323,7 @@ that changes the current animation.
         attachInterrupt(digitalPinToInterrupt(7), cycleAnimationRoutine, FALLING);
       }
       clearAllLEDs();
+      setBrightness(20);
       drawFrame();
     }
 
@@ -541,6 +542,10 @@ signal is preserved.
 </div>
 <div class="code">
 ```cpp
+    void setBrightness(uint8_t b) {
+      largeLEDs.setBrightness(b);
+    }
+
     void setSmallLEDsRainbow(uint8_t angle) {
       for (int i=0; i<12; i++) {
         setSmallLED(i, colorWheel(angle+i*ONETWELFTH));

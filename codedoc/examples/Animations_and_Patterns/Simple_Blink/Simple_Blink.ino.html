@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title>BiologyOfSight_2_persistence_of_vision.ino</title>
+  <title>Simple_Blink.ino</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -112,41 +112,57 @@ video {
 </head>
 <body>
 <div class="flex-container">
-<section id="biology-of-sight-persistence-of-vision" class="wide-text">
-<h1>Biology of Sight: Persistence of Vision</h1>
-<p>Rapidly switch between two colors and observe how the human eye can be too slow to distinguish them.</p>
+<section id="a-simple-blink-animation-using-a-timer" class="wide-text">
+<h1>A Simple Blink Animation Using a Timer</h1>
+<p>In our <a href="https://spinwearables.com/animation/">animations and patterns</a> lesson we describe how an animation can be created by instructing a computer to make a particular drawing dependent on a single number, the current time. This is a small example doing exactly that: We read the current time, divide it in intervals, and depending on the time since the start of the last interval, we change the brightness of the LEDs. <video src="./simple_blink.mp4" muted="" autoplay="" playsinline="" loop=""></video></p>
 </section>
 <div class="side-text">
 
 </div>
 <div class="code">
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>  SpinWheel.begin();</span>
-<span id="cb1-8"><a href="#cb1-8"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"></code></pre></div>
 </div>
 <div class="side-text">
-<p>CHANGE THIS VALUE! EXPERIMENT!</p>
+<p>Most of our code examples start with these <code>include</code> statements, as they tell the computer that there is a set of coding tools related to the SpinWheel that we will want to use.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">int</span> delay_time_in_milliseconds = <span class="dv">500</span>;</span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="dt">void</span> loop() {</span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="co">// Show red...</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
-<span id="cb2-6"><a href="#cb2-6"></a>  SpinWheel.drawFrame();</span>
-<span id="cb2-7"><a href="#cb2-7"></a>  <span class="co">// Wait...</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>  delay(delay_time_in_milliseconds);</span>
-<span id="cb2-9"><a href="#cb2-9"></a>  <span class="co">// Show blue...</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>);</span>
-<span id="cb2-11"><a href="#cb2-11"></a>  SpinWheel.drawFrame();</span>
-<span id="cb2-12"><a href="#cb2-12"></a>  <span class="co">// Wait...</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a>  delay(delay_time_in_milliseconds);  </span>
-<span id="cb2-14"><a href="#cb2-14"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>The instructions we write in the <code>setup</code> block are executed once when the SpinWheel device powers on. We run one single instruction called <code>SpinWheel.begin()</code> which prepares all the LEDs to accept new colors.</p>
+</div>
+<div class="code">
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">void</span> setup() {</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  SpinWheel.begin();</span>
+<span id="cb3-3"><a href="#cb3-3"></a>}</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>The instructions in the <code>loop</code> block are executed repeatedly “in a loop”. This is what lets us smoothly update the brightness of the LEDs and make a simple animation.</p>
+</div>
+<div class="code">
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">void</span> loop() {</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>First we store the current time in the variable <code>t</code>. The function <code>millis()</code> gives us that time.</p>
+</div>
+<div class="code">
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a>  <span class="dt">int</span> t = millis();</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>Then we divide the time in equal intervals of length 2.5 seconds (2500 milliseconds). By performin division with remainder and storing only the remainder, we find the time since the last interval has started. In this computer language <code>a / b</code> means “divide a by b”, while <code>a % b</code> means “find the remainder after dividing a by b”. We store this time in <code>t_repeating</code>.</p>
+</div>
+<div class="code">
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a>  <span class="dt">int</span> t_repeating = t % <span class="dv">2500</span>;</span></code></pre></div>
+</div>
+<div class="side-text">
+<p><code>t_repeating</code> will now smoothly go from 0 to 2500, and then repeat. We want to turn this number into a brightness, but</p>
+</div>
+<div class="code">
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="dt">int</span> b = t_repeating / <span class="dv">10</span>;</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  SpinWheel.setLargeLEDsUniform(b, b, b);</span>
+<span id="cb7-3"><a href="#cb7-3"></a>  SpinWheel.drawFrame();</span>
+<span id="cb7-4"><a href="#cb7-4"></a>}</span></code></pre></div>
 </div>
 </div>
 </body>
