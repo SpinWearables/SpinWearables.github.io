@@ -13,9 +13,10 @@ render_firmwaresource: register_submodule_updates
 	rm -rf codedoc
 	mkdir codedoc
 	cp -r ./firmwaresource/* codedoc/
-local_test_server: render_websitesource render_firmwaresource
+render: render_websitesource render_firmwaresource
+local_test_server: render
 	python3 -m http.server
-publish: render_websitesource
+publish: render
 	git add .
 	git commit -m "Complete render of the entire website."
 	git push
