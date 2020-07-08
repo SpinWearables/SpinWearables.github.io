@@ -12,8 +12,72 @@
   <meta property="og:image" content="https://spinwearables.com/hanging.jpg" />
   <link rel="image_src" href="https://spinwearables.com/hanging.jpg" />
   <meta name="keywords" content="dancing, kinematics, color, light, programming" />
-  <title>Dancing Companion</title>
+  <title>Dancing with Color</title>
   <style>
+  </style>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="/custom.css" />
   <link rel="stylesheet" href="/custom_book.css" />
@@ -46,7 +110,7 @@
 <a href="/book">The Field Guide</a>
 </div>
 <img src="/images/banners/dancer_color.png">
-<h1 class="title">Dancing Companion</h1>
+<h1 class="title">Dancing with Color</h1>
 </header>
 <main>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
@@ -175,16 +239,210 @@ void loop() {
 <!--TODO: Find out licence for video and upload it -->
 <!--TODO: Find videos that describe these different turns -->
 <p>The answer is yes! There are many different ways we can describe all types of different dances! Mathematically, we could say that there are many different coordinate systems to describe motion. A dancer turning is a type of rotational motion. Instead of describing each point by drawing three separate lines, we could think of this motion in terms of points along a circle. This system is called polar coordinates.</p>
-<p>In this coordinate system, we can represent points on a circle, first by describing how large the circle is, by its radius, r. Then we express how far to go along the circular path by some angle, theta. If a dancer is making small tight turns, like chaînés turns, r will be small. If a dancer is making a wide turn, an attitude or a fouetté, r would be bigger! The angle in this coordinate system describes how far along the dancer is in their turn. At the start of the turn, the angle would be small. As the turn continued, the angle would get larger.</p>
-<p>With this new system, we can describe points in space (or in a turn!) as (r, theta) instead of (x,y,z). In this animation, click anywhere in space to see how we could move there using this new coordinate system.</p>
-<!--TODO: Animation -->
-<p>Animation: Very similar to 2, but move to a point in space using a polar system. Trace out to r, then sweep to an angle theta, making an arc. Leave the colorful path there until another point is selected</p>
-<!--TODO: Picture or gif of a dancer turning that traces out the polar angle theta -->
-<p>To see this coordinate system in action, upload this sketch to SpinWheel.</p>
-<!--TODO: Have a program where the spinwheel responds to rotational motion -->
+<div class="further-reading">
+<p>Polar coordinates are useful to describe points along a circle more easily than in Cartesian coordinates, but knowing more about them isn’t important for the rest of this lesson. If you are interested in diving into this idea a bit more deeply, then check out our <a href="/rotation">rotation lesson</a>.</p>
+</div>
+<p>There are special sensors in your SpinWheel, called gyroscopes, that allow it to detect rotational motion. We can use the output from these sensors to have the SpinWheel respond to spinning! To begin, we can start with a simpler case and program the SpinWheel to light up when it detects rotation around one axis.</p>
+<div class="further-reading">
+<p>To learn more about modifying the SpinWheel’s LED display with the output from the SpinWheel’s motion sensors, check out the <a href="/stepcounter">“Step Counter” activity</a>. This lesson will teach you to access the output from the motion sensors, monitor it on your computer, and use this to turn your SpinWheel into a step counter.</p>
+</div>
+<p>In this case, we’re measuring the rotation around the SpinWhee’s x-axis, which is stored in the variable SpinWheel.gx. As the sensor is very sensitive, we only want to change color if there is sufficient rotation. In this case, we will only have the color change if absolute value of the rotation is greater than 1.</p>
+<!--TODO: Maybe only choose one or two of these to be in the lesson and have the rest be elsewhere; Add more context/explanation/better commenting -->
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  SpinWheel.begin();</span>
+<span id="cb1-7"><a href="#cb1-7"></a>}</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="co">// Define a variable that will store whether or not the SpinWheel is spinning.</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="dt">int</span> spinning = <span class="dv">0</span>; </span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  SpinWheel.readIMU();</span>
+<span id="cb1-15"><a href="#cb1-15"></a>  <span class="co">// If the x rotation (gx) is big enough, then </span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  <span class="co">// turn on the LEDs</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) {</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    spinning = <span class="dv">255</span>;</span>
+<span id="cb1-19"><a href="#cb1-19"></a>  }</span>
+<span id="cb1-20"><a href="#cb1-20"></a></span>
+<span id="cb1-21"><a href="#cb1-21"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, spinning, spinning);</span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="co">// Make the SpinWheel show the registered color.</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a>  SpinWheel.drawFrame();</span>
+<span id="cb1-24"><a href="#cb1-24"></a> }</span></code></pre></div>
+<p>One simple modification to this script that we can make is to have the LEDs change color based on the direction of rotation. In the script below, the LEDs light up green up when the device is spun in one direction, and blue when spun in the other direction. If you prefer other colors, then you can modify the code below to change the colors.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>  SpinWheel.begin();</span>
+<span id="cb2-7"><a href="#cb2-7"></a>}</span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="dt">int</span> pos_spin = <span class="dv">0</span>;</span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="dt">int</span> neg_spin = <span class="dv">0</span>;</span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="dt">void</span> loop() {</span>
+<span id="cb2-13"><a href="#cb2-13"></a>  SpinWheel.readIMU();</span>
+<span id="cb2-14"><a href="#cb2-14"></a>  <span class="co">// If the x rotation (gx) is big enough, then </span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>  <span class="co">// change the color of the big LEDs based on the</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>  <span class="co">// direction of the spin</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) {</span>
+<span id="cb2-18"><a href="#cb2-18"></a>    pos_spin = <span class="dv">255</span>;</span>
+<span id="cb2-19"><a href="#cb2-19"></a>    neg_spin = <span class="dv">0</span>;</span>
+<span id="cb2-20"><a href="#cb2-20"></a>  }</span>
+<span id="cb2-21"><a href="#cb2-21"></a>  <span class="cf">else</span> <span class="cf">if</span> (SpinWheel.gx &lt; -<span class="dv">1</span>) {</span>
+<span id="cb2-22"><a href="#cb2-22"></a>    neg_spin = <span class="dv">255</span>;</span>
+<span id="cb2-23"><a href="#cb2-23"></a>    pos_spin = <span class="dv">0</span>;</span>
+<span id="cb2-24"><a href="#cb2-24"></a>  }</span>
+<span id="cb2-25"><a href="#cb2-25"></a>  <span class="cf">else</span> {</span>
+<span id="cb2-26"><a href="#cb2-26"></a>    pos_spin = <span class="dv">0</span>;</span>
+<span id="cb2-27"><a href="#cb2-27"></a>    neg_spin = <span class="dv">0</span>;</span>
+<span id="cb2-28"><a href="#cb2-28"></a>  }</span>
+<span id="cb2-29"><a href="#cb2-29"></a>  <span class="co">// If gz is positive, set the big LEDs to light up green</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a>  <span class="co">// If gz is negative, set the big LEDs to light up blue</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, pos_spin, neg_spin);</span>
+<span id="cb2-32"><a href="#cb2-32"></a>  <span class="co">// Make the SpinWheel show the registered color.</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a>  SpinWheel.drawFrame();</span>
+<span id="cb2-34"><a href="#cb2-34"></a> }</span></code></pre></div>
+<p>It is also possible to measure and change the SpinWheel’s LEDs color based on rotation in 3D space. In the sketch below, you can the red, green, and blue components of the LEDs to respond to the rotation around the x, y, and z axes. We also have the small LEDs and not only the large LEDs light up in response to the SpinWheel’s motion.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  SpinWheel.begin();</span>
+<span id="cb3-7"><a href="#cb3-7"></a>}</span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="dt">int</span> red = <span class="dv">0</span>;</span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="dt">int</span> green = <span class="dv">0</span>;</span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="dt">int</span> blue = <span class="dv">0</span>;</span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="dt">void</span> loop() {</span>
+<span id="cb3-14"><a href="#cb3-14"></a>  SpinWheel.readIMU();</span>
+<span id="cb3-15"><a href="#cb3-15"></a>  <span class="co">// If the rotation in the x direction is big enough,</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>  <span class="co">// turn the red LED of each big LED on.</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) {</span>
+<span id="cb3-18"><a href="#cb3-18"></a>    red = <span class="dv">255</span>;</span>
+<span id="cb3-19"><a href="#cb3-19"></a>  }</span>
+<span id="cb3-20"><a href="#cb3-20"></a>  <span class="co">// If the rotation in the y direction is big enough,</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a>  <span class="co">// turn the green LED of each big LED on.</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a>  <span class="cf">if</span> (abs(SpinWheel.gy) &gt; <span class="dv">1</span>) {</span>
+<span id="cb3-23"><a href="#cb3-23"></a>    green = <span class="dv">255</span>;</span>
+<span id="cb3-24"><a href="#cb3-24"></a>  }</span>
+<span id="cb3-25"><a href="#cb3-25"></a>  <span class="co">// If the rotation in the z direction is big enough,</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a>  <span class="co">// turn the blue LED of each big LED on.</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a>  <span class="cf">if</span> (abs(SpinWheel.gz) &gt; <span class="dv">1</span>)  {</span>
+<span id="cb3-28"><a href="#cb3-28"></a>    blue = <span class="dv">255</span>;</span>
+<span id="cb3-29"><a href="#cb3-29"></a>  }</span>
+<span id="cb3-30"><a href="#cb3-30"></a>  <span class="co">// If the rotation in all directions is small enough,</span></span>
+<span id="cb3-31"><a href="#cb3-31"></a>  <span class="co">// turn the big LEDs off.</span></span>
+<span id="cb3-32"><a href="#cb3-32"></a>  <span class="cf">if</span> ((abs(SpinWheel.gx)+abs(SpinWheel.gy)+abs(SpinWheel.gz)) &lt; <span class="dv">1</span>) {</span>
+<span id="cb3-33"><a href="#cb3-33"></a>    red = <span class="dv">0</span>;</span>
+<span id="cb3-34"><a href="#cb3-34"></a>    green = <span class="dv">0</span>;</span>
+<span id="cb3-35"><a href="#cb3-35"></a>    blue = <span class="dv">0</span>;</span>
+<span id="cb3-36"><a href="#cb3-36"></a>  }</span>
+<span id="cb3-37"><a href="#cb3-37"></a>  </span>
+<span id="cb3-38"><a href="#cb3-38"></a>  SpinWheel.setLargeLEDsUniform(red, green, blue);</span>
+<span id="cb3-39"><a href="#cb3-39"></a>  SpinWheel.setSmallLEDsUniform(red, green, blue);</span>
+<span id="cb3-40"><a href="#cb3-40"></a></span>
+<span id="cb3-41"><a href="#cb3-41"></a>  <span class="co">// Make the SpinWheel show the registered color.</span></span>
+<span id="cb3-42"><a href="#cb3-42"></a>  SpinWheel.drawFrame();</span>
+<span id="cb3-43"><a href="#cb3-43"></a> }</span></code></pre></div>
+<p>One of the programs that came preloaded on your SpinWheel was an LED “snake” that spins around the device. We can modify this snake so that it only rotates when you rotate. You will program the SpinWheel LEDs to light up and turn and turn like a dancer. In this script, we’ll introduce a new function: <code>SpinWheel.setSmallLEDsPointer(angle, decay, red, green, and blue)</code>. Angle controls how big the snake is, decay the fade at the end of the snake, and red, green, and blue represent the red, green, and blue component of the small LEDs. The “snake” only moves when you rotate along the x axis. Can you modify the color of the snake? How long the snake is? Have it respond to other motion?</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  SpinWheel.begin();</span>
+<span id="cb4-7"><a href="#cb4-7"></a>}</span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="dt">uint8_t</span> angle; </span>
+<span id="cb4-10"><a href="#cb4-10"></a></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="dt">void</span> loop() {</span>
+<span id="cb4-12"><a href="#cb4-12"></a>  SpinWheel.readIMU();</span>
+<span id="cb4-13"><a href="#cb4-13"></a></span>
+<span id="cb4-14"><a href="#cb4-14"></a>  <span class="co">// if there is sufficient rotation, have the snake rotate</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) { </span>
+<span id="cb4-16"><a href="#cb4-16"></a>    angle = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;    </span>
+<span id="cb4-17"><a href="#cb4-17"></a>  }</span>
+<span id="cb4-18"><a href="#cb4-18"></a></span>
+<span id="cb4-19"><a href="#cb4-19"></a>  <span class="co">// this is a function that we created to display a &quot;snake&quot;</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>);</span>
+<span id="cb4-21"><a href="#cb4-21"></a>    </span>
+<span id="cb4-22"><a href="#cb4-22"></a>  <span class="co">// Make the SpinWheel show the registered color.</span></span>
+<span id="cb4-23"><a href="#cb4-23"></a>  SpinWheel.drawFrame();</span>
+<span id="cb4-24"><a href="#cb4-24"></a>}</span></code></pre></div>
 <h2 id="the-grand-finale-showing-off-all-its-colors">The Grand Finale: Showing Off All Its Colors</h2>
-<p>You’ve explored motion so far in this adventure. To see the SpinWheel “dance” and show off all its colors, upload this final sketch of the adventure. You will program the SpinWheel LEDs to light up and turn and turn like a dancer.</p>
-<!--TODO: Write a program where the outer edges of the SpinWheel lights up in a snake at different speeds -->
+<p>You’ve explored motion so far in this adventure. Using the above scripts as a starting point, you can modify the SpinWheel to respond to your motion however you see fit! We’ll leave you with one final more complicated sketch to inspire your imagination.</p>
+<!--TODO: Make the color wheel better, have the snake stop moving slowly, maybe step through what this does more -->
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">/// # Dancing with Color: Step x, have the color wheel change only </span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">// if there is rotation</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">//</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="dt">void</span> setup() {</span>
+<span id="cb5-9"><a href="#cb5-9"></a>  SpinWheel.begin();</span>
+<span id="cb5-10"><a href="#cb5-10"></a>}</span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="dt">int</span> offset = <span class="dv">0</span>;</span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="dt">int</span> colorChange;</span>
+<span id="cb5-14"><a href="#cb5-14"></a></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="co">// #### Color wheel</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co">// Frequently one needs to access the color (or hue) wheel. It is particularly</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co">// important when making rainbows for instance. This function takes a coordinate</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co">// on the circle (a single byte, 0 to 255, where 255 denotes a whole turn), and</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="co">// turns it into the corresponding hue.</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="co">// ![Depiction of the colorwheel.](./colorwheel.png)</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="dt">uint32_t</span> colorWheel(<span class="dt">int</span> wheelPos) {</span>
+<span id="cb5-22"><a href="#cb5-22"></a>  wheelPos = <span class="dv">255</span> - wheelPos;</span>
+<span id="cb5-23"><a href="#cb5-23"></a>  <span class="cf">if</span>(wheelPos &lt; <span class="dv">85</span>) {</span>
+<span id="cb5-24"><a href="#cb5-24"></a>    <span class="cf">return</span> color(<span class="dv">255</span> - wheelPos * <span class="dv">3</span>, <span class="dv">0</span>, wheelPos * <span class="dv">3</span>);</span>
+<span id="cb5-25"><a href="#cb5-25"></a>  }</span>
+<span id="cb5-26"><a href="#cb5-26"></a>  <span class="cf">if</span>(wheelPos &lt; <span class="dv">170</span>) {</span>
+<span id="cb5-27"><a href="#cb5-27"></a>    wheelPos -= <span class="dv">85</span>;</span>
+<span id="cb5-28"><a href="#cb5-28"></a>    <span class="cf">return</span> color(<span class="dv">0</span>, wheelPos * <span class="dv">3</span>, <span class="dv">255</span> - wheelPos * <span class="dv">3</span>);</span>
+<span id="cb5-29"><a href="#cb5-29"></a>  }</span>
+<span id="cb5-30"><a href="#cb5-30"></a>  wheelPos -= <span class="dv">170</span>;</span>
+<span id="cb5-31"><a href="#cb5-31"></a>  <span class="cf">return</span> color(wheelPos * <span class="dv">3</span>, <span class="dv">255</span> - wheelPos * <span class="dv">3</span>, <span class="dv">0</span>);</span>
+<span id="cb5-32"><a href="#cb5-32"></a>}</span>
+<span id="cb5-33"><a href="#cb5-33"></a></span>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="dt">uint8_t</span> angle;</span>
+<span id="cb5-35"><a href="#cb5-35"></a></span>
+<span id="cb5-36"><a href="#cb5-36"></a><span class="dt">void</span> loop() {</span>
+<span id="cb5-37"><a href="#cb5-37"></a>  SpinWheel.readIMU();</span>
+<span id="cb5-38"><a href="#cb5-38"></a>  <span class="co">// figure out how to get smoother color wheel so doesn&#39;t change when switch direction</span></span>
+<span id="cb5-39"><a href="#cb5-39"></a>  <span class="co">// if rotation is fast, add a step to the offset</span></span>
+<span id="cb5-40"><a href="#cb5-40"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) {</span>
+<span id="cb5-41"><a href="#cb5-41"></a>    offset = SpinWheel.gx*<span class="dv">100</span>; </span>
+<span id="cb5-42"><a href="#cb5-42"></a>    Serial.println(offset);</span>
+<span id="cb5-43"><a href="#cb5-43"></a>  }</span>
+<span id="cb5-44"><a href="#cb5-44"></a></span>
+<span id="cb5-45"><a href="#cb5-45"></a>  <span class="co">// make the rainbow in the large LEDs</span></span>
+<span id="cb5-46"><a href="#cb5-46"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {</span>
+<span id="cb5-47"><a href="#cb5-47"></a>    colorChange = offset+i*<span class="dv">255</span>/<span class="dv">4</span>;</span>
+<span id="cb5-48"><a href="#cb5-48"></a>    Serial.println(colorChange);</span>
+<span id="cb5-49"><a href="#cb5-49"></a>    SpinWheel.setLargeLED(i, colorWheel(colorChange));</span>
+<span id="cb5-50"><a href="#cb5-50"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>-i, colorWheel(colorChange));</span>
+<span id="cb5-51"><a href="#cb5-51"></a>  }</span>
+<span id="cb5-52"><a href="#cb5-52"></a></span>
+<span id="cb5-53"><a href="#cb5-53"></a></span>
+<span id="cb5-54"><a href="#cb5-54"></a>  <span class="co">// make a snake in the small LEDs</span></span>
+<span id="cb5-55"><a href="#cb5-55"></a>  <span class="co">// if there is sufficient rotation, have the snake rotate</span></span>
+<span id="cb5-56"><a href="#cb5-56"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) { </span>
+<span id="cb5-57"><a href="#cb5-57"></a>    angle = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;    </span>
+<span id="cb5-58"><a href="#cb5-58"></a>  }</span>
+<span id="cb5-59"><a href="#cb5-59"></a></span>
+<span id="cb5-60"><a href="#cb5-60"></a>  <span class="co">// this is a function that we created to display a &quot;snake&quot;</span></span>
+<span id="cb5-61"><a href="#cb5-61"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>);</span>
+<span id="cb5-62"><a href="#cb5-62"></a></span>
+<span id="cb5-63"><a href="#cb5-63"></a>  SpinWheel.drawFrame();</span>
+<span id="cb5-64"><a href="#cb5-64"></a>}</span></code></pre></div>
 <p>To see even more dances mathematically, you can watch Mariel Pettee’s, a physics graduate student who studies particle physics as well as physics and dance, AI-generated dances here: <!--TODO: insert Mariel's video here --></p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
