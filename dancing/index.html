@@ -237,8 +237,10 @@ void loop() {
 <h2 id="turning-rotational-motion">Turning: Rotational Motion</h2>
 <p>We’ve talked about moving through space in line, but now imagine a dancer’s feet doing turn after turn and their arms outstretched in different configurations. Can you picture how their arms and feet move through space in small tight turns, like chaînés turns, and wide turns, like an attitude or a fouetté? Watch this video from — to see dancing path represented:</p>
 <!--TODO: Find out licence for video and upload it -->
-<!--TODO: Find videos that describe these different turns -->
 <p>The answer is yes! There are many different ways we can describe all types of different dances! Mathematically, we could say that there are many different coordinate systems to describe motion. A dancer turning is a type of rotational motion. Instead of describing each point by drawing three separate lines, we could think of this motion in terms of points along a circle. This system is called polar coordinates.</p>
+<figure>
+<img src="/images/dance_turn.jpg" alt="" /><figcaption>Notice how in tight turns or wide turns, a dancers feet create different size circles through space. We coudl describe these circles using polar coordinates.</figcaption>
+</figure>
 <div class="further-reading">
 <p>Polar coordinates are useful to describe points along a circle more easily than in Cartesian coordinates, but knowing more about them isn’t important for the rest of this lesson. If you are interested in diving into this idea a bit more deeply, then check out our <a href="/rotation">rotation lesson</a>.</p>
 </div>
@@ -247,6 +249,9 @@ void loop() {
 <p>To learn more about modifying the SpinWheel’s LED display with the output from the SpinWheel’s motion sensors, check out the <a href="/stepcounter">“Step Counter” activity</a>. This lesson will teach you to access the output from the motion sensors, monitor it on your computer, and use this to turn your SpinWheel into a step counter.</p>
 </div>
 <p>In this case, we’re measuring the rotation around the SpinWhee’s x-axis, which is stored in the variable SpinWheel.gx. As the sensor is very sensitive, we only want to change color if there is sufficient rotation. In this case, we will only have the color change if absolute value of the rotation is greater than 1.</p>
+<figure>
+<img src="/images/dance_axis.jpg" alt="" /><figcaption>In this picture you can see the x and y axes of your SpinWheel.</figcaption>
+</figure>
 <!--TODO: Maybe only choose one or two of these to be in the lesson and have the rest be elsewhere; Add more context/explanation/better commenting -->
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>

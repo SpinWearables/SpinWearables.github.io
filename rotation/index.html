@@ -169,7 +169,7 @@ function myMove() {
       clearInterval(id);
     } else {
       pos++; 
-      elem.style.top = 195+ Math.sin(pos*Math.PI/180)*r*10 + 'px'; 
+      elem.style.top = 195- Math.sin(pos*Math.PI/180)*r*10 + 'px'; 
       elem.style.left = 195+ Math.cos(pos*Math.PI/180)*r*10 + 'px'; 
     }
   }
@@ -199,11 +199,11 @@ angButton.onclick = myMove;
 <figure>
 <img src="/images/merry_go_round.jpg" alt="" /><figcaption>Here’s a picture of this merry-go-round ride!</figcaption>
 </figure>
-<p>Answer: (Could we hide this in a dropdown box that you have to click to open?)</p>
+<!-- TODO: Maybe hide this in a dropdown box that you have to click to open? -->
 <p>Your angular displacement, angular velocity, and angular acceleration would stay the same on both rides. The two horses lie along the same radial line, so in polar coordinates, their <span class="math inline">\(\theta\)</span> coordinate would be the same, but <span class="math inline">\(r\)</span> would change. Since <span class="math inline">\(\theta\)</span> remains the same, both horses have equal angular displacements. For angular velocity and acceleration, every horse on the ride would have the same value. This is because the entire merry-go-round starts, moves, and stops together at the same rate.</p>
 <p>What would change between the two horses is your linear velocity. Switching to the yellow horse decreases your <span class="math inline">\(r\)</span> coordinate, and means you are traveling in a smaller circle. Just like for the ball on a string, when <span class="math inline">\(r\)</span> decreases, your linear velocity also decreases.</p>
 <p>How would your angular acceleration change as you ride on the merry-go-round?</p>
-<p>Answer: (Could we hide this in a dropdown box that you have to click to open?)</p>
+<!-- TODO: Maybe hide this in a dropdown box that you have to click to open? -->
 <p>When you first get on the merry-go-round, your angular velocity and angular acceration are both zero. Once the merry-go-round starts moving, your angular velocity increases until it reaches a constant velocity. During that time, your angular acceleration will describe this increase in angular velocity. However, once you reach the constant angular velocity of most of the merry-go-round ride, your angular velocity is no longer changing and so your angular acceleration is again zero. At the end of the ride, your angular velocity is going to decrease back to zero at a rate controlled by the angular acceleration. Then when once the merry-go-round has stopped moving, your angular velocity and acceleration are again zero.</p>
 <div class="further-reading">
 <p>To apply some of these concepts to the SpinWheel, go to <a href="/dancing">Dancing with Color</a> adventure.</p>

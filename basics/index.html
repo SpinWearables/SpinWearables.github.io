@@ -51,7 +51,7 @@
 <a id="TOCbutton" href="#TOC">Table of Contents</a>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#led-manipuation">LED Manipuation</a>
+<li><a href="#led-manipulation">LED Manipulation</a>
 <ul>
 <li><a href="#turn-on-all-the-large-leds-with-setlargeledsuniform">Turn on all the Large LEDs with <code>setLargeLEDsUniform</code></a></li>
 <li><a href="#turn-on-all-the-small-leds-with-setsmallledsuniform">Turn on all the Small LEDs with <code>setSmallLEDsUniform</code></a></li>
@@ -73,7 +73,7 @@
 <p>This document lists some of the most important functions available with the SpinWheel code library. With these functions you can detect motion and set the LEDs to different color patterns. If you have never programmed with Arduino before, be sure to read our <a href="/quickstart">quick start guide</a> and if necessary some of the <a href="/progpatterns">Computer Science 101 sections</a>. For more details you can consult the <a href="/codedoc/SpinWearables.h.html">annotated source code</a>, listing everything available in the library.</p>
 </div>
 <p>You can use the virtual SpinWheel simulator to test each of these functions. If a function involves the motion sensor, you can grab the virtual device with your mouse and shake it, simulating how the physical sensor would respond to real motion.</p>
-<h2 id="led-manipuation">LED Manipuation</h2>
+<h2 id="led-manipulation">LED Manipulation</h2>
 <p>There are a number of functions that let you manipulate the state of the LEDs, however, for the LEDs to actually respond to these manipulations, you also need to call <code>SpinWheel.drawFrame()</code> when you are done. That way you can make multiple modifications, preparing the final image, without the intermediate unfinished images showing up.</p>
 <p>If you want to reset the image, you can call <code>SpinWheel.clearAllLEDs()</code>, which will set all LEDs to be dark, deleting any color information that they were previously set to.</p>
 <h3 id="turn-on-all-the-large-leds-with-setlargeledsuniform">Turn on all the Large LEDs with <code>setLargeLEDsUniform</code></h3>
@@ -172,7 +172,7 @@ void loop() {
 <h2 id="color-and-brightness-helpers">Color and Brightness Helpers</h2>
 <!--TODO: expand this section and implement as necessary-->
 <p>The <code>colorWheel</code> function turns a single number representing an angle into a color from the color wheel.</p>
-<p>The <code>triangularWave</code> and <code>parabolaWave</code> functions provide for a convenient periodic patterns, useful in animations.</p>
+<p>The <code>triangularWave</code> and <code>parabolaWave</code> functions provide for convenient periodic patterns, useful in animations.</p>
 <p>The <code>faston_slowoff</code> function can be used to pleasantly filter time-dependent measurements. For instance, it can be used to rapidly brighten an LED when a motion is detected and then slowly let the light decay after the motion stops.</p>
 <h2 id="motion-sensing-and-compass">Motion Sensing and Compass</h2>
 <!--TODO: expand this section and implement as necessary-->
