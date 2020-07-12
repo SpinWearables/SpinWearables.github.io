@@ -55,6 +55,7 @@ class SpinWheelClass {
   }
  
   setLargeLEDsUniform(r,g,b) {
+    if (typeof g === 'undefined') {b = r & 0x0000FF; g = (r>>8) & 0x0000FF; r = (r>>16) & 0x0000FF;}
     for (let i = 0; i<this._ssw_lLEDdiv.length; i++) {
       this._ssw_lLEDarray[3*i  ] = r;
       this._ssw_lLEDarray[3*i+1] = g;
@@ -63,6 +64,7 @@ class SpinWheelClass {
   }
 
   setSmallLEDsUniform(r,g,b) {
+    if (typeof g === 'undefined') {b = r & 0x0000FF; g = (r>>8) & 0x0000FF; r = (r>>16) & 0x0000FF;}
     for (let i = 0; i<this._ssw_sLEDdiv.length; i++) {
       this._ssw_sLEDarray[3*i  ] = r;
       this._ssw_sLEDarray[3*i+1] = g;
@@ -71,6 +73,7 @@ class SpinWheelClass {
   }
 
   setLargeLEDs(s,e,r,g,b) {
+    if (typeof g === 'undefined') {b = r & 0x0000FF; g = (r>>8) & 0x0000FF; r = (r>>16) & 0x0000FF;}
     for (let i = Math.max(s,0); i<Math.min(e,this._ssw_lLEDdiv.length); i++) {
       this._ssw_lLEDarray[3*i  ] = r;
       this._ssw_lLEDarray[3*i+1] = g;
@@ -79,6 +82,7 @@ class SpinWheelClass {
   }
 
   setSmallLEDs(s,e,r,g,b) {
+    if (typeof g === 'undefined') {b = r & 0x0000FF; g = (r>>8) & 0x0000FF; r = (r>>16) & 0x0000FF;}
     for (let i = Math.max(s,0); i<Math.min(e,this._ssw_sLEDdiv.length); i++) {
       this._ssw_sLEDarray[3*i  ] = r;
       this._ssw_sLEDarray[3*i+1] = g;
@@ -87,12 +91,14 @@ class SpinWheelClass {
   }
 
   setLargeLED(i, r,g,b) {
+    if (typeof g === 'undefined') {b = r & 0x0000FF; g = (r>>8) & 0x0000FF; r = (r>>16) & 0x0000FF;}
     this._ssw_lLEDarray[3*i  ] = r;
     this._ssw_lLEDarray[3*i+1] = g;
     this._ssw_lLEDarray[3*i+2] = b;
   }
 
   setSmallLED(i, r,g,b) {
+    if (typeof g === 'undefined') {b = r & 0x0000FF; g = (r>>8) & 0x0000FF; r = (r>>16) & 0x0000FF;}
     this._ssw_sLEDarray[3*i  ] = r;
     this._ssw_sLEDarray[3*i+1] = g;
     this._ssw_sLEDarray[3*i+2] = b;
@@ -104,6 +110,36 @@ class SpinWheelClass {
   }
 
   // TODO all of the set*** functions
+}
+
+function color(r, g, b) {
+  r %= 256;
+  g %= 256;
+  b %= 256;
+  return (r<<16)+(g<<8)+b;
+}
+
+function colorWheel(wheelPos) {
+  wheelPos %= 256;
+  wheelPos = 255 - wheelPos;
+  if(wheelPos < 85) {
+    return color(255 - wheelPos * 3, 0, wheelPos * 3);
+  }
+  if(wheelPos < 170) {
+    wheelPos -= 85;
+    return color(0, wheelPos * 3, 255 - wheelPos * 3);
+  }
+  wheelPos -= 170;
+  return color(wheelPos * 3, 255 - wheelPos * 3, 0);
+}
+
+function triangularWave(x) {
+  x %= 256;
+  if (x>0x7f) {
+    return (0xff-x)<<1;
+  } else {
+    return x<<1;
+  }
 }
 
 // Define mock serial instance
