@@ -398,56 +398,37 @@ void loop() {
 <span id="cb5-12"><a href="#cb5-12"></a><span class="dt">int</span> offset = <span class="dv">0</span>;</span>
 <span id="cb5-13"><a href="#cb5-13"></a><span class="dt">int</span> colorChange;</span>
 <span id="cb5-14"><a href="#cb5-14"></a></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="co">// #### Color wheel</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="co">// Frequently one needs to access the color (or hue) wheel. It is particularly</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="co">// important when making rainbows for instance. This function takes a coordinate</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co">// on the circle (a single byte, 0 to 255, where 255 denotes a whole turn), and</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="co">// turns it into the corresponding hue.</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="co">// ![Depiction of the colorwheel.](./colorwheel.png)</span></span>
-<span id="cb5-21"><a href="#cb5-21"></a><span class="dt">uint32_t</span> colorWheel(<span class="dt">int</span> wheelPos) {</span>
-<span id="cb5-22"><a href="#cb5-22"></a>  wheelPos = <span class="dv">255</span> - wheelPos;</span>
-<span id="cb5-23"><a href="#cb5-23"></a>  <span class="cf">if</span>(wheelPos &lt; <span class="dv">85</span>) {</span>
-<span id="cb5-24"><a href="#cb5-24"></a>    <span class="cf">return</span> color(<span class="dv">255</span> - wheelPos * <span class="dv">3</span>, <span class="dv">0</span>, wheelPos * <span class="dv">3</span>);</span>
-<span id="cb5-25"><a href="#cb5-25"></a>  }</span>
-<span id="cb5-26"><a href="#cb5-26"></a>  <span class="cf">if</span>(wheelPos &lt; <span class="dv">170</span>) {</span>
-<span id="cb5-27"><a href="#cb5-27"></a>    wheelPos -= <span class="dv">85</span>;</span>
-<span id="cb5-28"><a href="#cb5-28"></a>    <span class="cf">return</span> color(<span class="dv">0</span>, wheelPos * <span class="dv">3</span>, <span class="dv">255</span> - wheelPos * <span class="dv">3</span>);</span>
-<span id="cb5-29"><a href="#cb5-29"></a>  }</span>
-<span id="cb5-30"><a href="#cb5-30"></a>  wheelPos -= <span class="dv">170</span>;</span>
-<span id="cb5-31"><a href="#cb5-31"></a>  <span class="cf">return</span> color(wheelPos * <span class="dv">3</span>, <span class="dv">255</span> - wheelPos * <span class="dv">3</span>, <span class="dv">0</span>);</span>
-<span id="cb5-32"><a href="#cb5-32"></a>}</span>
+<span id="cb5-15"><a href="#cb5-15"></a></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="dt">uint8_t</span> angle;</span>
+<span id="cb5-17"><a href="#cb5-17"></a></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="dt">void</span> loop() {</span>
+<span id="cb5-19"><a href="#cb5-19"></a>  SpinWheel.readIMU();</span>
+<span id="cb5-20"><a href="#cb5-20"></a>  <span class="co">// if rotation is fast, add a step to the offset</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) {</span>
+<span id="cb5-22"><a href="#cb5-22"></a>    offset = SpinWheel.gx*<span class="dv">100</span>; </span>
+<span id="cb5-23"><a href="#cb5-23"></a>    Serial.println(offset);</span>
+<span id="cb5-24"><a href="#cb5-24"></a>  }</span>
+<span id="cb5-25"><a href="#cb5-25"></a></span>
+<span id="cb5-26"><a href="#cb5-26"></a>  <span class="co">// make the rainbow in the large LEDs</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {</span>
+<span id="cb5-28"><a href="#cb5-28"></a>    colorChange = offset+i*<span class="dv">255</span>/<span class="dv">4</span>;</span>
+<span id="cb5-29"><a href="#cb5-29"></a>    Serial.println(colorChange);</span>
+<span id="cb5-30"><a href="#cb5-30"></a>    SpinWheel.setLargeLED(i, colorWheel(colorChange));</span>
+<span id="cb5-31"><a href="#cb5-31"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>-i, colorWheel(colorChange));</span>
+<span id="cb5-32"><a href="#cb5-32"></a>  }</span>
 <span id="cb5-33"><a href="#cb5-33"></a></span>
-<span id="cb5-34"><a href="#cb5-34"></a><span class="dt">uint8_t</span> angle;</span>
-<span id="cb5-35"><a href="#cb5-35"></a></span>
-<span id="cb5-36"><a href="#cb5-36"></a><span class="dt">void</span> loop() {</span>
-<span id="cb5-37"><a href="#cb5-37"></a>  SpinWheel.readIMU();</span>
-<span id="cb5-38"><a href="#cb5-38"></a>  <span class="co">// figure out how to get smoother color wheel so doesn&#39;t change when switch direction</span></span>
-<span id="cb5-39"><a href="#cb5-39"></a>  <span class="co">// if rotation is fast, add a step to the offset</span></span>
-<span id="cb5-40"><a href="#cb5-40"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) {</span>
-<span id="cb5-41"><a href="#cb5-41"></a>    offset = SpinWheel.gx*<span class="dv">100</span>; </span>
-<span id="cb5-42"><a href="#cb5-42"></a>    Serial.println(offset);</span>
-<span id="cb5-43"><a href="#cb5-43"></a>  }</span>
-<span id="cb5-44"><a href="#cb5-44"></a></span>
-<span id="cb5-45"><a href="#cb5-45"></a>  <span class="co">// make the rainbow in the large LEDs</span></span>
-<span id="cb5-46"><a href="#cb5-46"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {</span>
-<span id="cb5-47"><a href="#cb5-47"></a>    colorChange = offset+i*<span class="dv">255</span>/<span class="dv">4</span>;</span>
-<span id="cb5-48"><a href="#cb5-48"></a>    Serial.println(colorChange);</span>
-<span id="cb5-49"><a href="#cb5-49"></a>    SpinWheel.setLargeLED(i, colorWheel(colorChange));</span>
-<span id="cb5-50"><a href="#cb5-50"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>-i, colorWheel(colorChange));</span>
-<span id="cb5-51"><a href="#cb5-51"></a>  }</span>
-<span id="cb5-52"><a href="#cb5-52"></a></span>
-<span id="cb5-53"><a href="#cb5-53"></a></span>
-<span id="cb5-54"><a href="#cb5-54"></a>  <span class="co">// make a snake in the small LEDs</span></span>
-<span id="cb5-55"><a href="#cb5-55"></a>  <span class="co">// if there is sufficient rotation, have the snake rotate</span></span>
-<span id="cb5-56"><a href="#cb5-56"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) { </span>
-<span id="cb5-57"><a href="#cb5-57"></a>    angle = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;    </span>
-<span id="cb5-58"><a href="#cb5-58"></a>  }</span>
-<span id="cb5-59"><a href="#cb5-59"></a></span>
-<span id="cb5-60"><a href="#cb5-60"></a>  <span class="co">// this is a function that we created to display a &quot;snake&quot;</span></span>
-<span id="cb5-61"><a href="#cb5-61"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>);</span>
-<span id="cb5-62"><a href="#cb5-62"></a></span>
-<span id="cb5-63"><a href="#cb5-63"></a>  SpinWheel.drawFrame();</span>
-<span id="cb5-64"><a href="#cb5-64"></a>}</span></code></pre></div>
+<span id="cb5-34"><a href="#cb5-34"></a></span>
+<span id="cb5-35"><a href="#cb5-35"></a>  <span class="co">// make a snake in the small LEDs</span></span>
+<span id="cb5-36"><a href="#cb5-36"></a>  <span class="co">// if there is sufficient rotation, have the snake rotate</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) { </span>
+<span id="cb5-38"><a href="#cb5-38"></a>    angle = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;    </span>
+<span id="cb5-39"><a href="#cb5-39"></a>  }</span>
+<span id="cb5-40"><a href="#cb5-40"></a></span>
+<span id="cb5-41"><a href="#cb5-41"></a>  <span class="co">// this is a function that we created to display a &quot;snake&quot;</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>);</span>
+<span id="cb5-43"><a href="#cb5-43"></a></span>
+<span id="cb5-44"><a href="#cb5-44"></a>  SpinWheel.drawFrame();</span>
+<span id="cb5-45"><a href="#cb5-45"></a>}</span></code></pre></div>
 <p>To see even more dances mathematically, you can watch Mariel Pettee’s, a physics graduate student who studies particle physics as well as physics and dance, AI-generated dances here: <!--TODO: insert Mariel's video here --></p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
