@@ -85,7 +85,8 @@ The total displacement, <span class="math inline">\(\vec{D}\)</span>, is the sum
 <p>Then we can write <span class="math display">\[\vec{D} = \vec{A}+\vec{B}+\vec{C}\]</span> and from the drawing we can see that <span class="math inline">\(\vec{D}\)</span>, the vector representing the final position, is the one connecting the starting point and the end destination. It is also the vector obtained by following one after the other each of the vectors representing the sequence of displacements. In other words, to add to vectors together, we simply put the start of the second vector where the first vector ends. Then the new vector, joining the start of the first vector and the end of the second vector, represents the sum, i.e. the total displacement.</p>
 <h3 id="velocity-vectors">Velocity Vectors</h3>
 <p>Motion, however, is not always described by a few discrete steps. Usually, motion is a smooth process in which the position of a point slowly and smoothly changes, very much unlike the abrupt discrete steps seen above.</p>
-<p>Vectors become even more useful here. They permit us to introduce the notion of <em>instantaneous velocity</em> (“instantaneous” is just a fancy word for “current”). This would be a vector, whose orientation points along the current direction of motion. This vector is longer if the position is changing faster (a longer vector represents a higher speed), or shorter if the position is changing slowly.</p>
+<p>Vectors become even more useful here. They permit us to neatly introduce the notion of <em>instantaneous velocity</em> (“instantaneous” is just a fancy word for “current”). This would be a vector whose orientation points along the current direction of motion. This vector is longer if the position is changing faster (a longer vector represents a higher speed), or shorter if the position is changing slowly.</p>
+<p>Below you are provided with an interactive visualization of the notion of velocity vector. You can pick the velocity by dragging the black dot with the cursor of your mouse. In the left circle, the velocity vector will be visualized. This would be the velocity with which the position (in blue) depicted in the right rectangle would be modified. Notice that when the orange velocity vector is small, then the blue position vector changes very slowly. Notice as well that the direction in which the position vector changes is governed by the direction of the velocity vector.</p>
 <style>
 #v_to_path {
   justify-content: center;
@@ -144,6 +145,25 @@ function canvas_arrow(context, fromx, fromy, tox, toy) {
   context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
 }
 
+function vcanvas_labels(ctx, vctx) {
+  vctx.font = '20px sans';
+  vctx.fillStyle = '#ff8510';
+  vctx.textAlign = 'center';
+  vctx.fillText('Velocity',100,120);
+  vctx.font = '14px sans';
+  vctx.fillText('drag the black circle',100,140);
+  vctx.fillText('to set the velocity',100,160);
+  ctx.font = '20px sans';
+  ctx.fillStyle = '#1772b4';
+  ctx.textAlign = 'center';
+  ctx.fillText('Position',100,120);
+  ctx.font = '14px sans';
+  ctx.fillText('determined by',100,140);
+  ctx.fillText('the velocity',100,160);
+}
+
+vcanvas_labels(v2p_ctx, v2p_vctx);
+
 function dragElementVel(elmnt, ctx, vctx) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   elmnt.onmousedown = dragMouseDown;
@@ -155,33 +175,38 @@ function dragElementVel(elmnt, ctx, vctx) {
   m_canvas.height = 200;
   var m_ctx = m_canvas.getContext('2d');
   
-  m_ctx.strokeStyle='lightgrey';
+  m_ctx.strokeStyle='rgb(139,185,218)';
+  ctx.lineCap="round";
+  vctx.lineCap="round";
+  ctx.lineWidth=2;
+  vctx.lineWidth=2;
   
   function drawStep() {
     var v1 = elmnt.offsetLeft-95;
     var v2 = elmnt.offsetTop-95;
     ipos1 += 0.05*v1;
     ipos2 += 0.05*v2;
-    if (0<=ipos1 && ipos1<200 && 0<=ipos2 && ipos2<200) {
-      m_ctx.lineTo(ipos1, ipos2);
-    } else {
-      ipos1 = (ipos1+200)%200;
-      ipos2 = (ipos2+200)%200;
-      m_ctx.moveTo(ipos1, ipos2);
-    }
+    //if (0<=ipos1 && ipos1<200 && 0<=ipos2 && ipos2<200) {
+    //  m_ctx.lineTo(ipos1, ipos2);
+    //} else {
+    //  ipos1 = (ipos1+200)%200;
+    //  ipos2 = (ipos2+200)%200;
+    //  m_ctx.moveTo(ipos1, ipos2);
+    //}
+    m_ctx.lineTo(ipos1, ipos2);
     m_ctx.stroke();
     ctx.clearRect(0,0,200,200);
     ctx.drawImage(m_canvas,0,0);
-    ctx.strokeStyle='black';
+    ctx.strokeStyle='#1772b4';
     ctx.beginPath();
     canvas_arrow(ctx,100,100,ipos1,ipos2);
     ctx.stroke()
-    ctx.strokeStyle='red';
+    ctx.strokeStyle='#ff8510';
     ctx.beginPath();
     canvas_arrow(ctx,ipos1,ipos2,ipos1+0.5*v1,ipos2+0.5*v2);
     ctx.stroke();
     vctx.clearRect(0,0,200,200);
-    vctx.strokeStyle='red';
+    vctx.strokeStyle='#ff8510';
     vctx.beginPath();
     canvas_arrow(vctx,100,100,100+v1,100+v2);
     vctx.stroke();
@@ -222,13 +247,14 @@ function dragElementVel(elmnt, ctx, vctx) {
     ipos2 = 100;
     document.onmouseup = null;
     document.onmousemove = null;
+    vcanvas_labels(v2p_ctx, v2p_vctx);
   }
 }
 
 dragElementVel(v2p_vhandle, v2p_ctx, v2p_vctx);
 </script>
 <h3 id="acceleration-vectors">Acceleration Vectors</h3>
-<p>In addition to the velocity, we also care about the acceleration, or change in velocity over time. This next drawing allows you to manipulate the acceleration in the farthest left circle and see the corresponding change in velocity in the center. The acceleration (green), velocity (red) and total displacement (black) are shown on the right. Can you use the acceleration vectors to make a velocity of zero? Can you make the movement path (shown in gray) form a circle?</p>
+<p>In many circumstances it is not easy to keep a steady velocity (and hence a steadily changing position). To study such cases, we need to define a new vector, the <em>acceleration</em> vector, which describes how the velocity vector changes. In the same way in which the velocity vector’s direction shows the direction in which the position changes, the acceleration vector’s direction shows how the current velocity will change. And the bigger the acceleration vector is, the more rapidly the velocity vector changes. In the visualization below you can see how changing the acceleration vector (by dragging the black circle) will induce a change in the velocity vector, which in turn will change the velocity.</p>
 <style>
 #a_to_path {
   justify-content: center;
@@ -276,6 +302,32 @@ const a2p_ctx = a_to_path.getElementsByClassName('trajectory')[0].getContext('2d
 const a2p_vctx = a_to_path.getElementsByClassName('velocity')[0].getContext('2d');
 const a2p_actx = a_to_path.getElementsByClassName('acceleration')[0].getContext('2d');
 
+function acanvas_labels(ctx, vctx, actx) {
+  actx.font = '20px sans';
+  actx.fillStyle = '#e63928';
+  actx.textAlign = 'center';
+  actx.fillText('Acceleration',100,120);
+  actx.font = '14px sans';
+  actx.fillText('drag the black circle',100,140);
+  actx.fillText('to set the acceleration',100,160);
+  vctx.font = '20px sans';
+  vctx.fillStyle = '#ff8510';
+  vctx.textAlign = 'center';
+  vctx.fillText('Velocity',100,120);
+  vctx.font = '14px sans';
+  vctx.fillText('determined by',100,140);
+  vctx.fillText('the acceleration',100,160);
+  ctx.font = '20px sans';
+  ctx.fillStyle = '#1772b4';
+  ctx.textAlign = 'center';
+  ctx.fillText('Position',100,120);
+  ctx.font = '14px sans';
+  ctx.fillText('determined by',100,140);
+  ctx.fillText('the velocity',100,160);
+}
+
+acanvas_labels(a2p_ctx, a2p_vctx, a2p_actx);
+
 function dragElementAcc(elmnt, ctx, vctx, actx) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   elmnt.onmousedown = dragMouseDown;
@@ -288,7 +340,13 @@ function dragElementAcc(elmnt, ctx, vctx, actx) {
   m_canvas.height = 200;
   var m_ctx = m_canvas.getContext('2d');
   
-  m_ctx.strokeStyle='lightgrey';
+  m_ctx.strokeStyle='rgb(139,185,218)';
+  ctx.lineCap="round";
+  vctx.lineCap="round";
+  actx.lineCap="round";
+  ctx.lineWidth=2;
+  vctx.lineWidth=2;
+  actx.lineWidth=2;
   
   function drawStep() {
     var a1 = elmnt.offsetLeft-95;
@@ -297,35 +355,36 @@ function dragElementAcc(elmnt, ctx, vctx, actx) {
     v2 += 0.1*a2
     ipos1 += 0.05*v1;
     ipos2 += 0.05*v2;
-    if (0<=ipos1 && ipos1<200 && 0<=ipos2 && ipos2<200) {
-      m_ctx.lineTo(ipos1, ipos2);
-    } else {
-      ipos1 = (ipos1+200)%200;
-      ipos2 = (ipos2+200)%200;
-      m_ctx.moveTo(ipos1, ipos2);
-    }
+    //if (0<=ipos1 && ipos1<200 && 0<=ipos2 && ipos2<200) {
+    //  m_ctx.lineTo(ipos1, ipos2);
+    //} else {
+    //  ipos1 = (ipos1+200)%200;
+    //  ipos2 = (ipos2+200)%200;
+    //  m_ctx.moveTo(ipos1, ipos2);
+    //}
+    m_ctx.lineTo(ipos1, ipos2);
     m_ctx.stroke();
     ctx.clearRect(0,0,200,200);
     ctx.drawImage(m_canvas,0,0);
-    ctx.strokeStyle='black';
+    ctx.strokeStyle='#1772b4';
     ctx.beginPath();
     canvas_arrow(ctx,100,100,ipos1,ipos2);
     ctx.stroke()
-    ctx.strokeStyle='red';
+    ctx.strokeStyle='#ff8510';
     ctx.beginPath();
     canvas_arrow(ctx,ipos1,ipos2,ipos1+0.5*v1,ipos2+0.5*v2);
     ctx.stroke();
-    ctx.strokeStyle='green';
+    ctx.strokeStyle='#e63928';
     ctx.beginPath();
     canvas_arrow(ctx,ipos1,ipos2,ipos1+0.5*a1,ipos2+0.5*a2);
     ctx.stroke();
     vctx.clearRect(0,0,200,200);
-    vctx.strokeStyle='red';
+    vctx.strokeStyle='#ff8510';
     vctx.beginPath();
     canvas_arrow(vctx,100,100,100+v1,100+v2);
     vctx.stroke();
     actx.clearRect(0,0,200,200);
-    actx.strokeStyle='green';
+    actx.strokeStyle='#e63928';
     actx.beginPath();
     canvas_arrow(actx,100,100,100+a1,100+a2);
     actx.stroke();
@@ -366,24 +425,35 @@ function dragElementAcc(elmnt, ctx, vctx, actx) {
     ipos2 = 100;
     document.onmouseup = null;
     document.onmousemove = null;
+    acanvas_labels(a2p_ctx, a2p_vctx, a2p_actx);
   }
 }
 
 dragElementAcc(a2p_vhandle, a2p_ctx, a2p_vctx, a2p_actx);
 </script>
-<h2 id="vector-magnitude-and-orientation">Vector Magnitude and Orientation</h2>
-<p>Now that you have become comfortable with drawing vectors, we will begin to describe their properties using numbers. Vectors have a length (mathematicians usually call it <em>magnitude</em> or <em>norm</em>) and orientation (or direction). We will see how to encode these properties as pairs of numbers with the example below.</p>
-<p>Imagine that you are standing in the middle of an empty school cafeteria. The floor is tiled with squares. We will imagine that a giant coordinate system has been drawn on the floor and you are standing at the location x = 0 and y = 0.</p>
-<p>(add image)</p>
-<p>If you take a step forward to the next tile, we can define a displacement vector between your initial to final position. In this case, the magnitude of this vector is 1 tile because you are 1 tile from your starting position. The direction of your movement is defined using an angle. This requires agreeing on how to describe the direction. If we were looking at a map, we might agree to describe the direction relative to North. For vector motion, scientists, mathematicians and others have agreed to describe the direction of a vector in terms of the angle relative to east, or the x-axis. In this case, if you have moved towards the door in the image, you have moved north, or with an angle of 90 degrees from the x-axis.</p>
-<p>If your friend, who has joined you in this adventure, moves to the right from the center of the cafeteria, she will have also moved with a magnitude of 1 tile. But her direction will be 0 degrees.</p>
-<p>(add image with diagonal motion) Now, lets move back to the center of the cafeteria and move on a diagonal one tile. This motion is the combination of moving one tile up and one tile to the right. The magnitude is the distance of the diagonal (sqrt(2 tiles)) and the direction is 45 degrees. Try moving in various directions and distances using the widget below and see how the magnitude and direction change.</p>
+<p>There are a couple of interesting cases to consider. Try to reproduce the following in the visualization:</p>
+<ul>
+<li>When the acceleration vector points in the same direction as the velocity vector, then the velocity will grow.</li>
+<li>When the acceleration vector is pointing in the direction opposite to the velocity vector, then the velocity will become lower and lower, until eventually the position stops changing. If we continue after that point, the velocity will change directions and start growing bigger and bigger.</li>
+<li>When the acceleration is perpendicular to the velocity, then the velocity will have its orientation change, causing a turn. Try, for instance, to see whether you can control the acceleration such that the position traces out circles.</li>
+</ul>
+<h2 id="vector-magnitude-and-components-or-coordinates">Vector Magnitude and Components (or Coordinates)</h2>
+<p>Now that you have become comfortable with drawing vectors, we will begin to describe their properties using numbers. This is particularly useful when we want to use computers to draw vectors, or when we want to learn a vector that was measured by a sensor. For instance, the motion sensors on the SpinWheel can measure the acceleration vector describing the motion of the device. However, to interpret that measurement we need to understand how a vector can be represented as a sequence of numbers.</p>
+<p>As we have seen, one important property of vectors is their length. Mathematicians usually call it <em>magnitude</em> or <em>norm</em>. To also describe the orientation of a given vector, we will need something more. We have already mentioned that an <em>origin</em> or a center from which vectors radiate would be convenient. That gives us a reference starting point, but it does not yet give us a reference orientation with respect to which we can measure the orientation of our vector.</p>
+<p>One way to achieve this orientation requirement is to draw a grid over which the vectors will be drawn. For a real-world example, consider the tile floor in a cafeteria. You can pick a tile at the center of the room to be your origin. But the grid provides you with something more: the two sides of the tile give you two axes along which displacement can be measured. To each displacement vector you can assign a description in words: “I move <span class="math inline">\(X\)</span> tiles to the right and <span class="math inline">\(Y\)</span> tiles forward”. The numbers <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is what we call the <em>coordinates</em> (or <em>components</em>) of the vector. It is customary for drawings to depict <span class="math inline">\(X\)</span> horizontally and <span class="math inline">\(Y\)</span> vertically.</p>
+<p>This custom is kept in the visualization below, where a tile grid is drawn, together with a position vector on top of it. You can use the sliders to modify the coordinates (i.e. the number of tiles taken to the right or forward, where negative numbers are interpreted as stepping to the left or backwards).</p>
 <style>
 #grid2d {
   text-align: center;
 }
 .grid2dcontrol > input {
   width: 40px;
+}
+.xcom {
+  color: #228e2c;
+}
+.ycom {
+  color: #2676b3;
 }
 </style>
 <div id="grid2d">
@@ -392,13 +462,13 @@ dragElementAcc(a2p_vhandle, a2p_ctx, a2p_vctx, a2p_actx);
 </canvas>
 </div>
 <div id="values">
-<div class="grid2dcontrol">
+<div class="grid2dcontrol xcom">
 X component: <span id="xshow">0</span>
 </div>
 <div>
 <input type="range" min="-10" max="10"  id="xvalue">
 </div>
-<div class="grid2dcontrol">
+<div class="grid2dcontrol ycom">
 Y component: <span id="yshow">0</span>
 </div>
 <div>
@@ -407,9 +477,7 @@ Y component: <span id="yshow">0</span>
 <div class="grid2dcontrol">
 Magnitude: <span id="magshow">0</span>
 </div>
-<div class="grid2dcontrol">
-Angle: <span id="angshow">0</span>°
-</div>
+<!--<div class="grid2dcontrol">Angle: <span id="angshow">0</span>&deg;</div>-->
 </div>
 </div>
 <script>
@@ -421,6 +489,8 @@ xElement.value = 2;
 yElement.value = 2;
 var xcurrent = 0;
 var ycurrent = 0;
+ctx2D.textAlign = 'center';
+ctx2D.textBaseline = 'middle';
 
 function canvas_axis(context, maxX, maxY) {
   var midX = maxX/2;
@@ -455,6 +525,15 @@ function plot_all(){
     ctx2D.clearRect(0,0,400,400);
     ctx2D.beginPath();
     canvas_axis(ctx2D, 400, 400);
+    ctx2D.font = '14px sans';
+    ctx2D.fillStyle = '#228e2c';
+    ctx2D.strokeStyle = '#228e2c';
+    ctx2D.beginPath();ctx2D.moveTo(x_scale,y_scale);ctx2D.lineTo(200,y_scale);ctx2D.stroke();
+    ctx2D.fillText('X = '+xcurrent.toFixed(1),x*10+200,y_scale-10*Math.sign(y));
+    ctx2D.fillStyle = '#2676b3';
+    ctx2D.strokeStyle = '#2676b3';
+    ctx2D.beginPath();ctx2D.moveTo(x_scale,y_scale);ctx2D.lineTo(x_scale,200);ctx2D.stroke();
+    ctx2D.fillText('Y = '+ycurrent.toFixed(1),x_scale+40*Math.sign(x),-y*10+200);
     ctx2D.beginPath();
     ctx2D.strokeStyle='black';
     ctx2D.lineWidth=2;
@@ -468,12 +547,12 @@ function plot_all(){
     document.getElementById("xshow").innerHTML=xcurrent.toFixed(1);
     document.getElementById("yshow").innerHTML=ycurrent.toFixed(1);
     document.getElementById("magshow").innerHTML=magnitude.toFixed(1);
-    document.getElementById("angshow").innerHTML=direction_angle.toFixed(0);
+    //document.getElementById("angshow").innerHTML=direction_angle.toFixed(0);
 }
 
 setInterval(plot_all, 50);
 </script>
-<p>Now that we have represented displacement vectors with numbers, lets discuss velocity vectors. Instead of measuring the amount and direction an item has moved, we can measure the speed and direction, giving a velocity vector. In the video below, a ball is rolling down a slope. The vector to represent this motion has a magnitude of 5 meters per second and a direction of 330 degrees. The same concept applies to acceleration vectors.</p>
+<p>A third direction can be added if we want to describe a position in three dimensions. For instance, in the example of a cafeteria with a tile floor, the third component of the vector would be the height above the floor (usually denoted as <span class="math inline">\(Z\)</span>). Similar grids can be constructed for velocity vectors and acceleration vectors (the grids are called <em>coordinate systems</em>). In fact, our SpinWheel device has its own grid in which it measures acceleration. The way this measurement is provided, is as three variables, <span class="math inline">\(a_x\)</span>, <span class="math inline">\(a_y\)</span>, and <span class="math inline">\(a_z\)</span>, which represent the components of the acceleration along the <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>, and <span class="math inline">\(Z\)</span> directions. Now that you have a rough understanding of what these number represent, we will use them in various creative endeavors, where a small piece of code will be able to react to motion in a colorful way. For instance, consider how we use acceleration measurements in the <a href="/stepcounter">make a stepcounter</a> project, or their more artistic use in the <a href="/dancing">dance and motion visualization</a> project.</p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
 data-isso-require-author="true"
