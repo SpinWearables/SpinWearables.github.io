@@ -52,86 +52,45 @@
 <div class="warning">
 <p>This is only a scaffolding for the (printed and electronic) textbook that will be developed as part of the project.</p>
 </div>
-<p><a href="/quickstart">Quick Start</a></p>
-<p><a href="/basics">SpinWheel Programming Reference</a></p>
-<h2 id="adventures">Adventures</h2>
-<ol type="1">
-<li><a href="/sight">Biology of sight</a></li>
-<li><a href="/animation">Animations and patterns</a></li>
-<li><a href="/stepcounter">Make a step counter</a></li>
-<li>Dancing companion</li>
-<li>Compass</li>
-<li>Hacker’s common tools</li>
-<li>Stroboscope and stroboscopic photography</li>
-</ol>
-<h2 id="computer-science-101">Computer Science 101</h2>
-<ol type="1">
-<li>Digital Electronics</li>
-<li><a href="/progpatterns">Programming Patterns</a></li>
-<li>Physical Computing</li>
-</ol>
-<h2 id="physics-101">Physics 101</h2>
-<ol type="1">
-<li><a href="/vectors">Vectors and Kinematics</a></li>
-<li><a href="/rotation">Rotation</a></li>
-<li>Pendulums and Vibrations</li>
-<li>Inertial reference frames / Free fall</li>
-<li><a href="/lightandcolor">Light and Color</a></li>
-<li><a href="/colortheory">Color Theory</a></li>
-<li>Magnetism</li>
-<li>Electricity</li>
-</ol>
-<h2 id="engineers-diary">Engineer’s Diary</h2>
-<ol type="1">
-<li>Circuit Design</li>
-<li>Hardware Testing</li>
-<li>Kickstarter Setup and Manufacturing Partner</li>
-</ol>
-<h2 id="community-rules">Community Rules</h2>
-<p>We are excited to provide you with this adventure guide, to be your companion on your journey of exploration with the SpinWheel. Each adventure and lesson includes a comment section in which you are encouraged to ask questions or help other adventurers understand the world around them. Comments will be moderated by our volunteers, so we ask you to be polite and helpful and to expect the same from others.</p>
-<h2 id="map">Map</h2>
+<p>Welcome to the table of contents for the SpinWheel! We hope you enjoy the adventures (hands-on activities that use the SpinWheel) and associated lessons.</p>
+<p>The concept map illustrates how we see the lessons and adventures being connected. Follow the arrows to see potential orders for completing them. If words on the map are overlapping, then you can drag the map around to better see how the different adventures and lessons are connected.</p>
 <script src="/jquery.min.js"></script>
 <script src="/springy/springy.js"></script>
 <script src="/springy/springyui.js"></script>
 <script>
-var graphJSON = {
-  "nodes": [
-    "Quick Start",
-    "Biology of Sight",
-    "Stroboscope",
-    "Animations and Patterns",
-    "Step Counter",
-    "Dancing Companion",
-    "Compass",
-    "Programming Patterns",
-    "Light and Color",
-    "Color Theory",
-    "Inertial Reference Frames",
-    "Rotation",
-    "Magnetism",
-    "Vectors and Kinematics"
-  ],
-  "edges": [
-    ["Quick Start", "Biology of Sight"],
-    ["Quick Start", "Stroboscope"],
-    ["Quick Start", "Animations and Patterns"],
-    ["Biology of Sight", "Light and Color"],
-    ["Light and Color", "Color Theory"],
-    ["Animations and Patterns", "Step Counter"],
-    ["Animations and Patterns", "Programming Patterns"],
-    ["Programming Patterns", "Dancing Companion"],
-    ["Dancing Companion", "Compass"],
-    ["Compass", "Magnetism"],
-    ["Dancing Companion", "Inertial Reference Frames"],
-    ["Dancing Companion", "Vectors and Kinematics"],
-    ["Vectors and Kinematics", "Rotation"],
-    ["Step Counter", "Inertial Reference Frames"],
-  ]
-};
 
 jQuery(function(){
   var graph = new Springy.Graph();
-  graph.loadJSON(graphJSON);
+
+  var quick = graph.newNode({label: "Quick Start"});
+  var sight = graph.newNode({label: "Biology of Sight"});
+  var strobe = graph.newNode({label: "Stroboscope"});
+  var ani = graph.newNode({label: "Animations and Patterns"});
+  var step = graph.newNode({label: "Step Counter"});
+  var dance = graph.newNode({label: "Dancing Companion"});
+  var compass = graph.newNode({label: "Compass"});
+  var progpatterns = graph.newNode({label: "Programming Patterns"});
+  var light = graph.newNode({label: "Light and Color"});
+  var colortheory = graph.newNode({label: "Color Theory"});
+  var inertia = graph.newNode({label: "Inertial Reference Frames"});
+  var rotation = graph.newNode({label: "Rotation"});
+  var magnet = graph.newNode({label: "Magnetism"});
+  var vector = graph.newNode({label: "Vectors and Kinematics"});
+  
+  graph.newEdge(quick, sight); 
+  graph.newEdge(quick, strobe);
+  graph.newEdge(quick, ani); 
+  graph.newEdge(sight, light); 
+  graph.newEdge(light, colortheory); 
+  graph.newEdge(ani, step); 
+  graph.newEdge(ani, progpatterns); 
+  graph.newEdge(progpatterns, dance);
+  graph.newEdge(dance, compass); 
+  graph.newEdge(compass, magnet);
+  graph.newEdge(dance, inertia); 
+  graph.newEdge(dance, vector); 
+  graph.newEdge(vector, rotation); 
+  graph.newEdge(step, inertia);
 
   var springy = jQuery('#springymap').springy({
     graph: graph,
@@ -140,8 +99,61 @@ jQuery(function(){
     damping: 0.5
   });
 });
+
 </script>
-<canvas id="springymap" width="800" height="600" />
+<canvas id="springymap" width="800" height="600">
+</canvas>
+<p>Are you looking for a suggestion of where to start? Below we have our recommended order. However, this is just a recommendation! Depending on which activities you are excited by and your comfort with programming, then you may jump around.</p>
+<h2 id="getting-started">Getting Started</h2>
+<p>Before doing anything else, we encourage you to read the <a href="/quickstart">Quick Start Guide</a>. This is where we explain how to download the Arduino software and provide essential information for the rest of the adventures.</p>
+<p>To learn the basics of controlling the LEDs, then check out our <a href="/basics">SpinWheel Programming Reference</a>. While this has been written for those who are discovering coding for the first time, it can also be used as a reference to create your own SpinWheel designs if you are comfortable with programming. We recommend using it as a reference as you are going through the adventures, either way!</p>
+<h2 id="intro-adventures">Intro Adventures</h2>
+<p>These adventures assume that you have no coding experience and are a great way to become comfortable with both the SpinWheel and coding. The associated lessons go into more depth into concepts that are referenced for the first time in these adventures. We have written the lessons to supplement the content in the adventures and we provide links in each adventure when we recommend checking them out to learn more. We hope these will spark your curiousity to learn even more about the world around you!</p>
+<ol type="1">
+<li><a href="/sight">Biology of sight</a></li>
+<li><a href="/animation">Animations and patterns</a></li>
+<li>Stroboscope and stroboscopic photography (planned)</li>
+</ol>
+<h3 id="associated-lessons">Associated Lessons</h3>
+<ol type="1">
+<li><a href="/lightandcolor">Light and Color</a></li>
+<li><a href="/colortheory">Color Theory</a></li>
+<li><a href="/progpatterns">Programming Patterns</a></li>
+<li>Physical Computing (planned)</li>
+</ol>
+<h2 id="intermediate-adventures">Intermediate Adventures</h2>
+<p>These activities build on the ideas presented in the introductory adventures. If you have coding experience, you can jump right in and then refer back to the earlier adventures and lessons as you have questions.</p>
+<ol type="1">
+<li><a href="/stepcounter">Make a step counter</a></li>
+<li>Dancing companion (planned)</li>
+</ol>
+<h3 id="associated-lessons-1">Associated Lessons</h3>
+<ol type="1">
+<li><a href="/vectors">Vectors and Kinematics</a></li>
+<li><a href="/rotation">Rotation</a></li>
+<li>Inertial reference frames / Free fall (planned)</li>
+</ol>
+<h2 id="advanced-adventures">Advanced Adventures</h2>
+<p>These are the most challenging SpinWheel activities. We recommend completing at least one earlier adventure before trying them out. If you have completed the other adventures, then you should be able to jump into any of these.</p>
+<ol type="1">
+<li>Compass (planned)</li>
+<li><a href="/rnn">Recurrent Neural Networks for Gesture Recognition</a></li>
+</ol>
+<h3 id="associated-lessons-2">Associated Lessons</h3>
+<ol type="1">
+<li>Magnetism (planned)</li>
+<li>Electricity (planned)</li>
+<li>Neural Networks (planned)</li>
+</ol>
+<h2 id="engineers-diary">Engineer’s Diary</h2>
+<p>Want to learn more about how the SpinWheel was created? We’ll be adding additional lessons about designing the SpinWheel to empower you to design your own electronic creations!</p>
+<ol type="1">
+<li>Circuit Design</li>
+<li>Hardware Testing</li>
+<li>Kickstarter Setup and Manufacturing Partner</li>
+</ol>
+<h2 id="community-rules">Community Rules</h2>
+<p>We are excited to provide you with this adventure guide, to be your companion on your journey of exploration with the SpinWheel. Each adventure and lesson includes a comment section in which you are encouraged to ask questions or help other adventurers understand the world around them. Comments will be moderated by our volunteers, so we ask you to be polite and helpful and to expect the same from others.</p>
 </main>
 <div id="license">
 <!--<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc-by-sa.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.-->
