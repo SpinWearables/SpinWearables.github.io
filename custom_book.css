@@ -162,7 +162,8 @@ figure > img {
 }
 
 figure > figcaption {
-  font-size: 0.9em;
+  font-size: 0.9rem;
+  line-height: 1.1rem;
 }
 
 .imagecredit {
