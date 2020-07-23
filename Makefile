@@ -13,6 +13,7 @@ render_firmwaresource: register_submodule_updates
 	rm -rf codedoc
 	mkdir codedoc
 	cp -r ./firmwaresource/* codedoc/
+	cp -r ./codedoc/src/* codedoc/
 render: render_websitesource render_firmwaresource
 local_test_server: render
 	python3 -m http.server
