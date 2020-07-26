@@ -15,6 +15,70 @@
   <title>Learning to Program the SpinWheel</title>
   <style>
   </style>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
   <link rel="stylesheet" href="/custom.css" />
   <link rel="stylesheet" href="/custom_book.css" />
   <!--[if lt IE 9]>
@@ -48,128 +112,66 @@
 <h1 class="title">Learning to Program the SpinWheel</h1>
 </header>
 <main>
-<a id="TOCbutton" href="#TOC">Table of Contents</a>
-<nav id="TOC" role="doc-toc">
-<ul>
-<li><a href="#led-manipulation">LED Manipulation</a>
-<ul>
-<li><a href="#turn-on-all-the-large-leds-with-setlargeledsuniform">Turn on all the Large LEDs with <code>setLargeLEDsUniform</code></a></li>
-<li><a href="#turn-on-all-the-small-leds-with-setsmallledsuniform">Turn on all the Small LEDs with <code>setSmallLEDsUniform</code></a></li>
-<li><a href="#control-a-specific-large-led-with-setlargeled">Control a Specific Large LED with <code>setLargeLED</code></a></li>
-<li><a href="#control-a-specific-small-led-with-setsmallled">Control a Specific Small LED with <code>setSmallLED</code></a></li>
-<li><a href="#turn-on-a-range-of-large-leds-with-setlargeleds">Turn on a range of Large LEDs with <code>setLargeLEDs</code></a></li>
-<li><a href="#turn-on-a-range-of-small-leds-with-setsmallleds">Turn on a range of Small LEDs with <code>setSmallLEDs</code></a></li>
-<li><a href="#set-overall-brightness-with-setbrightness">Set overall brightness with <code>setBrightness</code></a></li>
-</ul></li>
-<li><a href="#color-and-brightness-helpers">Color and Brightness Helpers</a></li>
-</ul>
-<a id="TOCclose" href="#"></a>
-</nav>
-<link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
-<script src='/simspinwheel/simspinwheel.js'></script>
 <div class="intro-box">
 <p>This document will help you learn the basics of programming the SpinWheel’s LEDs to different color patterns. Before reading this, be sure to read our <a href="/quickstart">quick start guide</a>.</p>
 </div>
-<p>You can use the virtual SpinWheel simulator to test each of these functions. If a function involves the motion sensor, you can grab the virtual device with your mouse and shake it, simulating how the physical sensor would respond to real motion.</p>
-<!--TODO: add a section to discuss setup/loop so know this going into everything else-->
-<h2 id="led-manipulation">LED Manipulation</h2>
-<p>There are a number of functions that let you manipulate the state of the LEDs, however, for the LEDs to actually respond to these manipulations, you also need to call <code>SpinWheel.drawFrame()</code> when you are done. That way you can make multiple modifications, preparing the final image, without the intermediate unfinished images showing up.</p>
-<p>If you want to reset the image, you can call <code>SpinWheel.clearAllLEDs()</code>, which will set all LEDs to be dark, deleting any color information that they were previously set to.</p>
-<h3 id="turn-on-all-the-large-leds-with-setlargeledsuniform">Turn on all the Large LEDs with <code>setLargeLEDsUniform</code></h3>
-<p><code>setLargeLEDsUniform</code> takes three arguments, the red, green, and blue components of the desired color. Their range is between 0 and 255 (one byte).</p>
-<div class="ssw-codecontent" data-markdown="0">
-<pre class="ssw-codeblock">
-void loop() {
-</pre>
-<textarea class="ssw-codeblock">
-  SpinWheel.setLargeLEDsUniform(255, 0, 155);
-  SpinWheel.drawFrame();
-</textarea>
-<pre class="ssw-codeblock">
-}
-</pre>
+<p>Approach this page the way you would approach the first page of a foreign language you want to learn. Try to pick out separate words and commands that make sense, without worrying about the overall structure, correct syntax, or proper grammar. As time passes and you have learnt new things, come back to this page and see whether you can understand a bit more of it.</p>
+<p>In different communities, computer programs are referred to by different names: program, sketch, script, etc. Arduino tends to call them sketches, because in them you sketch out what your device is supposed to do. We also like the name script, because it invokes the idea of a sequence of instructions: the instructions you give to the device and the order in which you want them to be executed.</p>
+<p>Computers are not particularly smart, so you need to be very explicit in your instructions. The particular language we are using imposes a certain structure on our programs. The most bare-bones program would look like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">void</span> setup() {</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>}</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>}</span></code></pre></div>
+<p>This program does absolutely nothing. <span class="footnote">It contains two blocks<span>Marked by the brackets { and }.</span></span> we need to fill out with instructions. The <code>setup</code> which executes only once, immediately after the device is powered up. This block is used for (surprise) setting up any initial conditions we might require.</p>
+<p>And then there is the <code>loop</code> block. This block is executed repeatedly “in a loop”, starting immediately after <code>setup</code> is done and repeating itself until the power is turned off. Most of our instructions will be written in that block. They will frequently take the form of measuring time or motion, and then producing a color or a pattern of colors depending on the measurement.</p>
+<p>A program that is capable of instructing the hardware specific to the SpinWheel (e.g. the LEDs and motion sensor) would require a few more incantations:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">// Include extra resources and commands</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co">// specific to the SpinWheel.</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="dt">void</span> setup() {</span>
+<span id="cb2-7"><a href="#cb2-7"></a>  <span class="co">// Instruct the specific SpinWheel hardware</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>  <span class="co">// to be ready to receive instructions.</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>  SpinWheel.begin();</span>
+<span id="cb2-10"><a href="#cb2-10"></a>}</span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="dt">void</span> loop() {</span>
+<span id="cb2-13"><a href="#cb2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14"></a>}</span></code></pre></div>
+<p>Notice the faded bluish text prepended by two slashes <code>//</code>. This text is called a “comment”, and it is something completely disregarded by the computer. We will use it extensively to write down explanations for the humans that might be reading the code, without worrying about the computer being confused by them.</p>
+<p>The <code>loop</code> block is still empty and this program still will not do anything interesting. However, to great extent our <code>setup</code> function is complete: it prepares the SpinWheel to receive instructions. Through our activities, we will rarely need anything more sophisticated in <code>setup</code>.</p>
+<p>Finally, let us turn on an LED, by simply adding a single command to the</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  SpinWheel.begin();</span>
+<span id="cb3-6"><a href="#cb3-6"></a>}</span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="dt">void</span> loop() {</span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="co">// Set the large LED number 0 to</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>  <span class="co">// have red=255, green=0, and blue=0 color.</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>  SpinWheel.setLargeLED(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
+<span id="cb3-12"><a href="#cb3-12"></a>  <span class="co">// Update the currently shinning LEDs</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>  <span class="co">// based on the instructions provided up to here.</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>  SpinWheel.drawFrame();</span>
+<span id="cb3-15"><a href="#cb3-15"></a>}</span></code></pre></div>
+<p>Try to copy this code in the Arduino software and upload it. It should cause one single large LED to turn on in bright red. Try to modify the <code>setLargeLED</code> line (the first parameter in the parenthesis is the <span class="footnote">number of the affected LED<span>The number goes from 0 to 7.</span></span> and the other <span class="footnote">three numbers are the red, green, and blue components<span>They have to be numbers between 0 (color is off) and 255 (color is on at full brightness).</span></span> of the desired color.)</p>
+<p>There are a couple more things you might have noticed about the style of this language:</p>
+<ul>
+<li>We tend to have only one “command” per line. This helps with readability.</li>
+<li>Each command is ended by a semicolon <code>;</code>. That makes it easier for the computer to separate different commands.</li>
+<li>Commands tend to be some name followed by parenthesis <code>()</code>.</li>
+<li>Inside these parenthesis we frequently put some extra information: this information can modify exactly how a command performs. For instance in <code>setLargeLED</code> we have one parameter to select the LED we want to modify and three parameters for the color of that LED.</li>
+<li>There certainly are other ways in which LED colors can be modified and motion be detected. We will be discussing many such tools in futures pages.</li>
+</ul>
+<div class="further-reading">
+<p>If you are already accustomed to programming, you might want to see the <a href="/allcommands">list of all functions provided with the SpinWheel</a>. In either case, we advise you to play with the <a href="/book">SpinWheel examples available in the Arduino software and to peruse the many suggested activities we have prepared for you</a>. If you would like to specifically focusing on learning more about this programming language, you can see our <a href="/progpatterns">programming patterns page</a>.</p>
 </div>
-<h3 id="turn-on-all-the-small-leds-with-setsmallledsuniform">Turn on all the Small LEDs with <code>setSmallLEDsUniform</code></h3>
-<p><code>setSmallLEDsUniform</code>, same as <code>setLargeLEDsUniform</code>, takes three arguments, the red, green, and blue components of the desired color. Their range is between 0 and 255 (one byte).</p>
-<div class="ssw-codecontent" data-markdown="0">
-<pre class="ssw-codeblock">
-void loop() {
-</pre>
-<textarea class="ssw-codeblock">
-  SpinWheel.setSmallLEDsUniform(255, 255, 0);
-  SpinWheel.drawFrame();
-</textarea>
-<pre class="ssw-codeblock">
-}
-</pre>
-</div>
-<h3 id="control-a-specific-large-led-with-setlargeled">Control a Specific Large LED with <code>setLargeLED</code></h3>
-<p>The first argument of <code>setLargeLED</code> is a number between 0 and 7, denoting which of the 8 LEDs is to be turned on. The other three arguments are the red, green, and blue components of the color.</p>
-<div class="ssw-codecontent" data-markdown="0">
-<pre class="ssw-codeblock">
-void loop() {
-</pre>
-<textarea class="ssw-codeblock">
-  SpinWheel.clearAllLEDs();
-  SpinWheel.setLargeLED(4, 255, 155, 0);
-  SpinWheel.drawFrame();
-</textarea>
-<pre class="ssw-codeblock">
-}
-</pre>
-</div>
-<h3 id="control-a-specific-small-led-with-setsmallled">Control a Specific Small LED with <code>setSmallLED</code></h3>
-<p>The first argument of <code>setSmallLED</code> is a number between 0 and 11, denoting which of the 12 LEDs is to be turned on. The other three arguments are the red, green, and blue components of the color.</p>
-<div class="ssw-codecontent" data-markdown="0">
-<pre class="ssw-codeblock">
-void loop() {
-</pre>
-<textarea class="ssw-codeblock">
-  SpinWheel.clearAllLEDs();
-  SpinWheel.setSmallLED(4, 155, 255, 0);
-  SpinWheel.drawFrame();
-</textarea>
-<pre class="ssw-codeblock">
-}
-</pre>
-</div>
-<h3 id="turn-on-a-range-of-large-leds-with-setlargeleds">Turn on a range of Large LEDs with <code>setLargeLEDs</code></h3>
-<p>The first and second arguments of <code>setLargeLEDs</code> are numbers between 0 and 7, denoting what range of the 8 LEDs is to be turned on. The other three arguments are the red, green, and blue components of the color.</p>
-<div class="ssw-codecontent" data-markdown="0">
-<pre class="ssw-codeblock">
-void loop() {
-</pre>
-<textarea class="ssw-codeblock">
-  SpinWheel.clearAllLEDs();
-  SpinWheel.setLargeLEDs(0, 3, 255, 0, 255);
-  SpinWheel.drawFrame();
-</textarea>
-<pre class="ssw-codeblock">
-}
-</pre>
-</div>
-<h3 id="turn-on-a-range-of-small-leds-with-setsmallleds">Turn on a range of Small LEDs with <code>setSmallLEDs</code></h3>
-<p>The first and second arguments of <code>setSmallLEDs</code> are numbers between 0 and 11, denoting what range of the 12 LEDs is to be turned on. The other three arguments are the red, green, and blue components of the color.</p>
-<div class="ssw-codecontent" data-markdown="0">
-<pre class="ssw-codeblock">
-void loop() {
-</pre>
-<textarea class="ssw-codeblock">
-  SpinWheel.clearAllLEDs();
-  SpinWheel.setSmallLEDs(2, 7, 255, 255, 0);
-  SpinWheel.drawFrame();
-</textarea>
-<pre class="ssw-codeblock">
-}
-</pre>
-</div>
-<h3 id="set-overall-brightness-with-setbrightness">Set overall brightness with <code>setBrightness</code></h3>
-<p>This function takes only one argument, between 0 and 255, that sets the brightness of the LEDs. At maximal settings the large LEDs are blindingly bright and pull a total current of 480 mAh, which would deplete our battery in less than 10 minutes. Using the maximal setting would cause the battery to wear out much quicker and would cause significant heating.</p>
-<h2 id="color-and-brightness-helpers">Color and Brightness Helpers</h2>
-<!--TODO: expand this section and implement as necessary-->
-<p>The <code>colorWheel</code> function turns a single number representing an angle into a color from the color wheel.</p>
-<p>The <code>triangularWave</code> and <code>parabolaWave</code> functions provide for convenient periodic patterns, useful in animations.</p>
-<p>The <code>faston_slowoff</code> function can be used to pleasantly filter time-dependent measurements. For instance, it can be used to rapidly brighten an LED when a motion is detected and then slowly let the light decay after the motion stops.</p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
 data-isso-require-author="true"

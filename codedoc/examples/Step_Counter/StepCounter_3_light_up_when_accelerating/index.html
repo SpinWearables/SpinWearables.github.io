@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title>StepCounter_2_detect_kinematic_acceleration.ino</title>
+  <title>StepCounter_3_light_up_when_accelerating.ino</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -119,11 +119,11 @@ video {
 </head>
 <body>
 <p style="font-size:0.6rem;text-align:center;margin:0;">
-The code presented on this page can be <a href="./StepCounter_2_detect_kinematic_acceleration.ino">downloaded</a> or found in the Arduino examples menu under <code>Examples → SpinWearables → StepCounter → StepCounter_2_detect_kinematic_acceleration</code>.
+The code presented on this page can be <a href="./StepCounter_3_light_up_when_accelerating.ino">downloaded</a> or found in the Arduino examples menu under <code>Examples → SpinWearables → Step_Counter → StepCounter_3_light_up_when_accelerating</code>.
 </p>
 <div class="flex-container">
-<section id="step-counter-step-2-detect-only-acceleration-due-to-motion" class="wide-text">
-<h1>Step Counter: Step 2, detect only acceleration due to motion</h1>
+<section id="step-counter-step-3-lighting-up-in-response-to-motion" class="wide-text">
+<h1>Step Counter: Step 3, lighting up in response to motion</h1>
 </section>
 <div class="side-text">
 
@@ -146,9 +146,18 @@ The code presented on this page can be <a href="./StepCounter_2_detect_kinematic
 <span id="cb1-15"><a href="#cb1-15"></a>  <span class="co">// This `total_acceleration` includes the effect of the gravitational field even at rest.</span></span>
 <span id="cb1-16"><a href="#cb1-16"></a>  <span class="co">// We want only the component of that measurement that is related to motion.</span></span>
 <span id="cb1-17"><a href="#cb1-17"></a>  <span class="dt">float</span> kinematic_acceleration = abs(total_acceleration - <span class="fl">1.0</span>); <span class="co">// Kinematic is a fancy word for &quot;related to moving&quot;.</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>  Serial.print(kinematic_acceleration);</span>
-<span id="cb1-19"><a href="#cb1-19"></a>  Serial.println();</span>
-<span id="cb1-20"><a href="#cb1-20"></a>}</span></code></pre></div>
+<span id="cb1-18"><a href="#cb1-18"></a>  <span class="co">// Turn on the large LEDs when noticing motion.</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>  <span class="co">// The intensity for each color goes from 0 to 255 on the SpinWheel,</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>  <span class="co">// so we multiply the value of the kinematic_acceleration by a largish number,</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>  <span class="co">// to make the light more noticeable.</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="dt">int</span> intensity = <span class="dv">20</span>*kinematic_acceleration;</span>
+<span id="cb1-23"><a href="#cb1-23"></a>  <span class="co">// We mix equal red, green, and blue for white light.</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>  SpinWheel.setLargeLEDsUniform(intensity, intensity, intensity);</span>
+<span id="cb1-25"><a href="#cb1-25"></a>  <span class="co">// And we tell the SpinWheel to show the light pattern we registered on the previous line.</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a>  SpinWheel.drawFrame();</span>
+<span id="cb1-27"><a href="#cb1-27"></a>  Serial.print(intensity);</span>
+<span id="cb1-28"><a href="#cb1-28"></a>  Serial.println();</span>
+<span id="cb1-29"><a href="#cb1-29"></a>}</span></code></pre></div>
 </div>
 </div>
 </body>

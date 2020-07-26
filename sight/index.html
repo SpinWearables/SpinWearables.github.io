@@ -122,7 +122,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 </div>
 <div class="warning">
-<p><strong> WARNING: PHOTOSENSITIVITY/EPILEPSY SEIZURES </strong></p>
+<p><strong> Photosensitivity and Epilepsy Warning </strong></p>
 <p>Some activities on this page involve flashing colors. If you (or a family member) have epilepsy, please talk to a parent or teacher before continuing.</p>
 </div>
 <p>On one hand, the human eye is a spectacular sensor that far outperforms all our other senses in the amount of information it gives us about our surroundings. On the other hand, it leaves much of the richness of color and light imperceptible to us. Here, we will explore the limitations of this important organ; we will even learn a few ways in which we can trick it into seeing colors that aren’t actually there.</p>
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </figure>
 <p>This leads to a problem… If our eyes can sense only red, green, and blue, how come we can see yellow? Our eyes and brains have evolved so that our red- and green-sensing cones both respond slightly to yellow. If our brain detects that both groups of cones are activated, it knows to interpret the color as yellow. And similar compromises are made for the other colors we can detect. For instance, purple activates both red- and blue-sensing cones.</p>
 <div class="further-reading">
-<p>There is an animal that can (unlike us) detect the difference between a true pure color, and a mixture of colors that fakes the presence of the given color (for humans, the true pure colors we can see are red, green, and blue). This animal is a mantis shrimp, and it has 12 different types of cone cells in its eye. The Oatmeal comic has <a href="https://theoatmeal.com/comics/mantis_shrimp">an informative and entertaining strip about it</a>.</p>
+<p>There is an animal that can (unlike us) detect the difference between a true pure color, and a mixture of colors that fakes the presence of the given color (for humans, the true pure colors we can see are red, green, and blue). This animal is the mantis shrimp, and it has 12 different types of cone cells in its eye. The Oatmeal comic has <a href="https://theoatmeal.com/comics/mantis_shrimp">an informative and entertaining strip about it</a>.</p>
 </div>
 <p>We can exploit this imperfection of our eyes to make rich colorful displays (such as the screen you are viewing this on!) while using only three colors. For instance, since our eyes cannot distinguish between true purple and a mixture of blue and red, we don’t need a purple light source, only blue and red lights (and green for the other color combinations).</p>
 <p>If you look at a TV screen displaying a white page with a magnifying glass, you will see that it is made out of red, blue, and green dots. Combinations of these red, blue, and green dots make up the colorful displays you are looking at on your screen.</p>
@@ -213,25 +213,27 @@ changeColor();
 <span id="cb1-4"><a href="#cb1-4"></a><span class="dt">void</span> setup() {</span>
 <span id="cb1-5"><a href="#cb1-5"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
 <span id="cb1-6"><a href="#cb1-6"></a>  SpinWheel.begin();</span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="co">// Ask the SpinWheel to prepare all large LEDs to</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="co">// show a particular color.</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="co">// Make the SpinWheel show the registered color.</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>  SpinWheel.drawFrame();</span>
-<span id="cb1-12"><a href="#cb1-12"></a>}</span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-7"><a href="#cb1-7"></a>}</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-10"><a href="#cb1-10"></a>  <span class="co">// Ask the SpinWheel to prepare all large LEDs to</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="co">// show a particular color.</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="co">// Make the SpinWheel show the registered color.</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  SpinWheel.drawFrame();</span>
 <span id="cb1-15"><a href="#cb1-15"></a>}</span></code></pre></div>
 <div class="further-reading">
 <p>If you have trouble uploading to your SpinWheel, be sure to read our <a href="/quickstart">Quick Start Guide</a>. If you want more explanation about the code shown here, you can read the <a href="/progpatterns">Programming Patterns lesson</a>.</p>
 </div>
-<p>You can try this code in the virtual SpinWheel simulator - this lets you see how your physical SpinWheel would respond if you ran the same code. Below you can change the brightness of each of the red, green, and blue components of the light emitters.</p>
+<p>Instead of copying the code, you can also find a complete example in the Arduino examples menu under <code>Examples → SpinWearables → Biology_of_Sight →  Mixing_Colors</code>. You can try this code in the virtual SpinWheel simulator below - this lets you see how your physical SpinWheel would respond if you ran the same code. Below you can change the brightness of each of the red, green, and blue components of the light emitters.</p>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
 <script src='/simspinwheel/simspinwheel.js'></script>
 <div class="ssw-codecontent" data-markdown="0">
 <pre class="ssw-codeblock">
 void setup() {
   SpinWheel.begin();
+}
+void loop() {
 </pre>
 <textarea class="ssw-codeblock">
   SpinWheel.setLargeLEDsUniform(195, 0, 255);
@@ -338,11 +340,12 @@ getT();
 <span id="cb2-23"><a href="#cb2-23"></a>  <span class="co">// Wait...</span></span>
 <span id="cb2-24"><a href="#cb2-24"></a>  delay(delay_time_in_milliseconds);  </span>
 <span id="cb2-25"><a href="#cb2-25"></a>}</span></code></pre></div>
+<p>This code is also available in the Arduino examples menu under <code>Examples → SpinWearables → Biology_of_Sight →  Persistence_of_Vision</code>.</p>
 <p>Right at the point where the red and blue stop being observable on their own, you can perform another experiment that showcases the persistence of vision effect. Instead of keeping the SpinWheel still, start shaking it back and forth rapidly. By doing this, the light emitters will be in different locations in space when they emit either red or blue, and this will let you once again distinguish the two colors (and stop seeing purple). Once you stop shaking the device, it will once again look purple.</p>
 <figure>
 <img src="/images/bookpics/fast_pov_streak.jpg" title="Picture of a fast-moving SpinWheel" alt="" /><figcaption>If you move the SpinWheel rapidly in front of your eyes, you will see the purple color separate in two distinct streaks of red and blue.</figcaption>
 </figure>
-<p>These two tools – faking rich colors by combining just red, green, and blue, and faking a faking one image by rapidly cycling through others – are the basis for many technologies, and are tools we’ll keep using as we program the SpinWheel in more advanced ways.</p>
+<p>These two tools – faking rich colors by combining just red, green, and blue, and faking one complete image by rapidly cycling through partial images – are the basis for many technologies, and are tools we’ll keep using as we program the SpinWheel in more advanced ways.</p>
 <!--TODO: This further reading box seems inappropriate. Use different format for this block-->
 <div class="further-reading">
 <p>To keep exploring, you can try other color combinations! For instance, what happens if you mix red and green? Can you make orange?</p>

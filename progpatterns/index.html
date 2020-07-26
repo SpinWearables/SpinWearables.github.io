@@ -12,7 +12,7 @@
   <meta property="og:image" content="https://spinwearables.com/hanging.jpg" />
   <link rel="image_src" href="https://spinwearables.com/hanging.jpg" />
   <meta name="keywords" content="physical computing, computer science, arduino, programming" />
-  <title>Basic Programming Patterns</title>
+  <title>Programming Patterns</title>
   <style>
   </style>
   <style>
@@ -110,11 +110,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="/">The SpinWheel</a>
 <a href="/book">The Field Guide</a>
 </div>
-<h1 class="title">Basic Programming Patterns</h1>
+<h1 class="title">Programming Patterns</h1>
 </header>
 <main>
+<div class="intro-box">
+<p>This page will introduce you to many of the typical patterns programmers follow when writing code. If this is your first time thinking about computer code, it would be helpful to also consult the <a href="/basics">mini-reference on the particular programming style for the SpinWheel</a>.</p>
+</div>
 <p>Writing a computer program of your own, whether a desktop app, an interactive website, or the hidden brain of a robot, starts by writing a sequence of instructions in one of the many available computer languages. In this lesson, we will use a very popular older language that runs well on simple computers like the SpinWheel’s microcontroller. The name of this language is <code>C++</code>. While <code>C++</code> has a specific set of commands and rules used to write computer programs, the main ideas are common to other programming languages. In fact, the vast majority of computer languages share the same patterns, just like how many human languages share ideas such as the distinction between a noun and a verb, or the difference between a word and a sentence. We will describe the most important such patterns in this chapter.</p>
-<h1 id="variables">Variables</h1>
+<h2 id="variables">Variables</h2>
 <p>Computer programs do one thing and one thing only: process information. That information can be the time of a mouse click, a voicemail on your phone, or a picture of the road taken by a self-driving car. Before processing such data, we have to tell the computer to store it in its memory. This is done using <strong>variables</strong>.</p>
 <p>We will only discuss two types of variables: integers and decimals. Other types do exist, but we won’t cover them here. Integers are easier for a computer to work with because it does not need to store all of the data after the decimal point. Treating them separately from decimals lets us have faster code, which is especially important for small computers like in the SpinWheel.</p>
 <p>To <strong>define</strong> a new integer variable you need the following line in your code:</p>
@@ -124,7 +127,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">float</span> pi = <span class="fl">3.1415</span>;</span></code></pre></div>
 <p>Here we stored an approximation of the number <span class="math inline">\(\pi\)</span> in a variable with the name <code>pi</code>. We could then use this variable in other parts of our code to do computations that involve circles.</p>
 <p>Notice that throughout all of our code we have used the equality sign <code>=</code> to mean “store the value on the right in the memory cell on the left”. This differs from the usual mathematical meaning of the sign, which usually means “check if the left and right side have the same value”. You can blame early computer scientists and their laziness for the misuse of this sign in most modern programming languages.</p>
-<h1 id="functions">Functions</h1>
+<h2 id="functions">Functions</h2>
 <p>In computer programming, functions are commands that take a few variables and do something useful with them. Functions are reusable pieces of code. A function can act like a calculator, computing a new value based on the variables that are given to it. A function can also do something that affects the world around it, like blinking an LED, playing a sound, or sending a message.</p>
 <p>Most programing languages have some functions built into them, similar to how a new cellphone comes with pre-installed apps. We can use these functions without having to write them ourselves. Here is an example function called <code>max</code> that takes two numbers as input and returns the larger number. The input values are also called the <strong>arguments</strong> of the function.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">int</span> number_a = <span class="dv">5</span>;</span>
@@ -147,7 +150,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="dt">int</span> number_a = <span class="dv">5</span>;</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="dt">int</span> number_b = <span class="dv">7</span>;</span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="dt">int</span> resulting_number = max(sqrt(number_a-<span class="dv">1</span>) * <span class="dv">2</span>, min(number_b, <span class="dv">2</span>));</span></code></pre></div>
-<h1 id="creating-your-own-functions">Creating your own functions</h1>
+<h2 id="creating-your-own-functions">Creating your own functions</h2>
 <p>A large part of programming is creating your own functions and building interesting, complex, and useful functions out of small simple functions. Here we give an example of how to write your own function that takes two numbers, <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, and returns their average, <span class="math inline">\(\frac{x+y}{2}\)</span>. We will name the function <code>avg</code>. Let us first write an example of how this function would be used if it already existed:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a><span class="dt">float</span> x = <span class="fl">3.5</span>;</span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="dt">float</span> y = <span class="fl">2.5</span>;</span>
@@ -171,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-3"><a href="#cb8-3"></a>  <span class="cf">return</span> sqrt(intermediate_value);</span>
 <span id="cb8-4"><a href="#cb8-4"></a>}</span></code></pre></div>
 <p>Maybe the functions <code>avg</code> and <code>root4</code> seem too redundant to you, and you would prefer to always write <code>(x+y)/2</code> instead of <code>avg(x,y)</code>. This is quite valid feeling for such short functions, but as you build more complex programs you will have longer pieces of code that would be cumbersome to repeat every time. Functions let you have a shorthand notation, so you do not need to make such repetitions.</p>
-<h1 id="functions-that-do-not-return-values">Functions that do not return values</h1>
+<h2 id="functions-that-do-not-return-values">Functions that do not return values</h2>
 <p>Functions can also be used to change something in the environment of the device instead of being used as advanced calculators. Such functions do not return a value and don’t need a variable to store their output. One example of such a function is the <code>delay</code> function that pauses the computer for the length of time specified by the input variable. In the following example, calling the <code>delay</code> function will pause the program for 1000 milliseconds (which equals one second) before executing the next line:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a>a = calculation1();</span>
 <span id="cb9-2"><a href="#cb9-2"></a>delay(<span class="dv">1000</span>);</span>
@@ -181,12 +184,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-2"><a href="#cb10-2"></a>  <span class="dt">int</span> number_of_milliseconds = <span class="dv">1000</span> * number_of_seconds;</span>
 <span id="cb10-3"><a href="#cb10-3"></a>  delay(number_of_milliseconds);</span>
 <span id="cb10-4"><a href="#cb10-4"></a>}</span></code></pre></div>
-<h1 id="comments">Comments</h1>
+<h2 id="comments">Comments</h2>
 <p>As the code we write grows longer, it helps to add notes in the code to ourselves and our friends who might view our code. This makes it easier to understand the purpose of the code when we look at it again in the future. Such notes are usually called “comments”, and are completely ignored by the computer when it runs the code. In the language we are using, comments are denoted by a double slash <code>//</code> – everything to the right of these symbols, until the end of the line, is a message for fellow humans. We will use such comments below in some more complicated examples of code.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">// I am writing this comment to remind me that the next</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="co">// line stores the number 5 in the variable named my_test_variable.</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="dt">int</span> my_test_variable = <span class="dv">5</span>;</span></code></pre></div>
-<h1 id="putting-it-all-together">Putting it all together</h1>
+<h2 id="putting-it-all-together">Putting it all together</h2>
 <p>After we have created all the variables and functions we need for our code to do what we want it to do, we need to actually start the program. To do this, the program needs to know what function to run first. In different languages this is done differently. In our particular case, we do it by defining two special functions: <code>setup</code> and <code>loop</code>. Our computer is instructed to run these functions first. It finds the <code>setup</code> function and runs it before anything else. Usually this function is used to <strong>set up</strong> any settings we need in advance. Then the computer repeatedly runs the <code>loop</code> function, which is named this way because it <strong>runs in a loop</strong> (or repeats itself).</p>
 <p>Here is a large example that includes all these features. It will use the <code>Serial.println()</code> function in order to send messages to the computer.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">// Here we define a convenient pausing function</span></span>

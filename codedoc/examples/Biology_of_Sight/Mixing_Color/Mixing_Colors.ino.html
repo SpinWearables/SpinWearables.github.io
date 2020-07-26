@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title>StepCounter_3_light_up_when_accelerating.ino</title>
+  <title>Mixing_Colors.ino</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -119,11 +119,12 @@ video {
 </head>
 <body>
 <p style="font-size:0.6rem;text-align:center;margin:0;">
-The code presented on this page can be <a href="./StepCounter_3_light_up_when_accelerating.ino">downloaded</a> or found in the Arduino examples menu under <code>Examples → SpinWearables → StepCounter → StepCounter_3_light_up_when_accelerating</code>.
+The code presented on this page can be <a href="./Mixing_Colors.ino">downloaded</a> or found in the Arduino examples menu under <code>Examples → SpinWearables → Biology_of_Sight → Mixing_Color</code>.
 </p>
 <div class="flex-container">
-<section id="step-counter-step-3-lighting-up-in-response-to-motion" class="wide-text">
-<h1>Step Counter: Step 3, lighting up in response to motion</h1>
+<section id="biology-of-sight-mixing-colors" class="wide-text">
+<h1>Biology of Sight: Mixing Colors</h1>
+<p>Turning all of the large LEDs to a custom color.</p>
 </section>
 <div class="side-text">
 
@@ -134,30 +135,18 @@ The code presented on this page can be <a href="./StepCounter_3_light_up_when_ac
 <span id="cb1-3"><a href="#cb1-3"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
 <span id="cb1-4"><a href="#cb1-4"></a></span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  Serial.begin(<span class="dv">115200</span>);</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
 <span id="cb1-7"><a href="#cb1-7"></a>  SpinWheel.begin();</span>
 <span id="cb1-8"><a href="#cb1-8"></a>}</span>
 <span id="cb1-9"><a href="#cb1-9"></a></span>
 <span id="cb1-10"><a href="#cb1-10"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-11"><a href="#cb1-11"></a>  SpinWheel.readIMU();</span>
-<span id="cb1-12"><a href="#cb1-12"></a>  <span class="co">// The &quot;sum of the squares&quot; is a common way to measure total ammount of motion independent of direction.</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>  <span class="co">// Mathematicians call it &quot;the norm of the vector describing the motion&quot;.</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>  <span class="dt">float</span> total_acceleration = sqrt(SpinWheel.ax*SpinWheel.ax+SpinWheel.ay*SpinWheel.ay+SpinWheel.az*SpinWheel.az);</span>
-<span id="cb1-15"><a href="#cb1-15"></a>  <span class="co">// This `total_acceleration` includes the effect of the gravitational field even at rest.</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>  <span class="co">// We want only the component of that measurement that is related to motion.</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>  <span class="dt">float</span> kinematic_acceleration = abs(total_acceleration - <span class="fl">1.0</span>); <span class="co">// Kinematic is a fancy word for &quot;related to moving&quot;.</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="co">// Turn on the large LEDs when noticing motion.</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a>  <span class="co">// The intensity for each color goes from 0 to 255 on the SpinWheel,</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>  <span class="co">// so we multiply the value of the kinematic_acceleration by a largish number,</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>  <span class="co">// to make the light more noticeable.</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a>  <span class="dt">int</span> intensity = <span class="dv">20</span>*kinematic_acceleration;</span>
-<span id="cb1-23"><a href="#cb1-23"></a>  <span class="co">// We mix equal red, green, and blue for white light.</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>  SpinWheel.setLargeLEDsUniform(intensity, intensity, intensity);</span>
-<span id="cb1-25"><a href="#cb1-25"></a>  <span class="co">// And we tell the SpinWheel to show the light pattern we registered on the previous line.</span></span>
-<span id="cb1-26"><a href="#cb1-26"></a>  SpinWheel.drawFrame();</span>
-<span id="cb1-27"><a href="#cb1-27"></a>  Serial.print(intensity);</span>
-<span id="cb1-28"><a href="#cb1-28"></a>  Serial.println();</span>
-<span id="cb1-29"><a href="#cb1-29"></a>}</span></code></pre></div>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="co">// Ask the SpinWheel to prepare all large LEDs to</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="co">// show a particular color.</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="co">// **Change the three numbers to a new random color.</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">195</span>, <span class="dv">0</span>, <span class="dv">255</span>);</span>
+<span id="cb1-15"><a href="#cb1-15"></a>  <span class="co">// Make the SpinWheel show the registered color.</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  SpinWheel.drawFrame();</span>
+<span id="cb1-17"><a href="#cb1-17"></a>}</span></code></pre></div>
 </div>
 </div>
 </body>

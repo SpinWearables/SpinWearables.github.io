@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title>BiologyOfSight_1_mixing_colors.ino</title>
+  <title>StepCounter_2_detect_kinematic_acceleration.ino</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -119,12 +119,11 @@ video {
 </head>
 <body>
 <p style="font-size:0.6rem;text-align:center;margin:0;">
-The code presented on this page can be <a href="./BiologyOfSight_1_mixing_colors.ino">downloaded</a> or found in the Arduino examples menu under <code>Examples → SpinWearables → BiologyOfSight_1_mixing_colors</code>.
+The code presented on this page can be <a href="./StepCounter_2_detect_kinematic_acceleration.ino">downloaded</a> or found in the Arduino examples menu under <code>Examples → SpinWearables → Step_Counter → StepCounter_2_detect_kinematic_acceleration</code>.
 </p>
 <div class="flex-container">
-<section id="biology-of-sight-mixing-colors" class="wide-text">
-<h1>Biology of Sight: Mixing Colors</h1>
-<p>Turning all of the large LEDs to a custom color.</p>
+<section id="step-counter-step-2-detect-only-acceleration-due-to-motion" class="wide-text">
+<h1>Step Counter: Step 2, detect only acceleration due to motion</h1>
 </section>
 <div class="side-text">
 
@@ -135,17 +134,21 @@ The code presented on this page can be <a href="./BiologyOfSight_1_mixing_colors
 <span id="cb1-3"><a href="#cb1-3"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
 <span id="cb1-4"><a href="#cb1-4"></a></span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  Serial.begin(<span class="dv">115200</span>);</span>
 <span id="cb1-7"><a href="#cb1-7"></a>  SpinWheel.begin();</span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="co">// Ask the SpinWheel to prepare all large LEDs to</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>  <span class="co">// show a particular color.</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">195</span>, <span class="dv">0</span>, <span class="dv">255</span>);</span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="co">// Make the SpinWheel show the registered color.</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>  SpinWheel.drawFrame();</span>
-<span id="cb1-13"><a href="#cb1-13"></a>}</span>
-<span id="cb1-14"><a href="#cb1-14"></a></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-16"><a href="#cb1-16"></a>}</span></code></pre></div>
+<span id="cb1-8"><a href="#cb1-8"></a>}</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-11"><a href="#cb1-11"></a>  SpinWheel.readIMU();</span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="co">// The &quot;sum of the squares&quot; is a common way to measure total ammount of motion independent of direction.</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="co">// Mathematicians call it &quot;the norm of the vector describing the motion&quot;.</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="dt">float</span> total_acceleration = sqrt(SpinWheel.ax*SpinWheel.ax+SpinWheel.ay*SpinWheel.ay+SpinWheel.az*SpinWheel.az);</span>
+<span id="cb1-15"><a href="#cb1-15"></a>  <span class="co">// This `total_acceleration` includes the effect of the gravitational field even at rest.</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  <span class="co">// We want only the component of that measurement that is related to motion.</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>  <span class="dt">float</span> kinematic_acceleration = abs(total_acceleration - <span class="fl">1.0</span>); <span class="co">// Kinematic is a fancy word for &quot;related to moving&quot;.</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>  Serial.print(kinematic_acceleration);</span>
+<span id="cb1-19"><a href="#cb1-19"></a>  Serial.println();</span>
+<span id="cb1-20"><a href="#cb1-20"></a>}</span></code></pre></div>
 </div>
 </div>
 </body>
