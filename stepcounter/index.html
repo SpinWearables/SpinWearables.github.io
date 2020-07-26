@@ -213,11 +213,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can do this by introducing a minimum <code>threshold</code> under which motion is not counted. We do this by using an <code>if</code> statement of the form <code>if (kinematic_acceleration&gt;threshold)</code>. Without this addition to our code, small vibrations would be falsely included in our count. You can observe this effect in the interactive chart below. In the chart, you can see the grey line depicting the values reported by the motion sensor. By manipulating the slider, you can change the threshold at which values are counted in the total. If the threshold is too low, all the small vibrations detected by the sensor are counted, falsely inflating the total sum. However, by setting the threshold higher, we are able to count only the three very noticeable strong motions (i.e. the peaks that approach a value of 1 on the y-axis): they actually correspond to real steps and need to be counted. But if we set the threshold too high, then none of the motions are counted, and once again, the stepcounter will not work properly.</p>
 <!--TODO: Make the plot fit with the rest of the aesthetics. Maybe use rough.js -->
 <script src='/chart/Chart.bundle.min.js'></script>
+<div style="text-align:center">
 <div>
-<input style="width:30%" type="range" min="0" max="100" value="20" id="thrSlider"> Use this slider to set the threshold.
+<input style="width:30%;" type="range" min="0" max="100" value="20" id="thrSlider"> Use this slider to set the threshold.
 </div>
 <div>
 The threshold is set at <code id="thrView"></code> which leads to a total sum of <code id="thrSum"></code>.
+</div>
 </div>
 <div style="width:100%;height:200px;">
 <canvas id="thresholdchart">
@@ -275,14 +277,16 @@ var thrChart = new Chart(ctx, {
                 ticks: {
                     min:0,
                     max:40
-                }
+                },
+                gridLines: {display: false}
             }],
             yAxes: [{
                 scaleLabel: {labelString: 'value', display: true},
                 ticks: {
                     min:0,
                     max:1
-                }
+                },
+                gridLines: {display: false}
             }]
         }
     }
