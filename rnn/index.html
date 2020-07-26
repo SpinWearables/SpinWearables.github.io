@@ -114,9 +114,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">Gesture Recognition and Recurrent Neural Networks on an Arduino</h1>
 </header>
 <main>
-<p>This lesson is part of the SpinWheel series. The <a href="https://www.kickstarter.com/projects/spinwheel/447670470">SpinWheel</a> is a small Arduino-compatible sensor-enabled wearable device, meant to be used for teaching physics and computer science through an artistic medium. You can support our non-profit <a href="https://www.kickstarter.com/projects/spinwheel/447670470">Kickstarter</a> to help us reach more curious young minds and to get the device and teaching kit showcased in this lesson.</p>
 <div class="intro-box">
-<p>For the majority of our lessons we use the <a href="https://www.kickstarter.com/projects/spinwheel/447670470">SpinWheel</a> and its <a href="https://spinwearables.com">engaging aesthetics</a> as a hook and introduction to many STEM topics accessible to K12 students without prior experience. Here we decided to do something different and show how that same platform can be used to study much more advanced topics. In this writeup we will see:</p>
+<p>For the majority of our lessons we use the SpinWheel and its <a href="https://spinwearables.com">engaging aesthetics</a> as a hook and introduction to many STEM topics accessible to K12 students without prior experience. Here we decided to do something different and show how that same platform can be used to study much more advanced topics. In this writeup we will see:</p>
 <ul>
 <li>simple linear algebra and neural networks on a microcontroller</li>
 <li>hardware speed testing to decide how big of a NN to use</li>
@@ -124,9 +123,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>recording training data from a microcontroller</li>
 <li>visualizing information propagating through the NN</li>
 </ul>
-</div>
-<div class="warning">
-<p>Lessons are still under development!</p>
 </div>
 <h2 id="brief-review-neural-networks-and-recurrent-neural-networks">Brief review: Neural Networks and Recurrent Neural Networks</h2>
 <div class="further-reading">
@@ -326,14 +322,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Even neurons deep in the network seem to respond mostly to the immediate motion measurement, not to the overall gesture. Is this is a desired feature or is it a sign of a bad architectural decision?</li>
 </ul>
 <p>Some of these question go against the standard approach of deep learning, where we just explode the number of training parameters, hopefully making the cost landscape easier to train on. However, such questions of simplifying our neural network might be important when we want to run them on simple underpowered hardware.</p>
-<a href="https://www.kickstarter.com/projects/spinwheel/447670470">
-<figure>
-<img src="/images/kickstarter_support.png">
-</figure>
-<figcaption>
-We are trying to bring similar resources, from the middle-school level to the undergraduate level, to more curious minds. Supporting our non-profit Kickstarter would greatly help us.
-</figcaption>
-<p></a></p>
 <h2 id="next-steps">Next Steps</h2>
 <p>There are a number of important steps to take in order to understand this setup better and improve upon it. The next guide would explore:</p>
 <ul>
