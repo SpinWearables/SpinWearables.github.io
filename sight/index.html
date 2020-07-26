@@ -121,6 +121,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong> Persistence of Vision</strong>: Use the SpinWheel to explore a limitation of our eyes that animators take advantage of.</li>
 </ol>
 </div>
+<div class="warning">
+<p><strong> WARNING: PHOTOSENSITIVITY/EPILEPSY SEIZURES </strong></p>
+<p>Some activities on this page involve flashing colors. If you (or a family member) have epilepsy, please talk to a parent or teacher before continuing.</p>
+</div>
 <p>On one hand, the human eye is a spectacular sensor that far outperforms all our other senses in the amount of information it gives us about our surroundings. On the other hand, it leaves much of the richness of color and light imperceptible to us. Here, we will explore the limitations of this important organ; we will even learn a few ways in which we can trick it into seeing colors that aren’t actually there.</p>
 <h2 id="colors">Colors</h2>
 <p>When light comes from the Sun (or most other sources of illumination), we perceive it as lacking a hue (or, white light). In reality, white light is a mixture of many colors. This mixture can be seen by using a prism to separate the components of the mixture. A prism works by bending, or “refracting”, light at different angles depending on its color, thereby allowing us to see all of the colors that make up white light. This is why if you let sunlight shine through a prism, you can see a rainbow.</p>
@@ -135,14 +139,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="further-reading">
 <p>There is an animal that can (unlike us) detect the difference between a true pure color, and a mixture of colors that fakes the presence of the given color (for humans, the true pure colors we can see are red, green, and blue). This animal is a mantis shrimp, and it has 12 different types of cone cells in its eye. The Oatmeal comic has <a href="https://theoatmeal.com/comics/mantis_shrimp">an informative and entertaining strip about it</a>.</p>
 </div>
-<div class="further-reading">
-<p>You can learn more about the spectrum of light and the physics behind it in the section on <a href="/lightandcolor">Light and Color</a>. Or if you are interested in the study of color as perceived by humans, and how this informs the choice of pigments and colored lights, see the section on <a href="/colortheory">Color Theory</a>.</p>
-</div>
 <p>We can exploit this imperfection of our eyes to make rich colorful displays (such as the screen you are viewing this on!) while using only three colors. For instance, since our eyes cannot distinguish between true purple and a mixture of blue and red, we don’t need a purple light source, only blue and red lights (and green for the other color combinations).</p>
 <p>If you look at a TV screen displaying a white page with a magnifying glass, you will see that it is made out of red, blue, and green dots. Combinations of these red, blue, and green dots make up the colorful displays you are looking at on your screen.</p>
 <figure>
 <img src="/images/bookpics/lcd_pixels_macro.jpg" title="An up-close picture of a computer screen, showing the red, green, and blue subpixels, making up the white background" alt="" /><figcaption>An up-close picture of a computer screen, showing the red, green, and blue subpixels, making up the white background. (image credit to Wikimedia)</figcaption>
 </figure>
+<p>The SpinWheel produces colorful displays using a similar method. If you look closely at a LED light on the SpinWheel, you can see that it contain 3 small light sources: one red, one green and one blue. Combining these lights in different intensities allows for a wide variety of colors to be displayed on the LEDs. This will allow us to program the SpinWheel to display beautiful colorful patterns (while using only a small set of hardware components). 0-255 is the range used by the SpinWheel for the minimum and maximum of red, green, and blue allowed in the mixture (while these numbers look strange to a human, who would probably prefer the range 0-100, computers use binary numbers and it is more efficient to use ranges that are powers of 2, as in <span class="math inline">\(256=2^8\)</span>).</p>
 <p>Below, you can move the sliders to see how all the colors of the rainbow can be made by mixing just red, green, and blue (or our eyes can be convinced of this, even if it is not true).</p>
 <style>
 #colortests {
@@ -201,9 +203,10 @@ document.getElementById("blue").oninput = changeColor;
 changeColor();
 </script>
 </div>
-<p>This will allow us to program the SpinWheel to display beautiful colorful patterns (while using only a small set of hardware components). 0-255 is the range used by the SpinWheel for the minimum and maximum of red, green, and blue allowed in the mixture (while these numbers look strange to a human, who would probably prefer the range 0-100, computers use binary numbers and it is more efficient to use ranges that are powers of 2, as in <span class="math inline">\(256=2^8\)</span>). If you do not have a SpinWheel at hand, you can program the virtual one further down on this page.</p>
-<p>Now let us start programming the SpinWheel to light up in a specific color! You can use the code shown below. First, pick a color you like by changing the sliders above (for instance, we like this purple <code>(195,0,255)</code>) You can make the large LEDs on the SpinWheel display that color by editing the code and uploading it to the SpinWheel or running it on the virtual SpinWheel below. By changing the values in <code>SpinWheel.setLargeLEDsUniform(...)</code> you can have the animation light up in your desired color.</p>
-<p>If you have trouble understanding the commands below, be sure to read our <a href="/quickstart">Quick Start Guide</a>. You can read even more in some of the Computer Science 101 sections, in particular the <a href="/progpatterns">Programming Patterns lesson</a>.</p>
+<div class="further-reading">
+<p>You can learn more about the spectrum of light and the physics behind it in the section on <a href="/lightandcolor">Light and Color</a>. Or if you are interested in the study of color as perceived by humans, and how this informs the choice of pigments and colored lights, see the section on <a href="/colortheory">Color Theory</a>.</p>
+</div>
+<p>Now let us start programming the SpinWheel to light up in a specific color! First, copy the code shown here to a new sketch in the Arduino software. Pick a color you like by changing the sliders above (for instance, we like this purple <code>(195,0,255)</code>) You can make the large LEDs on the SpinWheel display that color by changing the values in <code>SpinWheel.setLargeLEDsUniform(...)</code> . For example, to create our pretty purple color, we would change <code>SpinWheel.setLargeLEDsUniform(0, 0, 0)</code> to <code>SpinWheel.setLargeLEDsUniform(195,0,255)</code>. Finally, save the sketch and upload it to your SpinWheel. If you do not have a SpinWheel at hand, you can program the virtual one further down on this page.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
@@ -212,14 +215,17 @@ changeColor();
 <span id="cb1-6"><a href="#cb1-6"></a>  SpinWheel.begin();</span>
 <span id="cb1-7"><a href="#cb1-7"></a>  <span class="co">// Ask the SpinWheel to prepare all large LEDs to</span></span>
 <span id="cb1-8"><a href="#cb1-8"></a>  <span class="co">// show a particular color.</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">195</span>, <span class="dv">0</span>, <span class="dv">255</span>);</span>
+<span id="cb1-9"><a href="#cb1-9"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
 <span id="cb1-10"><a href="#cb1-10"></a>  <span class="co">// Make the SpinWheel show the registered color.</span></span>
 <span id="cb1-11"><a href="#cb1-11"></a>  SpinWheel.drawFrame();</span>
 <span id="cb1-12"><a href="#cb1-12"></a>}</span>
 <span id="cb1-13"><a href="#cb1-13"></a></span>
 <span id="cb1-14"><a href="#cb1-14"></a><span class="dt">void</span> loop() {</span>
 <span id="cb1-15"><a href="#cb1-15"></a>}</span></code></pre></div>
-<p>You can try this code in the above simulator - this lets you see how your physical SpinWheel would respond if you ran the same code. Below you can change the brightness of each of the red, green, and blue components of the light emitters.</p>
+<div class="further-reading">
+<p>If you have trouble uploading to your SpinWheel, be sure to read our <a href="/quickstart">Quick Start Guide</a>. If you want more explanation about the code shown here, you can read the <a href="/progpatterns">Programming Patterns lesson</a>.</p>
+</div>
+<p>You can try this code in the virtual SpinWheel simulator - this lets you see how your physical SpinWheel would respond if you ran the same code. Below you can change the brightness of each of the red, green, and blue components of the light emitters.</p>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
 <script src='/simspinwheel/simspinwheel.js'></script>
 <div class="ssw-codecontent" data-markdown="0">
@@ -306,8 +312,8 @@ document.getElementById("stop").onclick = stopCycle;
 getT();
 </script>
 </div>
-<p>Since web browsers are not particularly well adapted to this type of rapid color change, the flicker at high speeds is rather unpleasant. However, as you speed up the color changes, you will start to see purple, and the original red and blue will become less clearly distinct. Unlike web browsers, the SpinWheel is up to this task. The following program will cycle between red and blue at variable delays. Experiment with the value for the delay time. At what delay time do you stop distinguishing the two original colors and start seeing only purple?</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">// BE CAREFUL IF YOU SUFFER FROM EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
+<p>Since web browsers are not particularly well adapted to this type of rapid color change, the flicker at high speeds is rather unpleasant. However, as you speed up the color changes, you will start to see purple, and the original red and blue will become less clearly distinct. Unlike web browsers, the SpinWheel is up to this task. The following program will cycle between red and blue at variable delays. Upload it to your SpinWheel and experiment with the value for the delay time by changing the line <code>int delay_time_in_milliseconds = 500;</code>. At what delay time do you stop distinguishing the two original colors and start seeing only purple?</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">// BE CAREFUL IF YOU HAVE EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
 <span id="cb2-4"><a href="#cb2-4"></a></span>
@@ -316,7 +322,7 @@ getT();
 <span id="cb2-7"><a href="#cb2-7"></a>  SpinWheel.begin();</span>
 <span id="cb2-8"><a href="#cb2-8"></a>}</span>
 <span id="cb2-9"><a href="#cb2-9"></a></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">// BE CAREFUL IF YOU SUFFER FROM EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">// BE CAREFUL IF YOU HAVE EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
 <span id="cb2-11"><a href="#cb2-11"></a><span class="co">// Change this value! Experiment!</span></span>
 <span id="cb2-12"><a href="#cb2-12"></a><span class="dt">int</span> delay_time_in_milliseconds = <span class="dv">500</span>;</span>
 <span id="cb2-13"><a href="#cb2-13"></a></span>
@@ -336,7 +342,7 @@ getT();
 <figure>
 <img src="/images/bookpics/fast_pov_streak.jpg" title="Picture of a fast-moving SpinWheel" alt="" /><figcaption>If you move the SpinWheel rapidly in front of your eyes, you will see the purple color separate in two distinct streaks of red and blue.</figcaption>
 </figure>
-<p>These two tools – faking rich colors by combining just red, green, and blue, and faking a complete static image by very rapidly cycling through incomplete images – are the basis for many technologies, and are tools we’ll keep using as we program the SpinWheel in more advanced ways.</p>
+<p>These two tools – faking rich colors by combining just red, green, and blue, and faking a faking one image by rapidly cycling through others – are the basis for many technologies, and are tools we’ll keep using as we program the SpinWheel in more advanced ways.</p>
 <!--TODO: This further reading box seems inappropriate. Use different format for this block-->
 <div class="further-reading">
 <p>To keep exploring, you can try other color combinations! For instance, what happens if you mix red and green? Can you make orange?</p>
