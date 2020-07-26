@@ -158,18 +158,19 @@ The code presented on this page can be <a href="./Grand_Finale.ino">downloaded</
 <span id="cb1-27"><a href="#cb1-27"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>-i, colorWheel(colorChange));</span>
 <span id="cb1-28"><a href="#cb1-28"></a>  }</span>
 <span id="cb1-29"><a href="#cb1-29"></a></span>
-<span id="cb1-30"><a href="#cb1-30"></a></span>
-<span id="cb1-31"><a href="#cb1-31"></a>  <span class="co">// make a snake in the small LEDs</span></span>
-<span id="cb1-32"><a href="#cb1-32"></a>  <span class="co">// if there is sufficient rotation, have the snake rotate</span></span>
-<span id="cb1-33"><a href="#cb1-33"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) { </span>
-<span id="cb1-34"><a href="#cb1-34"></a>    angle = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;    </span>
-<span id="cb1-35"><a href="#cb1-35"></a>  }</span>
-<span id="cb1-36"><a href="#cb1-36"></a></span>
-<span id="cb1-37"><a href="#cb1-37"></a>  <span class="co">// this is a function that we created to display a &quot;snake&quot;</span></span>
-<span id="cb1-38"><a href="#cb1-38"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>);</span>
-<span id="cb1-39"><a href="#cb1-39"></a></span>
-<span id="cb1-40"><a href="#cb1-40"></a>  SpinWheel.drawFrame();</span>
-<span id="cb1-41"><a href="#cb1-41"></a>}</span></code></pre></div>
+<span id="cb1-30"><a href="#cb1-30"></a>  <span class="dt">float</span> total_acceleration = SpinWheel.ax + SpinWheel.ay + SpinWheel.az</span>
+<span id="cb1-31"><a href="#cb1-31"></a>  </span>
+<span id="cb1-32"><a href="#cb1-32"></a>  <span class="co">// make a snake in the small LEDs</span></span>
+<span id="cb1-33"><a href="#cb1-33"></a>  <span class="co">// if there is sufficient motion, have the snake move</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a>  <span class="cf">if</span> (abs(total_acceleration) &gt; <span class="dv">1</span>) { </span>
+<span id="cb1-35"><a href="#cb1-35"></a>    angle = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;    </span>
+<span id="cb1-36"><a href="#cb1-36"></a>  }</span>
+<span id="cb1-37"><a href="#cb1-37"></a></span>
+<span id="cb1-38"><a href="#cb1-38"></a>  <span class="co">// this is a function that we created to display a &quot;snake&quot;</span></span>
+<span id="cb1-39"><a href="#cb1-39"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>);</span>
+<span id="cb1-40"><a href="#cb1-40"></a></span>
+<span id="cb1-41"><a href="#cb1-41"></a>  SpinWheel.drawFrame();</span>
+<span id="cb1-42"><a href="#cb1-42"></a>}</span></code></pre></div>
 </div>
 </div>
 </body>
