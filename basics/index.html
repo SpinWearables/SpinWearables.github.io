@@ -115,7 +115,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="intro-box">
 <p>This document will help you learn the basics of programming the SpinWheel’s LEDs to different color patterns. Before reading this, be sure to read our <a href="/quickstart">quick start guide</a>.</p>
 </div>
-<p>Approach this page the way you would approach the first page of a foreign language you want to learn. Try to pick out separate words and commands that make sense, without worrying about the overall structure, correct syntax, or proper grammar. As time passes and you have learnt new things, come back to this page and see whether you can understand a bit more of it.</p>
+<p>Approach this page the way you would approach the first page of a foreign language you want to learn. Try to pick out separate words and commands that make sense, without worrying about the overall structure, correct syntax, or proper grammar. As time passes and you have learned new things, come back to this page and see whether you can understand a bit more of it.</p>
 <p>In different communities, computer programs are referred to by different names: program, sketch, script, etc. Arduino tends to call them sketches, because in them you sketch out what your device is supposed to do. We also like the name script, because it invokes the idea of a sequence of instructions: the instructions you give to the device and the order in which you want them to be executed.</p>
 <p>Computers are not particularly smart, so you need to be very explicit in your instructions. The particular language we are using imposes a certain structure on our programs. The most bare-bones program would look like this:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">void</span> setup() {</span>
@@ -125,9 +125,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-5"><a href="#cb1-5"></a><span class="dt">void</span> loop() {</span>
 <span id="cb1-6"><a href="#cb1-6"></a></span>
 <span id="cb1-7"><a href="#cb1-7"></a>}</span></code></pre></div>
-<p>This program does absolutely nothing. <span class="footnote">It contains two blocks<span>Marked by the brackets { and }.</span></span> we need to fill out with instructions. The <code>setup</code> which executes only once, immediately after the device is powered up. This block is used for (surprise) setting up any initial conditions we might require.</p>
-<p>And then there is the <code>loop</code> block. This block is executed repeatedly “in a loop”, starting immediately after <code>setup</code> is done and repeating itself until the power is turned off. Most of our instructions will be written in that block. They will frequently take the form of measuring time or motion, and then producing a color or a pattern of colors depending on the measurement.</p>
-<p>A program that is capable of instructing the hardware specific to the SpinWheel (e.g. the LEDs and motion sensor) would require a few more incantations:</p>
+<p>This program does absolutely nothing. It contains two blocks (or sections) of code which start and end with the brackets <code>{</code> and <code>}</code>. For our program to do anything, we need to fill these blocks with instructions. The first block is called <code>setup</code> and executes only once, immediately after the device is powered up. This block is used for (surprise) setting up any initial conditions we might require.</p>
+<p>Next there is the <code>loop</code> block. This block is executed repeatedly “in a loop”, starting immediately after <code>setup</code> is done and repeating itself until the power is turned off. Most of our instructions will be written in that block. They will frequently take the form of measuring time or motion, and then producing a color or a pattern of colors depending on the measurement.</p>
+<p>To produce a program capable of sending instructions to the hardware of the SpinWheel (e.g. the LEDs and motion sensor), our program require a few more lines:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">// Include extra resources and commands</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="co">// specific to the SpinWheel.</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
@@ -142,9 +142,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-12"><a href="#cb2-12"></a><span class="dt">void</span> loop() {</span>
 <span id="cb2-13"><a href="#cb2-13"></a></span>
 <span id="cb2-14"><a href="#cb2-14"></a>}</span></code></pre></div>
-<p>Notice the faded bluish text prepended by two slashes <code>//</code>. This text is called a “comment”, and it is something completely disregarded by the computer. We will use it extensively to write down explanations for the humans that might be reading the code, without worrying about the computer being confused by them.</p>
-<p>The <code>loop</code> block is still empty and this program still will not do anything interesting. However, to great extent our <code>setup</code> function is complete: it prepares the SpinWheel to receive instructions. Through our activities, we will rarely need anything more sophisticated in <code>setup</code>.</p>
-<p>Finally, let us turn on an LED, by simply adding a single command to the block of code we started above.</p>
+<p>Notice the faded bluish lines that begin with two slashes <code>//</code>. This text is called a “comment.” By starting the line with <code>//</code>, the computer is told to completely disregarded everything else on the line. We will use comments extensively to write down explanations for the humans that might be reading the code, without worrying about the computer being confused by them.</p>
+<p>The <code>loop</code> block is still empty and this program still will not do anything interesting. However, to great extent our <code>setup</code> section is complete: it prepares the SpinWheel to receive instructions. Through our activities, we will rarely need anything more sophisticated in <code>setup</code>.</p>
+<p>Finally, let us turn on an LED by simply adding a single command to the block of code we started above.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
 <span id="cb3-3"><a href="#cb3-3"></a></span>
@@ -160,17 +160,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-13"><a href="#cb3-13"></a>  <span class="co">// based on the instructions provided up to here.</span></span>
 <span id="cb3-14"><a href="#cb3-14"></a>  SpinWheel.drawFrame();</span>
 <span id="cb3-15"><a href="#cb3-15"></a>}</span></code></pre></div>
-<p>Try to copy this code in the Arduino software and upload it. It should cause one single large LED to turn on in bright red. Try to modify the <code>setLargeLED</code> line (the first parameter in the parenthesis is the <span class="footnote">number of the affected LED<span>The number goes from 0 to 7.</span></span> and the other <span class="footnote">three numbers are the red, green, and blue components<span>They have to be numbers between 0 (color is off) and 255 (color is on at full brightness).</span></span> of the desired color.)</p>
+<p>Try to copy this code in the Arduino software and upload it to your SpinWheel. It should cause one single large LED to turn on in bright red. You can modify the <code>setLargeLED</code> line to change the appearance of the SpinWheel. The first item (also called “parameters”) in the parenthesis <span class="footnote">identifies the affected LED<span>The number goes from 0 to 7.</span></span> and the other <span class="footnote">three numbers are the red, green, and blue components<span>They have to be numbers between 0 (color is off) and 255 (color is on at full brightness).</span></span> of the desired color.)</p>
 <p>There are a couple more things you might have noticed about the style of this language:</p>
 <ul>
-<li>We tend to have only one “command” per line. This helps with readability.</li>
-<li>Each command is ended by a semicolon <code>;</code>. That makes it easier for the computer to separate different commands.</li>
+<li>We tend to have only one “command” per line. This makes the code more readable.</li>
+<li>Each command is followed by a semicolon <code>;</code>. That makes it easier for the computer to separate different commands.</li>
 <li>Commands tend to be some name followed by parenthesis <code>()</code>.</li>
-<li>Inside these parenthesis we frequently put some extra information: this information can modify exactly how a command performs. For instance in <code>setLargeLED</code> we have one parameter to select the LED we want to modify and three parameters for the color of that LED.</li>
-<li>There certainly are other ways in which LED colors can be modified and motion be detected. We will be discussing many such tools in futures pages.</li>
+<li>Inside these parenthesis we frequently put some extra information: this information can control how a command performs. For instance, in <code>setLargeLED</code> we have one parameter that selects the LED we want to modify and three parameters for the color of that LED.</li>
+<li>There are other ways in which LED colors can be modified and motion be detected. We will be discussing many such tools in futures pages.</li>
 </ul>
 <div class="further-reading">
-<p>If you are already accustomed to programming, you might want to see the <a href="/allcommands">list of all functions provided with the SpinWheel</a>. In either case, we advise you to play with the <a href="/book">SpinWheel examples available in the Arduino software and to peruse the many suggested activities we have prepared for you</a>. If you would like to specifically focusing on learning more about this programming language, you can see our <a href="/progpatterns">programming patterns page</a>.</p>
+<p>We invite you to play with the <a href="/book">SpinWheel examples available in the Arduino software and to peruse the many suggested activities we have prepared for you</a>. If you are already accustomed to programming, you might want to see the <a href="/allcommands">list of all functions provided with the SpinWheel</a>. If you would like to specifically focus on learning more about this programming language, you can see our <a href="/progpatterns">programming patterns page</a>.</p>
 </div>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
