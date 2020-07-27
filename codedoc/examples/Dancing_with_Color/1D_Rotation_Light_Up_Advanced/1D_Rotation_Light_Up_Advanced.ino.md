@@ -54,7 +54,7 @@ int neg_spin = 0;
 ```
 </div>
 <div class="side-text">
-Insturctions in a loop function are repeated over and over again,
+Instructions in a loop function are repeated over and over again,
 in other words, "in a loop".
 </div>
 <div class="code">
