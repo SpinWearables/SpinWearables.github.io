@@ -137,14 +137,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </figure>
 <p>This leads to a problem… If our eyes can sense only red, green, and blue, how come we can see yellow? Our eyes and brains have evolved so that our red- and green-sensing cones both respond slightly to yellow. If our brain detects that both groups of cones are activated, it knows to interpret the color as yellow. And similar compromises are made for the other colors we can detect. For instance, purple activates both red- and blue-sensing cones.</p>
 <div class="further-reading">
-<p>There is an animal that can (unlike us) detect the difference between a true pure color, and a mixture of colors that fakes the presence of the given color (for humans, the true pure colors we can see are red, green, and blue). This animal is the mantis shrimp, and it has 12 different types of cone cells in its eye. The Oatmeal comic has <a href="https://theoatmeal.com/comics/mantis_shrimp">an informative and entertaining strip about it</a>.</p>
+<p>There is an animal that can detect the difference between many more pure colors than us. For humans, the only true pure colors we can see are red, green, and blue (for other colors, we can’t tell a difference between the pure color and a mixture of red, green, and blue light). This animal is the mantis shrimp, and it has 12 different types of cone cells in its eye. The Oatmeal comic has <a href="https://theoatmeal.com/comics/mantis_shrimp">an informative and entertaining strip about it</a>.</p>
 </div>
 <p>We can exploit this imperfection of our eyes to make rich colorful displays (such as the screen you are viewing this on!) while using only three colors. For instance, since our eyes cannot distinguish between true purple and a mixture of blue and red, we don’t need a purple light source, only blue and red lights (and green for the other color combinations).</p>
 <p>If you look at a TV screen displaying a white page with a magnifying glass, you will see that it is made out of red, blue, and green dots. Combinations of these red, blue, and green dots make up the colorful displays you are looking at on your screen.</p>
 <figure>
 <img src="/images/bookpics/lcd_pixels_macro.jpg" title="An up-close picture of a computer screen, showing the red, green, and blue subpixels, making up the white background" alt="" /><figcaption>An up-close picture of a computer screen, showing the red, green, and blue subpixels, making up the white background. (image credit to Wikimedia)</figcaption>
 </figure>
-<p>The SpinWheel produces colorful displays using a similar method. If you look closely at a LED light on the SpinWheel, you can see that it contain 3 small light sources: one red, one green and one blue. Combining these lights in different intensities allows for a wide variety of colors to be displayed on the LEDs. This will allow us to program the SpinWheel to display beautiful colorful patterns (while using only a small set of hardware components). 0-255 is the range used by the SpinWheel for the minimum and maximum of red, green, and blue allowed in the mixture (while these numbers look strange to a human, who would probably prefer the range 0-100, computers use binary numbers and it is more efficient to use ranges that are powers of 2, as in <span class="math inline">\(256=2^8\)</span>).</p>
+<p>The SpinWheel’s colorful display uses a similar method. If you look closely at a LED light on the SpinWheel, you can see that it contain 3 small light sources: one red, one green, and one blue. Combining these lights in different intensities allows for a wide variety of colors to be displayed on the LEDs. This will allow us to program the SpinWheel to display beautiful colorful patterns (while using only a small set of hardware components). 0-255 is the range used by the SpinWheel for the minimum and maximum of red, green, and blue allowed in the mixture (while these numbers look strange to a human, who would probably prefer the range 0-100, computers use binary numbers and it is more efficient to use ranges that are powers of 2, as in <span class="math inline">\(256=2^8\)</span>).</p>
 <p>Below, you can move the sliders to see how all the colors of the rainbow can be made by mixing just red, green, and blue (or our eyes can be convinced of this, even if it is not true).</p>
 <style>
 #colortests {
@@ -203,29 +203,12 @@ document.getElementById("blue").oninput = changeColor;
 changeColor();
 </script>
 </div>
+<p>Now let us start programming the SpinWheel to light up as your favorite color from above!</p>
+<p>First, you can also use the red, green, and blue sliders to determine the amount of red, green, and blue light necessary to make your favorite color.</p>
 <div class="further-reading">
-<p>You can learn more about the spectrum of light and the physics behind it in the section on <a href="/lightandcolor">Light and Color</a>. Or if you are interested in the study of color as perceived by humans, and how this informs the choice of pigments and colored lights, see the section on <a href="/colortheory">Color Theory</a>.</p>
+<p>If you are new to coding, be sure to read our <a href="/quickstart">Quick Start Guide</a> and the <a href="/basics">Basic SpinWheel Code lesson</a>.</p>
 </div>
-<p>Now let us start programming the SpinWheel to light up in a specific color! First, copy the code shown here to a new sketch in the Arduino software. Pick a color you like by changing the sliders above (for instance, we like this purple <code>(195,0,255)</code>) You can make the large LEDs on the SpinWheel display that color by changing the values in <code>SpinWheel.setLargeLEDsUniform(...)</code> . For example, to create our pretty purple color, we would change <code>SpinWheel.setLargeLEDsUniform(0, 0, 0)</code> to <code>SpinWheel.setLargeLEDsUniform(195,0,255)</code>. Finally, save the sketch and upload it to your SpinWheel. If you do not have a SpinWheel at hand, you can program the virtual one further down on this page.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>  SpinWheel.begin();</span>
-<span id="cb1-7"><a href="#cb1-7"></a>}</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="co">// Ask the SpinWheel to prepare all large LEDs to</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="co">// show a particular color.</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
-<span id="cb1-13"><a href="#cb1-13"></a>  <span class="co">// Make the SpinWheel show the registered color.</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>  SpinWheel.drawFrame();</span>
-<span id="cb1-15"><a href="#cb1-15"></a>}</span></code></pre></div>
-<div class="further-reading">
-<p>If you have trouble uploading to your SpinWheel, be sure to read our <a href="/quickstart">Quick Start Guide</a>. If you want more explanation about the code shown here, you can read the <a href="/progpatterns">Programming Patterns lesson</a>.</p>
-</div>
-<p>Instead of copying the code, you can also find a complete example in the Arduino examples menu under <code>Examples → SpinWearables → Biology_of_Sight →  Mixing_Colors</code>. You can try this code in the virtual SpinWheel simulator below - this lets you see how your physical SpinWheel would respond if you ran the same code. Below you can change the brightness of each of the red, green, and blue components of the light emitters.</p>
+<p>To begin, let’s try changing the code in the browser. We have created a virtual SpinWheel simulator to let you see how your physical SpinWheel would respond if you ran the same code. This makes it easy to quickly see how a particular change would affect the SpinWheel without waiting for the code to upload to the SpinWheel.</p>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
 <script src='/simspinwheel/simspinwheel.js'></script>
 <div class="ssw-codecontent" data-markdown="0">
@@ -236,12 +219,18 @@ void setup() {
 void loop() {
 </pre>
 <textarea class="ssw-codeblock">
-  SpinWheel.setLargeLEDsUniform(195, 0, 255);
+  SpinWheel.setLargeLEDsUniform(255, 255, 255);
 </textarea>
 <pre class="ssw-codeblock">
   SpinWheel.drawFrame();
 }
 </pre>
+</div>
+<p>What happens when you hit run?</p>
+<p>To have the SpinWheel light up another color other than white, you can change the large LEDs on the SpinWheel display that color by changing the values in <code>SpinWheel.setLargeLEDsUniform(...)</code>. For example, to create a pretty purple color that we like, we would change <code>SpinWheel.setLargeLEDsUniform(255, 255, 255)</code> to <code>SpinWheel.setLargeLEDsUniform(195,0,255)</code>. This purple is created by changing the first component to <code>195</code> to represent the addition of red light, the green component to <code>0</code>, and the blue component to <code>255</code>. Try making this change above (or choose your favorite color that you picked above).</p>
+<p>To change the color of the large LEDs on your SpinWheel, you can find the complete sketch in the Arduino examples menu under <code>Examples → SpinWearables → Biology_of_Sight →  Mixing_Colors</code>. You can then change the color of the SpinWheel’s LEDs to whatever color you would like. After you have made any changes you want to that Arduino sketch, you will be prompted to save the sketch in a new location. Finally, you can upload it to your SpinWheel and see it light up as your favorite color!</p>
+<div class="further-reading">
+<p>You can learn more about the spectrum of light and the physics behind it in our lesson on <a href="/lightandcolor">Light and Color</a>. Or if you are interested in the study of color as perceived by humans, and how this informs the choice of pigments and colored lights, see our lesson on <a href="/colortheory">Color Theory</a>.</p>
 </div>
 <h2 id="persistence-of-vision">Persistence of Vision</h2>
 <p>Our eyes have another imperfection that we can take advantage of while programming the SpinWheel: they are rather slow at perceiving changes when compared to the speed that electronics can operate at! This is often described as the persistence of vision. Consider the example below, where you can select the speed at which a shade of blue and a shade of red switch between each other.</p>
@@ -314,33 +303,32 @@ document.getElementById("stop").onclick = stopCycle;
 getT();
 </script>
 </div>
-<p>Since web browsers are not particularly well adapted to this type of rapid color change, the flicker at high speeds is rather unpleasant. However, as you speed up the color changes, you will start to see purple, and the original red and blue will become less clearly distinct. Unlike web browsers, the SpinWheel is up to this task. The following program will cycle between red and blue at variable delays. Upload it to your SpinWheel and experiment with the value for the delay time by changing the line <code>int delay_time_in_milliseconds = 500;</code>. At what delay time do you stop distinguishing the two original colors and start seeing only purple?</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">// BE CAREFUL IF YOU HAVE EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="dt">void</span> setup() {</span>
-<span id="cb2-6"><a href="#cb2-6"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>  SpinWheel.begin();</span>
-<span id="cb2-8"><a href="#cb2-8"></a>}</span>
-<span id="cb2-9"><a href="#cb2-9"></a></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">// BE CAREFUL IF YOU HAVE EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">// Change this value! Experiment!</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="dt">int</span> delay_time_in_milliseconds = <span class="dv">500</span>;</span>
-<span id="cb2-13"><a href="#cb2-13"></a></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="dt">void</span> loop() {</span>
-<span id="cb2-15"><a href="#cb2-15"></a>  <span class="co">// Show red...</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
-<span id="cb2-17"><a href="#cb2-17"></a>  SpinWheel.drawFrame();</span>
-<span id="cb2-18"><a href="#cb2-18"></a>  <span class="co">// Wait...</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>  delay(delay_time_in_milliseconds);</span>
-<span id="cb2-20"><a href="#cb2-20"></a>  <span class="co">// Show blue...</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>);</span>
-<span id="cb2-22"><a href="#cb2-22"></a>  SpinWheel.drawFrame();</span>
-<span id="cb2-23"><a href="#cb2-23"></a>  <span class="co">// Wait...</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a>  delay(delay_time_in_milliseconds);  </span>
-<span id="cb2-25"><a href="#cb2-25"></a>}</span></code></pre></div>
-<p>This code is also available in the Arduino examples menu under <code>Examples → SpinWearables → Biology_of_Sight →  Persistence_of_Vision</code>.</p>
+<p>Since web browsers are not particularly well adapted to this type of rapid color change, the flicker at high speeds is rather unpleasant. However, as you speed up the color changes, you will start to see purple, and the original red and blue will become less clearly distinct. Unlike web browsers, the SpinWheel is up to this task. The following program will cycle between red and blue at variable delays. You can find this code in the examples menu under <code>Examples → SpinWearables → Biology_of_Sight →  Persistence_of_Vision</code>. Upload it to your SpinWheel and experiment with the value for the delay time by changing the line <code>int delay_time_in_milliseconds = 500;</code>. At what delay time do you stop distinguishing the two original colors and start seeing only purple?</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">// BE CAREFUL IF YOU HAVE EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="dt">void</span> setup() {</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  SpinWheel.begin();</span>
+<span id="cb1-8"><a href="#cb1-8"></a>}</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">// BE CAREFUL IF YOU HAVE EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co">// Change this value! Experiment!</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="dt">int</span> delay_time_in_milliseconds = <span class="dv">500</span>;</span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-15"><a href="#cb1-15"></a>  <span class="co">// Show red...</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
+<span id="cb1-17"><a href="#cb1-17"></a>  SpinWheel.drawFrame();</span>
+<span id="cb1-18"><a href="#cb1-18"></a>  <span class="co">// Wait...</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>  delay(delay_time_in_milliseconds);</span>
+<span id="cb1-20"><a href="#cb1-20"></a>  <span class="co">// Show blue...</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>);</span>
+<span id="cb1-22"><a href="#cb1-22"></a>  SpinWheel.drawFrame();</span>
+<span id="cb1-23"><a href="#cb1-23"></a>  <span class="co">// Wait...</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>  delay(delay_time_in_milliseconds);  </span>
+<span id="cb1-25"><a href="#cb1-25"></a>}</span></code></pre></div>
 <p>Right at the point where the red and blue stop being observable on their own, you can perform another experiment that showcases the persistence of vision effect. Instead of keeping the SpinWheel still, start shaking it back and forth rapidly. By doing this, the light emitters will be in different locations in space when they emit either red or blue, and this will let you once again distinguish the two colors (and stop seeing purple). Once you stop shaking the device, it will once again look purple.</p>
 <figure>
 <img src="/images/bookpics/fast_pov_streak.jpg" title="Picture of a fast-moving SpinWheel" alt="" /><figcaption>If you move the SpinWheel rapidly in front of your eyes, you will see the purple color separate in two distinct streaks of red and blue.</figcaption>

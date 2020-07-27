@@ -1,5 +1,10 @@
 <div class="flex-container"><div class="wide-text">
 # Dancing with Color: Step x, changing color in response to rotation in the z-direction.
+Here we go through in detail how to change the color of the SpinWheel in 
+response to the rotation of the device. For more information and other 
+examples, [click here](https://spinwearables.com/dancing/).
+</div>
+<div class="side-text">
 </div>
 <div class="code">
 ```cpp
@@ -12,7 +17,6 @@ They allow the program to access a set of tools for the SpinWheel for us to use.
 </div>
 <div class="code">
 ```cpp
-
 #include "SpinWearables.h"
 using namespace SpinWearables;
 
@@ -28,6 +32,7 @@ called `SpinWheel.begin()` which prepares all the LEDs to accept new colors.
 void setup() {
   SpinWheel.begin();
 }
+
 ```
 </div>
 <div class="side-text">
@@ -50,10 +55,10 @@ motion of the SpinWheel itself.
 ```cpp
   int spinning = 0;
  
+
 ```
 </div>
 <div class="side-text">
-
 The `readIMU` function checks if the sensor is ready
 and takes its current rotation data, which we will
 use below to change the color.  
@@ -95,8 +100,7 @@ In this case, if the SpinWheel is spinning, we will use
   SpinWheel.drawFrame();
  }
   
+
 ```
-</div>
-<div class="side-text">
 </div>
 </div>

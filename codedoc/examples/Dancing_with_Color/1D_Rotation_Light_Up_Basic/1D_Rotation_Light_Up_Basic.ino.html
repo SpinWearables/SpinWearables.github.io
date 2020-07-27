@@ -124,7 +124,11 @@ The code presented on this page can be <a href="./1D_Rotation_Light_Up_Basic.ino
 <div class="flex-container">
 <section id="dancing-with-color-step-x-changing-color-in-response-to-rotation-in-the-z-direction." class="wide-text">
 <h1>Dancing with Color: Step x, changing color in response to rotation in the z-direction.</h1>
+<p>Here we go through in detail how to change the color of the SpinWheel in response to the rotation of the device. For more information and other examples, <a href="https://spinwearables.com/dancing/">click here</a>.</p>
 </section>
+<div class="side-text">
+
+</div>
 <div class="code">
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"></code></pre></div>
 </div>
@@ -132,9 +136,8 @@ The code presented on this page can be <a href="./1D_Rotation_Light_Up_Basic.ino
 <p>You’ve probably seen these <code>include</code> statements in some of the other code examples. They allow the program to access a set of tools for the SpinWheel for us to use.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>The instructions we write in the <code>setup</code> block are executed once when the SpinWheel device powers on. We run one single instruction called <code>SpinWheel.begin()</code> which prepares all the LEDs to accept new colors.</p>
@@ -180,9 +183,6 @@ In this case, if the x rotation (gx) is large enough, then we will change the co
 <span id="cb8-2"><a href="#cb8-2"></a>  SpinWheel.drawFrame();</span>
 <span id="cb8-3"><a href="#cb8-3"></a> }</span>
 <span id="cb8-4"><a href="#cb8-4"></a>  </span></code></pre></div>
-</div>
-<div class="side-text">
-
 </div>
 </div>
 </body>
