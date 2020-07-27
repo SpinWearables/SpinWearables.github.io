@@ -121,7 +121,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="from-an-empty-sketch">From an Empty Sketch</h2>
 <p>We will build our Step Counter program step by step, starting with this empty sketch. A good first step is to write some simple test code that just prints a few messages, confirming that your device is still functioning. For instance, copy the following code into your file. This code, once running on the SpinWheel, will repeatedly send the message “I am working!” to the computer that your SpinWheel is attached to. As always, we will add comments to the code, so that the purpose of each line is explained. (A comment is a line of code that is not run by the computer, but meant to be interpreted by humans. In this code, comment lines start with <code>//</code>).</p>
 <div class="further-reading">
-<p>You can consult our <a href="/progpatterns">Programming Patterns page</a> to remind yourself how to read the computer code shown below.</p>
+<p>You can consult our <a href="/basics">SpinWheel basic commands page</a> to remind yourself how to read the computer code shown below. For more details about coding itself, check out the <a href="/progpatterns">Programming Patterns page</a>.</p>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
@@ -148,7 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We will also send this value to the computer connected to the SpinWheel to confirm that everything is working. The command <code>Serial.print(total_acceleration)</code> does just this. Once the code is running on the SpinWheel, we can use <code>Tools -&gt; Serial Plotter</code> in the Arduino software to visualize the results.</p>
 <video src="/images/bookpics/stepcounter_nolights.mp4" muted autoplay playsinline loop>
 </video>
-<p>Here is all the code put together:</p>
+<p>Here is all the code put together (if you want to open this sketch in the Arduino software to add it to your SpinWheel, navigate to <code>Examples → SpinWearables → Step_Counter →  Detect_Total_Acceleration</code>):</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
 <span id="cb2-3"><a href="#cb2-3"></a></span>
@@ -173,7 +173,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To further explore why we can trick our brains to perceive a mixture of red, green, and blue colors as white, check out the <a href="/sight">“Biology of Sight” activity</a>.</p>
 </div>
 <p>The intensity of each color will be proportional to the detected acceleration. However, you might have noticed that the <code>total_acceleration</code> value is 1, not 0, at rest. This is because the motion sensor (called an accelerometer) cannot distinguish between the force of gravity acting on it at all times, and the forces of inertia acting on it when you shake it. To account for that, we subtract 1 (the magnitude of gravity) from <code>total_acceleration</code>. This is how we obtain <code>kinematic_acceleration = total_acceleration - 1</code>. “Kinematic” is a fancy word physicists use to refer to things related to motion. We calculate intensity based on that value with <code>intensity = 20*kinematic_acceleration</code> and use it in the <code>setLargeLEDsUniform</code> function. We chose a factor of 20 in order to make the LEDs brighter.</p>
-<p>Below you can see the code to perform this task.</p>
+<p>Here is all the code put together (you can find it in <code>Examples → SpinWearables → Step_Counter →  Detect_Kinematic_Acceleration</code>):</p>
 <div class="further-reading">
 <p>There are a lot of intricate facts about motion and gravity that relate to why our motion sensor can not distinguish between the two. You can read more about it in the section on <a href="./inertia">“Inertial reference frames and Free fall”</a>, which will also explain why <code>total_acceleration</code> at rest, as measured by our sensor, is 1 unit. Einstein himself was thinking about this everyday fact when he was developing the general theory of relativity.</p>
 </div>
@@ -294,7 +294,7 @@ var thrChart = new Chart(ctx, {
 thrUpdate();
 </script>
 <p>Finally, we use the 12 smaller LEDs in order to show the value of <code>total_motion</code>. If <code>total_motion</code> is 1, we light up only the first LED. If it is 5, we light up the first five LEDs, and so on. We use the <code>SpinWheel.setSmallLEDs()</code> function to do this.</p>
-<p>Below you can see the code in its entirety, and <a href="#stepcounter-sim1">at the bottom of the page</a> you can try running it on a virtual SpinWheel.</p>
+<p>Below you can see the code in its entirety, and <a href="#stepcounter-sim1">at the bottom of the page</a> you can try running it on a virtual SpinWheel. To add this code to your SpinWheel, go to <code>Examples → SpinWearables → Step_Counter →  Fancy_Step_Counter</code>):</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
 <span id="cb4-3"><a href="#cb4-3"></a></span>

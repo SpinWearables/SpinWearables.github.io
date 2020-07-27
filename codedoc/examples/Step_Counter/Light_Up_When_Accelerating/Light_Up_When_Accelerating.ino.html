@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title>Smoother_Blink.ino</title>
+  <title>Light_Up_When_Accelerating.ino</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -119,12 +119,11 @@ video {
 </head>
 <body>
 <p style="font-size:0.6rem;text-align:center;margin:0;">
-The code presented on this page can be <a href="./Smoother_Blink.ino">downloaded</a> or found in the Arduino examples menu under <code>Examples → SpinWearables → Animations_and_Patterns → Smoother_Blink</code>.
+The code presented on this page can be <a href="./Light_Up_When_Accelerating.ino">downloaded</a> or found in the Arduino examples menu under <code>Examples → SpinWearables → Step_Counter → Light_Up_When_Accelerating</code>.
 </p>
 <div class="flex-container">
-<section id="a-smoother-blink-animation-using-a-timer" class="wide-text">
-<h1>A Smoother Blink Animation Using a Timer</h1>
-<p>In our <a href="https://spinwearables.com/animation/">animations and patterns</a> lesson we describe how an animation can be created by instructing a computer to make a particular drawing dependent on a single number, the current time. The first example we considered, <a href="../Simple_Blink">Simple_Blink</a>, has somewhat abrupt change from bright to dark. Here we use the <code>triangularWave</code> function to make the pulsing pattern more pleasant and less abrupt. Some pieces of code are the same as in previous examples from this series on coded animations, We do not comment them as extensively here, but consult the <code>Simple_Blink</code> example if you need a refresher.</p>
+<section id="step-counter-step-3-lighting-up-in-response-to-motion" class="wide-text">
+<h1>Step Counter: Step 3, lighting up in response to motion</h1>
 </section>
 <div class="side-text">
 
@@ -135,26 +134,30 @@ The code presented on this page can be <a href="./Smoother_Blink.ino">downloaded
 <span id="cb1-3"><a href="#cb1-3"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
 <span id="cb1-4"><a href="#cb1-4"></a></span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  SpinWheel.begin();</span>
-<span id="cb1-7"><a href="#cb1-7"></a>}</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="dt">int</span> t = millis();</span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="dt">int</span> t_repeating = t % <span class="dv">2500</span>;</span></code></pre></div>
-</div>
-<div class="side-text">
-<p>The triangularWave function has a period of 256 and provides for a smooth ramp-up and ramp-down.</p>
-</div>
-<div class="code">
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a>  <span class="dt">int</span> b = triangularWave(t_repeating / <span class="dv">10</span>);</span></code></pre></div>
-</div>
-<div class="side-text">
-<p>The next function takes three arguments: The red, green, and blue components of the color we desire. We are mixing only red and blue, setting green to zero.</p>
-</div>
-<div class="code">
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a>  SpinWheel.setLargeLEDsUniform(b, <span class="dv">0</span>, b);</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  SpinWheel.drawFrame();</span>
-<span id="cb3-3"><a href="#cb3-3"></a>}</span></code></pre></div>
+<span id="cb1-6"><a href="#cb1-6"></a>  Serial.begin(<span class="dv">115200</span>);</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  SpinWheel.begin();</span>
+<span id="cb1-8"><a href="#cb1-8"></a>}</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-11"><a href="#cb1-11"></a>  SpinWheel.readIMU();</span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="co">// The &quot;sum of the squares&quot; is a common way to measure total ammount of motion independent of direction.</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="co">// Mathematicians call it &quot;the norm of the vector describing the motion&quot;.</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="dt">float</span> total_acceleration = sqrt(SpinWheel.ax*SpinWheel.ax+SpinWheel.ay*SpinWheel.ay+SpinWheel.az*SpinWheel.az);</span>
+<span id="cb1-15"><a href="#cb1-15"></a>  <span class="co">// This `total_acceleration` includes the effect of the gravitational field even at rest.</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  <span class="co">// We want only the component of that measurement that is related to motion.</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>  <span class="dt">float</span> kinematic_acceleration = abs(total_acceleration - <span class="fl">1.0</span>); <span class="co">// Kinematic is a fancy word for &quot;related to moving&quot;.</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>  <span class="co">// Turn on the large LEDs when noticing motion.</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>  <span class="co">// The intensity for each color goes from 0 to 255 on the SpinWheel,</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>  <span class="co">// so we multiply the value of the kinematic_acceleration by a largish number,</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>  <span class="co">// to make the light more noticeable.</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="dt">int</span> intensity = <span class="dv">20</span>*kinematic_acceleration;</span>
+<span id="cb1-23"><a href="#cb1-23"></a>  <span class="co">// We mix equal red, green, and blue for white light.</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>  SpinWheel.setLargeLEDsUniform(intensity, intensity, intensity);</span>
+<span id="cb1-25"><a href="#cb1-25"></a>  <span class="co">// And we tell the SpinWheel to show the light pattern we registered on the previous line.</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a>  SpinWheel.drawFrame();</span>
+<span id="cb1-27"><a href="#cb1-27"></a>  Serial.print(intensity);</span>
+<span id="cb1-28"><a href="#cb1-28"></a>  Serial.println();</span>
+<span id="cb1-29"><a href="#cb1-29"></a>}</span></code></pre></div>
 </div>
 </div>
 </body>

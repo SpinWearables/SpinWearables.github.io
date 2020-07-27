@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title>StepCounter_1_detect_total_acceleration.ino</title>
+  <title>Fancy_Step_Counter.ino</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -119,11 +119,12 @@ video {
 </head>
 <body>
 <p style="font-size:0.6rem;text-align:center;margin:0;">
-The code presented on this page can be <a href="./StepCounter_1_detect_total_acceleration.ino">downloaded</a> or found in the Arduino examples menu under <code>Examples → SpinWearables → Step_Counter → StepCounter_1_detect_total_acceleration</code>.
+The code presented on this page can be <a href="./Fancy_Step_Counter.ino">downloaded</a> or found in the Arduino examples menu under <code>Examples → SpinWearables → Step_Counter → Fancy_Step_Counter</code>.
 </p>
 <div class="flex-container">
-<section id="step-counter-step-1-read-the-motion-sensor" class="wide-text">
-<h1>Step Counter: Step 1, read the motion sensor</h1>
+<section id="step-counter-complete" class="wide-text">
+<h1>Step Counter, Complete</h1>
+<p>We use a slightly fancier light-up pattern, where we rapidly brighten the LEDs in the presence of motion and only slowly dim them to darkness when at rest.</p>
 </section>
 <div class="side-text">
 
@@ -138,14 +139,25 @@ The code presented on this page can be <a href="./StepCounter_1_detect_total_acc
 <span id="cb1-7"><a href="#cb1-7"></a>  SpinWheel.begin();</span>
 <span id="cb1-8"><a href="#cb1-8"></a>}</span>
 <span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-11"><a href="#cb1-11"></a>  SpinWheel.readIMU();</span>
-<span id="cb1-12"><a href="#cb1-12"></a>  <span class="co">// The &quot;sum of the squares&quot; is a common way to measure total ammount of motion independent of direction.</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>  <span class="co">// Mathematicians call it &quot;the norm of the vector describing the motion&quot;.</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>  <span class="dt">float</span> total_acceleration = sqrt(SpinWheel.ax*SpinWheel.ax+SpinWheel.ay*SpinWheel.ay+SpinWheel.az*SpinWheel.az);</span>
-<span id="cb1-15"><a href="#cb1-15"></a>  Serial.print(total_acceleration);</span>
-<span id="cb1-16"><a href="#cb1-16"></a>  Serial.println();</span>
-<span id="cb1-17"><a href="#cb1-17"></a>}</span></code></pre></div>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="dt">float</span> total_motion = <span class="dv">0</span>;</span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="dt">float</span> threshold = <span class="fl">0.1</span>;</span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="dt">float</span> conversion_factor = <span class="fl">0.3</span>;</span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="dt">float</span> filtered_intensity = <span class="dv">0</span>;</span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-16"><a href="#cb1-16"></a>  SpinWheel.readIMU();</span>
+<span id="cb1-17"><a href="#cb1-17"></a>  <span class="dt">float</span> total_acceleration = sqrt(SpinWheel.ax*SpinWheel.ax+SpinWheel.ay*SpinWheel.ay+SpinWheel.az*SpinWheel.az);</span>
+<span id="cb1-18"><a href="#cb1-18"></a>  <span class="dt">float</span> kinematic_acceleration = abs(total_acceleration - <span class="fl">1.0</span>);</span>
+<span id="cb1-19"><a href="#cb1-19"></a>  filtered_intensity = faston_slowoff(filtered_intensity, <span class="dv">20</span>*kinematic_acceleration, <span class="fl">0.1</span>);</span>
+<span id="cb1-20"><a href="#cb1-20"></a>  <span class="dt">int</span> intensity = filtered_intensity;</span>
+<span id="cb1-21"><a href="#cb1-21"></a>  SpinWheel.setLargeLEDsUniform(intensity, intensity/<span class="dv">2</span>, intensity);</span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="cf">if</span> (kinematic_acceleration&gt;threshold) {</span>
+<span id="cb1-23"><a href="#cb1-23"></a>    total_motion = total_motion+conversion_factor*kinematic_acceleration;</span>
+<span id="cb1-24"><a href="#cb1-24"></a>  }</span>
+<span id="cb1-25"><a href="#cb1-25"></a>  SpinWheel.setSmallLEDs(<span class="dv">0</span>,min(total_motion, <span class="dv">12</span>),<span class="dv">255</span>,<span class="dv">255</span>,<span class="dv">255</span>);</span>
+<span id="cb1-26"><a href="#cb1-26"></a>  SpinWheel.drawFrame();</span>
+<span id="cb1-27"><a href="#cb1-27"></a>  <span class="co">//Serial.println(kinematic_acceleration);</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a>}</span></code></pre></div>
 </div>
 </div>
 </body>
