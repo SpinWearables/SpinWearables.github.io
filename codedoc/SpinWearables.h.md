@@ -716,6 +716,19 @@ void smallWhiteRotating() {
 ```
 </div>
 <div class="side-text">
+#### Snake
+Create a rotating pattern similar to a snake on the small LEDs.
+</div>
+<div class="code">
+```cpp
+void snake() {
+   uint8_t angle = (millis()>>4)&0xff;
+   SpinWheel.setSmallLEDsPointer(angle, 500, 0xffffff);
+}
+
+```
+</div>
+<div class="side-text">
 #### Breathing
 A pulsing pattern on all of the LEDs.
 </div>

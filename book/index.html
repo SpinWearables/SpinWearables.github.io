@@ -63,6 +63,7 @@ jQuery(function(){
   var graph = new Springy.Graph();
 
   var quick = graph.newNode({label: "Quick Start"});
+  var basic = graph.newNode({label: "Basic SpinWheel Commands"});
   var sight = graph.newNode({label: "Biology of Sight"});
   var strobe = graph.newNode({label: "Stroboscope"});
   var ani = graph.newNode({label: "Animations and Patterns"});
@@ -77,17 +78,18 @@ jQuery(function(){
   var magnet = graph.newNode({label: "Magnetism"});
   var vector = graph.newNode({label: "Vectors and Kinematics"});
   
-  graph.newEdge(quick, sight); 
-  graph.newEdge(quick, strobe);
-  graph.newEdge(quick, ani); 
+  graph.newEdge(quick, basic);
+  graph.newEdge(basic, sight); 
+  graph.newEdge(basic, strobe);
+  graph.newEdge(basic, ani); 
   graph.newEdge(sight, light); 
   graph.newEdge(light, colortheory); 
   graph.newEdge(ani, step); 
   graph.newEdge(ani, progpatterns); 
-  graph.newEdge(progpatterns, dance);
+  graph.newEdge(ani, dance);
   graph.newEdge(dance, compass); 
   graph.newEdge(compass, magnet);
-  graph.newEdge(dance, inertia); 
+  graph.newEdge(step, compass);
   graph.newEdge(dance, vector); 
   graph.newEdge(vector, rotation); 
   graph.newEdge(step, inertia);
@@ -103,7 +105,7 @@ jQuery(function(){
 </script>
 <canvas id="springymap" width="800" height="600">
 </canvas>
-<p>Are you looking for a suggestion of where to start? Below we have our recommended order. However, this is just a recommendation! Depending on which activities you are excited by and your comfort with programming, then you may jump around.</p>
+<p>There is a lot going on in the map above, so below we have our recommended order for completing the lessons and adventures. However, this is just a recommendation! Depending on which activities you are excited by and your comfort with programming, then you may jump around.</p>
 <h2 id="getting-started">Getting Started</h2>
 <p>Before doing anything else, we encourage you to read the <a href="/quickstart">Initial Setup Guide</a>. This is where we explain how to download the Arduino software and provide essential information for the rest of the adventures.</p>
 <p>To learn the basics of controlling the LEDs, then check out our <a href="/basics">SpinWheel Programming Reference</a>. Skim through that page without necessarily trying to understand the code shown there. Use it to establish a vague intuition about the code and use that intuition in the first few adventures. Then go back to this page and try to read it again with the new knowledge of programming you have gained.</p>
