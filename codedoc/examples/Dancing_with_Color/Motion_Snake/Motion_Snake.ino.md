@@ -57,12 +57,13 @@ and takes its current rotation data.
 Use an **if statement** to check to see if the rotation is
 large enough. If the rotation is large enough, then 
 `SpinWheel.snake()` creates a snake-like pattern 
-on the device.
+on the device. Here we use (0,255,0) to make the 
+snake green, but you can use any color you like. 
 </div>
 <div class="code">
 ```cpp
   if (abs(SpinWheel.gx) > 1) { 
-     SpinWheel.snake();
+     SpinWheel.snake(0,255,0);
   }
 
   

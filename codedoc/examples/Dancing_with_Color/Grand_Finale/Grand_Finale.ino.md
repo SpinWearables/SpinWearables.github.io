@@ -36,10 +36,9 @@ void setup() {
   SpinWheel.begin();
 }
 
+
 int offset = 0;
 int colorChange;
-
-uint8_t angle;
 
 ```
 </div>
@@ -59,13 +58,33 @@ and takes its current rotation data.
 <div class="code">
 ```cpp
   SpinWheel.readIMU();
-  // if rotation is fast, add a step to the offset
+```
+</div>
+<div class="side-text">
+Here, we use an **if statement** to check if 
+the rotation is fast. If this is true, then add 
+a step to the offset.
+</div>
+<div class="code">
+```cpp
   if (abs(SpinWheel.gx) > 1) {
     offset = SpinWheel.gx*100; 
     Serial.println(offset);
   }
 
-  // make the rainbow in the large LEDs
+```
+</div>
+<div class="side-text">
+Here we will use a **for loop**. Similar to the 
+`loop` function, instructions inside the for loop
+repeat. In this case the insturctions inside the 
+for loop will repeat four times as specified by the 
+`i < 4`. This will make a rainbow in the large LEDs
+with a color change specified by the movement of the 
+device. 
+</div>
+<div class="code">
+```cpp
   for (int i=0; i<4; i++) {
     colorChange = offset+i*255/4;
     Serial.println(colorChange);
@@ -73,16 +92,32 @@ and takes its current rotation data.
     SpinWheel.setLargeLED(7-i, colorWheel(colorChange));
   }
 
-  float total_acceleration = SpinWheel.ax + SpinWheel.ay + SpinWheel.az
+```
+</div>
+<div class="side-text">
+Here we define the total acceleration as the 
+sum of the acceleration in the x,y,and z directions.
+</div>
+<div class="code">
+```cpp
+  float total_acceleration = SpinWheel.ax + SpinWheel.ay + SpinWheel.az;
   
-  // make a snake in the small LEDs
-  // if there is sufficient motion, have the snake move
+```
+</div>
+<div class="side-text">
+Here we use an **if statement** to check to see if the 
+the total acceleration is large enough. If it is, 
+then we will create a snake on the small LEDs using
+`SpinWheel.snake()`. Here we use (0,255,0) to make the 
+snake green, but you can use any color you like! 
+</div>
+<div class="code">
+```cpp
   if (abs(total_acceleration) > 1) { 
-    angle = (millis()>>4)&0xff;    
+     SpinWheel.snake(0,255,0);
   }
 
-  // this is a function that we created to display a "snake"
-  SpinWheel.setSmallLEDsPointer(angle, 500, 0, 255, 255);
+
 
   SpinWheel.drawFrame();
 }

@@ -688,12 +688,12 @@ x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> i
 </div>
 <section id="snake" class="side-text">
 <h4>Snake</h4>
-<p>Create a rotating pattern similar to a snake on the small LEDs.</p>
+<p>Create a rotating pattern similar to a snake on the small LEDs with a color given by (r, g, b).</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb42"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb42-1"><a href="#cb42-1"></a><span class="dt">void</span> snake() {</span>
+<div class="sourceCode" id="cb42"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb42-1"><a href="#cb42-1"></a><span class="dt">void</span> snake(<span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
 <span id="cb42-2"><a href="#cb42-2"></a>   <span class="dt">uint8_t</span> angle = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;</span>
-<span id="cb42-3"><a href="#cb42-3"></a>   SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
+<span id="cb42-3"><a href="#cb42-3"></a>   SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, r, g, b);</span>
 <span id="cb42-4"><a href="#cb42-4"></a>}</span></code></pre></div>
 </div>
 <section id="breathing" class="side-text">

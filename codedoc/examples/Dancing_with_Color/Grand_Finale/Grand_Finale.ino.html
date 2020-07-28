@@ -147,10 +147,9 @@ The code presented on this page can be <a href="./Grand_Finale.ino">downloaded</
 <span id="cb3-2"><a href="#cb3-2"></a>  SpinWheel.begin();</span>
 <span id="cb3-3"><a href="#cb3-3"></a>}</span>
 <span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="dt">int</span> offset = <span class="dv">0</span>;</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="dt">int</span> colorChange;</span>
-<span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="dt">uint8_t</span> angle;</span></code></pre></div>
+<span id="cb3-5"><a href="#cb3-5"></a></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="dt">int</span> offset = <span class="dv">0</span>;</span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="dt">int</span> colorChange;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Instructions in a loop function are repeated over and over again, in other words, “in a loop”.</p>
@@ -162,34 +161,47 @@ The code presented on this page can be <a href="./Grand_Finale.ino">downloaded</
 <p>The <code>readIMU</code> function checks if the sensor is ready and takes its current rotation data.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a>  SpinWheel.readIMU();</span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="co">// if rotation is fast, add a step to the offset</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) {</span>
-<span id="cb5-4"><a href="#cb5-4"></a>    offset = SpinWheel.gx*<span class="dv">100</span>; </span>
-<span id="cb5-5"><a href="#cb5-5"></a>    Serial.println(offset);</span>
-<span id="cb5-6"><a href="#cb5-6"></a>  }</span>
-<span id="cb5-7"><a href="#cb5-7"></a></span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="co">// make the rainbow in the large LEDs</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {</span>
-<span id="cb5-10"><a href="#cb5-10"></a>    colorChange = offset+i*<span class="dv">255</span>/<span class="dv">4</span>;</span>
-<span id="cb5-11"><a href="#cb5-11"></a>    Serial.println(colorChange);</span>
-<span id="cb5-12"><a href="#cb5-12"></a>    SpinWheel.setLargeLED(i, colorWheel(colorChange));</span>
-<span id="cb5-13"><a href="#cb5-13"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>-i, colorWheel(colorChange));</span>
-<span id="cb5-14"><a href="#cb5-14"></a>  }</span>
-<span id="cb5-15"><a href="#cb5-15"></a></span>
-<span id="cb5-16"><a href="#cb5-16"></a>  <span class="dt">float</span> total_acceleration = SpinWheel.ax + SpinWheel.ay + SpinWheel.az</span>
-<span id="cb5-17"><a href="#cb5-17"></a>  </span>
-<span id="cb5-18"><a href="#cb5-18"></a>  <span class="co">// make a snake in the small LEDs</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a>  <span class="co">// if there is sufficient motion, have the snake move</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a>  <span class="cf">if</span> (abs(total_acceleration) &gt; <span class="dv">1</span>) { </span>
-<span id="cb5-21"><a href="#cb5-21"></a>    angle = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;    </span>
-<span id="cb5-22"><a href="#cb5-22"></a>  }</span>
-<span id="cb5-23"><a href="#cb5-23"></a></span>
-<span id="cb5-24"><a href="#cb5-24"></a>  <span class="co">// this is a function that we created to display a &quot;snake&quot;</span></span>
-<span id="cb5-25"><a href="#cb5-25"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>);</span>
-<span id="cb5-26"><a href="#cb5-26"></a></span>
-<span id="cb5-27"><a href="#cb5-27"></a>  SpinWheel.drawFrame();</span>
-<span id="cb5-28"><a href="#cb5-28"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a>  SpinWheel.readIMU();</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>Here, we use an <strong>if statement</strong> to check if the rotation is fast. If this is true, then add a step to the offset.</p>
+</div>
+<div class="code">
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) {</span>
+<span id="cb6-2"><a href="#cb6-2"></a>    offset = SpinWheel.gx*<span class="dv">100</span>; </span>
+<span id="cb6-3"><a href="#cb6-3"></a>    Serial.println(offset);</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  }</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>Here we will use a <strong>for loop</strong>. Similar to the <code>loop</code> function, instructions inside the for loop repeat. In this case the insturctions inside the for loop will repeat four times as specified by the <code>i &lt; 4</code>. This will make a rainbow in the large LEDs with a color change specified by the movement of the device.</p>
+</div>
+<div class="code">
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    colorChange = offset+i*<span class="dv">255</span>/<span class="dv">4</span>;</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    Serial.println(colorChange);</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    SpinWheel.setLargeLED(i, colorWheel(colorChange));</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>-i, colorWheel(colorChange));</span>
+<span id="cb7-6"><a href="#cb7-6"></a>  }</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>Here we define the total acceleration as the sum of the acceleration in the x,y,and z directions.</p>
+</div>
+<div class="code">
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a>  <span class="dt">float</span> total_acceleration = SpinWheel.ax + SpinWheel.ay + SpinWheel.az;</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  </span></code></pre></div>
+</div>
+<div class="side-text">
+<p>Here we use an <strong>if statement</strong> to check to see if the the total acceleration is large enough. If it is, then we will create a snake on the small LEDs using <code>SpinWheel.snake()</code>. Here we use (0,255,0) to make the snake green, but you can use any color you like!</p>
+</div>
+<div class="code">
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a>  <span class="cf">if</span> (abs(total_acceleration) &gt; <span class="dv">1</span>) { </span>
+<span id="cb9-2"><a href="#cb9-2"></a>     SpinWheel.snake(<span class="dv">0</span>,<span class="dv">255</span>,<span class="dv">0</span>);</span>
+<span id="cb9-3"><a href="#cb9-3"></a>  }</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a>  SpinWheel.drawFrame();</span>
+<span id="cb9-8"><a href="#cb9-8"></a>}</span></code></pre></div>
 </div>
 </div>
 </body>
