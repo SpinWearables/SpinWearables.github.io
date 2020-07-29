@@ -157,7 +157,7 @@ The code presented on this page can be <a href="./1D_Rotation_Light_Up_Basic.ino
 <p>Here we get to the code specific to this example. First we will initialize a variable which stores a number that tells the SpinWheel what color to display. . In the code below we will choose this color based on the motion of the SpinWheel itself.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a>  <span class="dt">int</span> spinning = <span class="dv">0</span>;</span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a>  </span>
 <span id="cb5-2"><a href="#cb5-2"></a> </span></code></pre></div>
 </div>
 <div class="side-text">
@@ -171,18 +171,30 @@ The code presented on this page can be <a href="./1D_Rotation_Light_Up_Basic.ino
 In this case, if the x rotation (gx) is large enough, then we will change the color of the large LEDS by changing the <code>spinning</code> variable. The <code>abs</code> function makes it so that the direction of the rotation (clockwise or counter clockwise), does not matter.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) {</span>
-<span id="cb7-2"><a href="#cb7-2"></a>    spinning = <span class="dv">255</span>;</span>
-<span id="cb7-3"><a href="#cb7-3"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) {</span></code></pre></div>
 </div>
 <div class="side-text">
-<p>As before, the <code>setLargeLEDsUniform</code> function tells the SpinWheel to show the color we would like it to show. In this case, if the SpinWheel is spinning, we will use (0,255,255), which is a light blue.</p>
+<p>As before, the <code>setLargeLEDsUniform</code> function tells the SpinWheel to show the color we would like it to show. We will use (0,255,255), which is a light blue.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, spinning, spinning);</span>
-<span id="cb8-2"><a href="#cb8-2"></a>  SpinWheel.drawFrame();</span>
-<span id="cb8-3"><a href="#cb8-3"></a> }</span>
-<span id="cb8-4"><a href="#cb8-4"></a>  </span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a>    SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>);</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  }</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="cf">else</span> {</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>Since no motion has been detected, we will instead use We will use (0,0,0), which turns off the LEDs.</p>
+</div>
+<div class="code">
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a>    SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  }</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>Finally, we need to tell the SpinWheel to light up the LEDs according to the instructions in <code>setLargeLEDsUniform</code>.</p>
+</div>
+<div class="code">
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1"></a>  SpinWheel.drawFrame();</span>
+<span id="cb10-2"><a href="#cb10-2"></a> }</span>
+<span id="cb10-3"><a href="#cb10-3"></a>  </span></code></pre></div>
 </div>
 </div>
 </body>

@@ -118,9 +118,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="intro-box">
 <p>In this adventure, you will explore the ways we can describe motion mathematically and code colorful representations of that math.</p>
 </div>
-<p>Whether you’ve watched a dance, or are a dancer yourself, you know dancing is all about movement. Be it a pirouette, a leap, or a straight line, dancers gracefully move through space in exciting ways. Your SpinWheel can act as a dancer too! Mathematically we can represent this motion in many ways. In this lesson, we will write colorful visualizations of this math that you can explore with SpinWheel!</p>
+<p>Whether you’ve watched a dance, or are a dancer yourself, you know dancing is all about movement. Be it a pirouette, a leap, or a straight line, dancers gracefully move through space in exciting ways. Your SpinWheel can act as a dancer too! Mathematically we can represent this motion in many ways. In this lesson, we will write colorful visualizations of this math that you can explore with you SpinWheel!</p>
 <h2 id="linear-motion-line-dancing">Linear Motion: Line Dancing</h2>
-<p>The first way we will think about motions is by moving along a line. We can move back and forth on a line but in no other direction. This is called one dimension motion. Below you can use your mouse to drag the circle along one dimension. Think of this like a dancer moving back and forth across the stage.</p>
+<p>The first way we will think about motion is by moving along a line. We can move back and forth on a line but in no other direction. This is called one dimension motion. Below you can use your mouse to drag the circle along one dimension. Think of this like a dancer moving back and forth across the stage.</p>
 <style>
 #move1d {
   text-align: center;
@@ -181,7 +181,7 @@ function getValue(){
         var b = 0;
         }
     else {
-        var r = 0
+        var r = 0;
         var b = 256;
         }
   
@@ -209,8 +209,8 @@ locElement.oninput = getValue;
 
 </script>
 </div>
-<p>Notice when you dragged your mouse, your screen lit up at different brightnesses and colors! Try moving your mouse faster and slower! Also, in different directions!</p>
-<p>As you can see, when you drag the mouse faster, the line gets more colorful! How fast or slow the mouse is moving is called speed. Now, did you also notice that if you dragged the mouse to the left, then to the right, the color changes? This is because we can assign a direction to our speed, and call it velocity! The color of the box becomes blue when we drag the slider to the right and red when we drag the slider to the left. The color tells us the direction we are moving (right or left). When we represent velocity with numbers, we call motion in one direction positive and motion in the opposite direction negative.</p>
+<p>Notice when you dragged your mouse, your screen lit up at different brightnesses and colors! Try moving your mouse faster and slower!</p>
+<p>As you can see, when you drag the mouse faster, the color gets brighter! How fast or slow the mouse is moving is called speed. Now, did you also notice that if you dragged the mouse to the left, then to the right, the color changes? This is because we can assign a direction to our speed, and call it velocity! The color of the box becomes blue when we drag the slider to the right and red when we drag the slider to the left. The color tells us the direction we are moving (right or left). When we represent velocity with numbers, we call motion in one direction positive and motion in the opposite direction negative.</p>
 <div class="further-reading">
 <p>We discuss the idea of velocity more in our lesson on <a href="/vectors">vectors and kinematics</a>. Kinematics is simply a fancy word for the study of motion.</p>
 </div>
@@ -219,8 +219,7 @@ locElement.oninput = getValue;
 <div class="further-reading">
 <p>If you are curious about the sensor itself, check out our <a href="/specs">specs</a> page where we talk more about the motion sensor and the other components of the SpinWheel.</p>
 </div>
-<p>You can program your SpinWheel to light up different colors as it moves like this animation.</p>
-<p>After you click <code>Run</code>, grab the SpinWheel and shake it.</p>
+<p>The code below will light up the virtual SpinWheel in different colors as it moves. After you click <code>Run</code>, grab the SpinWheel and shake it.</p>
 <div class="ssw-codecontent" data-markdown="0">
 <pre class="ssw-codeblock">
 void loop() {
@@ -236,80 +235,75 @@ void loop() {
 }
 </pre>
 </div>
-<p>The ways the SpinWheel changes with motion is easier to see if you upload the sketch directly onto your SpinWheel: <code>Examples → SpinWearables → Dancing_with_Color → Acceleration_Light_Up_Basic</code>. After you open the file and save it, you can upload this sketch to your SpinWheel and explore how the LEDs change as it dances through 3D space.</p>
-<p>The virtual SpinWheel can only move in two dimensions as it is trapped in the plane of your computer screen. For this reason, the code above and that you just uploaded onto your SpiNWheel only cares about the motion in two dimensions. The horizontal acceleration (<code>ax</code>) controls the red LED, while the vertical acceleration (<code>ay</code>) controls the green LED. The SpinWheel flashes yellow when it moves at an angle instead of straight up and down because then there is acceleration in both the horizontal and vertical directions.</p>
-<p>Did the speed you moved your SpinWheel change the brightness? With a faster acceleration, you may have noticed that the virtual SpinWheel’s LEDs lit up more brightly.</p>
+<p>The ways the SpinWheel changes with motion is easier to see if you upload the sketch directly onto your SpinWheel: <code>Examples → SpinWearables → Dancing_with_Color → Acceleration_Light_Up_Basic</code>. After you open the file and save it, you can upload this sketch to your SpinWheel and explore how the LEDs change as it dances through 3D space. To see these colors clearly, place your SpinWheel on a table, oriented to match the virtual SpinWheel. Try moving the SpinWheel left and right, up and down, while keeping it on the table.</p>
+<p>The virtual SpinWheel can only move in two dimensions as it is trapped in the plane of your computer screen. For this reason, the code above and that you just uploaded onto your SpinWheel only shows the motion in two dimensions. Acceleration to the left and right (<code>ax</code>) controls the red component of the LEDs, while acceleration up and down (<code>ay</code>) controls the green component of the LEDs. The SpinWheel flashes yellow when it moves at an angle instead of straight up and down because then there is acceleration in both the horizontal and vertical directions. If you carefully lift your SpinWheel from the table, you’ll notice that the color does not change. This is because movement in the z direction isn’t included in this code.</p>
+<p>Did the speed you moved your SpinWheel change the brightness? With a faster acceleration, you may have noticed that the SpinWheel’s LEDs lit up more brightly.</p>
 <p>If you are interested in reading a more detailed explanation of what each line above does, then check out <a href="/codedoc/examples/Dancing_with_Color/Acceleration_Light_Up_Basic/Acceleration_Light_Up_Basic.ino.html">this annotated script</a>.</p>
 <div class="further-reading">
 <p>To learn more about modifying the SpinWheel’s LED display with the output from the SpinWheel’s motion sensors, check out the <a href="/stepcounter">“Step Counter” activity</a>. This lesson will teach you to access the output from the motion sensors, monitor it on your computer, and use this to turn your SpinWheel into a step counter. You can do this lesson either now or after finishing the rest of this lesson.</p>
 </div>
 <h2 id="turning-rotational-motion">Turning: Rotational Motion</h2>
 <p>We’ve talked about moving through space in line, but now imagine a dancer’s feet doing turn after turn and their arms outstretched in different configurations. Can you picture how their arms and feet move through space in small tight turns, like chaînés turns, and wide turns, like an attitude or a fouetté?</p>
-<p>There are many different ways we can describe all types of different dances! Mathematically, we could say that there are many different coordinate systems to describe motion. A dancer turning is a type of rotational motion. Instead of describing each point by drawing three separate lines, we could think of this motion in terms of points along a circle. This system is called polar coordinates.</p>
+<p>There are many different ways we can describe all types of different dances! A dancer moving side to side is a type of translational motion. A dancer turning in a circle is a type of rotational motion.</p>
 <figure>
-<img src="/images/dance_turn.jpg" alt="" /><figcaption>Notice how in tight turns or wide turns, a dancers feet create different size circles through space. We coudl describe these circles using polar coordinates.</figcaption>
+<img src="/images/bookpics/dance_turn.png" alt="" /><figcaption>Notice how in tight turns or wide turns, a dancer’s feet create different size circles on the floor. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
 </figure>
-<div class="further-reading">
-<p>Polar coordinates are useful to describe points along a circle more easily than in Cartesian coordinates, but knowing more about them isn’t important for the rest of this lesson. If you are interested in diving into this idea a bit more deeply, then check out our <a href="/rotation">rotation lesson</a>.</p>
-</div>
+<p>A simple way to describe rotational motion is as the movement around an axis. When a dancer spins, without moving around the stage, they are rotating around the axis of their body. There are special sensors in your SpinWheel, called gyroscopes, that allow it to detect rotational motion. We can use the output from these sensors to have the SpinWheel respond to spinning!</p>
+<figure>
+<img src="/images/bookpics/dance_axis.png" alt="" /><figcaption>This picture demonstrates the three axes that the SpinWheel can detect rotation around. We’ll dive into what this means more in the rest of the lesson! <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
+</figure>
 <h3 id="rotation-around-one-axis">Rotation Around One Axis</h3>
-<p>There are special sensors in your SpinWheel, called gyroscopes, that allow it to detect rotational motion. We can use the output from these sensors to have the SpinWheel respond to spinning! To begin, we can start with a simpler case and program the SpinWheel to light up when it detects rotation around one axis.</p>
-<p>In this case, we’re measuring the rotation around the SpinWhee’s x-axis, which is stored in the variable <code>SpinWheel.gx</code>. As the sensor is very sensitive, we only want to change color if there is sufficient rotation. In this case, we will only have the color change if absolute value of the rotation is greater than 1.</p>
-<figure>
-<img src="/images/dance_axis.jpg" alt="" /><figcaption>In this picture you can see the x and y axes of your SpinWheel.</figcaption>
-</figure>
-<p>To see the senor respond to rotional motion, upload the sketch here: <code>Examples → SpinWearables → Dancing_with_Color → 1D_Rotation_Light_Up_Basic</code> to your SpinWheel and explore what happens when you rotate your SpinWheel. You can also read more about what each command in<a href="/codedoc/examples/Dancing_with_Color/1D_Rotation_Light_Up_Basic/1D_Rotation_Light_Up_Basic.ino.html">this 1D Rotation sketch</a> does.</p>
-<!--TODO: Maybe only choose one or two of these to be in the lesson and have the rest be elsewhere; Add more context/explanation/better commenting -->
-<p>One simple modification we can make to the previous sketch is to have the LEDs change color based on the direction of rotation. In the script below, the LEDs light up green up when the device is spun in one direction, and blue when spun in the other direction. If you prefer other colors, then you can modify the code below to change the colors. For a hint of how to do this and a more detailed explanation of those code, you can also check out <a href="/codedoc/examples/Dancing_with_Color/1D_Rotation_Light_Up_Advanced/1D_Rotation_Light_Up_Advanced.ino.html">this script</a>. You can also find the sketch in the SpinWheel examples you downloaded: <code>Examples → SpinWearables → Dancing_with_Color → 1D_Rotation_Light_Up_Advanced</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>  SpinWheel.begin();</span>
-<span id="cb1-7"><a href="#cb1-7"></a>}</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="dt">int</span> pos_spin = <span class="dv">0</span>;</span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="dt">int</span> neg_spin = <span class="dv">0</span>;</span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-13"><a href="#cb1-13"></a>  SpinWheel.readIMU();</span>
-<span id="cb1-14"><a href="#cb1-14"></a>  <span class="co">// If the x rotation (gx) is big enough, then </span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>  <span class="co">// change the color of the big LEDs based on the</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>  <span class="co">// direction of the spin</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) {</span>
-<span id="cb1-18"><a href="#cb1-18"></a>    pos_spin = <span class="dv">255</span>;</span>
-<span id="cb1-19"><a href="#cb1-19"></a>    neg_spin = <span class="dv">0</span>;</span>
-<span id="cb1-20"><a href="#cb1-20"></a>  }</span>
-<span id="cb1-21"><a href="#cb1-21"></a>  <span class="cf">else</span> <span class="cf">if</span> (SpinWheel.gx &lt; -<span class="dv">1</span>) {</span>
-<span id="cb1-22"><a href="#cb1-22"></a>    neg_spin = <span class="dv">255</span>;</span>
-<span id="cb1-23"><a href="#cb1-23"></a>    pos_spin = <span class="dv">0</span>;</span>
-<span id="cb1-24"><a href="#cb1-24"></a>  }</span>
-<span id="cb1-25"><a href="#cb1-25"></a>  <span class="cf">else</span> {</span>
-<span id="cb1-26"><a href="#cb1-26"></a>    pos_spin = <span class="dv">0</span>;</span>
-<span id="cb1-27"><a href="#cb1-27"></a>    neg_spin = <span class="dv">0</span>;</span>
-<span id="cb1-28"><a href="#cb1-28"></a>  }</span>
-<span id="cb1-29"><a href="#cb1-29"></a>  <span class="co">// If gz is positive, set the big LEDs to light up green</span></span>
-<span id="cb1-30"><a href="#cb1-30"></a>  <span class="co">// If gz is negative, set the big LEDs to light up blue</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, pos_spin, neg_spin);</span>
-<span id="cb1-32"><a href="#cb1-32"></a>  <span class="co">// Make the SpinWheel show the registered color.</span></span>
-<span id="cb1-33"><a href="#cb1-33"></a>  SpinWheel.drawFrame();</span>
-<span id="cb1-34"><a href="#cb1-34"></a> }</span></code></pre></div>
-<h3 id="rotation-in-3d-space">Rotation in 3D Space</h3>
-<p>It is also possible to measure and change the SpinWheel’s LEDs color based on rotation in 3D space!</p>
-<p>To start off, upload the <a href="/codedoc/examples/Dancing_with_Color/3D_Rotation_Light_Up/3D_Rotation_Light_Up.ino.html">3D Rotation sketch</a> from here: <code>Examples → SpinWearables → Dancing_with_Color → 3D_Rotation_Light_Up</code> to see how you can code the red, green, and blue components of the LEDs to respond to the rotation around the x, y, and z axes. Rather than only modifying the large LEDs as in the earlier sketches, this sketch also has the small LEDs light up in response to the SpinWheel’s rotational motion.</p>
-<h2 id="rotating-lights-or-an-led-snake">Rotating Lights (or an LED “snake”)</h2>
-<p>One of the programs that came preloaded on your SpinWheel was an LED “snake” that spins around the device like a dancer. We can change that basic snake code so that it only rotates when you rotate.</p>
-<p>To create this snake, we’ll introduce a new function: <code>SpinWheel.setSmallLEDsPointer(angle, decay, red, green, and blue)</code>. <code>Angle</code> controls how big the snake is, <code>decay</code> the fade at the end of the snake, and <code>red</code>, <code>green</code>, and <code>blue</code> represent the red, green, and blue component of the small LEDs. To try modifying the snake on your SpinWheel, upload the example sketch from here: <code>Examples → SpinWearables → Dancing_with_Color → Motion_Snake</code>. You can also read more about our <a href="/codedoc/examples/Dancing_with_Color/Motion_Snake/Motion_Snake.ino.html">motion snake script here</a>.</p>
-<p>To begin with, try modifying the code to change the color of the snake. Can you change how many LEDs turn on to make a longer or shorter snake?</p>
+<p>To begin, we can program the SpinWheel to light up when it detects rotation around one axis. This is similar to the dancer spinning in place where their body represents the axis of each turn. In this case, we’re measuring the rotation around the SpinWhee’s x-axis, which is stored in the variable <code>SpinWheel.gx</code>. As the sensor is very sensitive, we only want to change color if there is sufficient rotation. In this case, we will only have the color change <code>if</code> the absolute value of the rotation is greater than 1, <code>abs(SpinWheel.gx) &gt; 1</code>. Below is the essential piece of code, where we tell the SpinWheel to light up only when motion is detected (<code>if (abs(SpinWheel.gx) &gt; 1)</code> and to otherwise (<code>else</code>) turn off all of the LEDs.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">// if there is enough rotation, then light up the </span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co">// LEDs a light blue</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) {</span>
+<span id="cb1-4"><a href="#cb1-4"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>);</span>
+<span id="cb1-5"><a href="#cb1-5"></a>}</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">// otherwise, keep the LEDs turned off</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="cf">else</span> {</span>
+<span id="cb1-8"><a href="#cb1-8"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
+<span id="cb1-9"><a href="#cb1-9"></a>}</span></code></pre></div>
+<p>To see your SpinWheel light up in response to rotional motion, upload the full sketch (<code>Examples → SpinWearables → Dancing_with_Color → 1D_Rotation_Light_Up_Basic</code>) to your SpinWheel and explore what happens when you rotate your SpinWheel. You can can also read more about what each command in <a href="/codedoc/examples/Dancing_with_Color/1D_Rotation_Light_Up_Basic/1D_Rotation_Light_Up_Basic.ino.html">this 1D Rotation sketch</a> does.</p>
+<p>If you prefer other colors to the light blue that we chose, then you can modify the code for this example to light up your SpinWheel a different color.</p>
 <div class="further-reading">
 <p>Looking for a refresher on how to customize the LEDs to light up your favorite color? In our <a href="/sight">biology of sight adventure</a>, we discuss how three light sources can be used to represent any color of the rainbow by taking advantage of how our eyes perceive color.</p>
 </div>
-<p>You may have noticed that the “snake” currently only moves when you rotate along the x axis. Can you have it respond to rotation around the other axes?<br />
-What about making it respond to motion in all three directions? For a hint of how to do this with acceleration, you can check out the code for the final example of this adventure.</p>
+<p>Another modification you can make to the previous sketch is to have the LEDs change color based on the direction of rotation. We include the important new elements of the code below, including defining new variables <code>pos_spin</code> and <code>neg_spin</code> to store the direction that the SpinWheel is rotating around the x-axis.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">// If the x rotation (gx) is big enough, then </span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co">// change the color of the big LEDs based on the</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">// direction of the spin</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="cf">if</span> (SpinWheel.gx &gt; <span class="dv">1</span>) {</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  pos_spin = <span class="dv">255</span>;</span>
+<span id="cb2-6"><a href="#cb2-6"></a>  neg_spin = <span class="dv">0</span>;</span>
+<span id="cb2-7"><a href="#cb2-7"></a>}</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="cf">else</span> <span class="cf">if</span> (SpinWheel.gx &lt; -<span class="dv">1</span>) {</span>
+<span id="cb2-9"><a href="#cb2-9"></a>  neg_spin = <span class="dv">255</span>;</span>
+<span id="cb2-10"><a href="#cb2-10"></a>  pos_spin = <span class="dv">0</span>;</span>
+<span id="cb2-11"><a href="#cb2-11"></a>}</span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="cf">else</span> {</span>
+<span id="cb2-13"><a href="#cb2-13"></a>  pos_spin = <span class="dv">0</span>;</span>
+<span id="cb2-14"><a href="#cb2-14"></a>  neg_spin = <span class="dv">0</span>;</span>
+<span id="cb2-15"><a href="#cb2-15"></a>}</span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co">// If gz is positive, set the big LEDs to light up green</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="co">// If gz is negative, set the big LEDs to light up blue</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, pos_spin, neg_spin);</span></code></pre></div>
+<p>In this script, the LEDs light up green up when the device is spun around the x-axis in one direction (<code>if (SpinWheel.gz &gt; 1)</code>), and blue when spun in the other direction (<code>else if (SpinWheel.gx &lt; -1)</code>). The <code>else</code> statment ensures that the SpinWheel’s LEDs turn off when not enough rotation is detected. You can upload the sketch from: <code>Examples → SpinWearables → Dancing_with_Color → 1D_Rotation_Light_Up_Advanced</code> to give it a try on your own SpinWheel. For a more detailed explanation of this code, you can also check out <a href="/codedoc/examples/Dancing_with_Color/1D_Rotation_Light_Up_Advanced/1D_Rotation_Light_Up_Advanced.ino.html">this script</a>.</p>
+<div class="further-reading">
+<p>At this point you may want to check out <a href="/rotation">our lesson on rotation</a> to learn more.</p>
+</div>
+<h3 id="rotation-in-3d-space">Rotation in 3D Space</h3>
+<p>In the two last sketches, the SpinWheel only changed color when its rotation was around the x-axis. It is also possible to measure and change the SpinWheel’s LEDs color based on rotation around any axis in 3D space!</p>
+<p>To start off, upload the <a href="/codedoc/examples/Dancing_with_Color/3D_Rotation_Light_Up/3D_Rotation_Light_Up.ino.html">3D Rotation sketch</a> from here: <code>Examples → SpinWearables → Dancing_with_Color → 3D_Rotation_Light_Up</code>. If you read the <a href="/codedoc/examples/Dancing_with_Color/3D_Rotation_Light_Up/3D_Rotation_Light_Up.ino.html">details about the code</a>, you will see how you can code the red, green, and blue components of the LEDs to respond to the rotation around the x, y, and z axes. Rather than only modifying the large LEDs as in the earlier sketches, this sketch also has the small LEDs light up in response to the SpinWheel’s rotational motion. Try rotating your SpinWheel in different directions to make it fully red, green or blue. Can you combine these rotations to make other colors? If the rotation is around two axis at the same time, both colors are shown, making yellow, purple or teal.</p>
+<h2 id="rotating-lights-or-an-led-snake">Rotating Lights (or an LED “snake”)</h2>
+<p>One of the programs that came preloaded on your SpinWheel was an LED “snake” that spins around the device like a dancer. We can change that basic snake code so that it only rotates colors when you rotate the SpinWheel.</p>
+<video src="/images/behindthescenes/circling.mp4" muted autoplay playsinline loop>
+</video>
+<p>To create this snake, we’ll introduce a new function that lights up several LEDs (making a snake): <code>SpinWheel.snake(red, green, and blue)</code>. <code>Red</code>, <code>green</code>, and <code>blue</code> control the red, green, and blue components of the small LEDs. By changing these values, you can change the color that your LED “snake” lights up. To try modifying the snake on your SpinWheel, upload the example sketch from here: <code>Examples → SpinWearables → Dancing_with_Color → Motion_Snake</code>. You can also read more about our <a href="/codedoc/examples/Dancing_with_Color/Motion_Snake/Motion_Snake.ino.html">motion snake script here</a> to learn more about how this script works.</p>
+<p>You may have noticed that the “snake” currently only moves when you rotate along the x-axis. Can you have it respond to rotation around the other axes?<br />
+What about making it respond to motion in all three directions? For a hint of how to do this with acceleration, you can check out the <a href="/codedoc/examples/Dancing_with_Color/Grand_Finale/Grand_Finale.ino.html">code for the final example of this adventure</a>.</p>
 <p>The past few examples are all relying on the measurements from the gyroscope (sensing rotation). However, you could also have the snake (or any of the other sketches) respond to acceleration instead. You can modify the snake to respond to acceleration in one direction or even all three.</p>
 <h2 id="the-grand-finale-showing-off-all-its-colors">The Grand Finale: Showing Off All Its Colors</h2>
-<p>You’ve explored both linear and rotational motion independtly so far in this adventure. Using the above scripts as a starting point, you can modify the SpinWheel to respond to your motion however you see fit! We’ll leave you with one final more complicated sketch to inspire your imagination. Here is a webpage with a <a href="/codedoc/examples/Dancing_with_Color/Grand_Finale/Grand_Finale.ino.html">grand finale code and explaination</a>. This script has the SpinWheel respond to both acceleration and rotation. To try this code on your SpinWheel or use it as a framework for your own creations, you can find it at <code>Examples → SpinWearables → Dancing_with_Color → Grand_Finale</code>.</p>
+<p>You’ve explored both linear and rotational motion independently so far in this adventure. Using the above scripts as a starting point, you can modify the SpinWheel to respond to your motion however you see fit! We’ll leave you with one final more complicated sketch to inspire your imagination. Here is a webpage with our <a href="/codedoc/examples/Dancing_with_Color/Grand_Finale/Grand_Finale.ino.html">grand finale code and explaination</a>. This script has the SpinWheel respond to both acceleration and rotation. To try this code on your SpinWheel or use it as a framework for your own creations, you can find it at <code>Examples → SpinWearables → Dancing_with_Color → Grand_Finale</code>.</p>
 <p>To see even more dances mathematically, you can watch <a href="https://vimeo.com/400629616">this video</a> below, created by Mariel Pettee, a physics graduate student who studies particle physics as well as physics and dance.</p>
 <figure>
 <video src="/images/bookpics/mariel.mp4" controls>

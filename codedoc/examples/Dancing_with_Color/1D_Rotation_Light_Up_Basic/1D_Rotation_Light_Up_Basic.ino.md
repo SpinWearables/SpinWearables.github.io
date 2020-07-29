@@ -53,7 +53,7 @@ motion of the SpinWheel itself.
 </div>
 <div class="code">
 ```cpp
-  int spinning = 0;
+  
  
 
 ```
@@ -83,24 +83,40 @@ makes it so that the direction of the rotation
 <div class="code">
 ```cpp
   if (abs(SpinWheel.gx) > 1) {
-    spinning = 255;
-  }
-
 ```
 </div>
 <div class="side-text">
 As before, the `setLargeLEDsUniform` function tells the 
 SpinWheel to show the color we would like it to show. 
-In this case, if the SpinWheel is spinning, we will use
-(0,255,255), which is a light blue. 
+We will use (0,255,255), which is a light blue.
 </div>
 <div class="code">
 ```cpp
-  SpinWheel.setLargeLEDsUniform(0, spinning, spinning);
+    SpinWheel.setLargeLEDsUniform(0, 255, 255);
+  }
+  else {
+```
+</div>
+<div class="side-text">
+Since no motion has been detected, we will instead use 
+We will use (0,0,0), which turns off the LEDs.
+</div>
+<div class="code">
+```cpp
+    SpinWheel.setLargeLEDsUniform(0, 0, 0);
+  }
+
+```
+</div>
+<div class="side-text">
+Finally, we need to tell the SpinWheel to light up the LEDs
+according to the instructions in `setLargeLEDsUniform`.
+</div>
+<div class="code">
+```cpp
   SpinWheel.drawFrame();
  }
   
-
 ```
 </div>
 </div>

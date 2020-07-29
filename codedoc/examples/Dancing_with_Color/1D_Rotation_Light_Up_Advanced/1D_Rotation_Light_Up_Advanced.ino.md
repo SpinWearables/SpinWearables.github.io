@@ -85,7 +85,7 @@ instruction.
 </div>
 <div class="code">
 ```cpp
-  if (abs(SpinWheel.gx) > 1) {
+  if (SpinWheel.gx > 1) {
     pos_spin = 255;
     neg_spin = 0;
   }

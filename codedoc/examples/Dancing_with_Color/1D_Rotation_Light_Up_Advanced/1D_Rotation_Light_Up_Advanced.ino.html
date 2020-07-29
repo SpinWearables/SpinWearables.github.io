@@ -172,7 +172,7 @@ The code presented on this page can be <a href="./1D_Rotation_Light_Up_Advanced.
 <p>Here, we will also utilize <code>else if</code> and <code>else</code> commands. These commands are used in programming along with an <strong>if statement</strong> to tell the program what to do when the if condition is not met. In this example, our <strong>if condition</strong> checks whether or not the rotation is big enough in the <strong>positive direction</strong>. If this condition is true we will light up the LEDs according to the given instruction.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) {</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">if</span> (SpinWheel.gx &gt; <span class="dv">1</span>) {</span>
 <span id="cb7-2"><a href="#cb7-2"></a>    pos_spin = <span class="dv">255</span>;</span>
 <span id="cb7-3"><a href="#cb7-3"></a>    neg_spin = <span class="dv">0</span>;</span>
 <span id="cb7-4"><a href="#cb7-4"></a>  }</span></code></pre></div>
