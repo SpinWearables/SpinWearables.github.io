@@ -141,13 +141,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The simplest way to do that is to subdivide time into intervals of the same length as our animation and see how many milliseconds have passed since the start of the current interval. We can do that by looking at the remainder after dividing time by the length of our repeating unit. For example, if 5600 milliseconds have passed since the device was powered, then <span class="math display">\[ 5600\div 2500 = 2 \text{ with a remainder of } 600.\]</span> This means that two full intervals of 2500 milliseconds have passed and we are 600 milliseconds into the third interval.</p>
 <!--FIGURE: figure describing this division and reminder. -->
 <p>We can also consider intervals of different lengths, but for now we will stick to 2.5 seconds as it is short enough for us to be able to see the animation we create without waiting an unnecessary amount of time, and long enough that our eyes can capture how things change during this interval.</p>
-<p>Lastly, we need to tell the computer that we want it to compute a division with remainder for us. Thankfully, we can find in our dictionary of programming languages that the notation <code>a % b</code> is <span class="footnote">frequently used<span>Programmers have the bad habit of taking established symbols like the percentage sign and using it for unrelated concepts, like its use here for division with remainder.</span></span> to mean “find the remainder of dividing <code>a</code> by <code>b</code>”. With all this knowledge, we now know how to store a new variable <code>t_repeating</code> which measures time in repeating intervals of (for example) 2500 milliseconds.</p>
+<p>Lastly, we need to tell the computer that we want it to compute a division with a remainder for us. Thankfully, we can find in our dictionary of programming languages that the notation <code>a % b</code> is <span class="footnote">frequently used<span>Programmers have the bad habit of taking established symbols like the percentage sign and using it for unrelated concepts, like its use here for division with remainder.</span></span> to mean “find the remainder of dividing <code>a</code> by <code>b</code>”. With all this knowledge, we now know how to measure time in repeating intervals of (for example) 2500 milliseconds. We can store this value in a new variable <code>t_repeating</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">int</span> t_repeating = t % <span class="dv">2500</span>;</span></code></pre></div>
 <figure>
 <video src="/images/bookpics/time_remainder.mp4" muted autoplay playsinline loop>
 </video>
 <figcaption>
-Using a clock to create a repeating pattern: the counter in our timer (in blue) is divided in equal intervals, and the remainder of that division (in orange) provides a steady repeating sequence of numbers on which we can base a repeating animation.
+Using a timer to create a repeating pattern: the value returned by our timer (in blue) is divided into equal intervals. The remainder of that division (in orange) provides a steady repeating sequence of numbers on which we can base a repeating animation.
 </figcaption>
 </figure>
 <h3 id="a-picture-that-depends-on-time">A picture that depends on time</h3>
@@ -167,11 +167,11 @@ void loop() {
 }
 </pre>
 </div>
-<p>We had to divide <code>t_repeating</code> by 10, because otherwise <code>b</code> will go beyond <code>255</code>, which is the maximal permitted brightness value for our software. Now let us upload this code to the SpinWheel device itself. Connect your device with a USB cable to your computer and load the file, ready to upload, in the Arduino software. To run this code on your SpinWheel, navigate to <code>Examples → SpinWearables → Animations_and_Patterns → Simple_Blink</code> in the Arduino software and open the file. If you simply copy the above code, it will not run because it is missing the important setup information. The file in <code>Examples</code> contains the entirety of the necessary code. After you open the file, you can try some of the same modifications that you attempted in the simulator from the previous paragraph.</p>
+<p>We had to divide <code>t_repeating</code> by 10, because otherwise <code>b</code> will go beyond <code>255</code>, which is the maximal permitted brightness value for our software. Now let us upload this code to the SpinWheel device itself. Connect your device with a USB cable to your computer. To run this code on your SpinWheel, navigate to <code>Examples → SpinWearables → Animations_and_Patterns → Simple_Blink</code> in the Arduino software and open the file and upload it to your SpinWheel. If you simply copy the above code, it will not run because it is missing the important setup information. The file in <code>Examples</code> contains the entirety of the necessary code. After you open the file, you can try some of the same modifications that you attempted in the simulator from the previous paragraph.</p>
 <div class="further-reading">
 <p>If you want a reminder about why the above code will not work if you run it on your SpinWheel, check out the <a href="/basics">lesson on learning to program the SpinWheel</a>.</p>
 </div>
-<p>We also have a <a href="/codedoc/examples/Animations_and_Patterns/Simple_Blink">webpage with detailed explanation of the code</a>, if you are interested in learning more about what each line of the code does. If you are already accustomed to programming and want to simply see the list of available commands, <a href="/allcommands">check out our function documentation</a>.</p>
+<p>We also have a <a href="/codedoc/examples/Animations_and_Patterns/Simple_Blink">webpage with a detailed explanation of the code</a>, if you are interested in learning more about what each line of the code does. If you are already accustomed to programming and want to simply see the list of available commands, <a href="/allcommands">check out our function documentation</a>.</p>
 <p>By learning to control the SpinWheel’s LEDs, you are learning some basic coding concepts. To expand on this, we have also put together a reference guide that introduces <a href="/progpatterns">some of the most important patterns in programming</a>.</p>
 <h2 id="more-sophisticated-patterns">More sophisticated patterns</h2>
 <h3 id="smoother-pulsing">Smoother pulsing</h3>
@@ -207,9 +207,9 @@ void loop() {
 <p>If you want to learn more about controlling the SpinWheel’s LEDs, then try out our <a href="/sight">Biology of Sight</a> Adventure. The <a href="/colortheory">color theory</a> lesson provides more information about why we can use red, green, and blue LEDs to represent all the colors of the rainbow.</p>
 </div>
 <h3 id="the-color-wheel">The color wheel</h3>
-<p>Up until now we have discussed how to turn a time-dependent number into a brightness. However, instead of having time-dependent intensity of light, we might be more interested in a time-dependent hue. One particularly lovely way to achieve this is to use a color wheel, where we assign a color to each point of a circle, and use it as a reference when turning numbers into colors.</p>
+<p>Up until now we have discussed how to turn a time-dependent number into a brightness. However, instead of having time-dependent intensity of light, we might be more interested in a time-dependent hue. One particularly lovely way to achieve this is to use a color wheel, where we assign a color to each point of a circle, and use it as a reference when turning numbers into colors. We provide you with a function, <code>colorWheel()</code>, that converts the numbers between 0 and 255 to a color as seen in the image below. For each input number, the appropriate red, blue and green components of a color from the colorWheel are calculated and used to color our LED lights.</p>
 <figure>
-<img src="/images/bookpics/colorwheel.png" title="The color wheel lets you generate a color based on a single continuously changing (maybe time-dependent) number." alt="" /><figcaption>The color wheel lets you generate a color based on a single continuously changing (maybe time-dependent) number.</figcaption>
+<img src="/images/bookpics/colorwheel.png" title="The color wheel lets you generate a color based on a single continuously changing (maybe time-dependent) number." alt="" /><figcaption>The color wheel lets you generate a color based on a single continuously changing (maybe time-dependent) number. The red, blue and green components of the colors in the color wheel are shown in the plot on the right.</figcaption>
 </figure>
 <div class="ssw-codecontent" data-markdown="0">
 <pre class="ssw-codeblock">
@@ -228,8 +228,9 @@ void loop() {
 </div>
 <p>As usual, <a href="/codedoc/examples/Animations_and_Patterns/Color_Wheel">the entirety of the code is documented on its own page</a>, and in the Arduino examples menu under <code>Animations_and_Patterns → Color_Wheel</code></p>
 <h3 id="non-uniform-patterns-and-accessing-separate-leds">Non-uniform patterns and accessing separate LEDs</h3>
-<p>Lastly, we would like to have a pattern that illuminates different LEDs differently. To set the color of all of the larger LEDs to a single uniform color, we have already seen that we need to use <code>SpinWheel.setLargeLEDsUniform(r,g,b)</code>, where <code>r</code>, <code>g</code>, and <code>b</code> are the red, green, and blue components of the color we desire. They need to be between 0 (turned off) and 255 (maximum intensity). To do the same to the smaller LEDs, we can use <code>SpinWheel.setSmallLEDsUniform(r,g,b)</code>. To illuminate a single large LED (numbered from 0 to 7), we can use <code>SpinWheel.setLargeLED(i,r,g,b)</code>, where the first argument <code>i</code> is the number of the LED we want to change. Similarly, we use <code>SpinWheel.setSmallLED(i,r,g,b)</code> to do the same for the smaller LEDs.</p>
-<p>Now we will introduce the last conceptual tool we will need. To create an interesting time-dependent pattern where different LEDs show different colors and intensities, we simply need to control each of them separately. Consider this case, in which only two of the LEDs (number 0 and number 2) are enabled, but with different patterns.</p>
+<p>Lastly, we would like to have a pattern that illuminates different LEDs differently. To set the color of all of the larger LEDs to a single uniform color, we have already seen that we need to use <code>SpinWheel.setLargeLEDsUniform(r,g,b)</code>, where <code>r</code>, <code>g</code>, and <code>b</code> are the red, green, and blue components of the color we desire. They need to be between 0 (turned off) and 255 (maximum intensity). To do the same to the smaller LEDs, we can use <code>SpinWheel.setSmallLEDsUniform(r,g,b)</code>.</p>
+<p>If we want to illuminate a single large LED (numbered from 0 to 7), we can use <code>SpinWheel.setLargeLED(i,r,g,b)</code>, where the first argument <code>i</code> is the number of the LED we want to change. Similarly, we use <code>SpinWheel.setSmallLED(i,r,g,b)</code> to do the same for the smaller LEDs.</p>
+<p>By accessing individual LEDs, we can create an interesting time-dependent pattern where different LEDs show different colors and intensities. Consider this case, in which only two of the LEDs (number 0 and number 2) are enabled, but with different patterns.</p>
 <div class="ssw-codecontent" data-markdown="0">
 <pre class="ssw-codeblock">
 void loop() {
@@ -238,6 +239,8 @@ void loop() {
   int t = millis();
   int t_repeating = t % 2500;
   int w = triangularWave(t_repeating/10);
+  // The next line sets the intensity of the 2nd LED 
+  // to be opposite of the value in w
   int w_opposite = 255 - w;
   SpinWheel.setLargeLED(0, w, 0, 0);
   SpinWheel.setLargeLED(2, 0, w_opposite, 0);
@@ -247,8 +250,8 @@ void loop() {
 }
 </pre>
 </div>
-<p>The code above can be opened from the examples folder, under the name <code>Railroad_Signal</code> or <a href="/codedoc/examples/Animations_and_Patterns/Railroad_Signal">viewed online</a>.</p>
-<p>Another particularly useful trick is to add “delay” between the time-dependent numbers controlling the color of each LED. This creates the illusion that the LEDs are following each other.</p>
+<p>In this code, the lights are given opposite intensities and set to different colors. The code above can be opened from the examples folder, under the name <code>Railroad_Signal</code> or <a href="/codedoc/examples/Animations_and_Patterns/Railroad_Signal">viewed online</a>.</p>
+<p>Another cool pattern can be created with a particularly useful trick that adds a “delay” between the time-dependent numbers controlling the color of each LED. This creates the illusion that the LEDs are following each other.</p>
 <div class="ssw-codecontent" data-markdown="0">
 <pre class="ssw-codeblock">
 void loop() {
@@ -271,8 +274,11 @@ void loop() {
 </pre>
 </div>
 <p>This code is <a href="/codedoc/examples/Animations_and_Patterns/Rainbow_Chase">in the <code>Rainbow_Chase</code> example</a>.</p>
-<p>With these tools mastered, you might want to peruse the <a href="/allcommands">list of available functions</a>, or learn more about <a href="/sight">mixing of colors</a>. You can also delve deeper in <a href="/progpatterns">the tools that this programming language provides</a>, which could enable you to write more sophisticated programs and patterns.</p>
-<p>Here are some suggestions: Try to add more LEDs to your patterns. Try to have some of them (e.g. the small ones) have varying brightness, while others (e.g. the large ones) have changing colors. Mix and match code from the previous examples. Let your creativity sing through the code.</p>
+<p>You now have the tools you need to control each LED of the SpinWheel and create a time dependent color or brightness. Use these sketches and the building blocks introduced in them to create new and exciting patterns on your SpinWheel! We have created a <a href="/allcommands">reference</a> with the various commands (like <code>setLargeLED()</code> and <code>setSmallLEDsUniform()</code>), that we introduced above, as well as some new ones for programming the SpinWheel in even more ways. As you try out the other adventures and begin to program the SpinWheel for yourself, we hope that you will find these functions useful. These functions also have virtual SpinWheels embedded in the page to allow you to experiment with the code and see how they work more easily!</p>
+<div class="further-reading">
+<p>If you are interested in learning more about mixing of colors with LEDs and how the human eye works, then check out our <a href="/sight">adventure on the biology of the human eye</a>. You can also delve deeper into <a href="/progpatterns">the tools that this programming language provides</a>, which could enable you to write more sophisticated programs and patterns.</p>
+</div>
+<p>Overwhelmed by the possibilities of how you can modify the above sketches? Here are some suggestions: Try to add more LEDs to your patterns. Try to have some of them (e.g. the small ones) have varying brightness, while others (e.g. the large ones) have changing colors. Mix and match code from the previous examples. Let your creativity sing through the code.</p>
 <div class="further-reading">
 <p>You might have noticed that many of the functions and commands we have used are set to repeat themselves when their input passes through 255. There is a reason for this. There are 256 numbers from 0 to 255. And 256 is exactly how many different values can be stored in one byte. One byte is how much space is dedicated to many typical variables in the language used by the Arduino software, hence, many of its functions are written to expect numerical values on that scale.</p>
 </div>
