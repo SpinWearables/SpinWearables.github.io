@@ -14,9 +14,10 @@ render_firmwaresource: register_submodule_updates
 	mkdir codedoc
 	cp -r ./firmwaresource/* codedoc/
 	cp -r ./codedoc/src/* codedoc/
+zip_firmwaresource: register_submodule_updates
 	make -C ./firmwaresource zip
 	cp ./firmwaresource/SpinWearables.zip ./software/SpinWearablesFirmware.zip
-render: render_websitesource render_firmwaresource
+render: render_websitesource render_firmwaresource zip_firmwaresource
 local_test_server: render
 	python3 -m http.server
 publish: render
