@@ -64,7 +64,7 @@
 <p>If you aren’t already familiar with the concepts of displacement, velocity, and acceleration, we recommend first reading our <a href="/vectors">vectors and kinematics lesson</a> lesson.</p>
 </div>
 <h1 id="angular-displacement">Angular Displacement</h1>
-<p>When dealing with circular motion or rotation (for instance, for a ball on a string or a horse on a merry-go-round), then it is useful to describe its position using an angle (<span class="math inline">\(\theta\)</span>). The change between the original angle of the ball and its final angle is typically specified as the change in <span class="math inline">\(\theta\)</span> (or <span class="math inline">\(\Delta \theta\)</span>) and is known as angular displacement. Displacement is a useful term to describe an object’s change in position and can be defined as an angle (angular displacement) or distance (linear displacement). This concept is easier to understand through diagrams. In the image below you can see how linear displacement and angular displacement are related to each other.</p>
+<p>When dealing with circular motion or rotation (for instance, for a ball on a string or a horse on a merry-go-round), it is useful to describe position using an angle (<span class="math inline">\(\theta\)</span>, pronounced ‘theta’). The change between the original angle of the ball and its final angle is typically specified as the change in <span class="math inline">\(\theta\)</span> (or <span class="math inline">\(\Delta \theta\)</span>) and is known as angular displacement. Displacement is a useful term to describe an object’s change in position and can be defined as an angle (angular displacement) or distance (linear displacement). This concept is easier to understand through diagrams. In the image below you can see how linear displacement and angular displacement are related to each other.</p>
 <video src="/images/bookpics/ang_lin_displacement.mp4" muted autoplay playsinline loop>
 </video>
 <center>
@@ -76,11 +76,11 @@ This pictures shows the difference between angular displacement (<span class="ma
 Two movements can have the same angular displacement but different linear displacements.
 </center>
 <h1 id="angular-velocity">Angular Velocity</h1>
-<p>To describe the motion of this ball as it is spun around on a string, we use something called angular velocity. Usually when we think of velocity, we are thinking of something called linear velocity, which is defined as the change in position over the time. Angular velocity is very similar, but it is instead defined as the change in angle over the time. While angular velocity and linear velocity are related they are not the same. For instance, take our ball, if we change the length of the string, we can keep our angular velocity the same, but the linear velocity will be different. You can experiment with how changing the length of the string changes the angular and linear velocity using the interactive animation below.</p>
+<p>To describe the motion of a ball as it is spun around on a string, we use something called angular velocity. Usually when we think of velocity, we are thinking of something called linear velocity, which is defined as the change in position over the time. Angular velocity is very similar, but it is instead defined as the change in angle over the time. While angular velocity and linear velocity are related they are not the same. For instance, take our ball, if we change the length of the string, we can keep our angular velocity the same, but the linear velocity will be different. You can experiment with how changing the length of the string changes the angular and linear velocity using the interactive animation below.</p>
 <style>
 #angRot {
   width: 400px;
-  height: 600px;
+  height: 400px;
   position: relative;
   justify-content: center;
 
@@ -89,6 +89,7 @@ Two movements can have the same angular displacement but different linear displa
   width: 800px;
   height: 400px;
   position: absolute;
+  border-style: solid;
 
 }
 #angAnimation {
@@ -104,18 +105,17 @@ Two movements can have the same angular displacement but different linear displa
 width: 10px;
   height: 10px;
   position: absolute;
+  border-style: solid;
+  border-width: thin;
   }
   
-  #angOutput {
-left: 400px;
-  top: 0px;
-  position: absolute;
+#angOutput {
+    left: 450px;
+    top: 0px;
+    position: absolute;
   }
 </style>
 <div id="angRot">
-<div id="dataBar">
-<p><span class="spacer">radius : </span><input type="number" min="0" max="10"  id="rvalue"> <button id="angButton">Show</button></p>
-</div>
 <div id="angBox">
 <canvas class="trajectory" width="400" height="400">
 </canvas>
@@ -123,6 +123,9 @@ left: 400px;
 
 </div>
 <div id="angOutput">
+<div id="dataBar">
+<p><span class="spacer">Radius : </span><input type="number" min="0" max="10"  id="rvalue"> <button id="angButton">Show</button></p>
+</div>
 <p><span class="spacer">Velocities </span><br> <span class="spacer">Linear (units/second): </span><span id="linV" class="vis"> </span><br> <span class="spacer">Angular (degrees/second): </span><span id="angV" class="vis"> </span></p>
 </div>
 </div>
@@ -182,22 +185,24 @@ function myMove() {
 angButton.onclick = myMove;
 
 </script>
-<p>Did you notice how as you made the string longer, the linear velocity increased but the angular velocity stayed the same? This is because to trace the larger circle at the same rate, it has to move faster when it is farther away. If you measured the linear velocity at points moving out from the origin, you could see that they steadily increase. However, the angular velocity remains the same because the ball is still covering the same 360 degrees of the circle.</p>
+<p>Did you notice how as you made the radius larger, the linear velocity increased but the angular velocity stayed the same? In this example, we have chosen to keep the angular velocity the same, no matter the radius. Because the distance the ball has to travel is larger with a larger radius, the ball has to move faster to complete a full circle in the same amount of time. Every time we increase the radius, the linear velocity has to increase to keep the angular velocity the same.</p>
 <h1 id="angular-acceleration">Angular Acceleration</h1>
-<p>To describe the change in velocity of an object, scientists use a concept called acceleration. For instance, as a ball picks up speed as it rolls down a ramp. The acceleration will change depending on the tilt of the ramp. If it is steeper, it will pick up speed more quickly and has a higher acceleration. In a similar way, you can use angular acceleration to describe the rate of change of angular velocity.</p>
-<p>To help understand better the idea of angular acceleration, we have two animations below. On the left, the ball on a string is spinning at a constant angular velocity. As its angular velocity is not changing, the angular acceleration is zero. However, on the right, you can see that the ball’s angular velocity increases and then decreases. The faster that this change in angular velocity occurs the larger the angular acceleration will be. If you adjust the sliders below, you can see that the time that it takes to change between the minimum and maximum acceleration changes.</p>
+<p>To describe the change in velocity of an object, scientists use a concept called acceleration. For instance, if you roll a ball down down a ramp, it will pick up speed as it goes. This acceleration will change depending on the tilt of the ramp. If it is steeper, it will pick up speed more quickly and has a higher acceleration. In a similar way, you can use angular acceleration to describe the rate of change of angular velocity.</p>
+<p>To help understand better the idea of angular acceleration, we have two animations below. On the left, the ball on a string is spinning at a constant angular velocity. As its angular velocity is not changing, the angular acceleration is zero. However, on the right, you can see that the ball’s angular velocity increases and then decreases due the angular velocity changing.</p>
 <video src="/images/bookpics/rotation_acceleration.mp4" muted autoplay playsinline loop>
 </video>
-<p>Did you notice how if you increase the angular acceleration that the time it takes to get to the maximum velocity decreases? This is because with a faster angular acceleration, it takes less time to get to the maximum angular velocity. Conversely, with a smaller angular acceleration, it will take more time to get to the maxiumum angular velocity. This is similar to how a sprinter that can accelerate faster will beat in a race another sprinter who has the same top speed but a slower acceleration. Since the first sprinter can reach their top speed faster, they will be ahead of the other sprinter in the race, even if they can run equally fast.</p>
 <h1 id="polar-coordinates">Polar Coordinates</h1>
-<p>In the <a href="/vectors">vectors and kinematics lesson</a>, we introduced the idea of coordinates, which describe a point in space. In this lesson, we used something called ‘Cartesian coordinates.’ If we think of a line connecting the origin to the point, Cartesian coordinates provide the x and y position <span class="math inline">\((x, y)\)</span>. This is very useful for straight lines, (give more examples). In other cases, something called polar coordinates can be more useful. Polar coordinates define points in space differently. Rather than giving the x and y position, they specify points as their position on a circle. The two polar coordinates describes the radius of the circle (<span class="math inline">\(r\)</span>) and its direction (<span class="math inline">\(\theta\)</span>) <span class="math inline">\((r, \theta)\)</span>. This is easier to describe using a visual:</p>
+<p>In the <a href="/vectors">vectors and kinematics lesson</a>, we introduced the idea of coordinates, which describe a point in space. In that lesson, we used something called ‘Cartesian coordinates.’ If we think of a line connecting the origin to a point, Cartesian coordinates provide the x and y position <span class="math inline">\((x, y)\)</span>. This is very useful for describing straight lines and many mathematical functions, such as those we created in the <a href="/animation">Animations and Patterns</a> adventure. In other cases, something called polar coordinates can be more useful. Polar coordinates define points in space differently. Rather than giving the x and y position, they specify points as their position on a circle. The two polar coordinates describes the radius of the circle (<span class="math inline">\(r\)</span>) and the distance that has been traveled along the circle, which is measured as the angle <span class="math inline">\(\theta\)</span>. Instead of reporting coordinates as <span class="math inline">\((x, y)\)</span>, polar coordinates are reported as <span class="math inline">\((r, \theta)\)</span>. This is easier to describe using a visual. In this image, we can see how the same point in space can be described using either Cartesian or polar coordinates.</p>
 <figure>
 <img src="/images/rotation_polarCoordinates.png" alt="" /><figcaption>The same point can be described using cartesian coordinates (left image) and polar coordinates (right plot).</figcaption>
 </figure>
-<p>It sometimes is important to switch from Cartesian to polar coordiantes or in the reverse from polar to Cartesian coordinates. <span class="math inline">\(x\)</span>, <span class="math inline">\(r\)</span>, and <span class="math inline">\(\theta\)</span> are related to each other using the cosine function, which relates <span class="math inline">\(\theta\)</span> to the ratio between <span class="math inline">\(x\)</span> and <span class="math inline">\(r\)</span> (<span class="math inline">\(cos(\theta) = x/r\)</span>). The sine function (<span class="math inline">\(sin(\theta) = y/r\)</span>) relates <span class="math inline">\(/theta\)</span> to the ratio between <span class="math inline">\(y\)</span> and <span class="math inline">\(r\)</span>.</p>
-<p>##add visualization of this</p>
-<p>Going back to our discussion above about angular displacement, you can see how polar coordinates make it easy to describe the ball’s location. Polar coordinates make it easier to describe the ball’s motion as well. By steadily increasing theta (or the angle), you can draw a circle with a specific radius.</p>
-<h2 id="add-an-animation-here-maybe-of-a-ball-on-a-string">add an animation here, maybe of a ball on a string</h2>
+<p>It sometimes is important to switch from Cartesian to polar coordiantes or in the reverse from polar to Cartesian coordinates. <span class="math inline">\(x\)</span>, <span class="math inline">\(r\)</span>, and <span class="math inline">\(\theta\)</span> are related to each other using the cosine function where <span class="math display">\[ x = r\times\cos{\theta}\]</span> <span class="math inline">\(y\)</span>, <span class="math inline">\(r\)</span>, and <span class="math inline">\(\theta\)</span> are related to each other using the sin function where <span class="math display">\[ y = r\times\sin{\theta} \]</span></p>
+<figure>
+<img src="/images/rotation_polarCart_trig.png" alt="" /><figcaption>Conversion between polar and Cartesian coordinates requires the use of sin and cos functions.</figcaption>
+</figure>
+<p>Going back to our discussion above about angular displacement, you can see how polar coordinates make it easy to describe the ball’s location. As the ball moves in a circle, we can describe its location using the radius and angle. This is much simpler than determining <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> for each position. Polar coordinates make it easier to describe the ball’s motion as well. By steadily increasing <span class="math inline">\(\theta\)</span> (or the angle), you can draw a circle with a specific radius.</p>
+<video src="/images/bookpics/polar_animation.mp4" muted autoplay playsinline loop>
+</video>
 <h1 id="summary">Summary</h1>
 <p>Let’s tie all of these concepts together to describe your ride on the merry-go-round! Now, imagine a second ride where you chose the yellow horse to your left (closer to the center) instead. How would the following properties of your trip change: Angular displacement, angular velocity, linear velocity, angular acceleration?</p>
 <p><img src="/images/bookpics/merry-go-round.png" alt="Here’s a picture of this merry-go-round ride! Notice that the different radii for the canopy, inner horse, and outer horse. How will that affect their linear and rotational velocities? image credit Mariya Krastanova" /> <!-- TODO: Add final version once Mariya uploads it --></p>
