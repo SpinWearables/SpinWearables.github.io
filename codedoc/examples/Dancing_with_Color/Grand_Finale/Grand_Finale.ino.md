@@ -36,9 +36,17 @@ void setup() {
   SpinWheel.begin();
 }
 
-
+```
+</div>
+<div class="side-text">
+Here, we initialize some variables that we
+will make use of later. 
+</div>
+<div class="code">
+```cpp
 int offset = 0;
 int colorChange;
+uint8_t angle = 0; 
 
 ```
 </div>
@@ -107,18 +115,34 @@ sum of the acceleration in the x,y,and z directions.
 <div class="side-text">
 Here we use an **if statement** to check to see if the 
 the total acceleration is large enough. If it is, 
-then we will create a snake on the small LEDs using
-`SpinWheel.snake()`. Here we use (0,255,0) to make the 
-snake green, but you can use any color you like! 
+then we will create a snake on the small LEDs using the function
+`SpinWheel.setSmallLEDsPointer()`. Here we use (0,255,0) 
+to make the snake green, but you can use any color you like!
+We have also included the 5 here to make the SpinWheel spin at 
+a reasonable speed, but you can also adjust this to make the 
+SpinWheel spin faster or slower.  
 </div>
 <div class="code">
 ```cpp
   if (abs(total_acceleration) > 1) { 
-     SpinWheel.snake(0,255,0);
+     angle = angle+SpinWheel.gz+5;  
+     SpinWheel.setSmallLEDsPointer(angle, 0, 255, 0);
   }
-
-
-
+```
+</div>
+<div class="side-text">
+Additionally, light up the large LEDs. 
+</div>
+<div class="code">
+```cpp
+  SpinWheel.setLargeLEDsUniform(100, 0, 100);
+```
+</div>
+<div class="side-text">
+Have the SpinWheel display the desired pattern.
+</div>
+<div class="code">
+```cpp
   SpinWheel.drawFrame();
 }
 ```

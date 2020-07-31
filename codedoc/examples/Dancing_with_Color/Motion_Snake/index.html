@@ -147,32 +147,45 @@ The code presented on this page can be <a href="./Motion_Snake.ino">downloaded</
 <span id="cb3-3"><a href="#cb3-3"></a>}</span></code></pre></div>
 </div>
 <div class="side-text">
+<p>Initialize the angle variable to zero. This will keep track of the Spin Wheel’s rotation.</p>
+</div>
+<div class="code">
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">uint8_t</span> angle = <span class="dv">0</span>; </span></code></pre></div>
+</div>
+<div class="side-text">
 <p>Instructions in a loop function are repeated over and over again, in other words, “in a loop”.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">void</span> loop() {</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="dt">void</span> loop() {</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>The <code>readIMU</code> function checks if the sensor is ready and takes its current rotation data.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a>  SpinWheel.readIMU();</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a>  SpinWheel.readIMU();</span></code></pre></div>
 </div>
 <div class="side-text">
-<p>Use an <strong>if statement</strong> to check to see if the rotation is large enough. If the rotation is large enough, then <code>SpinWheel.snake()</code> creates a snake-like pattern on the device. Here we use (0,255,0) to make the snake green, but you can use any color you like.</p>
+<p>Use an <strong>if statement</strong> to check to see if the rotation is large enough. If the rotation is large enough, then we will create a snake-like pattern on the device where the motion of the snake is based on the motion of the device. We add 5 to have the snake spin at a reasonable speed. You can adjust this number to change the speed at which the snake rotates. Here we use (0,255,0) to make the snake green, but you can use any color you like.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) { </span>
-<span id="cb6-2"><a href="#cb6-2"></a>     SpinWheel.snake(<span class="dv">0</span>,<span class="dv">255</span>,<span class="dv">0</span>);</span>
-<span id="cb6-3"><a href="#cb6-3"></a>  }</span>
-<span id="cb6-4"><a href="#cb6-4"></a></span>
-<span id="cb6-5"><a href="#cb6-5"></a>  </span>
-<span id="cb6-6"><a href="#cb6-6"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
-<span id="cb6-7"><a href="#cb6-7"></a></span>
-<span id="cb6-8"><a href="#cb6-8"></a>  <span class="co">// Make the SpinWheel show the registered color.</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a>  SpinWheel.drawFrame();</span>
-<span id="cb6-10"><a href="#cb6-10"></a>}</span>
-<span id="cb6-11"><a href="#cb6-11"></a>  </span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt;= <span class="dv">1</span>) { </span>
+<span id="cb7-2"><a href="#cb7-2"></a>     angle = angle + SpinWheel.gx + <span class="dv">5</span>;</span>
+<span id="cb7-3"><a href="#cb7-3"></a>     setSmallLEDsPointer(angle, <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>);</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  }</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>Create a pattern on the large LEDs as well.</p>
+</div>
+<div class="code">
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">100</span>);</span></code></pre></div>
+</div>
+<div class="side-text">
+<p>Have the SpinWheel draw the desired pattern.</p>
+</div>
+<div class="code">
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a>  SpinWheel.drawFrame();</span>
+<span id="cb9-2"><a href="#cb9-2"></a>}</span>
+<span id="cb9-3"><a href="#cb9-3"></a>  </span></code></pre></div>
 </div>
 </div>
 </body>

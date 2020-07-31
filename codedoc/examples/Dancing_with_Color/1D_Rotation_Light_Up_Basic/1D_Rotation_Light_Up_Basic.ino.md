@@ -42,18 +42,6 @@ in other words, "in a loop".
 <div class="code">
 ```cpp
 void loop() {
-```
-</div>
-<div class="side-text">
-Here we get to the code specific to this example.
-First we will initialize a variable which stores 
-a number that tells the SpinWheel what color to display. . 
-In the code below we will choose this color based on the 
-motion of the SpinWheel itself. 
-</div>
-<div class="code">
-```cpp
-  
  
 
 ```

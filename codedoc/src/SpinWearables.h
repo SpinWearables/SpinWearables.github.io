@@ -396,6 +396,14 @@ class SpinWheelClass {
     void setSmallLEDsPointer(uint8_t angle, int64_t decay, uint32_t rgb) {
       setSmallLEDsPointer(angle, decay, rgb>>16, rgb>>8, rgb);
     }
+
+    void setSmallLEDsPointer(uint8_t angle, uint8_t r, uint8_t g, uint8_t b) {
+      setSmallLEDsPointer(angle, 500, r, g, b);
+    }
+
+    void setSmallLEDsPointer(uint8_t angle, uint32_t rgb) {
+      setSmallLEDsPointer(angle, 500, rgb>>16, rgb>>8, rgb);
+    }
     
     void setSmallLEDsProgress(uint8_t angle, uint8_t r, uint8_t g, uint8_t b) {
       int i;
@@ -456,14 +464,6 @@ void bootAnimation() {
 void smallWhiteRotating() {
   uint8_t angle = (millis()>>4)&0xff;
   SpinWheel.setSmallLEDsPointer(angle, 500, 0xffffff);
-}
-
-// #### Snake
-// Create a rotating pattern similar to a snake on the small LEDs 
-// with a color given by (r, g, b).
-void snake(uint8_t r, uint8_t g, uint8_t b) {
-   uint8_t angle = (millis()>>4)&0xff;
-   SpinWheel.setSmallLEDsPointer(angle, 500, r, g, b);
 }
 
 // #### Breathing

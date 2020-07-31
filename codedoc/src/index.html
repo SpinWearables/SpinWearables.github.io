@@ -619,34 +619,42 @@ x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> i
 <span id="cb39-13"><a href="#cb39-13"></a>    <span class="dt">void</span> setSmallLEDsPointer(<span class="dt">uint8_t</span> angle, <span class="dt">int64_t</span> decay, <span class="dt">uint32_t</span> rgb) {</span>
 <span id="cb39-14"><a href="#cb39-14"></a>      setSmallLEDsPointer(angle, decay, rgb&gt;&gt;<span class="dv">16</span>, rgb&gt;&gt;<span class="dv">8</span>, rgb);</span>
 <span id="cb39-15"><a href="#cb39-15"></a>    }</span>
-<span id="cb39-16"><a href="#cb39-16"></a>    </span>
-<span id="cb39-17"><a href="#cb39-17"></a>    <span class="dt">void</span> setSmallLEDsProgress(<span class="dt">uint8_t</span> angle, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
-<span id="cb39-18"><a href="#cb39-18"></a>      <span class="dt">int</span> i;</span>
-<span id="cb39-19"><a href="#cb39-19"></a>      <span class="cf">for</span> (i=<span class="dv">0</span>; i&lt;angle/ONETWELFTH; i++) {</span>
-<span id="cb39-20"><a href="#cb39-20"></a>        setSmallLED(i, r, g, b);</span>
-<span id="cb39-21"><a href="#cb39-21"></a>      }</span>
-<span id="cb39-22"><a href="#cb39-22"></a>      <span class="cf">if</span> (i==<span class="dv">12</span>) <span class="cf">return</span>;</span>
-<span id="cb39-23"><a href="#cb39-23"></a>      <span class="dt">uint32_t</span> br = angle%ONETWELFTH;</span>
-<span id="cb39-24"><a href="#cb39-24"></a>      setSmallLED(i, br*r/ONETWELFTH, br*g/ONETWELFTH, br*b/ONETWELFTH);</span>
-<span id="cb39-25"><a href="#cb39-25"></a>    }</span>
-<span id="cb39-26"><a href="#cb39-26"></a></span>
-<span id="cb39-27"><a href="#cb39-27"></a>    <span class="dt">void</span> setSmallLEDsProgress(<span class="dt">uint8_t</span> angle, <span class="dt">uint32_t</span> rgb) {</span>
-<span id="cb39-28"><a href="#cb39-28"></a>      setSmallLEDsProgress(angle, rgb&gt;&gt;<span class="dv">16</span>, rgb&gt;&gt;<span class="dv">8</span>, rgb);</span>
-<span id="cb39-29"><a href="#cb39-29"></a>    }</span>
-<span id="cb39-30"><a href="#cb39-30"></a>};</span>
-<span id="cb39-31"><a href="#cb39-31"></a></span>
-<span id="cb39-32"><a href="#cb39-32"></a>SpinWheelClass SpinWheel;</span>
-<span id="cb39-33"><a href="#cb39-33"></a></span>
-<span id="cb39-34"><a href="#cb39-34"></a><span class="dt">void</span> cycleAnimationRoutine() { <span class="co">// called from interrupt</span></span>
-<span id="cb39-35"><a href="#cb39-35"></a>  <span class="at">static</span> <span class="dt">unsigned</span> <span class="dt">long</span> last_interrupt_time = <span class="dv">0</span>;</span>
-<span id="cb39-36"><a href="#cb39-36"></a>  <span class="dt">unsigned</span> <span class="dt">long</span> interrupt_time = millis();</span>
-<span id="cb39-37"><a href="#cb39-37"></a>  <span class="cf">if</span> (interrupt_time - last_interrupt_time &gt; <span class="dv">200</span>){</span>
-<span id="cb39-38"><a href="#cb39-38"></a>    SpinWheel.clearAllLEDs();</span>
-<span id="cb39-39"><a href="#cb39-39"></a>    SpinWheel.current_animation++;</span>
-<span id="cb39-40"><a href="#cb39-40"></a>    SpinWheel.current_animation %= SpinWheel.registered_animations;</span>
-<span id="cb39-41"><a href="#cb39-41"></a>  }</span>
-<span id="cb39-42"><a href="#cb39-42"></a>  last_interrupt_time = interrupt_time;</span>
-<span id="cb39-43"><a href="#cb39-43"></a>}</span></code></pre></div>
+<span id="cb39-16"><a href="#cb39-16"></a></span>
+<span id="cb39-17"><a href="#cb39-17"></a>    <span class="dt">void</span> setSmallLEDsPointer(<span class="dt">uint8_t</span> angle, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
+<span id="cb39-18"><a href="#cb39-18"></a>      setSmallLEDsPointer(angle, <span class="dv">500</span>, r, g, b);</span>
+<span id="cb39-19"><a href="#cb39-19"></a>    }</span>
+<span id="cb39-20"><a href="#cb39-20"></a></span>
+<span id="cb39-21"><a href="#cb39-21"></a>    <span class="dt">void</span> setSmallLEDsPointer(<span class="dt">uint8_t</span> angle, <span class="dt">uint32_t</span> rgb) {</span>
+<span id="cb39-22"><a href="#cb39-22"></a>      setSmallLEDsPointer(angle, <span class="dv">500</span>, rgb&gt;&gt;<span class="dv">16</span>, rgb&gt;&gt;<span class="dv">8</span>, rgb);</span>
+<span id="cb39-23"><a href="#cb39-23"></a>    }</span>
+<span id="cb39-24"><a href="#cb39-24"></a>    </span>
+<span id="cb39-25"><a href="#cb39-25"></a>    <span class="dt">void</span> setSmallLEDsProgress(<span class="dt">uint8_t</span> angle, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
+<span id="cb39-26"><a href="#cb39-26"></a>      <span class="dt">int</span> i;</span>
+<span id="cb39-27"><a href="#cb39-27"></a>      <span class="cf">for</span> (i=<span class="dv">0</span>; i&lt;angle/ONETWELFTH; i++) {</span>
+<span id="cb39-28"><a href="#cb39-28"></a>        setSmallLED(i, r, g, b);</span>
+<span id="cb39-29"><a href="#cb39-29"></a>      }</span>
+<span id="cb39-30"><a href="#cb39-30"></a>      <span class="cf">if</span> (i==<span class="dv">12</span>) <span class="cf">return</span>;</span>
+<span id="cb39-31"><a href="#cb39-31"></a>      <span class="dt">uint32_t</span> br = angle%ONETWELFTH;</span>
+<span id="cb39-32"><a href="#cb39-32"></a>      setSmallLED(i, br*r/ONETWELFTH, br*g/ONETWELFTH, br*b/ONETWELFTH);</span>
+<span id="cb39-33"><a href="#cb39-33"></a>    }</span>
+<span id="cb39-34"><a href="#cb39-34"></a></span>
+<span id="cb39-35"><a href="#cb39-35"></a>    <span class="dt">void</span> setSmallLEDsProgress(<span class="dt">uint8_t</span> angle, <span class="dt">uint32_t</span> rgb) {</span>
+<span id="cb39-36"><a href="#cb39-36"></a>      setSmallLEDsProgress(angle, rgb&gt;&gt;<span class="dv">16</span>, rgb&gt;&gt;<span class="dv">8</span>, rgb);</span>
+<span id="cb39-37"><a href="#cb39-37"></a>    }</span>
+<span id="cb39-38"><a href="#cb39-38"></a>};</span>
+<span id="cb39-39"><a href="#cb39-39"></a></span>
+<span id="cb39-40"><a href="#cb39-40"></a>SpinWheelClass SpinWheel;</span>
+<span id="cb39-41"><a href="#cb39-41"></a></span>
+<span id="cb39-42"><a href="#cb39-42"></a><span class="dt">void</span> cycleAnimationRoutine() { <span class="co">// called from interrupt</span></span>
+<span id="cb39-43"><a href="#cb39-43"></a>  <span class="at">static</span> <span class="dt">unsigned</span> <span class="dt">long</span> last_interrupt_time = <span class="dv">0</span>;</span>
+<span id="cb39-44"><a href="#cb39-44"></a>  <span class="dt">unsigned</span> <span class="dt">long</span> interrupt_time = millis();</span>
+<span id="cb39-45"><a href="#cb39-45"></a>  <span class="cf">if</span> (interrupt_time - last_interrupt_time &gt; <span class="dv">200</span>){</span>
+<span id="cb39-46"><a href="#cb39-46"></a>    SpinWheel.clearAllLEDs();</span>
+<span id="cb39-47"><a href="#cb39-47"></a>    SpinWheel.current_animation++;</span>
+<span id="cb39-48"><a href="#cb39-48"></a>    SpinWheel.current_animation %= SpinWheel.registered_animations;</span>
+<span id="cb39-49"><a href="#cb39-49"></a>  }</span>
+<span id="cb39-50"><a href="#cb39-50"></a>  last_interrupt_time = interrupt_time;</span>
+<span id="cb39-51"><a href="#cb39-51"></a>}</span></code></pre></div>
 </div>
 <section id="preloaded-animations" class="side-text">
 <h2>Preloaded animations</h2>
@@ -686,164 +694,154 @@ x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> i
 <span id="cb41-3"><a href="#cb41-3"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
 <span id="cb41-4"><a href="#cb41-4"></a>}</span></code></pre></div>
 </div>
-<section id="snake" class="side-text">
-<h4>Snake</h4>
-<p>Create a rotating pattern similar to a snake on the small LEDs with a color given by (r, g, b).</p>
-</section>
-<div class="code">
-<div class="sourceCode" id="cb42"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb42-1"><a href="#cb42-1"></a><span class="dt">void</span> snake(<span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
-<span id="cb42-2"><a href="#cb42-2"></a>   <span class="dt">uint8_t</span> angle = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;</span>
-<span id="cb42-3"><a href="#cb42-3"></a>   SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, r, g, b);</span>
-<span id="cb42-4"><a href="#cb42-4"></a>}</span></code></pre></div>
-</div>
 <section id="breathing" class="side-text">
 <h4>Breathing</h4>
 <p>A pulsing pattern on all of the LEDs.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb43"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb43-1"><a href="#cb43-1"></a><span class="dt">void</span> allBreathing() {</span>
-<span id="cb43-2"><a href="#cb43-2"></a>  <span class="dt">uint8_t</span> t = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;</span>
-<span id="cb43-3"><a href="#cb43-3"></a>  <span class="dt">uint8_t</span> b1 = parabolaWave(t);</span>
-<span id="cb43-4"><a href="#cb43-4"></a>  <span class="dt">uint8_t</span> b2 = parabolaWave(t+<span class="dv">20</span>);</span>
-<span id="cb43-5"><a href="#cb43-5"></a>  <span class="dt">uint8_t</span> b3 = parabolaWave(t+<span class="dv">70</span>);</span>
-<span id="cb43-6"><a href="#cb43-6"></a>  <span class="dt">uint8_t</span> b4 = parabolaWave(t+<span class="dv">90</span>);</span>
-<span id="cb43-7"><a href="#cb43-7"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {</span>
-<span id="cb43-8"><a href="#cb43-8"></a>    SpinWheel.largeLEDs.setPixelColor(i,b1,<span class="dv">0</span>,b1);</span>
-<span id="cb43-9"><a href="#cb43-9"></a>  }</span>
-<span id="cb43-10"><a href="#cb43-10"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">4</span>; i&lt;<span class="dv">8</span>; i++) {</span>
-<span id="cb43-11"><a href="#cb43-11"></a>    SpinWheel.largeLEDs.setPixelColor(i,b2,<span class="dv">0</span>,b2);</span>
-<span id="cb43-12"><a href="#cb43-12"></a>  }</span>
-<span id="cb43-13"><a href="#cb43-13"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {</span>
-<span id="cb43-14"><a href="#cb43-14"></a>    <span class="cf">if</span> (i%<span class="dv">2</span>==<span class="dv">1</span>) {</span>
-<span id="cb43-15"><a href="#cb43-15"></a>      SpinWheel.setSmallLED(i,b3,<span class="dv">0</span>,b3);</span>
-<span id="cb43-16"><a href="#cb43-16"></a>    } <span class="cf">else</span> {</span>
-<span id="cb43-17"><a href="#cb43-17"></a>      SpinWheel.setSmallLED(i,b4,<span class="dv">0</span>,b4);</span>
-<span id="cb43-18"><a href="#cb43-18"></a>    }</span>
-<span id="cb43-19"><a href="#cb43-19"></a>  }</span>
-<span id="cb43-20"><a href="#cb43-20"></a>}</span>
-<span id="cb43-21"><a href="#cb43-21"></a></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb42-1"><a href="#cb42-1"></a><span class="dt">void</span> allBreathing() {</span>
+<span id="cb42-2"><a href="#cb42-2"></a>  <span class="dt">uint8_t</span> t = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;</span>
+<span id="cb42-3"><a href="#cb42-3"></a>  <span class="dt">uint8_t</span> b1 = parabolaWave(t);</span>
+<span id="cb42-4"><a href="#cb42-4"></a>  <span class="dt">uint8_t</span> b2 = parabolaWave(t+<span class="dv">20</span>);</span>
+<span id="cb42-5"><a href="#cb42-5"></a>  <span class="dt">uint8_t</span> b3 = parabolaWave(t+<span class="dv">70</span>);</span>
+<span id="cb42-6"><a href="#cb42-6"></a>  <span class="dt">uint8_t</span> b4 = parabolaWave(t+<span class="dv">90</span>);</span>
+<span id="cb42-7"><a href="#cb42-7"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {</span>
+<span id="cb42-8"><a href="#cb42-8"></a>    SpinWheel.largeLEDs.setPixelColor(i,b1,<span class="dv">0</span>,b1);</span>
+<span id="cb42-9"><a href="#cb42-9"></a>  }</span>
+<span id="cb42-10"><a href="#cb42-10"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">4</span>; i&lt;<span class="dv">8</span>; i++) {</span>
+<span id="cb42-11"><a href="#cb42-11"></a>    SpinWheel.largeLEDs.setPixelColor(i,b2,<span class="dv">0</span>,b2);</span>
+<span id="cb42-12"><a href="#cb42-12"></a>  }</span>
+<span id="cb42-13"><a href="#cb42-13"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {</span>
+<span id="cb42-14"><a href="#cb42-14"></a>    <span class="cf">if</span> (i%<span class="dv">2</span>==<span class="dv">1</span>) {</span>
+<span id="cb42-15"><a href="#cb42-15"></a>      SpinWheel.setSmallLED(i,b3,<span class="dv">0</span>,b3);</span>
+<span id="cb42-16"><a href="#cb42-16"></a>    } <span class="cf">else</span> {</span>
+<span id="cb42-17"><a href="#cb42-17"></a>      SpinWheel.setSmallLED(i,b4,<span class="dv">0</span>,b4);</span>
+<span id="cb42-18"><a href="#cb42-18"></a>    }</span>
+<span id="cb42-19"><a href="#cb42-19"></a>  }</span>
+<span id="cb42-20"><a href="#cb42-20"></a>}</span>
+<span id="cb42-21"><a href="#cb42-21"></a></span></code></pre></div>
 </div>
 <section id="tilt-sensor-1" class="side-text">
 <h4>Tilt sensor 1</h4>
 <p>The large LEDs are used as a tilt sensor. <video src="./preloaded_tilt.mp4" muted="" autoplay="" playsinline="" loop=""></video></p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb44"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb44-1"><a href="#cb44-1"></a><span class="dt">void</span> tiltSensor() {</span>
-<span id="cb44-2"><a href="#cb44-2"></a>  <span class="dt">int8_t</span> x = SpinWheel.ax_int;  </span>
-<span id="cb44-3"><a href="#cb44-3"></a>  <span class="dt">int8_t</span> y = SpinWheel.ay_int;</span>
-<span id="cb44-4"><a href="#cb44-4"></a>  SpinWheel.clearLargeLEDs();</span>
-<span id="cb44-5"><a href="#cb44-5"></a>  <span class="cf">if</span> (x&gt;<span class="dv">0</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x,<span class="dv">0</span>,x);</span>
-<span id="cb44-6"><a href="#cb44-6"></a>  <span class="cf">else</span> SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x,<span class="dv">0</span>,-x);</span>
-<span id="cb44-7"><a href="#cb44-7"></a>  <span class="cf">if</span> (y&gt;<span class="dv">0</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,y,<span class="dv">0</span>,y);</span>
-<span id="cb44-8"><a href="#cb44-8"></a>  <span class="cf">else</span> SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,-y,<span class="dv">0</span>,-y);</span>
-<span id="cb44-9"><a href="#cb44-9"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb43-1"><a href="#cb43-1"></a><span class="dt">void</span> tiltSensor() {</span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="dt">int8_t</span> x = SpinWheel.ax_int;  </span>
+<span id="cb43-3"><a href="#cb43-3"></a>  <span class="dt">int8_t</span> y = SpinWheel.ay_int;</span>
+<span id="cb43-4"><a href="#cb43-4"></a>  SpinWheel.clearLargeLEDs();</span>
+<span id="cb43-5"><a href="#cb43-5"></a>  <span class="cf">if</span> (x&gt;<span class="dv">0</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x,<span class="dv">0</span>,x);</span>
+<span id="cb43-6"><a href="#cb43-6"></a>  <span class="cf">else</span> SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x,<span class="dv">0</span>,-x);</span>
+<span id="cb43-7"><a href="#cb43-7"></a>  <span class="cf">if</span> (y&gt;<span class="dv">0</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,y,<span class="dv">0</span>,y);</span>
+<span id="cb43-8"><a href="#cb43-8"></a>  <span class="cf">else</span> SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,-y,<span class="dv">0</span>,-y);</span>
+<span id="cb43-9"><a href="#cb43-9"></a>}</span></code></pre></div>
 </div>
 <section id="compass" class="side-text">
 <h4>Compass</h4>
 <p>A compass on the small LEDs, while the large LEDs are used as a tilt sensor.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb45"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb45-1"><a href="#cb45-1"></a><span class="dt">void</span> compass() {</span>
-<span id="cb45-2"><a href="#cb45-2"></a>  <span class="dt">int8_t</span> x = SpinWheel.ax_int;  </span>
-<span id="cb45-3"><a href="#cb45-3"></a>  <span class="dt">int8_t</span> y = SpinWheel.ay_int;</span>
-<span id="cb45-4"><a href="#cb45-4"></a>  SpinWheel.clearLargeLEDs();</span>
-<span id="cb45-5"><a href="#cb45-5"></a>  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
-<span id="cb45-6"><a href="#cb45-6"></a>  <span class="cf">else</span> <span class="cf">if</span> (x&lt;-<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
-<span id="cb45-7"><a href="#cb45-7"></a>  <span class="cf">else</span> {</span>
-<span id="cb45-8"><a href="#cb45-8"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(x));</span>
-<span id="cb45-9"><a href="#cb45-9"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(x));</span>
-<span id="cb45-10"><a href="#cb45-10"></a>  }</span>
-<span id="cb45-11"><a href="#cb45-11"></a>  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
-<span id="cb45-12"><a href="#cb45-12"></a>  <span class="cf">else</span> <span class="cf">if</span> (y&lt;-<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
-<span id="cb45-13"><a href="#cb45-13"></a>  <span class="cf">else</span> {</span>
-<span id="cb45-14"><a href="#cb45-14"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(y));</span>
-<span id="cb45-15"><a href="#cb45-15"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(y));</span>
-<span id="cb45-16"><a href="#cb45-16"></a>  }</span>
-<span id="cb45-17"><a href="#cb45-17"></a>  <span class="dt">uint8_t</span> angle = (atan2(SpinWheel.my_int, SpinWheel.mx_int)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
-<span id="cb45-18"><a href="#cb45-18"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
-<span id="cb45-19"><a href="#cb45-19"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb44-1"><a href="#cb44-1"></a><span class="dt">void</span> compass() {</span>
+<span id="cb44-2"><a href="#cb44-2"></a>  <span class="dt">int8_t</span> x = SpinWheel.ax_int;  </span>
+<span id="cb44-3"><a href="#cb44-3"></a>  <span class="dt">int8_t</span> y = SpinWheel.ay_int;</span>
+<span id="cb44-4"><a href="#cb44-4"></a>  SpinWheel.clearLargeLEDs();</span>
+<span id="cb44-5"><a href="#cb44-5"></a>  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
+<span id="cb44-6"><a href="#cb44-6"></a>  <span class="cf">else</span> <span class="cf">if</span> (x&lt;-<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
+<span id="cb44-7"><a href="#cb44-7"></a>  <span class="cf">else</span> {</span>
+<span id="cb44-8"><a href="#cb44-8"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(x));</span>
+<span id="cb44-9"><a href="#cb44-9"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(x));</span>
+<span id="cb44-10"><a href="#cb44-10"></a>  }</span>
+<span id="cb44-11"><a href="#cb44-11"></a>  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
+<span id="cb44-12"><a href="#cb44-12"></a>  <span class="cf">else</span> <span class="cf">if</span> (y&lt;-<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
+<span id="cb44-13"><a href="#cb44-13"></a>  <span class="cf">else</span> {</span>
+<span id="cb44-14"><a href="#cb44-14"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(y));</span>
+<span id="cb44-15"><a href="#cb44-15"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(y));</span>
+<span id="cb44-16"><a href="#cb44-16"></a>  }</span>
+<span id="cb44-17"><a href="#cb44-17"></a>  <span class="dt">uint8_t</span> angle = (atan2(SpinWheel.my_int, SpinWheel.mx_int)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
+<span id="cb44-18"><a href="#cb44-18"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
+<span id="cb44-19"><a href="#cb44-19"></a>}</span></code></pre></div>
 </div>
 <section id="tilt-sensor-2" class="side-text">
 <h4>Tilt sensor 2</h4>
 <p>The small LEDs are used as a tilt sensor.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb46"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb46-1"><a href="#cb46-1"></a><span class="dt">void</span> tiltSensor2() {</span>
-<span id="cb46-2"><a href="#cb46-2"></a>  <span class="dt">uint8_t</span> angle = (atan2(SpinWheel.ay_int, SpinWheel.ax_int)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
-<span id="cb46-3"><a href="#cb46-3"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
-<span id="cb46-4"><a href="#cb46-4"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb45-1"><a href="#cb45-1"></a><span class="dt">void</span> tiltSensor2() {</span>
+<span id="cb45-2"><a href="#cb45-2"></a>  <span class="dt">uint8_t</span> angle = (atan2(SpinWheel.ay_int, SpinWheel.ax_int)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
+<span id="cb45-3"><a href="#cb45-3"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
+<span id="cb45-4"><a href="#cb45-4"></a>}</span></code></pre></div>
 </div>
 <section id="tilt-sensor-3" class="side-text">
 <h4>Tilt sensor 3</h4>
 <p>Both the large and the small LEDs are used as a tilt sensor. <video src="./preloaded_tilt3.mp4" muted="" autoplay="" playsinline="" loop=""></video></p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb47"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb47-1"><a href="#cb47-1"></a><span class="dt">void</span> tiltSensor3() {</span>
-<span id="cb47-2"><a href="#cb47-2"></a>  <span class="dt">int8_t</span> x = SpinWheel.ax_int;  </span>
-<span id="cb47-3"><a href="#cb47-3"></a>  <span class="dt">int8_t</span> y = SpinWheel.ay_int;</span>
-<span id="cb47-4"><a href="#cb47-4"></a>  SpinWheel.setLargeLEDsUniform(<span class="bn">0xffffff</span>);</span>
-<span id="cb47-5"><a href="#cb47-5"></a>  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) {</span>
-<span id="cb47-6"><a href="#cb47-6"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,x-<span class="dv">8</span>);</span>
-<span id="cb47-7"><a href="#cb47-7"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">3</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,x-<span class="dv">8</span>);</span>
-<span id="cb47-8"><a href="#cb47-8"></a>  }</span>
-<span id="cb47-9"><a href="#cb47-9"></a>  <span class="cf">else</span> <span class="cf">if</span> (x&lt;-<span class="dv">10</span>) {</span>
-<span id="cb47-10"><a href="#cb47-10"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,-x+<span class="dv">8</span>);</span>
-<span id="cb47-11"><a href="#cb47-11"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">1</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,-x+<span class="dv">8</span>);</span>
-<span id="cb47-12"><a href="#cb47-12"></a>  }</span>
-<span id="cb47-13"><a href="#cb47-13"></a>  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) {</span>
-<span id="cb47-14"><a href="#cb47-14"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
-<span id="cb47-15"><a href="#cb47-15"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">0</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
-<span id="cb47-16"><a href="#cb47-16"></a>  }</span>
-<span id="cb47-17"><a href="#cb47-17"></a>  <span class="cf">else</span> <span class="cf">if</span> (y&lt;-<span class="dv">10</span>) {</span>
-<span id="cb47-18"><a href="#cb47-18"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
-<span id="cb47-19"><a href="#cb47-19"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">2</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
-<span id="cb47-20"><a href="#cb47-20"></a>  }</span>
-<span id="cb47-21"><a href="#cb47-21"></a>  <span class="dt">uint8_t</span> angle = (atan2(SpinWheel.ay_int, SpinWheel.ax_int)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
-<span id="cb47-22"><a href="#cb47-22"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
-<span id="cb47-23"><a href="#cb47-23"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb46-1"><a href="#cb46-1"></a><span class="dt">void</span> tiltSensor3() {</span>
+<span id="cb46-2"><a href="#cb46-2"></a>  <span class="dt">int8_t</span> x = SpinWheel.ax_int;  </span>
+<span id="cb46-3"><a href="#cb46-3"></a>  <span class="dt">int8_t</span> y = SpinWheel.ay_int;</span>
+<span id="cb46-4"><a href="#cb46-4"></a>  SpinWheel.setLargeLEDsUniform(<span class="bn">0xffffff</span>);</span>
+<span id="cb46-5"><a href="#cb46-5"></a>  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) {</span>
+<span id="cb46-6"><a href="#cb46-6"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,x-<span class="dv">8</span>);</span>
+<span id="cb46-7"><a href="#cb46-7"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">3</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,x-<span class="dv">8</span>);</span>
+<span id="cb46-8"><a href="#cb46-8"></a>  }</span>
+<span id="cb46-9"><a href="#cb46-9"></a>  <span class="cf">else</span> <span class="cf">if</span> (x&lt;-<span class="dv">10</span>) {</span>
+<span id="cb46-10"><a href="#cb46-10"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,-x+<span class="dv">8</span>);</span>
+<span id="cb46-11"><a href="#cb46-11"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">1</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,-x+<span class="dv">8</span>);</span>
+<span id="cb46-12"><a href="#cb46-12"></a>  }</span>
+<span id="cb46-13"><a href="#cb46-13"></a>  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) {</span>
+<span id="cb46-14"><a href="#cb46-14"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
+<span id="cb46-15"><a href="#cb46-15"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">0</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
+<span id="cb46-16"><a href="#cb46-16"></a>  }</span>
+<span id="cb46-17"><a href="#cb46-17"></a>  <span class="cf">else</span> <span class="cf">if</span> (y&lt;-<span class="dv">10</span>) {</span>
+<span id="cb46-18"><a href="#cb46-18"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
+<span id="cb46-19"><a href="#cb46-19"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">2</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
+<span id="cb46-20"><a href="#cb46-20"></a>  }</span>
+<span id="cb46-21"><a href="#cb46-21"></a>  <span class="dt">uint8_t</span> angle = (atan2(SpinWheel.ay_int, SpinWheel.ax_int)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
+<span id="cb46-22"><a href="#cb46-22"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
+<span id="cb46-23"><a href="#cb46-23"></a>}</span></code></pre></div>
 </div>
 <section id="flashlight" class="side-text">
 <h4>Flashlight</h4>
 <p>As the name suggests, this function turns all LEDs on to full brightness.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb48"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb48-1"><a href="#cb48-1"></a><span class="dt">void</span> flashlight() {</span>
-<span id="cb48-2"><a href="#cb48-2"></a>  SpinWheel.setSmallLEDsUniform(<span class="bn">0xffffff</span>);  </span>
-<span id="cb48-3"><a href="#cb48-3"></a>  SpinWheel.setLargeLEDsUniform(<span class="bn">0xffffff</span>);</span>
-<span id="cb48-4"><a href="#cb48-4"></a>}</span>
-<span id="cb48-5"><a href="#cb48-5"></a></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb47-1"><a href="#cb47-1"></a><span class="dt">void</span> flashlight() {</span>
+<span id="cb47-2"><a href="#cb47-2"></a>  SpinWheel.setSmallLEDsUniform(<span class="bn">0xffffff</span>);  </span>
+<span id="cb47-3"><a href="#cb47-3"></a>  SpinWheel.setLargeLEDsUniform(<span class="bn">0xffffff</span>);</span>
+<span id="cb47-4"><a href="#cb47-4"></a>}</span>
+<span id="cb47-5"><a href="#cb47-5"></a></span></code></pre></div>
 </div>
 <section id="teal-light" class="side-text">
 <h4>Teal Light</h4>
 <p>As the name suggests, this function turns all LEDs on to full brightness.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb49"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb49-1"><a href="#cb49-1"></a><span class="dt">void</span> tealLight() {</span>
-<span id="cb49-2"><a href="#cb49-2"></a>  SpinWheel.setSmallLEDsUniform(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">170</span>);  </span>
-<span id="cb49-3"><a href="#cb49-3"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">216</span>);</span>
-<span id="cb49-4"><a href="#cb49-4"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb48-1"><a href="#cb48-1"></a><span class="dt">void</span> tealLight() {</span>
+<span id="cb48-2"><a href="#cb48-2"></a>  SpinWheel.setSmallLEDsUniform(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">170</span>);  </span>
+<span id="cb48-3"><a href="#cb48-3"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">216</span>);</span>
+<span id="cb48-4"><a href="#cb48-4"></a>}</span></code></pre></div>
 </div>
 <section id="large-rainbow" class="side-text">
 <h4>Large Rainbow</h4>
 <p>Draw a rainbow on the larger LEDs and while the smaller ones are all white. <video src="./preloaded_rainbow.mp4" muted="" autoplay="" playsinline="" loop=""></video></p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb50"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb50-1"><a href="#cb50-1"></a><span class="dt">void</span> largeRainbow() {</span>
-<span id="cb50-2"><a href="#cb50-2"></a>  <span class="dt">long</span> <span class="dt">int</span> angle = millis()/<span class="dv">20</span>;</span>
-<span id="cb50-3"><a href="#cb50-3"></a>  SpinWheel.setSmallLEDsUniform(<span class="bn">0xffffff</span>);</span>
-<span id="cb50-4"><a href="#cb50-4"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {</span>
-<span id="cb50-5"><a href="#cb50-5"></a>    SpinWheel.setLargeLED(i, colorWheel(angle+i*<span class="dv">255</span>/<span class="dv">4</span>));</span>
-<span id="cb50-6"><a href="#cb50-6"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>-i, colorWheel(angle+i*<span class="dv">255</span>/<span class="dv">4</span>));</span>
-<span id="cb50-7"><a href="#cb50-7"></a>  }</span>
-<span id="cb50-8"><a href="#cb50-8"></a></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb49-1"><a href="#cb49-1"></a><span class="dt">void</span> largeRainbow() {</span>
+<span id="cb49-2"><a href="#cb49-2"></a>  <span class="dt">long</span> <span class="dt">int</span> angle = millis()/<span class="dv">20</span>;</span>
+<span id="cb49-3"><a href="#cb49-3"></a>  SpinWheel.setSmallLEDsUniform(<span class="bn">0xffffff</span>);</span>
+<span id="cb49-4"><a href="#cb49-4"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {</span>
+<span id="cb49-5"><a href="#cb49-5"></a>    SpinWheel.setLargeLED(i, colorWheel(angle+i*<span class="dv">255</span>/<span class="dv">4</span>));</span>
+<span id="cb49-6"><a href="#cb49-6"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>-i, colorWheel(angle+i*<span class="dv">255</span>/<span class="dv">4</span>));</span>
+<span id="cb49-7"><a href="#cb49-7"></a>  }</span>
+<span id="cb49-8"><a href="#cb49-8"></a></span></code></pre></div>
 </div>
 <div class="side-text">
 
 </div>
 <div class="code">
-<div class="sourceCode" id="cb51"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb51-1"><a href="#cb51-1"></a>}</span>
-<span id="cb51-2"><a href="#cb51-2"></a></span>
-<span id="cb51-3"><a href="#cb51-3"></a>} <span class="co">// end namespace SpinWearables</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb50-1"><a href="#cb50-1"></a>}</span>
+<span id="cb50-2"><a href="#cb50-2"></a></span>
+<span id="cb50-3"><a href="#cb50-3"></a>} <span class="co">// end namespace SpinWearables</span></span></code></pre></div>
 </div>
 </div>
 </body>

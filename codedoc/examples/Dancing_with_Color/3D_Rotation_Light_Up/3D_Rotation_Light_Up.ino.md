@@ -74,6 +74,18 @@ and takes its current rotation data.
 ```
 </div>
 <div class="side-text">
+Set the colors to zero. Below we will measure rotations
+and change the values away from zero if necessary. 
+</div>
+<div class="code">
+```cpp
+  red = 0;
+  green = 0;
+  blue = 0;
+
+```
+</div>
+<div class="side-text">
 Here we will also use if statements. 
 In this case if the rotation in the 
 **x direction** is large, then we will change 
@@ -115,22 +127,6 @@ the blue LED of **each** big LED on.
   if (abs(SpinWheel.gz) > 1)  {
     blue = 255;
   }
-```
-</div>
-<div class="side-text">
-Finally, we check to see if the rotation in
-all directions is small enough. We do this by 
-adding the rotational components in each of the 
-directions. If this condition is true, then
-turn the big LEDs off.
-</div>
-<div class="code">
-```cpp
-  if ((abs(SpinWheel.gx)+abs(SpinWheel.gy)+abs(SpinWheel.gz)) < 1) {
-    red = 0;
-    green = 0;
-    blue = 0;
-  }
 
 ```
 </div>
@@ -143,7 +139,6 @@ SpinWheel what color to display.
 ```cpp
   SpinWheel.setLargeLEDsUniform(red, green, blue);
   SpinWheel.setSmallLEDsUniform(red, green, blue);
-
 
   SpinWheel.drawFrame();
  }

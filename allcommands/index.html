@@ -61,9 +61,6 @@
 <li><a href="#turn-on-a-range-of-small-leds-with-setsmallleds">Turn on a range of Small LEDs with <code>setSmallLEDs</code></a></li>
 <li><a href="#set-overall-brightness-with-setbrightness">Set overall brightness with <code>setBrightness</code></a></li>
 </ul></li>
-<li><a href="#advanced-led-manipulation">Advanced LED Manipulation</a></li>
-<li><a href="#color-and-brightness-helpers">Color and Brightness Helpers</a></li>
-<li><a href="#motion-sensing-and-compass">Motion Sensing and Compass</a></li>
 </ul>
 <a id="TOCclose" href="#"></a>
 </nav>
@@ -166,17 +163,20 @@ void loop() {
 </div>
 <h3 id="set-overall-brightness-with-setbrightness">Set overall brightness with <code>setBrightness</code></h3>
 <p>This function takes only one argument, between 0 and 255, that sets the brightness of the LEDs. At maximal settings the large LEDs are blindingly bright and pull a total current of 480 mAh, which would deplete our battery in less than 10 minutes. Using the maximal setting would cause the battery to wear out much quicker and would cause significant heating.</p>
-<h2 id="advanced-led-manipulation">Advanced LED Manipulation</h2>
+<!--## Advanced LED Manipulation-->
 <!--TODO: expand this section and implement as necessary-->
-<p>There are some undocumented and unfinished functions, among them: <code>setSmallLEDsPointer</code> and <code>setSmallLEDsProgress</code> and the unfinished <code>setSmallLEDsRainbow</code> and <code>setLargeLEDsRainbow</code>.</p>
-<h2 id="color-and-brightness-helpers">Color and Brightness Helpers</h2>
+<!--There are some undocumented and unfinished functions, among them: `setSmallLEDsPointer` and `setSmallLEDsProgress` and the unfinished `setSmallLEDsRainbow` and `setLargeLEDsRainbow`.-->
+<!--## Color and Brightness Helpers-->
 <!--TODO: expand this section and implement as necessary-->
-<p>The <code>colorWheel</code> function turns a single number representing an angle into a color from the color wheel.</p>
-<p>The <code>triangularWave</code> and <code>parabolaWave</code> functions provide for convenient periodic patterns, useful in animations.</p>
-<p>The <code>faston_slowoff</code> function can be used to pleasantly filter time-dependent measurements. For instance, it can be used to rapidly brighten an LED when a motion is detected and then slowly let the light decay after the motion stops.</p>
-<h2 id="motion-sensing-and-compass">Motion Sensing and Compass</h2>
+<!--The `colorWheel` function turns a single number representing an angle into a color from the color wheel.
+
+The `triangularWave` and `parabolaWave` functions provide for convenient periodic patterns, useful in animations.
+
+The `faston_slowoff` function can be used to pleasantly filter time-dependent measurements. For instance, it can be used to rapidly brighten an LED when a motion is detected and then slowly let the light decay after the motion stops.
+
+## Motion Sensing and Compass-->
 <!--TODO: expand this section and implement as necessary-->
-<p>To request measurements from the sensor you need to call <code>SpinWearables.readIMU</code>. Then the measurement data will be available in <code>ax,ay,az,gx,gy,gz,mx,my,mz</code> in some units. There is also a temperature sensor.</p>
+<!--To request measurements from the sensor you need to call `SpinWearables.readIMU`. Then the measurement data will be available in `ax,ay,az,gx,gy,gz,mx,my,mz` in some units. There is also a temperature sensor.-->
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
 data-isso-require-author="true"

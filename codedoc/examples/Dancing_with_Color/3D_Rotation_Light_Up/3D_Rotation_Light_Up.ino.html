@@ -168,39 +168,37 @@ The code presented on this page can be <a href="./3D_Rotation_Light_Up.ino">down
 <div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a>  SpinWheel.readIMU();</span></code></pre></div>
 </div>
 <div class="side-text">
+<p>Set the colors to zero. Below we will measure rotations and change the values away from zero if necessary.</p>
+</div>
+<div class="code">
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  red = <span class="dv">0</span>;</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  green = <span class="dv">0</span>;</span>
+<span id="cb7-3"><a href="#cb7-3"></a>  blue = <span class="dv">0</span>;</span></code></pre></div>
+</div>
+<div class="side-text">
 <p>Here we will also use if statements. In this case if the rotation in the <strong>x direction</strong> is large, then we will change the value of the <code>red</code> variable. Later, this will be used to turn red LED of <strong>each</strong> big LED on.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) {</span>
-<span id="cb7-2"><a href="#cb7-2"></a>    red = <span class="dv">255</span>;</span>
-<span id="cb7-3"><a href="#cb7-3"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">1</span>) {</span>
+<span id="cb8-2"><a href="#cb8-2"></a>    red = <span class="dv">255</span>;</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  }</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Similarly, if the rotation in the<br />
 <strong>y direction</strong> is large, then we will change the value of the <code>green</code> variable. Later this will be use to turn the green LED of <strong>each</strong> big LED on.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gy) &gt; <span class="dv">1</span>) {</span>
-<span id="cb8-2"><a href="#cb8-2"></a>    green = <span class="dv">255</span>;</span>
-<span id="cb8-3"><a href="#cb8-3"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gy) &gt; <span class="dv">1</span>) {</span>
+<span id="cb9-2"><a href="#cb9-2"></a>    green = <span class="dv">255</span>;</span>
+<span id="cb9-3"><a href="#cb9-3"></a>  }</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Also, if the rotation in the <strong>z-direction</strong> is large, then we will change the value of the <code>blue</code> variable. Later this will be used to turn the blue LED of <strong>each</strong> big LED on.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gz) &gt; <span class="dv">1</span>)  {</span>
-<span id="cb9-2"><a href="#cb9-2"></a>    blue = <span class="dv">255</span>;</span>
-<span id="cb9-3"><a href="#cb9-3"></a>  }</span></code></pre></div>
-</div>
-<div class="side-text">
-<p>Finally, we check to see if the rotation in all directions is small enough. We do this by adding the rotational components in each of the directions. If this condition is true, then turn the big LEDs off.</p>
-</div>
-<div class="code">
-<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1"></a>  <span class="cf">if</span> ((abs(SpinWheel.gx)+abs(SpinWheel.gy)+abs(SpinWheel.gz)) &lt; <span class="dv">1</span>) {</span>
-<span id="cb10-2"><a href="#cb10-2"></a>    red = <span class="dv">0</span>;</span>
-<span id="cb10-3"><a href="#cb10-3"></a>    green = <span class="dv">0</span>;</span>
-<span id="cb10-4"><a href="#cb10-4"></a>    blue = <span class="dv">0</span>;</span>
-<span id="cb10-5"><a href="#cb10-5"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gz) &gt; <span class="dv">1</span>)  {</span>
+<span id="cb10-2"><a href="#cb10-2"></a>    blue = <span class="dv">255</span>;</span>
+<span id="cb10-3"><a href="#cb10-3"></a>  }</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Here, we will use the <code>setLargeLEDsUniform</code> and <code>setSmallLEDsUniform</code> function to tell the<br />
@@ -210,10 +208,9 @@ SpinWheel what color to display.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1"></a>  SpinWheel.setLargeLEDsUniform(red, green, blue);</span>
 <span id="cb11-2"><a href="#cb11-2"></a>  SpinWheel.setSmallLEDsUniform(red, green, blue);</span>
 <span id="cb11-3"><a href="#cb11-3"></a></span>
-<span id="cb11-4"><a href="#cb11-4"></a></span>
-<span id="cb11-5"><a href="#cb11-5"></a>  SpinWheel.drawFrame();</span>
-<span id="cb11-6"><a href="#cb11-6"></a> }</span>
-<span id="cb11-7"><a href="#cb11-7"></a>  </span></code></pre></div>
+<span id="cb11-4"><a href="#cb11-4"></a>  SpinWheel.drawFrame();</span>
+<span id="cb11-5"><a href="#cb11-5"></a> }</span>
+<span id="cb11-6"><a href="#cb11-6"></a>  </span></code></pre></div>
 </div>
 </div>
 </body>
