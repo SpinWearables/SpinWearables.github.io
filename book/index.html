@@ -63,8 +63,8 @@
 jQuery(function(){
   var graph = new Springy.Graph();
 
-  var quick = graph.newNode({label: "Quick Start"});
-  var basic = graph.newNode({label: "Basic SpinWheel Commands"});
+  var quick = graph.newNode({label: "Initial Setup", color: "red"});
+  var basic = graph.newNode({label: "Basic Structure of a Program"});
   var sight = graph.newNode({label: "Biology of Sight"});
   var strobe = graph.newNode({label: "Stroboscope"});
   var ani = graph.newNode({label: "Animations and Patterns"});
@@ -108,8 +108,7 @@ jQuery(function(){
 </canvas>
 <p>There is a lot going on in the map above, so below we have our recommended order for completing the lessons and adventures. However, this is just a recommendation! Depending on which activities you are excited by and your comfort with programming, then you may jump around.</p>
 <h2 id="getting-started">Getting Started</h2>
-<p>Before doing anything else, we encourage you to read the <a href="/quickstart">Initial Setup Guide</a>. This is where we explain how to download the Arduino software and provide essential information for the rest of the adventures.</p>
-<p>To learn the basics of controlling the LEDs, then check out our <a href="/basics">SpinWheel Programming Reference</a>. Skim through that page without necessarily trying to understand the code shown there. Use it to establish a vague intuition about the code and use that intuition in the first few adventures. Then go back to this page and try to read it again with the new knowledge of programming you have gained.</p>
+<p>Before doing anything else, we encourage you to read the <a href="/quickstart">Initial Setup Guide</a>. This is where we explain how to download the Arduino software and provide essential information for the rest of the adventures. Before writing your own programs, you might want to check what the <a href="/basics">basic structure of a program</a> looks like. Use that page to establish a vague intuition about the code and use that intuition in the first few adventures. Then go back to this page and try to read it and pages linked within again, with the new knowledge of programming you have gained.</p>
 <h2 id="intro-adventures">Intro Adventures</h2>
 <p>These adventures assume that you have no coding experience and are a great way to become comfortable with both the SpinWheel and coding. The associated lessons go into more depth into concepts that are referenced for the first time in these adventures. We have written the lessons to supplement the content in the adventures and we provide links in each adventure when we recommend checking them out to learn more. We hope these will spark your curiousity to learn even more about the world around you!</p>
 <ol type="1">
@@ -150,6 +149,15 @@ jQuery(function(){
 </ol>
 <h2 id="appendix">Appendix</h2>
 <p>Here’s a <a href="/allcommands">list of the commands</a> for controlling the SpinWheel’s LEDs. While this has been written for those who are discovering coding for the first time, it can also be used as a reference to create your own SpinWheel designs if you are comfortable with programming. We recommend using it as a reference as you are going through the adventures, either way!</p>
+<p>Throughout this guide we use a number of text formatting tools to bring attention to important conceps. Footnotes (actually hovernotes) are visible when you hover <span class="footnote">over dotted text like this<span>Such hovernotes frequently carry interesting additional information.</span></span>. Further reading blocks look as follows and</p>
+<div class="further-reading">
+<p>denote additional sources of information you might be interested in, either on our own website or elsewhere on the web.</p>
+</div>
+<p>On a few occasions we have warning blocks like</p>
+<div class="warning">
+<p>which denote important considerations about health and device care that should be seen before attempting an activity.</p>
+</div>
+<p>We have a variety of interactive visualizations throughout these pages, that work well on desktop browsers like Firefox and Chrome. Lastly, we have many <a href="/basics">code examples</a> in pages that explain how to program the device, <a href="/allcommands">including some interactive simulations of the device with which you can play directly from the browser</a>.</p>
 <h2 id="engineers-diary">Engineer’s Diary</h2>
 <p>Want to learn more about how the SpinWheel was created? We’ll be adding additional lessons about designing the SpinWheel to empower you to design your own electronic creations!</p>
 <ol type="1">

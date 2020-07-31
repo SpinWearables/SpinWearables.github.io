@@ -1,6 +1,6 @@
 <div class="flex-container"><div class="wide-text">
 # A Simple Example Sketch for the SpinWheel
-Part of the [Quick Start](https://spinwearables.com/quickstart/)
+Part of the [Initial Setup](https://spinwearables.com/quickstart/)
 </div>
 <div class="side-text">
 </div>
