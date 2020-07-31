@@ -578,27 +578,35 @@ x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> i
 <span id="cb38-51"><a href="#cb38-51"></a>    <span class="dt">void</span> setLargeLED(<span class="dt">int</span> i, <span class="dt">uint32_t</span> rgb) {</span>
 <span id="cb38-52"><a href="#cb38-52"></a>      largeLEDs.setPixelColor(i,rgb);</span>
 <span id="cb38-53"><a href="#cb38-53"></a>    }</span>
-<span id="cb38-54"><a href="#cb38-54"></a>    </span>
-<span id="cb38-55"><a href="#cb38-55"></a>    <span class="dt">void</span> setLargeLEDsUniform(<span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
-<span id="cb38-56"><a href="#cb38-56"></a>      largeLEDs.fill(color(r,g,b), <span class="dv">0</span>, <span class="dv">8</span>);</span>
+<span id="cb38-54"><a href="#cb38-54"></a></span>
+<span id="cb38-55"><a href="#cb38-55"></a>    <span class="dt">void</span> setLargeLEDs(<span class="dt">int</span> i, <span class="dt">int</span> j, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
+<span id="cb38-56"><a href="#cb38-56"></a>      <span class="cf">for</span> (<span class="dt">int</span> ii=max(<span class="dv">0</span>,i); ii&lt;min(<span class="dv">8</span>,j); ii++) setLargeLED(ii,r,g,b);</span>
 <span id="cb38-57"><a href="#cb38-57"></a>    }</span>
 <span id="cb38-58"><a href="#cb38-58"></a>    </span>
-<span id="cb38-59"><a href="#cb38-59"></a>    <span class="dt">void</span> setLargeLEDsUniform(<span class="dt">uint32_t</span> rgb) {</span>
-<span id="cb38-60"><a href="#cb38-60"></a>      largeLEDs.fill(rgb, <span class="dv">0</span>, <span class="dv">8</span>);</span>
+<span id="cb38-59"><a href="#cb38-59"></a>    <span class="dt">void</span> setLargeLEDs(<span class="dt">int</span> i, <span class="dt">int</span> j, <span class="dt">uint32_t</span> rgb) {</span>
+<span id="cb38-60"><a href="#cb38-60"></a>      <span class="cf">for</span> (<span class="dt">int</span> ii=max(<span class="dv">0</span>,i); ii&lt;min(<span class="dv">8</span>,j); ii++) setLargeLED(ii,rgb);</span>
 <span id="cb38-61"><a href="#cb38-61"></a>    }</span>
-<span id="cb38-62"><a href="#cb38-62"></a></span>
-<span id="cb38-63"><a href="#cb38-63"></a>    <span class="dt">void</span> clearSmallLEDs() {</span>
-<span id="cb38-64"><a href="#cb38-64"></a>      setSmallLEDsUniform(<span class="dv">0</span>);  </span>
+<span id="cb38-62"><a href="#cb38-62"></a>    </span>
+<span id="cb38-63"><a href="#cb38-63"></a>    <span class="dt">void</span> setLargeLEDsUniform(<span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
+<span id="cb38-64"><a href="#cb38-64"></a>      largeLEDs.fill(color(r,g,b), <span class="dv">0</span>, <span class="dv">8</span>);</span>
 <span id="cb38-65"><a href="#cb38-65"></a>    }</span>
-<span id="cb38-66"><a href="#cb38-66"></a></span>
-<span id="cb38-67"><a href="#cb38-67"></a>    <span class="dt">void</span> clearLargeLEDs() {</span>
-<span id="cb38-68"><a href="#cb38-68"></a>      largeLEDs.fill(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">8</span>);</span>
+<span id="cb38-66"><a href="#cb38-66"></a>    </span>
+<span id="cb38-67"><a href="#cb38-67"></a>    <span class="dt">void</span> setLargeLEDsUniform(<span class="dt">uint32_t</span> rgb) {</span>
+<span id="cb38-68"><a href="#cb38-68"></a>      largeLEDs.fill(rgb, <span class="dv">0</span>, <span class="dv">8</span>);</span>
 <span id="cb38-69"><a href="#cb38-69"></a>    }</span>
 <span id="cb38-70"><a href="#cb38-70"></a></span>
-<span id="cb38-71"><a href="#cb38-71"></a>    <span class="dt">void</span> clearAllLEDs() {</span>
+<span id="cb38-71"><a href="#cb38-71"></a>    <span class="dt">void</span> clearSmallLEDs() {</span>
 <span id="cb38-72"><a href="#cb38-72"></a>      setSmallLEDsUniform(<span class="dv">0</span>);  </span>
-<span id="cb38-73"><a href="#cb38-73"></a>      setLargeLEDsUniform(<span class="dv">0</span>);      </span>
-<span id="cb38-74"><a href="#cb38-74"></a>    }</span></code></pre></div>
+<span id="cb38-73"><a href="#cb38-73"></a>    }</span>
+<span id="cb38-74"><a href="#cb38-74"></a></span>
+<span id="cb38-75"><a href="#cb38-75"></a>    <span class="dt">void</span> clearLargeLEDs() {</span>
+<span id="cb38-76"><a href="#cb38-76"></a>      largeLEDs.fill(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">8</span>);</span>
+<span id="cb38-77"><a href="#cb38-77"></a>    }</span>
+<span id="cb38-78"><a href="#cb38-78"></a></span>
+<span id="cb38-79"><a href="#cb38-79"></a>    <span class="dt">void</span> clearAllLEDs() {</span>
+<span id="cb38-80"><a href="#cb38-80"></a>      setSmallLEDsUniform(<span class="dv">0</span>);  </span>
+<span id="cb38-81"><a href="#cb38-81"></a>      setLargeLEDsUniform(<span class="dv">0</span>);      </span>
+<span id="cb38-82"><a href="#cb38-82"></a>    }</span></code></pre></div>
 </div>
 <section id="some-slightly-more-advanced-drawing-functions" class="side-text">
 <h3>Some slightly more advanced drawing functions</h3>

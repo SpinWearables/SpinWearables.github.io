@@ -165,13 +165,14 @@ The code presented on this page can be <a href="./Motion_Snake.ino">downloaded</
 <div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a>  SpinWheel.readIMU();</span></code></pre></div>
 </div>
 <div class="side-text">
-<p>Use an <strong>if statement</strong> to check to see if the rotation is large enough. If the rotation is large enough, then we will create a snake-like pattern on the device where the motion of the snake is based on the motion of the device. We add 5 to have the snake spin at a reasonable speed. You can adjust this number to change the speed at which the snake rotates. Here we use (0,255,0) to make the snake green, but you can use any color you like.</p>
+<p>Use an <strong>if statement</strong> to check to see if the rotation is large enough. If the rotation is large enough, then we will create a snake-like pattern on the device where the motion of the snake is based on the motion of the device. We add 20 to have the snake spin quickly. You can adjust this number to change the speed at which the snake rotates. Here we use (0,255,0) to make the snake green, but you can use any color you like.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt;= <span class="dv">1</span>) { </span>
-<span id="cb7-2"><a href="#cb7-2"></a>     angle = angle + SpinWheel.gx + <span class="dv">5</span>;</span>
-<span id="cb7-3"><a href="#cb7-3"></a>     setSmallLEDsPointer(angle, <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>);</span>
-<span id="cb7-4"><a href="#cb7-4"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt;= <span class="dv">1</span>) {</span>
+<span id="cb7-2"><a href="#cb7-2"></a>     <span class="co">// add 10 to make it spin at a reasonable speed</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>     angle = angle+SpinWheel.gx+<span class="dv">20</span>;</span>
+<span id="cb7-4"><a href="#cb7-4"></a>     SpinWheel.setSmallLEDsPointer(angle, <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>);</span>
+<span id="cb7-5"><a href="#cb7-5"></a>  }</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Create a pattern on the large LEDs as well.</p>

@@ -22,12 +22,28 @@ void setup() {
 int r_cum = 0;
 
 void loop() {
-  
   SpinWheel.readIMU();
+
+```
+</div>
+<div class="side-text">
+Here we measure the rotation around the z-axis.  
+</div>
+<div class="code">
+```cpp
   int r = SpinWheel.gz;
-  Serial.println(r);
+```
+</div>
+<div class="side-text">
+Then we add this value to the sum of the 
+previous rotations. In the original Rainbow_Chase
+example, the function millis() provided an  
+equivalent value for us.
+</div>
+<div class="code">
+```cpp
   r_cum = r + r_cum;
-  Serial.println(r_cum);
+
 ```
 </div>
 <div class="side-text">
@@ -56,6 +72,7 @@ a slightly modified number.
 </div>
 <div class="side-text">
 Here we finally set those colors.
+Let's first turn on the large LEDs.
 </div>
 <div class="code">
 ```cpp
@@ -67,7 +84,13 @@ Here we finally set those colors.
   SpinWheel.setLargeLED(5, colorWheel(r1));
   SpinWheel.setLargeLED(6, colorWheel(r2));
   SpinWheel.setLargeLED(7, colorWheel(r3));
-
+```
+</div>
+<div class="side-text">
+Now we can turn on the small LEDs.
+</div>
+<div class="code">
+```cpp
   SpinWheel.setSmallLED(0, colorWheel(r0));
   SpinWheel.setSmallLED(1, colorWheel(r0));
   SpinWheel.setSmallLED(2, colorWheel(r1));
