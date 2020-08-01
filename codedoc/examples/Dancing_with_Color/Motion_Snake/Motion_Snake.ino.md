@@ -1,5 +1,6 @@
 <div class="flex-container"><div class="wide-text">
 # Dancing with Color: Create colorful snake that changes with rotation.
+For more examples and information, refer to the [dancing companion page](https://spinwearables.com/dancing/).
 </div>
 <div class="side-text">
 </div>

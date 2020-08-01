@@ -12,7 +12,7 @@
   <meta property="og:image" content="https://spinwearables.com/hanging.jpg" />
   <link rel="image_src" href="https://spinwearables.com/hanging.jpg" />
   <meta name="keywords" content="rotation, angular velocity, polar coordinates" />
-  <title>Rotation</title>
+  <title>Rotation and Moving in Circles</title>
   <style>
   </style>
   <link rel="stylesheet" href="/custom.css" />
@@ -46,74 +46,65 @@
 <a href="/">The SpinWheel</a>
 <a href="/book">The Field Guide</a>
 </div>
-<h1 class="title">Rotation</h1>
+<h1 class="title">Rotation and Moving in Circles</h1>
 </header>
 <main>
 <div class="intro-box">
-<p>In this lesson, we’ll talk more about rotation, introducing concepts like angular velocity and polar coordinates.</p>
+<p>Here we introduce the concepts necessary to describe the motion of rotating bodies, whether rotating around their own center, or moving in circles around a third point. We will use angles to measure the orientation of a body, and use angular velocity, i.e. the rate of change of that angle, as a way to describe the rotating motion.</p>
 </div>
-<div class="warning">
-<p>This lesson is still under-development. Check back soon for more links and the full lesson!</p>
-</div>
-<p>Imagine you are getting on a merry-go-round. Out of the many colorful options, you choose to ride your favorite horse in the middle row. The operator starts the ride, and you begin traveling around under flashing lights and bright mirrors. Now what would have been physically different about this ride had you chosen the horse to your right or left? You’ll be able to answer this by the end of the lesson!</p>
+<p>Imagine you are getting on a merry-go-round. Out of the many colorful options, you choose to ride your favorite horse on the outer row. The operator starts the ride, and you begin traveling around under flashing lights and bright mirrors. Now what would have been physically different about this ride had you chosen a different horse? You’ll be able to answer this by the end of the lesson!</p>
 <figure>
 <img src="/images/bookpics/MerryGoRound.jpg" alt="" /><figcaption>When learning about rotation, try to connect these concepts to the experince of riding a merry-go-round. <a class="imagecredit" href="https://www.pikrepo.com/ftrla/selective-focus-photography-of-merry-go-round-during-nighttime">image credit Pikrepo</a></figcaption>
 </figure>
-<p>This lesson will focus on understanding the many things around us that spin. Whether it’s a frisbee, a tire wheel, a dancer, or even yourself on an amusement park ride, rotation is all around us. When objects move in straight lines, we call this linear motion. In previous lessons, we’ve discussed how to describe linear motion. How about rotational motion? What tools do we have to explain this motion?</p>
+<p>This lesson will focus on understanding the many things around us that spin. Whether it’s a frisbee, a tire wheel, a dancer, or even yourself on an amusement park ride, rotation is all around us. When objects move in straight lines, we call this linear motion. In <a href="/vectors">previous lessons</a>, we’ve discussed how to describe linear motion. How about rotational motion? What tools do we have to explain this motion?</p>
 <div class="further-reading">
 <p>If you aren’t already familiar with the concepts of displacement, velocity, and acceleration, we recommend first reading our <a href="/vectors">vectors and kinematics lesson</a> lesson.</p>
 </div>
 <h1 id="angular-displacement">Angular Displacement</h1>
-<p>When dealing with circular motion or rotation (for instance, for a ball on a string or a horse on a merry-go-round), it is useful to describe position using an angle (<span class="math inline">\(\theta\)</span>, pronounced ‘theta’). The change between the original angle of the ball and its final angle is typically specified as the change in <span class="math inline">\(\theta\)</span> (or <span class="math inline">\(\Delta \theta\)</span>) and is known as angular displacement. Displacement is a useful term to describe an object’s change in position and can be defined as an angle (angular displacement) or distance (linear displacement). This concept is easier to understand through diagrams. In the image below you can see how linear displacement and angular displacement are related to each other.</p>
+<p>When dealing with circular motion or rotation (for instance, for a ball on a string or a horse on a merry-go-round), it is useful to describe position using an angle (denoted as <span class="math inline">\(\theta\)</span>, pronounced ‘theta’). The change between the original angle of the ball and its final angle is typically specified as the change in <span class="math inline">\(\theta\)</span> (or <span class="math inline">\(\Delta \theta\)</span>) and is known as angular displacement. Displacement is a useful term to describe an object’s change in position and can be defined as an angle (angular displacement) or distance (linear displacement). This concept is easier to understand through diagrams. In the image below you can see how linear displacement and angular displacement are related to each other.</p>
+<figure>
 <video src="/images/bookpics/ang_lin_displacement.mp4" muted autoplay playsinline loop>
 </video>
-<center>
-This pictures shows the difference between angular displacement (<span class="math inline">\(\theta\)</span>) and linear displacement.
-</center>
+<figcaption>
+This picture shows the difference between angular displacement (<span class="math inline">\(\theta\)</span>) and linear displacement.
+</figcaption>
+</figure>
+<figure>
 <video src="/images/bookpics/compare_rotations.mp4" muted autoplay playsinline loop>
 </video>
-<center>
+<figcaption>
 Two movements can have the same angular displacement but different linear displacements.
-</center>
+</figcaption>
+</figure>
 <h1 id="angular-velocity">Angular Velocity</h1>
-<p>To describe the motion of a ball as it is spun around on a string, we use something called angular velocity. Usually when we think of velocity, we are thinking of something called linear velocity, which is defined as the change in position over the time. Angular velocity is very similar, but it is instead defined as the change in angle over the time. While angular velocity and linear velocity are related they are not the same. For instance, take our ball, if we change the length of the string, we can keep our angular velocity the same, but the linear velocity will be different. You can experiment with how changing the length of the string changes the angular and linear velocity using the interactive animation below.</p>
+<p>To describe the motion of a ball as it is spun around on a string and other circular motion, we use something called angular velocity. Usually when we think of velocity, we are thinking of <span class="footnote">linear velocity<span>This type of velocity is sometimes also called translational velocity.</span></span> defined as the change in position (displacement) during a specified interval of time. Angular velocity is very similar, but it is instead defined as the change in angle over time. While angular velocity and linear velocity are related they are not the same. For instance, take our ball, if we change the length of the string, we can keep our angular velocity the same, but the linear velocity will be different. You can experiment with how changing the length of the string changes the angular and linear velocity using the interactive animation below.</p>
 <style>
 #angRot {
   width: 400px;
-  height: 400px;
-  position: relative;
-  justify-content: center;
-
+  margin: 2rem auto;
 }
 #angBox{
-  width: 800px;
-  height: 400px;
-  position: absolute;
-  border-style: solid;
-
+  position: relative;
 }
 #angAnimation {
   width: 10px;
   height: 10px;
-  position: absolute;
   background-color: red;
+  border-radius: 50%;
   top: 200px;
   left: 200px;
-}
-
-#trajectory {
-width: 10px;
-  height: 10px;
   position: absolute;
+}
+#trajectory {
+  width: 10px;
+  height: 10px;
   border-style: solid;
   border-width: thin;
-  }
-  
+}
 #angOutput {
-    left: 450px;
-    top: 0px;
-    position: absolute;
-  }
+  text-align: center;
+  margin: 1rem;
+}
 </style>
 <div id="angRot">
 <div id="angBox">
@@ -122,70 +113,50 @@ width: 10px;
 <div id="angAnimation">
 
 </div>
+</div>
 <div id="angOutput">
-<div id="dataBar">
-<p><span class="spacer">Radius : </span><input type="number" min="0" max="10"  id="rvalue"> <button id="angButton">Show</button></p>
-</div>
-<p><span class="spacer">Velocities </span><br> <span class="spacer">Linear (units/second): </span><span id="linV" class="vis"> </span><br> <span class="spacer">Angular (degrees/second): </span><span id="angV" class="vis"> </span></p>
-</div>
+<p>Radius: <span id="linR"></span> pixels <br> <input type="range" min="1" max="15" value="5" id="rvalue"><br> Linear velocity: <span id="linV"></span> pixels per second<br> Angular velocity: <span id="angV"></span> degrees per second</p>
 </div>
 </div>
 <script>
-
 var radius = document.getElementById("radiusBar");
 const drawBox = document.getElementById("angBox");
 const angImage = drawBox.getElementsByClassName('trajectory')[0].getContext('2d');
+const rotatingbody = document.getElementById("angAnimation");   
 var rElement = document.getElementById("rvalue");
+var r = rElement.value*10;
+var pos = 0;
 
+function frame() {
+  pos++; 
+  rotatingbody.style.top = 195 - Math.sin(pos*Math.PI/180)*r + 'px'; 
+  rotatingbody.style.left = 195 + Math.cos(pos*Math.PI/180)*r + 'px'; 
+}
+setInterval(frame, 10); // one degree per 10 ms is 100 degrees per second
 
 function myMove() {
-    var r = rElement.value;
-    if (r> 0){
-    var linVol = 2*Math.PI*r/4; // animation takes 4 seconds
-    var angVol = 90;
-    }
-    else{
-    var linVol = 0;
-    var angVol = 0;
-    }
-    document.getElementById("linV").innerHTML=linVol.toFixed(2);
-    document.getElementById("angV").innerHTML=angVol.toFixed(2);
+  r = rElement.value*10;
+  var linVol = 2*Math.PI*r/3.6; // 3.6 seconds for a full circle 
+  var angVol = 100;
 
-
-    var m_canvas = document.createElement('canvas'); // A frame buffer for only the path
-    m_canvas.width = 400;
-    m_canvas.height = 400
+  document.getElementById("linR").innerHTML=r;
+  document.getElementById("linV").innerHTML=linVol.toFixed(1);
+  document.getElementById("angV").innerHTML=angVol;
   
-    angImage.clearRect(0,0,400,400);
-    angImage.beginPath();
-    angImage.arc(200, 200, r*10, 0, 2 * Math.PI);
-    angImage.stroke();
-    angImage.beginPath();
-    angImage.moveTo(200, 200);
-    angImage.lineTo((r*10+200), 200);
-    angImage.stroke();
-
-
-  var elem = document.getElementById("angAnimation");   
-  var pos = 0;
-  
-  var id = setInterval(frame, 10);
-  function frame() {
-    if (pos == 360) {
-      clearInterval(id);
-    } else {
-      pos++; 
-      elem.style.top = 195- Math.sin(pos*Math.PI/180)*r*10 + 'px'; 
-      elem.style.left = 195+ Math.cos(pos*Math.PI/180)*r*10 + 'px'; 
-    }
-  }
-  
+  angImage.clearRect(0,0,400,400);
+  angImage.beginPath();
+  angImage.arc(200, 200, r, 0, 2 * Math.PI);
+  angImage.stroke();
+  angImage.beginPath();
+  angImage.moveTo(200, 200);
+  angImage.lineTo((r+200), 200);
+  angImage.stroke();
 }
+myMove();
 
-angButton.onclick = myMove;
-
+rElement.oninput = myMove;
 </script>
-<p>Did you notice how as you made the radius larger, the linear velocity increased but the angular velocity stayed the same? In this example, we have chosen to keep the angular velocity the same, no matter the radius. Because the distance the ball has to travel is larger with a larger radius, the ball has to move faster to complete a full circle in the same amount of time. Every time we increase the radius, the linear velocity has to increase to keep the angular velocity the same.</p>
+<p>Did you notice how as you made the radius larger, the linear velocity increased but the angular velocity stayed the same? In this example, we have chosen to keep the angular velocity the same, no matter the radius. Because the distance the ball has to travel farther with a larger radius, the ball has to move faster to complete a full circle in the same amount of time. Every time we increase the radius, the linear velocity has to increase to keep the angular velocity the same.</p>
 <h1 id="angular-acceleration">Angular Acceleration</h1>
 <p>To describe the change in velocity of an object, scientists use a concept called acceleration. For instance, if you roll a ball down down a ramp, it will pick up speed as it goes. This acceleration will change depending on the tilt of the ramp. If it is steeper, it will pick up speed more quickly and has a higher acceleration. In a similar way, you can use angular acceleration to describe the rate of change of angular velocity.</p>
 <p>To help understand better the idea of angular acceleration, we have two animations below. On the left, the ball on a string is spinning at a constant angular velocity. As its angular velocity is not changing, the angular acceleration is zero. However, on the right, you can see that the ball’s angular velocity increases and then decreases due the angular velocity changing.</p>
@@ -196,22 +167,56 @@ angButton.onclick = myMove;
 <figure>
 <img src="/images/rotation_polarCoordinates.png" alt="" /><figcaption>The same point can be described using cartesian coordinates (left image) and polar coordinates (right plot).</figcaption>
 </figure>
-<p>It sometimes is important to switch from Cartesian to polar coordiantes or in the reverse from polar to Cartesian coordinates. <span class="math inline">\(x\)</span>, <span class="math inline">\(r\)</span>, and <span class="math inline">\(\theta\)</span> are related to each other using the cosine function where <span class="math display">\[ x = r\times\cos{\theta}\]</span> <span class="math inline">\(y\)</span>, <span class="math inline">\(r\)</span>, and <span class="math inline">\(\theta\)</span> are related to each other using the sin function where <span class="math display">\[ y = r\times\sin{\theta} \]</span></p>
+<p>It sometimes is important to switch from Cartesian to polar coordiantes or in the reverse from polar to Cartesian coordinates. Luckily, there is an easy way to convert between these variables: <span class="math inline">\(x\)</span> is simply the product of <span class="math inline">\(r\)</span> and <span class="math inline">\(cos{\theta}\)</span> : <span class="math display">\[ x = r * \cos{\theta}\]</span> <span class="math inline">\(y\)</span>, <span class="math inline">\(r\)</span>, and <span class="math inline">\(\theta\)</span> are related to each other using the sin function where <span class="math display">\[ y = r * \sin{\theta} \]</span></p>
 <figure>
 <img src="/images/rotation_polarCart_trig.png" alt="" /><figcaption>Conversion between polar and Cartesian coordinates requires the use of sin and cos functions.</figcaption>
 </figure>
 <p>Going back to our discussion above about angular displacement, you can see how polar coordinates make it easy to describe the ball’s location. As the ball moves in a circle, we can describe its location using the radius and angle. This is much simpler than determining <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> for each position. Polar coordinates make it easier to describe the ball’s motion as well. By steadily increasing <span class="math inline">\(\theta\)</span> (or the angle), you can draw a circle with a specific radius.</p>
+<figure>
 <video src="/images/bookpics/polar_animation.mp4" muted autoplay playsinline loop>
 </video>
+</figure>
 <h1 id="summary">Summary</h1>
-<p>Let’s tie all of these concepts together to describe your ride on the merry-go-round! Now, imagine a second ride where you chose the yellow horse to your left (closer to the center) instead. How would the following properties of your trip change: Angular displacement, angular velocity, linear velocity, angular acceleration?</p>
+<p>Let’s tie all of these concepts together to describe your ride on the merry-go-round! On your first ride, you chose a horse on the outer ring of the merry-go-round. Now, imagine a second ride where you chose the yellow horse to your left (closer to the center) instead. How would the following properties of your trip change: Angular displacement, angular velocity, linear velocity, angular acceleration?</p>
 <p><img src="/images/bookpics/merry-go-round.png" alt="Here’s a picture of this merry-go-round ride! Notice that the different radii for the canopy, inner horse, and outer horse. How will that affect their linear and rotational velocities? image credit Mariya Krastanova" /> <!-- TODO: Add final version once Mariya uploads it --></p>
 <!-- TODO: Maybe hide this in a dropdown box that you have to click to open? -->
-<p>Your angular displacement, angular velocity, and angular acceleration would stay the same on both rides. The two horses lie along the same radial line, so in polar coordinates, their <span class="math inline">\(\theta\)</span> coordinate would be the same, but <span class="math inline">\(r\)</span> would change. Since <span class="math inline">\(\theta\)</span> remains the same, both horses have equal angular displacements. For angular velocity and acceleration, every horse on the ride would have the same value. This is because the entire merry-go-round starts, moves, and stops together at the same rate.</p>
-<p>What would change between the two horses is your linear velocity. Switching to the yellow horse decreases your <span class="math inline">\(r\)</span> coordinate, and means you are traveling in a smaller circle. Just like for the ball on a string, when <span class="math inline">\(r\)</span> decreases, your linear velocity also decreases.</p>
-<p>How would your angular acceleration change as you ride on the merry-go-round?</p>
+<p>Your angular displacement, angular velocity, and angular acceleration would stay the same on both rides. In polar coordinates, the two horses have the same change in <span class="math inline">\(\theta\)</span> coordinate but different but <span class="math inline">\(r\)</span> values. Since <span class="math inline">\(\theta\)</span> remains the same, both horses have equal angular displacements. For angular velocity and acceleration, every horse on the ride would have the same value. This is because the entire merry-go-round starts, moves, and stops together at the same rate.</p>
+<p>What would change between the two horses is your linear velocity. Switching to a horse closer to the center decreases <span class="math inline">\(r\)</span> and means you are traveling in a smaller circle. Just like for the ball on a string, when <span class="math inline">\(r\)</span> decreases, your linear velocity also decreases.</p>
+<p>What about if your friend chose the horse in front of you? In this case, your initial <span class="math inline">\(\theta\)</span> values would be different but your linear velocity and angular velocities would be identical for the entire ride. This is because you have the same <span class="math inline">\(r\)</span> values and same change in <span class="math inline">\(\theta\)</span> over time.</p>
+<p>Finally, let’s think about how the ride changes over time? How would your angular acceleration change as you ride on the merry-go-round?</p>
 <!-- TODO: Maybe hide this in a dropdown box that you have to click to open? -->
-<p>When you first get on the merry-go-round, your angular velocity and angular acceration are both zero. Once the merry-go-round starts moving, your angular velocity increases until it reaches a constant velocity. During that time, your angular acceleration will describe this increase in angular velocity. However, once you reach the constant angular velocity of most of the merry-go-round ride, your angular velocity is no longer changing and so your angular acceleration is again zero. At the end of the ride, your angular velocity is going to decrease back to zero at a rate controlled by the angular acceleration. Then when once the merry-go-round has stopped moving, your angular velocity and acceleration are again zero.</p>
+<p>When you first get on the merry-go-round, your angular velocity and angular acceration are both zero. Once the merry-go-round starts moving, your angular velocity increases until it reaches a constant velocity. During that time, your angular acceleration will describe this increase in angular velocity. Eventually, the ride will reach a constant angular velocity that it will remain at for a most of the ride. At this point, your angular velocity is no longer changing and your angular acceleration is zero. At the end of the ride, your angular velocity is going to decrease back to zero at a rate controlled by the angular acceleration. Then once the merry-go-round has stopped moving, your angular velocity and acceleration are again zero.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Part of Ride</th>
+<th>Velocity</th>
+<th>Acceleration</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Beginning</td>
+<td>Increasing</td>
+<td>Positive</td>
+</tr>
+<tr class="even">
+<td>Middle</td>
+<td>Constant</td>
+<td>Zero</td>
+</tr>
+<tr class="odd">
+<td>Almost Over</td>
+<td>Decreasing</td>
+<td>Negative</td>
+</tr>
+<tr class="even">
+<td>Done</td>
+<td>Zero</td>
+<td>Zero</td>
+</tr>
+</tbody>
+</table>
 <div class="further-reading">
 <p>To apply some of these concepts to the SpinWheel, go to <a href="/dancing">Dancing with Color</a> adventure.</p>
 </div>

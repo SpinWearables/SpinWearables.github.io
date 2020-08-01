@@ -2,7 +2,7 @@
 # Dancing with Color: Step x, changing color in response to rotation in the z-direction.
 Here we go through in detail how to change the color of the SpinWheel in 
 response to the rotation of the device. For more information and other 
-examples, [click here](https://spinwearables.com/dancing/).
+examples, refer to the [dancing companion page](https://spinwearables.com/dancing/).
 </div>
 <div class="side-text">
 </div>

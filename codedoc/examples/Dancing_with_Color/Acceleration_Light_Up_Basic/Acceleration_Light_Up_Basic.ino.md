@@ -1,4 +1,13 @@
-<div class="flex-container"><div class="code">
+<div class="flex-container"><div class="wide-text">
+# Dancing with Color: Color changes based on acceleration of the device.
+In this example, we will step through the code used
+to make the SpinWheel change color based on the acceleration in 
+the x and y direction. For more information and previous examples,
+refer to the [dancing companion page](https://spinwearables.com/dancing/).
+</div>
+<div class="side-text">
+</div>
+<div class="code">
 ```cpp
 
 ```
