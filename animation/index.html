@@ -115,10 +115,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <main>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
 <script src='/simspinwheel/simspinwheel.js'></script>
+<div class="intro-box">
+<p>An animation is created by rapidly cycling through a series of still images. You may be familiar with animations from watching cartoons, but we can also create animations with the SpinWheel’s LEDs. In this lesson, you’ll be able to try out doing just this.</p>
+</div>
 <p>To create an animation or a video, we need a rapid sequence of still images, called frames. The frames must be displayed rapidly enough that it looks like a smoothly changing pattern to our eyes. This is true both for the computer screen playing a video and for the SpinWheel lights changing their patterns. For example, this is a short repeating animation of a rainbow pattern playing on the LEDs.</p>
 <video src="/images/behindthescenes/pretty_device.mp4" muted autoplay playsinline loop>
 </video>
 <p>There are two ways such a pattern can be animated on a given device or screen. The first approach is to just draw every single frame by hand, save that large collection of images, and display them one by one in a rapid succession. Frequently, this is the only possible way. For instance, in an animated movie, the majority of the frames are drawn by an artist, even if they use modern computer graphics technologies to automate some of their work. This method requires a lot of manual work, and a lot of computer memory to store the artwork.</p>
+<figure>
+<img src="/images/bookpics/generative_art.png" alt="" /><figcaption>What if the computer itself created the images? This is called generative art and you’ll be learning how to do this yourself in the rest of this adventure. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
+</figure>
 <p>However, there is another type of art, called <em>generative art</em>, which does not have such taxing requirements. It obeys different constraints, and it requires a particular mindset, but its beauty comes from the fact that you tell a computer how to create art on its own, instead of drawing the art yourself. The creative element is deep in your imagination, and it depends on your skill to instruct and teach a computer to do something. We will explore this type of art here. We will learn how to command a computer (the SpinWheel) to draw patterns of color that evolve in time. Along the way we might even learn a bit about how to write programs.</p>
 <div class="warning">
 <p>If you haven’t already done the <a href="/quickstart">quickstart guide</a> and <a href="/basics">learning to code the SpinWheel lesson</a>, then we recommend reading them before finishing the rest of the lesson. They contain important information about downloading the software necessary to program the SpinWheel and other useful information about controlling the LEDs.</p>
