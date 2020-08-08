@@ -108,6 +108,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header>
 <div class="nav">
 <a href="/">The SpinWheel</a>
+ | 
 <a href="/book">The Field Guide</a>
 </div>
 <img src="/images/banners/stepcounter.png">
@@ -121,7 +122,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="from-an-empty-sketch">From an Empty Sketch</h2>
 <p>We will build our Step Counter program step by step, starting with this empty sketch. A good first step is to write some simple test code that just prints a few messages, confirming that your device is still functioning. For instance, copy the following code into your file. This code, once running on the SpinWheel, will repeatedly send the message “I am working!” to the computer that your SpinWheel is attached to. As always, we will add comments to the code, so that the purpose of each line is explained. (A comment is a line of code that is not run by the computer, but meant to be interpreted by humans. In this code, comment lines start with <code>//</code>).</p>
 <div class="further-reading">
-<p>You can consult our <a href="/basics">SpinWheel basic commands page</a> to remind yourself how to read the computer code shown below. For more details about coding itself, check out the <a href="/progpatterns">Programming Patterns page</a>.</p>
+<p>You can consult our <a href="/basics">SpinWheel basic commands page</a> to remind yourself how to read the computer code shown below. For more details about coding itself, check out the <a href="/progpatterns">Coding Building Blocks page</a>.</p>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
@@ -137,6 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-12"><a href="#cb1-12"></a>  <span class="co">// Send a confirmation message over and over.</span></span>
 <span id="cb1-13"><a href="#cb1-13"></a>  Serial.println(<span class="st">&quot;I am working!&quot;</span>); </span>
 <span id="cb1-14"><a href="#cb1-14"></a>}</span></code></pre></div>
+<p>If you upload this sketch to the SpinWheel, you won’t be able to see anything happen. It doesn’t turn on the LEDs, instead the sketch simply set ups the SpinWheel and sends a confirmation message (“I am working!”) repeatedly using <code>Serial.println()</code>. If you want to see this message, navigate to <code>Tools -&gt; Serial Monitor</code> in the Arduino software.</p>
 <h2 id="measuring-motion">Measuring Motion</h2>
 <p>Now we can begin to add useful functionality to our sketch. The first step is to ensure that the SpinWheel can measure something related to its motion. The function <code>loop</code> is repeatedly being called by our SpinWheel. Each time thist happens, we want to instruct the motion sensor to report the new values it has measured. We do this by calling <code>SpinWheel.readIMU()</code> where IMU stands for Inertial Measurement Unit: a fancy name for something that senses motion. This function will return 3 acceleration values, one for each direction of motion.</p>
 <!--TODO: Explain the directions of motion a little more here or link to vectors here instead of below? -->

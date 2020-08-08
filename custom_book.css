@@ -122,7 +122,7 @@ div.sourceCode {
 }
 
 div.sourceCode > pre:before {
-  content: "🤖";
+  /*content: "🤖";*/
   font-weight: bold;
   display: block;
 }
@@ -172,7 +172,9 @@ figure > figcaption {
 }
 
 .footnote {
-  text-decoration: underline black dotted;
+  border-bottom: solid 1px;
+  border-bottom-style: dashed;
+  border-bottom-color: #631187;
   position: relative;
 }
 
