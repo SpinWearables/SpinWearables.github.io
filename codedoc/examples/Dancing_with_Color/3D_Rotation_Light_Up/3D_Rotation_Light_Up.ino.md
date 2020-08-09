@@ -40,7 +40,7 @@ void setup() {
 </div>
 <div class="side-text">
 Now, we will need to initialize three variables, 
-for the red, green, and blue LED of each big 
+for the red, green, and blue component of each  
 LED. These variables will hold information
 telling the SpinWheel whether or not to 
 display these colors.  
@@ -90,8 +90,8 @@ Here we will also use if statements.
 In this case if the rotation in the 
 **x direction** is large, then we will change 
 the value of the `red` variable. Later, this
-will be used to turn red LED of **each** 
-big LED on. 
+will be used to turn red component of **each** 
+LED on. 
 </div>
 <div class="code">
 ```cpp
@@ -106,7 +106,7 @@ Similarly, if the rotation in the
 **y	direction** is large, then we will
 change the value of the `green` variable.
 Later this will be use to turn the
-green LED of **each** big LED on.
+green component of **each** LED on.
 </div>
 <div class="code">
 ```cpp
@@ -120,7 +120,7 @@ green LED of **each** big LED on.
 Also, if the rotation in the **z-direction**
 is large, then  we will change the value of the
 `blue` variable. Later this will be used to turn 
-the blue LED of **each** big LED on. 
+the blue component of **each** LED on. 
 </div>
 <div class="code">
 ```cpp

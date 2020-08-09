@@ -12,7 +12,7 @@
   <meta property="og:image" content="https://spinwearables.com/hanging.jpg" />
   <link rel="image_src" href="https://spinwearables.com/hanging.jpg" />
   <meta name="keywords" content="animations, frames, timing" />
-  <title>Animations and patterns</title>
+  <title>Intro to Animation</title>
   <style>
   </style>
   <style>
@@ -111,7 +111,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  | 
 <a href="/book">The Field Guide</a>
 </div>
-<h1 class="title">Animations and patterns</h1>
+<h1 class="title">Intro to Animation</h1>
 </header>
 <main>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
@@ -140,6 +140,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">int</span> t = millis();</span></code></pre></div>
 <p>We will shortly see how this command can be woven in with others in a whole program. Here, <code>millis()</code> is a <span class="footnote">command that reads the number of milliseconds that have passed since the device was started.<span>This command, together with many other useful commands comes built into the software we are using. We will later even learn how to make commands of our own.</span></span> These commands are special directions that ask the computer to complete a task. The rest of the small piece of code depicted above ensures that the number of milliseconds given by <code>millis()</code> is stored somewhere: in the variable we have named <code>t</code> (you can use more descriptive names if you wish). We also had to specify the type of the variable (<code>int</code> as in “integer”) because otherwise our SpinWheel will get confused.</p>
 <!--FIGURE: An image showing the type and name on the lhs, and the expression on the rhs, stressing the rigidity of this syntax.-->
+<figure>
+<video src="/images/bookpics/time_loop.mp4" muted autoplay playsinline loop>
+</video>
+<figcaption>
+Every time the loop block is run, t is set to millis() and shows the number of milliseconds since the setup() was run.
+</figcaption>
+</figure>
 <p>The entirety of our animation will depend on the number stored in this <code>time</code> variable. Based on that number, another piece of code can decide when to shine a given color, when to be illuminating brightly or showing subdued colors, when to alternate hues from one LED to the other, and in this particular case, simply when to blink.</p>
 <p>What follows is the most crucial concept in the construction of our animations. If we want our animations to repeat, we will need to turn this ever-growing counter <code>time</code>, into a number that <em>wraps around</em>. For instance, if we want our animation to repeat every 2500 milliseconds (2.5 seconds), then the number on which the animation depends should itself repeat in the same manner.</p>
 <figure>

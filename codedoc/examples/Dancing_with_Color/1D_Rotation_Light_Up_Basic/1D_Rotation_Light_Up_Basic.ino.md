@@ -87,7 +87,7 @@ We will use (0,255,255), which is a light blue.
 </div>
 <div class="side-text">
 Since no motion has been detected, we will instead use 
-We will use (0,0,0), which turns off the LEDs.
+(0,0,0), which turns off the LEDs.
 </div>
 <div class="code">
 ```cpp
