@@ -95,7 +95,7 @@ LED on.
 </div>
 <div class="code">
 ```cpp
-  if (abs(SpinWheel.gx) > 1) {
+  if (abs(SpinWheel.gx) > 50) {
     red = 255;
   }
 
@@ -110,7 +110,7 @@ green component of **each** LED on.
 </div>
 <div class="code">
 ```cpp
-  if (abs(SpinWheel.gy) > 1) {
+  if (abs(SpinWheel.gy) > 50) {
     green = 255;
   }
 
@@ -124,7 +124,7 @@ the blue component of **each** LED on.
 </div>
 <div class="code">
 ```cpp
-  if (abs(SpinWheel.gz) > 1)  {
+  if (abs(SpinWheel.gz) > 50)  {
     blue = 255;
   }
 

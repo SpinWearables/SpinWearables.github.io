@@ -70,6 +70,7 @@ and takes its current rotation data.
 <div class="code">
 ```cpp
   SpinWheel.readIMU();
+  
 ```
 </div>
 <div class="side-text">
@@ -81,11 +82,11 @@ is not met. In this example, our **if condition**
 checks whether or not the rotation is big enough in
 the **positive direction**. If this condition is true
 we will light up the LEDs according to the given
-instruction. 
+instruction. Feel free to play around with this number.
 </div>
 <div class="code">
 ```cpp
-  if (SpinWheel.gx > 1) {
+  if (SpinWheel.gx > 50) {
     pos_spin = 255;
     neg_spin = 0;
   }
@@ -100,7 +101,7 @@ then we will follow the given instruction.
 </div>
 <div class="code">
 ```cpp
-  else if (SpinWheel.gx < -1) {
+  else if (SpinWheel.gx < -50) {
     neg_spin = 255;
     pos_spin = 0;
   }
@@ -130,7 +131,6 @@ the LEDs will light up blue.
 </div>
 <div class="code">
 ```cpp
-
   SpinWheel.setLargeLEDsUniform(0, pos_spin, neg_spin);
 
   SpinWheel.drawFrame();

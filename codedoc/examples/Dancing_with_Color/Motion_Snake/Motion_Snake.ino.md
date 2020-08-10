@@ -40,7 +40,7 @@ track of the Spin Wheel's rotation.
 </div>
 <div class="code">
 ```cpp
-uint8_t angle = 0; 
+int angle = 0; 
 ```
 </div>
 <div class="side-text">
@@ -67,17 +67,19 @@ Use an **if statement** to check to see if the rotation is
 large enough. If the rotation is large enough, then 
 we will create a snake-like pattern on the device
 where the motion of the snake is based on the motion 
-of the device.  We add 20 to have the snake spin
-quickly. You can adjust this number
-to change the speed at which the snake rotates.
-Here we use (0,255,0) to make the 
-snake green, but you can use any color you like. 
+of the device.  
 </div>
 <div class="code">
 ```cpp
-  if (abs(SpinWheel.gx) >= 1) {
-     // add 10 to make it spin at a reasonable speed
-     angle = angle+SpinWheel.gx+20;
+  if (abs(SpinWheel.gx) > 50) {
+     // Add 10 to make it spin at a reasonable speed.
+     // Experiment with this number to change the rate
+     // with which the snake spins. Can you make the 
+     // snake go the other way? (Hint: what happens if you
+     // subtract 10 instead?)
+     angle = angle+10;
+     // Here we use (0,255,0) to make the 
+     // snake green, but you can use any color you like. 
      SpinWheel.setSmallLEDsPointer(angle, 0, 255, 0);
   }
 ```

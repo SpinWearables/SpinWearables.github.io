@@ -151,7 +151,7 @@ The code presented on this page can be <a href="./Motion_Snake.ino">downloaded</
 <p>Initialize the angle variable to zero. This will keep track of the Spin Wheel’s rotation.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">uint8_t</span> angle = <span class="dv">0</span>; </span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">int</span> angle = <span class="dv">0</span>; </span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Instructions in a loop function are repeated over and over again, in other words, “in a loop”.</p>
@@ -166,14 +166,20 @@ The code presented on this page can be <a href="./Motion_Snake.ino">downloaded</
 <div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a>  SpinWheel.readIMU();</span></code></pre></div>
 </div>
 <div class="side-text">
-<p>Use an <strong>if statement</strong> to check to see if the rotation is large enough. If the rotation is large enough, then we will create a snake-like pattern on the device where the motion of the snake is based on the motion of the device. We add 20 to have the snake spin quickly. You can adjust this number to change the speed at which the snake rotates. Here we use (0,255,0) to make the snake green, but you can use any color you like.</p>
+<p>Use an <strong>if statement</strong> to check to see if the rotation is large enough. If the rotation is large enough, then we will create a snake-like pattern on the device where the motion of the snake is based on the motion of the device.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt;= <span class="dv">1</span>) {</span>
-<span id="cb7-2"><a href="#cb7-2"></a>     <span class="co">// add 10 to make it spin at a reasonable speed</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>     angle = angle+SpinWheel.gx+<span class="dv">20</span>;</span>
-<span id="cb7-4"><a href="#cb7-4"></a>     SpinWheel.setSmallLEDsPointer(angle, <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>);</span>
-<span id="cb7-5"><a href="#cb7-5"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">50</span>) {</span>
+<span id="cb7-2"><a href="#cb7-2"></a>     <span class="co">// Add 10 to make it spin at a reasonable speed.</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>     <span class="co">// Experiment with this number to change the rate</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>     <span class="co">// with which the snake spins. Can you make the </span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>     <span class="co">// snake go the other way? (Hint: what happens if you</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>     <span class="co">// subtract 10 instead?)</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>     angle = angle+<span class="dv">10</span>;</span>
+<span id="cb7-8"><a href="#cb7-8"></a>     <span class="co">// Here we use (0,255,0) to make the </span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>     <span class="co">// snake green, but you can use any color you like. </span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>     SpinWheel.setSmallLEDsPointer(angle, <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>);</span>
+<span id="cb7-11"><a href="#cb7-11"></a>  }</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Create a pattern on the large LEDs as well.</p>
