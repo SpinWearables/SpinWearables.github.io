@@ -482,27 +482,18 @@ x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> i
 <span id="cb36-7"><a href="#cb36-7"></a>        tmxsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.mag.axes.x)*FILTER_A + tmxsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
 <span id="cb36-8"><a href="#cb36-8"></a>        tmysmooth = (((<span class="dt">int32_t</span>)IMU.agmt.mag.axes.y)*FILTER_A + tmysmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
 <span id="cb36-9"><a href="#cb36-9"></a>        tmzsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.mag.axes.z)*FILTER_A + tmzsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
-<span id="cb36-10"><a href="#cb36-10"></a>        ax_int = taxsmooth&gt;&gt;<span class="dv">8</span>;</span>
-<span id="cb36-11"><a href="#cb36-11"></a>        ay_int = taysmooth&gt;&gt;<span class="dv">8</span>;</span>
-<span id="cb36-12"><a href="#cb36-12"></a>        az_int = tazsmooth&gt;&gt;<span class="dv">8</span>;</span>
-<span id="cb36-13"><a href="#cb36-13"></a>        gx_int = tgxsmooth&gt;&gt;<span class="dv">8</span>;</span>
-<span id="cb36-14"><a href="#cb36-14"></a>        gy_int = -tgysmooth&gt;&gt;<span class="dv">8</span>;</span>
-<span id="cb36-15"><a href="#cb36-15"></a>        gz_int = -tgzsmooth&gt;&gt;<span class="dv">8</span>;</span>
-<span id="cb36-16"><a href="#cb36-16"></a>        mx_int = tmxsmooth&gt;&gt;<span class="dv">3</span>;</span>
-<span id="cb36-17"><a href="#cb36-17"></a>        my_int = -tmysmooth&gt;&gt;<span class="dv">3</span>;</span>
-<span id="cb36-18"><a href="#cb36-18"></a>        mz_int = -tmzsmooth&gt;&gt;<span class="dv">3</span>;</span>
-<span id="cb36-19"><a href="#cb36-19"></a>        ax = taxsmooth / <span class="fl">16384.</span>;</span>
-<span id="cb36-20"><a href="#cb36-20"></a>        ay = taysmooth / <span class="fl">16384.</span>;</span>
-<span id="cb36-21"><a href="#cb36-21"></a>        az = tazsmooth / <span class="fl">16384.</span>;</span>
-<span id="cb36-22"><a href="#cb36-22"></a>        gx = tgxsmooth / <span class="fl">16384.</span>;</span>
-<span id="cb36-23"><a href="#cb36-23"></a>        gy = tgysmooth / <span class="fl">16384.</span>;</span>
-<span id="cb36-24"><a href="#cb36-24"></a>        gz = tgzsmooth / <span class="fl">16384.</span>;</span>
-<span id="cb36-25"><a href="#cb36-25"></a>        mx = tmxsmooth / <span class="fl">16384.</span>;</span>
-<span id="cb36-26"><a href="#cb36-26"></a>        my = tmysmooth / <span class="fl">16384.</span>;</span>
-<span id="cb36-27"><a href="#cb36-27"></a>        mz = tmzsmooth / <span class="fl">16384.</span>;</span>
-<span id="cb36-28"><a href="#cb36-28"></a>    </span>
-<span id="cb36-29"><a href="#cb36-29"></a>      }</span>
-<span id="cb36-30"><a href="#cb36-30"></a>    }</span></code></pre></div>
+<span id="cb36-10"><a href="#cb36-10"></a>        ax =  taxsmooth / <span class="fl">16384.</span>; <span class="co">// Units of 1g because the range is +/-2g at +/-2**15</span></span>
+<span id="cb36-11"><a href="#cb36-11"></a>        ay = -taysmooth / <span class="fl">16384.</span>;</span>
+<span id="cb36-12"><a href="#cb36-12"></a>        az = -tazsmooth / <span class="fl">16384.</span>;</span>
+<span id="cb36-13"><a href="#cb36-13"></a>        gx =  tgxsmooth / <span class="fl">131.07</span>; <span class="co">// Units of dps because the range is +/-250dps at +/-2**15</span></span>
+<span id="cb36-14"><a href="#cb36-14"></a>        gy = -tgysmooth / <span class="fl">131.07</span>; <span class="co">// 131.072 = 2**15/250</span></span>
+<span id="cb36-15"><a href="#cb36-15"></a>        gz = -tgzsmooth / <span class="fl">131.07</span>;</span>
+<span id="cb36-16"><a href="#cb36-16"></a>        mx =  tmxsmooth / <span class="fl">6.6873</span>; <span class="co">// Units of because the range is 4900uT at +/-2**15</span></span>
+<span id="cb36-17"><a href="#cb36-17"></a>        my =  tmysmooth / <span class="fl">6.6873</span>; <span class="co">// 6.68734 = 2**15/4900</span></span>
+<span id="cb36-18"><a href="#cb36-18"></a>        mz =  tmzsmooth / <span class="fl">6.6873</span>;</span>
+<span id="cb36-19"><a href="#cb36-19"></a>    </span>
+<span id="cb36-20"><a href="#cb36-20"></a>      }</span>
+<span id="cb36-21"><a href="#cb36-21"></a>    }</span></code></pre></div>
 </div>
 <section id="animation-routines" class="side-text">
 <h3>Animation routines</h3>
@@ -572,11 +563,11 @@ x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> i
 <span id="cb38-45"><a href="#cb38-45"></a>    }</span>
 <span id="cb38-46"><a href="#cb38-46"></a></span>
 <span id="cb38-47"><a href="#cb38-47"></a>    <span class="dt">void</span> setLargeLED(<span class="dt">int</span> i, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
-<span id="cb38-48"><a href="#cb38-48"></a>      largeLEDs.setPixelColor(i,r,g,b);</span>
+<span id="cb38-48"><a href="#cb38-48"></a>      <span class="cf">if</span> (i&gt;=<span class="dv">0</span> <span class="kw">and</span> i&lt;<span class="dv">8</span>) largeLEDs.setPixelColor(i,r,g,b);</span>
 <span id="cb38-49"><a href="#cb38-49"></a>    }</span>
 <span id="cb38-50"><a href="#cb38-50"></a>    </span>
 <span id="cb38-51"><a href="#cb38-51"></a>    <span class="dt">void</span> setLargeLED(<span class="dt">int</span> i, <span class="dt">uint32_t</span> rgb) {</span>
-<span id="cb38-52"><a href="#cb38-52"></a>      largeLEDs.setPixelColor(i,rgb);</span>
+<span id="cb38-52"><a href="#cb38-52"></a>      <span class="cf">if</span> (i&gt;=<span class="dv">0</span> <span class="kw">and</span> i&lt;<span class="dv">8</span>) largeLEDs.setPixelColor(i,rgb);</span>
 <span id="cb38-53"><a href="#cb38-53"></a>    }</span>
 <span id="cb38-54"><a href="#cb38-54"></a></span>
 <span id="cb38-55"><a href="#cb38-55"></a>    <span class="dt">void</span> setLargeLEDs(<span class="dt">int</span> i, <span class="dt">int</span> j, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>

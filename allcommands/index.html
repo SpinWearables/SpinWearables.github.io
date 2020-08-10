@@ -17,6 +17,7 @@
   </style>
   <link rel="stylesheet" href="/custom.css" />
   <link rel="stylesheet" href="/custom_book.css" />
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -60,19 +61,33 @@
 <li><a href="#control-a-specific-small-led-with-setsmallled">Control a Specific Small LED with <code>setSmallLED</code></a></li>
 <li><a href="#turn-on-a-range-of-large-leds-with-setlargeleds">Turn on a range of Large LEDs with <code>setLargeLEDs</code></a></li>
 <li><a href="#turn-on-a-range-of-small-leds-with-setsmallleds">Turn on a range of Small LEDs with <code>setSmallLEDs</code></a></li>
+<li><a href="#set-color-using-a-single-hex-variable">Set color using a single <code>hex</code> variable</a></li>
 <li><a href="#set-overall-brightness-with-setbrightness">Set overall brightness with <code>setBrightness</code></a></li>
 </ul></li>
+<li><a href="#custom-led-patterns">Custom LED Patterns</a>
+<ul>
+<li><a href="#rainbow-pattern-with-setsmallledsrainbow">Rainbow pattern with <code>setSmallLEDsRainbow</code></a></li>
+<li><a href="#circular-progress-bar-with-setsmallledsprogress">Circular progress bar with <code>setSmallLEDsProgress</code></a></li>
+<li><a href="#circular-pointer-with-setsmallledspointer">Circular pointer with <code>setSmallLEDsPointer</code></a></li>
+</ul></li>
+<li><a href="#color-and-brightness-helpers">Color and Brightness Helpers</a>
+<ul>
+<li><a href="#a-colorwheel">A <code>colorWheel</code></a></li>
+<li><a href="#pulsing-functions-like-triangularwave-and-parabolawave">Pulsing functions like <code>triangularWave</code> and <code>parabolaWave</code></a></li>
+</ul></li>
+<li><a href="#motion-sensing-and-compass-with-readimu">Motion Sensing and Compass with <code>readIMU</code></a></li>
+<li><a href="#advance-direct-use-of-the-hardware-bypassing-the-spinwheel">Advance direct use of the hardware, bypassing the SpinWheel</a></li>
 </ul>
 <a id="TOCclose" href="#"></a>
 </nav>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
 <script src='/simspinwheel/simspinwheel.js'></script>
 <div class="intro-box">
-<p>This document lists some of the most important functions available with the SpinWheel code library. With these functions you can detect motion and set the LEDs to different color patterns. If you have never programmed with Arduino before, be sure to read our <a href="/quickstart">quick start guide</a> and <a href="/basics">SpinWheel basic programming page</a>. To learn more about the building blocks of coding, check out the <a href="/progpatterns">programming patterns page</a>. For more details, you can consult the <a href="/codedoc/SpinWearables.h.html">annotated source code</a>, listing everything available in the library. This will serve as a reference as you code the SpinWheel in whatever designs you imagine.</p>
+<p>This document lists some of the most important functions available with the SpinWheel code library. With these functions you can detect motion and set the LEDs to different color patterns. If you have never programmed with Arduino before, be sure to read our <a href="/quickstart">initial setup guide</a> and <a href="/basics">guide on the basic structure of a program</a>. To learn more about the building blocks of coding, check out the <a href="/progpatterns">coding building blocks page</a>. For more details, you can consult the <a href="/codedoc/SpinWearables.h.html">annotated source code</a>, listing everything available in the library. This will serve as a reference as you code the SpinWheel in whatever designs you imagine.</p>
 </div>
 <p>You can use the virtual SpinWheel simulator to test each of these functions. If a function involves the motion sensor, you can grab the virtual device with your mouse and shake it, simulating how the physical sensor would respond to real motion.</p>
 <h2 id="led-manipulation">LED Manipulation</h2>
-<p>There are a number of functions that let you manipulate the state of the LEDs, however, for the LEDs to actually respond to these manipulations, you also need to call <code>SpinWheel.drawFrame()</code> when you are done. That way you can make multiple modifications, preparing the final image, without the intermediate unfinished images showing up.</p>
+<p>There are a number of functions that let you manipulate the state of the LEDs, however, for the LEDs to actually respond to these manipulations, you also need to call <code>drawFrame()</code> when you are done. <code>drawFrame</code> is the only <span class="footnote">“non-instantaneous” function<span>Commonly called “blocking” functions.</span></span>. It takes roughly 20ms for it to finish, during which time it uses a persistent of vision method to rapidly flash the small LEDs as necessary to mimic the required color. This lends itself to making 50 frames-per-second animations. By using <code>drawFrame()</code> you can make multiple modifications, preparing the final image, without the intermediate unfinished images showing up.</p>
 <p>If you want to reset the image, you can call <code>SpinWheel.clearAllLEDs()</code>, which will set all LEDs to be dark, deleting any color information that they were previously set to.</p>
 <h3 id="turn-on-all-the-large-leds-with-setlargeledsuniform">Turn on all the Large LEDs with <code>setLargeLEDsUniform</code></h3>
 <p><code>setLargeLEDsUniform</code> takes three arguments, the red, green, and blue components of the desired color. Their range is between 0 and 255 (one byte).</p>
@@ -162,22 +177,62 @@ void loop() {
 }
 </pre>
 </div>
+<h3 id="set-color-using-a-single-hex-variable">Set color using a single <code>hex</code> variable</h3>
+<p>All of the above functions can be used with a single color variable in the <a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet">standard hex notation</a>.</p>
+<div class="ssw-codecontent" data-markdown="0">
+<pre class="ssw-codeblock">
+void loop() {
+</pre>
+<textarea class="ssw-codeblock">
+  SpinWheel.clearAllLEDs();
+  SpinWheel.setLargeLEDs(2, 6, 0xffff00);
+  SpinWheel.drawFrame();
+</textarea>
+<pre class="ssw-codeblock">
+}
+</pre>
+</div>
 <h3 id="set-overall-brightness-with-setbrightness">Set overall brightness with <code>setBrightness</code></h3>
 <p>This function takes only one argument, between 0 and 255, that sets the brightness of the LEDs. At maximal settings the large LEDs are blindingly bright and pull a total current of 480 mAh, which would deplete our battery in less than 10 minutes. Using the maximal setting would cause the battery to wear out much quicker and would cause significant heating.</p>
-<!--## Advanced LED Manipulation-->
-<!--TODO: expand this section and implement as necessary-->
-<!--There are some undocumented and unfinished functions, among them: `setSmallLEDsPointer` and `setSmallLEDsProgress` and the unfinished `setSmallLEDsRainbow` and `setLargeLEDsRainbow`.-->
-<!--## Color and Brightness Helpers-->
-<!--TODO: expand this section and implement as necessary-->
-<!--The `colorWheel` function turns a single number representing an angle into a color from the color wheel.
-
-The `triangularWave` and `parabolaWave` functions provide for convenient periodic patterns, useful in animations.
-
-The `faston_slowoff` function can be used to pleasantly filter time-dependent measurements. For instance, it can be used to rapidly brighten an LED when a motion is detected and then slowly let the light decay after the motion stops.
-
-## Motion Sensing and Compass-->
-<!--TODO: expand this section and implement as necessary-->
-<!--To request measurements from the sensor you need to call `SpinWearables.readIMU`. Then the measurement data will be available in `ax,ay,az,gx,gy,gz,mx,my,mz` in some units. There is also a temperature sensor.-->
+<h2 id="custom-led-patterns">Custom LED Patterns</h2>
+<p>Thanks to these functions you can easily set all of the LEDs to a preset pattern. They are useful building blocks for commonly used patterns that do not require significant customization. These functions are not implemented in the SpinWheel simulator yet.</p>
+<!--TODO: implement these in the virtual spinwheel and demonstrate them here-->
+<h3 id="rainbow-pattern-with-setsmallledsrainbow">Rainbow pattern with <code>setSmallLEDsRainbow</code></h3>
+<h3 id="circular-progress-bar-with-setsmallledsprogress">Circular progress bar with <code>setSmallLEDsProgress</code></h3>
+<h3 id="circular-pointer-with-setsmallledspointer">Circular pointer with <code>setSmallLEDsPointer</code></h3>
+<h2 id="color-and-brightness-helpers">Color and Brightness Helpers</h2>
+<p>Various functions that help prepare colors or map a given number to a continuously changing brightness. A good place to see why these functions are useful is the set of lessons on <a href="/animation">animations</a>.</p>
+<h3 id="a-colorwheel">A <code>colorWheel</code></h3>
+<p>The <code>colorWheel</code> function turns a single number representing an angle into a color from the color wheel.</p>
+<!--TODO: add plots-->
+<div class="ssw-codecontent" data-markdown="0">
+<pre class="ssw-codeblock">
+void loop() {
+</pre>
+<textarea class="ssw-codeblock">
+  // Change the argument between 0 and 255.
+  SpinWheel.setLargeLEDsUniform(colorWheel(100));
+  SpinWheel.drawFrame();
+</textarea>
+<pre class="ssw-codeblock">
+}
+</pre>
+</div>
+<h3 id="pulsing-functions-like-triangularwave-and-parabolawave">Pulsing functions like <code>triangularWave</code> and <code>parabolaWave</code></h3>
+<p>The <code>triangularWave</code> and <code>parabolaWave</code> functions provide for convenient periodic patterns, useful in animations.</p>
+<!--TODO: add plots-->
+<!--TODO:finish documenting and implementing the various filters-->
+<!--The `faston_slowoff` function can be used to pleasantly filter time-dependent measurements. For instance, it can be used to rapidly brighten an LED when a motion is detected and then slowly let the light decay after the motion stops.-->
+<h2 id="motion-sensing-and-compass-with-readimu">Motion Sensing and Compass with <code>readIMU</code></h2>
+<p>To request measurements from the sensor you need to call <code>readIMU</code>. Then the measurement data will be available in <code>ax,ay,az,gx,gy,gz,mx,my,mz</code>. The acceleration along the three axes <code>ax, ay, az</code> is measured in units of <span class="math inline">\(g\)</span>, i.e. the <a href="https://en.wikipedia.org/wiki/Standard_gravity">standard gravitational acceleration at Earth’s surface</a>. The angular velocity components <code>gx, gy, gz</code> is measured in units of degrees per second. Lastly, the magnetic field <code>mx, my, mz</code> is measured in units of μT. There is also a temperature sensor, but we do not yet provide direct access to it.</p>
+<p>The <a href="\dancing">dancing with color adventure</a> gives ideas of how the sensor can be used.</p>
+<figure>
+<img src="/images/bookpics/dance_axis.png" alt="" /><figcaption>The axes orientations of the SpinWheel motion sensor. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
+</figure>
+<!--TODO: implement something to use the button-->
+<h2 id="advance-direct-use-of-the-hardware-bypassing-the-spinwheel">Advance direct use of the hardware, bypassing the SpinWheel</h2>
+<p>You can consult the <code>begin</code>, <code>readIMU</code>, <code>drawFrame</code>, <code>setLargeLED</code>, and <code>setSmallLED</code> function in our source code to see how to use the motion sensor, small LEDs, and large LEDs, without relying on the SpinWearables library.</p>
+<p>The button is attached to pin 7, and you can use <code>digitalWrite(7, INPUT_PULLUP)</code> to set it up. Then you can use <code>digitalRead(7)</code> to read the button directly or <code>attachInterrupt(digitalPinToInterrupt(7), callback, FALLING)</code> to set up an asynchronous callback.</p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
 data-isso-require-author="true"
