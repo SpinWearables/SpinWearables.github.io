@@ -104,7 +104,7 @@ in the snake example.
 </div>
 <div class="code">
 ```cpp
-  a_cum = (a)*10 + a_cum;
+  a_cum = a*10 + a_cum;
 ```
 </div>
 <div class="side-text">

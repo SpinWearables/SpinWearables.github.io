@@ -136,13 +136,12 @@ The code presented on this page can be <a href="./Rainbow_Chase_Advanced.ino">do
 <span id="cb1-4"><a href="#cb1-4"></a></span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="dt">void</span> setup() {</span>
 <span id="cb1-6"><a href="#cb1-6"></a>  SpinWheel.begin();</span>
-<span id="cb1-7"><a href="#cb1-7"></a>  Serial.begin(<span class="dv">115200</span>);</span>
-<span id="cb1-8"><a href="#cb1-8"></a>}</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="dt">int</span> r_cum = <span class="dv">0</span>;</span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-13"><a href="#cb1-13"></a>  SpinWheel.readIMU();</span></code></pre></div>
+<span id="cb1-7"><a href="#cb1-7"></a>}</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="dt">int</span> r_cum = <span class="dv">0</span>;</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-12"><a href="#cb1-12"></a>  SpinWheel.readIMU();</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Here we measure the rotation around the x-axis.</p>

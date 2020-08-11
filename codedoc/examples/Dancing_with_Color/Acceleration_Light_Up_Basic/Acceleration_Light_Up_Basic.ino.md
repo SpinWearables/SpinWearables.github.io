@@ -28,7 +28,6 @@ The Setup function runs one time to make sure the SpinWheel is ready to execute 
 <div class="code">
 ```cpp
 void setup() {
-  // put your setup code here, to run once:
 ```
 </div>
 <div class="side-text">

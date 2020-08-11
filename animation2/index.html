@@ -52,22 +52,22 @@
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
 <script src='/simspinwheel/simspinwheel.js'></script>
 <div class="intro-box">
-<p>This adventure builds on what you learned in Intro to Animation adventure, empowering you to make slightly more sophisticated patterns.</p>
+<p>This adventure builds on what you learned in the Intro to Animation adventure, empowering you to make some more sophisticated patterns.</p>
 </div>
-<p>To create an animation or a video, we need a rapid sequence of still images, called frames. The frames must be displayed rapidly enough that it looks like a smoothly changing pattern to our eyes. This is true both for the computer screen playing a video and for the SpinWheel lights changing their patterns. For example, this is a short repeating animation of a rainbow pattern playing on the LEDs.</p>
-<video src="/images/behindthescenes/pretty_device.mp4" muted autoplay playsinline loop>
+<p>To create an animation or a video, we need a rapid sequence of still images, called frames. The frames must be displayed rapidly enough that it looks like a smoothly changing pattern to our eyes. This is true both for the computer screen playing a video and for the SpinWheel lights changing their patterns. For example, this is a short repeating animation that you learned how to make in the first <a href="/animation">Intro to Animation</a> adventure.</p>
+<video src="/images/bookpics/simple_blink.mp4" muted autoplay playsinline loop>
 </video>
 <div class="warning">
 <p>If you haven’t already done the <a href="/animation">Intro to Animation</a> adventure, we recommend looking it over before starting this lesson.</p>
 </div>
-<p>There is a whole universe of patterns you can create with the SpinWheel: simply pick a piece of paper, draw the pattern you desire, and translate it to an expression of code and math that implements it. However, that much freedom can be paralysing at first. Here we will start by modifying the animation that you created in the <a href="/animation">intro adventure on animation</a>. Then we will present some additional sketches that allow you to create animations with changing colors and where you can control each LED separately. We invite you upload these sketches from <code>Examples → SpinWearables → Animations_and_Patterns</code> to see what they do on your SpinWheel and then experiment with modifying them.</p>
+<p>There is a whole universe of patterns you can create with the SpinWheel: simply pick a piece of paper, draw the pattern you desire, and translate it to an expression of code and math that implements it. However, that much freedom can be daunting at first. Here we will start by modifying the animation that you created in the <a href="/animation">intro adventure on animation</a>. Then we will present some additional sketches that allow you to create animations with changing colors and where you can control each LED separately. We invite you upload these sketches from <code>Examples → SpinWearables → Animations_and_Patterns</code> to see what they do on your SpinWheel and then experiment with modifying them.</p>
 <h3 id="smoother-pulsing">Smoother pulsing</h3>
-<p>First, notice that the brightness of the LEDs in the <a href="/codedoc/examples/Animations_and_Patterns/Simple_Blink">sketch we present in the intro to animation</a> was abruptly cut off. Wouldn’t it be prettier if we gently turned off the LEDs, similarly to how gently we are ramping them up? We can perform this by writing a function that first goes up and then slowly goes back down. We have already written such a function for you to use and called it <a href="/codedoc/SpinWearables.h.html#triangular-wave"><code>triangularWave</code></a>, because when you plot it, it looks like a series of triangles.</p>
+<p>You may have noticed that the brightness of the LEDs in the <a href="/codedoc/examples/Animations_and_Patterns/Simple_Blink">sketch we present in the intro to animation</a> was abruptly cut off. Wouldn’t it be prettier if we gently turned off the LEDs, similarly to how gently we are ramping them up? We can perform this by writing a function that first goes up and then slowly goes back down. We have already written such a function for you to use and called it <a href="/codedoc/SpinWearables.h.html#triangular-wave"><code>triangularWave</code></a>, because when you plot it, it looks like a series of triangles.</p>
 <figure>
 <video src="/images/bookpics/triangular_wave.mp4" muted autoplay playsinline loop>
 </video>
 <figcaption>
-Instead of the sawtooth time-dependent pattern of brightness we saw previously, we can employ a pattern that also decreases steadily (instead of abruptly dropping to zero), making for a more pleasant pulsing light.
+Instead of the pattern of brightness that abruptly dropped to zero that we saw previously, we can employ a pattern that also decreases steadily, making for a more pleasant pulsing light.
 </figcaption>
 </figure>
 <p>Below you can see a small modification of our previous example that employs such triangular waves. In order to also show some color, instead of purely white LEDs, we will <a href="/colortheory">mix only red and blue, and leave the green set to zero</a>. <a href="/codedoc/examples/Animations_and_Patterns/Smoother_Blink">You can peruse the entirety of the code online</a>, or access it directly from the Arduino software from <code>Examples → SpinWearables → Animations_and_Patterns → Smoother_Blink</code>.</p>
@@ -167,7 +167,19 @@ void loop() {
 <div class="further-reading">
 <p>If you are interested in learning more about mixing of colors with LEDs and how the human eye works, then check out our <a href="/sight">adventure on the biology of the human eye</a>. You can also delve deeper into <a href="/progpatterns">the tools that this programming language provides</a>, which could enable you to write more sophisticated programs and patterns.</p>
 </div>
-<p>Overwhelmed by the possibilities of how you can modify the above sketches? Here are some suggestions: Try to add more LEDs to your patterns. Try to have some of them (e.g. the small ones) have varying brightness, while others (e.g. the large ones) have changing colors. Mix and match code from the previous examples. Let your creativity sing through the code.</p>
+Overwhelmed by the possibilities of how you can modify the above sketches? Here are some suggestions:
+<ul>
+<li>
+Try to add more LEDs to your patterns.
+</li>
+<li>
+Try to have some of them (e.g. the small ones) have varying brightness, while others (e.g. the large ones) have changing colors.
+</li>
+<li>
+Mix and match code from the previous examples.
+</li>
+</ul>
+<p>Let your creativity sing through the code!</p>
 <div class="further-reading">
 <p>You might have noticed that many of the functions and commands we have used are set to repeat themselves when their input passes through 255. There is a reason for this. There are 256 numbers from 0 to 255. And 256 is exactly how many different values can be stored in one byte. One byte is how much space is dedicated to many typical variables in the language used by the Arduino software, hence, many of its functions are written to expect numerical values on that scale.</p>
 </div>

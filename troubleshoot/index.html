@@ -61,6 +61,8 @@
 <img src="/images/quickstart/battery_back.jpg" title="Battery attached to the SpinWheel." alt="" /><figcaption>This is what the back of your SpinWheel will look like when the battery is attached. This is approximately how far your battery should fit into the jack on the board.</figcaption>
 </figure>
 <p>Important! If you are using your SpinWheel with the battery (not connected to a computer), make sure the switch on the back is set to “BAT”. If you are using your SpinWheel plugged into your computer, make sure the switch on the back is set to “USB”. You may notice strange behavior with your SpinWheel if your switch is not set properly.</p>
+<h2 id="im-having-problems-installing-arduino">I’m having problems installing Arduino</h2>
+<p>When you navigate to the installation page for the Arduino software, make sure to download the one for your computer: Windows (and the correct version), Mac, or Linux. Once you download it, your computer will direct you through the process of installing it like for any other program. If you get stuck, Arduino has provided <a href="https://www.arduino.cc/en/Guide">instructions for each operating system</a> that you can check out for more help.</p>
 <h2 id="arduino-wont-recognize-my-spinwheel">Arduino won’t recognize my SpinWheel</h2>
 <p>If nothing appears in the <code>Tools</code> → <code>Port</code> menu when you plug in the SpinWheel there are a few things to try:</p>
 <ol type="1">
@@ -69,7 +71,11 @@
 <li><p>If neither of the first two solutions works, your micro USB cable is likely the problem. Do you have another cable you can try? If so, first try your new cable. While most cables are able to communicate with the SpinWheel, some manufacturers have stopped including the extra wires necessary for passing information in their micro USB cables to cut costs (particularly if the cable is only meant to be used for charging). We have had better luck with older cables and those from Kindles: cables that were intended to be used to transfer information and not just for charging.</p></li>
 </ol>
 <h2 id="my-code-wont-upload-onto-my-spinwheel">My code won’t upload onto my SpinWheel</h2>
-<p>If this is the first sketch you are trying to upload, start here and look a bit closer at the error message. Error messages will appear at the bottom of the window with your sketch when you upload it onto the device. You only will be able to see part of the error message with the default layout of the window, but you can resize it to read the full message. We include some example errors below to help with troubleshooting.</p>
+<p>If this is the first sketch you are trying to upload, start here and look a bit closer at the error message.</p>
+<figure>
+<img src="/images/troubleshoot/error_message.png" title="Example SpinWheel error message." alt="" /><figcaption>Here is an example of how your window will look if your code faied. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
+</figure>
+<p>Error messages will appear at the bottom of the window with your sketch when you upload it onto the device. You only will be able to see part of the error message with the default layout of the window, but you can resize it to read the full message. We include some example errors below to help with troubleshooting.</p>
 <ol type="1">
 <li><p>First make sure you have the proper board selected. This error message <code>avrdude: ser_open(): can't open device "/dev/cu.usbmodem142101": No such file or directory</code> indicates that you likely need to change which board you chose to the Arduino Leonardo. To fix this, navigate to <code>Tools → Board:</code> and click on <code>Arduino Leonardo</code>.</p></li>
 <li><p>If instead you have the message <code>avrdude: butterfly_recv(): programmer is not responding</code> repeating itself, then you haven’t picked the right port. See the above section “Arduino won’t recognize my SpinWheel” for more help.</p></li>

@@ -121,7 +121,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Approach this page the way you would approach the first page of a foreign language you want to learn. Try to pick out separate words and commands that make sense, without worrying about the overall structure, correct syntax, or proper grammar. As time passes and you have learned new things, come back to this page and see whether you can understand a bit more of it.</p>
 <p>In different communities, computer programs are referred to by different names: program, sketch, script, etc. Arduino tends to call them sketches, because you use them to sketch out what your device is supposed to do. We also like the name script, because it invokes the idea of a sequence of instructions: the programs you write are a set of instructions you give to the device and the order in which you want them to be executed.</p>
 <h2 id="writing-your-first-sketch">Writing your first sketch</h2>
-<p>Computers follow instructions, and do not solve problems on their own. So, you need to be very explicit in the instructions that you write when you program! The particular language we are using imposes a certain structure on our programs. The most bare-bones program looks like this:</p>
+<p>Computers follow instructions, and do not solve problems on their own. So, you need to be very explicit in the instructions that you write in your programs! The particular language we are using imposes a certain structure on our programs. The most bare-bones program looks like this:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">void</span> setup() {</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a>}</span>
@@ -192,7 +192,7 @@ void loop() {
 }
 </pre>
 </div>
-<p>You will be seeing plenty more virtual SpinWheels in the upcoming adventures. You can use them to test and experiment with your code and see what the result might look like before uploading to your real SpinWheel!</p>
+<p>You will be seeing plenty more virtual SpinWheels in the upcoming adventures. You can use them to test and experiment with your code and see what the result might look like before uploading to your real SpinWheel! The virtual Spinwheels will only show the <code>loop</code> block of the code. Make sure to add the <code>setup</code> block when copying into the Arduino software!</p>
 <div class="further-reading">
 <p>If you are eager to customize the SpinWheel in other ways (for instance by lighting up the small LEDs), check out the <a href="/allcommands">list of ways to manipulate the SpinWheel’s LEDs</a> we have created. For each of the functions introduced, there is a virtual SpinWheel to allow you to experiment with the code and become comfortable with how it works.</p>
 </div>
@@ -217,7 +217,7 @@ void loop() {
 <div class="further-reading">
 <p>To learn more about variables and other important concepts for creating programs, check out our <a href="/progpatterns">lesson on the building blocks of programming</a>. We encourage you to go back and forth between these pages as you deepen your understanding of programming the SpinWheel.</p>
 </div>
-<p>In this code, every loop still produces the same result; <code>which_LED</code> has the same value every time <code>loop()</code> is run. Lets add another variable that controls the brightness of the LEDs and change the brightness every time loop is run.</p>
+<p>In this code, every loop still produces the same result; <code>which_LED</code> has the same value every time <code>loop()</code> is run. Lets modify the code to change the selected LED every time loop is run.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
 <span id="cb6-3"><a href="#cb6-3"></a></span>
@@ -244,11 +244,13 @@ void loop() {
 <span id="cb6-24"><a href="#cb6-24"></a>  delay(<span class="dv">500</span>);</span>
 <span id="cb6-25"><a href="#cb6-25"></a>  </span>
 <span id="cb6-26"><a href="#cb6-26"></a>}</span></code></pre></div>
-<p>In this code, every loop increases the value of <code>which_LED</code> by 1. This value is then used in <code>SpinWheel.setLargeLED()</code> to indicate the LED to light up. This concept is further illustrated below. As each <code>loop()</code> block is run, the value stored in memory for <code>which_LED</code> is changed. Because the <code>loop</code> block runs many times a second, we have added the line <code>delay(500)</code> to pause the code for 500 milliseconds (0.5 seconds) before the loop if finished. Without the delay, the lights would change too quickly for us to see the change.</p>
+<p>In this code, every loop increases the value of <code>which_LED</code> by 1. This value is then used in <code>SpinWheel.setLargeLED()</code> to indicate the LED to light up. This concept is further illustrated below. As each <code>loop()</code> block is run, the value stored in memory for <code>which_LED</code> is changed. Because the <code>loop</code> block runs many times a second, we have added the line <code>delay(500)</code> to pause the code for 500 milliseconds (0.5 seconds) before the loop is finished. Without the delay, the lights would change too quickly for us to see the change.</p>
 <video src="/images/bookpics/brightness_loop.mp4" muted autoplay playsinline loop>
 </video>
 <p>You may have noticed that after a few seconds your SpinWheel stops lighting up. This is because the value in <code>which_LED</code> no longer corresponds to one of the 8 LEDs on the SpinWheel. For example, if <code>which_LED</code> equals 10, the code will try to turn on LED number 10. Since it doesn’t exist, nothing happens. To light up the SpinWheel again, unplug it or toggle the BAT/USB switch. This restarts the code, running <code>setup</code> again and starting <code>which_LED</code> over at 0.</p>
+<div class="further-reading">
 <p>What if instead you wanted this pattern to repeat itself over and over again? Check out the adventure on <a href="/animation">creating computer generated animations</a> to learn how!</p>
+</div>
 <p>You have now written your first piece of code for the SpinWheel!</p>
 <p>Continue the adventure by <a href="/animation">making computer generated animations</a> or <a href="/sight">learn about how colors are represented</a> in the SpinWheel. To learn more about the programming language used by the SpinWheel, check out our <a href="/progpatterns">programming patterns page</a>.</p>
 <p>There are a couple more things you might have noticed about the style of this programming language:</p>

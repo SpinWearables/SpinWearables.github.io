@@ -68,11 +68,12 @@ jQuery(function(){
   var basic = graph.newNode({label: "Basic Structure of a Program"});
   var sight = graph.newNode({label: "Biology of Sight"});
   var strobe = graph.newNode({label: "Stroboscope"});
-  var ani = graph.newNode({label: "Animations and Patterns"});
+  var ani = graph.newNode({label: "Intro to Animations"});
+  var ani2 = graph.newNode({label: "Animations and Patterns"});
   var step = graph.newNode({label: "Step Counter"});
   var dance = graph.newNode({label: "Dancing Companion"});
   var compass = graph.newNode({label: "Compass"});
-  var progpatterns = graph.newNode({label: "Programming Patterns"});
+  var progpatterns = graph.newNode({label: "Building Blocks of Coding"});
   var light = graph.newNode({label: "Light and Color"});
   var colortheory = graph.newNode({label: "Color Theory"});
   var inertia = graph.newNode({label: "Inertial Reference Frames"});
@@ -86,14 +87,16 @@ jQuery(function(){
   graph.newEdge(basic, ani); 
   graph.newEdge(sight, light); 
   graph.newEdge(light, colortheory); 
-  graph.newEdge(ani, step); 
+  graph.newEdge(ani, ani2); 
   graph.newEdge(ani, progpatterns); 
-  graph.newEdge(ani, dance);
+  graph.newEdge(ani2, step); 
+  graph.newEdge(ani2, dance);
   graph.newEdge(dance, compass); 
   graph.newEdge(compass, magnet);
   graph.newEdge(step, compass);
   graph.newEdge(dance, vector); 
   graph.newEdge(vector, rotation); 
+  graph.newEdge(dance, inertia);
   graph.newEdge(step, inertia);
 
   var springy = jQuery('#springymap').springy({

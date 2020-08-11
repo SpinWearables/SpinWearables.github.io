@@ -189,7 +189,7 @@ The code presented on this page can be <a href="./Grand_Finale.ino">downloaded</
 <p>Like r_cum in the Rainbow_Chase_Advanced sketch, a_cum is the sum of the SpinWheel’s acceleration in the x direction. We multiply the acceleration by 10 to have the color change be noticeable. We did a similar thing in the snake example.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a>  a_cum = (a)*<span class="dv">10</span> + a_cum;</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a>  a_cum = a*<span class="dv">10</span> + a_cum;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>We will have some fixed “delay” between the numbers controlling each LED’s color. Change this number! What happens?</p>
