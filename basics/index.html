@@ -116,12 +116,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
 <script src='/simspinwheel/simspinwheel.js'></script>
 <div class="intro-box">
-<p>A program is written as a text file containing multiple commands for your computer to follow. Here you will see what such a program might look like in one particular computer language. Before reading this, be sure to read our <a href="/quickstart">initial setup guide</a>.</p>
+<p>A program is a set of written commands for your computer to follow. Here you will see what such a program might look like in one particular computer language. Before reading this, be sure to read our <a href="/quickstart">initial setup guide</a>.</p>
 </div>
-<p>Approach this page the way you would approach the first page of a foreign language you want to learn. Try to pick out separate words and commands that make sense, without worrying about the overall structure, correct syntax, or proper grammar. As time passes and you have learned new things, come back to this page and see whether you can understand a bit more of it.</p>
-<p>In different communities, computer programs are referred to by different names: program, sketch, script, etc. Arduino tends to call them sketches, because you use them to sketch out what your device is supposed to do. We also like the name script, because it invokes the idea of a sequence of instructions: the programs you write are a set of instructions you give to the device and the order in which you want them to be executed.</p>
+<p>Approach this page the way you would approach the first few lines of a foreign language you want to learn. Try to pick out words that make sense, without worrying about the overall structure, correct syntax, or proper grammar. As time passes and you have learned new things, come back to this page and see whether you can understand a bit more of it.</p>
+<p>In different communities, computer programs are referred to by different names: program, sketch, script, etc. Arduino tends to call them sketches because you use them to sketch out what you want your device to do. We also like the name script, because it invokes the idea of a sequence of instructions. The programs you write are a set of instructions you give to the device and the order in which you want them to be executed.</p>
 <h2 id="writing-your-first-sketch">Writing your first sketch</h2>
-<p>Computers follow instructions, and do not solve problems on their own. So, you need to be very explicit in the instructions that you write in your programs! The particular language we are using imposes a certain structure on our programs. The most bare-bones program looks like this:</p>
+<p>Computers follow instructions. They do not solve problems on their own. So, when writing a program for the SpinWheel’s onboard computer, you need to be very explicit in the instructions that you write! The particular language we are using requires our programs to have a certain structure. The most bare-bones program looks like this:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">void</span> setup() {</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a>}</span>
@@ -129,8 +129,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-5"><a href="#cb1-5"></a><span class="dt">void</span> loop() {</span>
 <span id="cb1-6"><a href="#cb1-6"></a></span>
 <span id="cb1-7"><a href="#cb1-7"></a>}</span></code></pre></div>
-<p>This program does absolutely nothing. It contains two blocks (or sections) of code which start and end with the brackets <code>{</code> and <code>}</code>. For our program to do anything, we need to fill these blocks with instructions. The first block is called <code>setup</code> and executes only once, immediately after the device is powered up. This block is used for setting up any initial conditions we might require.</p>
-<p>Next there is the <code>loop</code> block. This block is executed repeatedly “in a loop”, starting immediately after <code>setup</code> is done and repeating itself until the power is turned off. Most of our instructions will be written in this block. They will frequently take the form of measuring time or motion, and then producing a color or a pattern of colors depending on the SpinWheel’s measurement.</p>
+<p>This program does absolutely nothing. It contains two blocks (or sections) of code which start and end with the brackets: <code>{</code> and <code>}</code>. For our program to do anything, we need to fill these blocks with instructions. The first block is called <code>setup</code> and runs only once, immediately after the device is powered up. This block is used for setting up any initial conditions we might require.</p>
+<p>Next there is the <code>loop</code> block. This block is executed repeatedly “in a loop”, starting immediately after <code>setup</code> is done and repeating itself until the power is turned off. Most of our instructions will be written in this block. They will frequently involve measuring time or motion and then producing a color or a pattern of colors depending on the SpinWheel’s measurement.</p>
 <figure>
 <video src="/images/bookpics/setup_loop.mp4" muted autoplay playsinline loop>
 </video>
@@ -153,7 +153,7 @@ When you turn on the SpinWheel, <code>setup()</code> is run once and then the <c
 <span id="cb2-12"><a href="#cb2-12"></a><span class="dt">void</span> loop() {</span>
 <span id="cb2-13"><a href="#cb2-13"></a></span>
 <span id="cb2-14"><a href="#cb2-14"></a>}</span></code></pre></div>
-<p>When you are writing other programs with the SpinWheel, these extra lines are essential. Adding <code>#include "SpinWearables.h"</code> and <code>using namespace SpinWearables;</code> before the <code>setup</code> loop ensures that the rest of the program has access to some extra resources and commands specific for programming your SpinWheel. It is also necessary to add <code>SpinWheel.begin();</code> in the <code>setup</code> block. This line makes sure that the SpinWheel hardware is ready for the instructions that we will add in <code>loop</code> in the next chunk of code.</p>
+<p>Adding <code>#include "SpinWearables.h"</code> and <code>using namespace SpinWearables;</code> before the <code>setup</code> loop ensures that the rest of the program has access to extra resources and commands specific for programming your SpinWheel. It is also necessary to add <code>SpinWheel.begin();</code> in the <code>setup</code> block. This line makes sure that the SpinWheel hardware is ready for the instructions that we will add in <code>loop</code> in the next chunk of code. When you start writing other programs for the SpinWheel, these extra lines will be essential.</p>
 <p>Notice the faded bluish lines that begin with two slashes <code>//</code>. This text is called a “comment.” By starting the line with <code>//</code>, the computer is told to completely disregard everything else on the line. If you reread the comments above, you will notice that they give the same information as we wrote in the paragraph above. We will use comments extensively to write down explanations for ourselves and any other humans that might be reading the code, without worrying about the computer being confused by them.</p>
 <p>The <code>loop</code> block is still empty and this program still will not do anything interesting. However, our <code>setup</code> section is complete: it prepares the SpinWheel to receive instructions. Through our activities, we will rarely need anything more sophisticated in <code>setup</code>.</p>
 <p>Finally, let us turn on an LED by simply adding a single command to the block of code we started above.</p>
@@ -176,7 +176,7 @@ When you turn on the SpinWheel, <code>setup()</code> is run once and then the <c
 <figure>
 <img src="/images/spinwheel_with_numbers.png" title="SpinWheel LED numbering" alt="" /><figcaption>SpinWheel LED numbering.</figcaption>
 </figure>
-<p>Play around with lighting up all of the different large LEDs, or combinations of them! For example, you can experiment with this virtual SpinWheel to light up the LEDs of your choice. What happens when you run the following code on the virtual SpinWheel or on your physical SpinWheel? How would you modify this code to light up the opposite set of LEDs?</p>
+<p>Play around with lighting up all of the different large LEDs, or combinations of them! For example, you can experiment with this virtual SpinWheel to light up the LEDs of your choice. What happens when you run the following code on the virtual SpinWheel or on your physical SpinWheel? How would you modify this code to light up the opposite set of large LEDs?</p>
 <div class="ssw-codecontent" data-markdown="0">
 <pre class="ssw-codeblock">
 void loop() {
@@ -197,10 +197,10 @@ void loop() {
 <p>If you are eager to customize the SpinWheel in other ways (for instance by lighting up the small LEDs), check out the <a href="/allcommands">list of ways to manipulate the SpinWheel’s LEDs</a> we have created. For each of the functions introduced, there is a virtual SpinWheel to allow you to experiment with the code and become comfortable with how it works.</p>
 </div>
 <h2 id="creating-changing-patterns">Creating changing patterns</h2>
-<p>In order to produce more interesting patterns on our SpinWheel, we have to modify the loop section. Currently, every loop produces the same result; the same LED is lit up with the same color. To begin writing more complex code, we need to introduce the idea of <em>variables</em>. Variables allow us to store information in the program and change that information as needed.</p>
+<p>In order to produce more dynamic patterns on our SpinWheel, we have to modify the loop section. Currently, every loop produces the same result; the same LED is lit up with the same color. To begin writing more complex code, we need to introduce the idea of <em>variables</em>. Variables allow us to store information in the program and change that information as needed.</p>
 <p>To <strong>define</strong> a new variable we can add the following line to the loop block:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">int</span> which_LED = <span class="dv">1</span>;</span></code></pre></div>
-<p>This reserves a location in the memory of the computer, lets us refer to that location by the name <code>which_LED</code>, and stores the value <code>1</code> there. By itself, this variable doesn’t impact the output of the SpinWheel. We can use it to store the location of the LED we want to light up.</p>
+<p>This reserves a location in the memory of the computer, lets us refer to that location by the name <code>which_LED</code>, and stores the value <code>1</code> there. By itself, this variable doesn’t impact the output of the SpinWheel, but we can use it to store the location of the LED we want to light up.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
 <span id="cb5-3"><a href="#cb5-3"></a></span>
@@ -244,15 +244,15 @@ void loop() {
 <span id="cb6-24"><a href="#cb6-24"></a>  delay(<span class="dv">500</span>);</span>
 <span id="cb6-25"><a href="#cb6-25"></a>  </span>
 <span id="cb6-26"><a href="#cb6-26"></a>}</span></code></pre></div>
-<p>In this code, every loop increases the value of <code>which_LED</code> by 1. This value is then used in <code>SpinWheel.setLargeLED()</code> to indicate the LED to light up. This concept is further illustrated below. As each <code>loop()</code> block is run, the value stored in memory for <code>which_LED</code> is changed. Because the <code>loop</code> block runs many times a second, we have added the line <code>delay(500)</code> to pause the code for 500 milliseconds (0.5 seconds) before the loop is finished. Without the delay, the lights would change too quickly for us to see the change.</p>
+<p>In this code, every loop increases the value of <code>which_LED</code> by 1. This value is then used in <code>SpinWheel.setLargeLED()</code> to indicate which LED to light up. This concept is further illustrated below. As each <code>loop()</code> block is run, the value stored in memory for <code>which_LED</code> is changed. Because the <code>loop</code> block runs many times a second, we have added the line <code>delay(500)</code> to pause the code for 500 milliseconds (0.5 seconds) before finishing the loop. Without the delay, the lights would change too quickly for us to see the change.</p>
 <video src="/images/bookpics/brightness_loop.mp4" muted autoplay playsinline loop>
 </video>
-<p>You may have noticed that after a few seconds your SpinWheel stops lighting up. This is because the value in <code>which_LED</code> no longer corresponds to one of the 8 LEDs on the SpinWheel. For example, if <code>which_LED</code> equals 10, the code will try to turn on LED number 10. Since it doesn’t exist, nothing happens. To light up the SpinWheel again, unplug it or toggle the BAT/USB switch. This restarts the code, running <code>setup</code> again and starting <code>which_LED</code> over at 0.</p>
+<p>You may have noticed that after a few seconds your SpinWheel stops lighting up. This is because the value in <code>which_LED</code> no longer corresponds to one of the 8 LEDs on the SpinWheel. For example, if <code>which_LED</code> equals 10, the code will try to turn on LED number 10. Since it doesn’t exist, nothing happens. To light up the SpinWheel again, unplug it and toggle the BAT/USB switch. This restarts the code, running <code>setup</code> again and starting <code>which_LED</code> over at 0.</p>
 <div class="further-reading">
 <p>What if instead you wanted this pattern to repeat itself over and over again? Check out the adventure on <a href="/animation">creating computer generated animations</a> to learn how!</p>
 </div>
 <p>You have now written your first piece of code for the SpinWheel!</p>
-<p>Continue the adventure by <a href="/animation">making computer generated animations</a> or <a href="/sight">learn about how colors are represented</a> in the SpinWheel. To learn more about the programming language used by the SpinWheel, check out our <a href="/progpatterns">programming patterns page</a>.</p>
+<p>Continue the adventure by <a href="/animation">making computer generated animations</a> or <a href="/sight">learn about how colors are represented</a> in the SpinWheel. To learn more about the programming language used by the SpinWheel, check out our lesson on the <a href="/progpatterns">building blocks of coding</a>.</p>
 <p>There are a couple more things you might have noticed about the style of this programming language:</p>
 <ul>
 <li>We tend to have only one “command” per line. This makes the code more readable.</li>
@@ -262,7 +262,7 @@ void loop() {
 <li>There are other ways in which LED colors can be modified and motion be detected. We will be discussing many such tools in future pages.</li>
 </ul>
 <div class="further-reading">
-<p>We invite you to play with the <a href="/book">SpinWheel examples available in the Arduino software and to peruse the many suggested activities we have prepared for you</a>. If you are already accustomed to programming, you might want to see the <a href="/allcommands">list of all functions provided with the SpinWheel</a> or to peruse the <a href="/codedoc/SpinWearables.h.html">code of this library</a>.</p>
+<p>We invite you to play with the SpinWheel examples available in the Arduino software and to peruse <a href="/book">the many suggested activities we have prepared for you</a>. If you are already accustomed to programming, you might want to see the <a href="/allcommands">list of all functions provided with the SpinWheel</a> or to peruse the <a href="/codedoc/SpinWearables.h.html">code of the SpinWearables library</a>.</p>
 </div>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
