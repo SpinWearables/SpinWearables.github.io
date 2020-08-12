@@ -55,6 +55,8 @@
 <ul>
 <li><a href="#led-manipulation">LED Manipulation</a>
 <ul>
+<li><a href="#turn-on-leds-with-drawframe">Turn on LEDs with ‘drawFrame()’</a></li>
+<li><a href="#turn-off-all-leds-with-spinwheel.clearallleds">Turn off all LEDs with <code>SpinWheel.clearALLLEDs()</code></a></li>
 <li><a href="#turn-on-all-the-large-leds-with-setlargeledsuniform">Turn on all the Large LEDs with <code>setLargeLEDsUniform</code></a></li>
 <li><a href="#turn-on-all-the-small-leds-with-setsmallledsuniform">Turn on all the Small LEDs with <code>setSmallLEDsUniform</code></a></li>
 <li><a href="#control-a-specific-large-led-with-setlargeled">Control a Specific Large LED with <code>setLargeLED</code></a></li>
@@ -73,7 +75,8 @@
 <li><a href="#color-and-brightness-helpers">Color and Brightness Helpers</a>
 <ul>
 <li><a href="#a-colorwheel">A <code>colorWheel</code></a></li>
-<li><a href="#pulsing-functions-like-triangularwave-and-parabolawave">Pulsing functions like <code>triangularWave</code> and <code>parabolaWave</code></a></li>
+<li><a href="#the-triangularwave-function-creates-a-pulsing-pattern">The <code>triangularWave</code> function creates a pulsing pattern</a></li>
+<li><a href="#the-parabolawave-function-creates-another-pulsing-pattern">The <code>parabolaWave</code> function creates another pulsing pattern</a></li>
 </ul></li>
 <li><a href="#motion-sensing-and-compass-with-readimu">Motion Sensing and Compass with <code>readIMU</code></a></li>
 <li><a href="#advance-direct-use-of-the-hardware-bypassing-the-spinwheel">Advance direct use of the hardware, bypassing the SpinWheel</a></li>
@@ -87,7 +90,9 @@
 </div>
 <p>You can use the virtual SpinWheel simulator to test each of these functions. If a function involves the motion sensor, you can grab the virtual device with your mouse and shake it, simulating how the physical sensor would respond to real motion.</p>
 <h2 id="led-manipulation">LED Manipulation</h2>
-<p>There are a number of functions that let you manipulate the state of the LEDs, however, for the LEDs to actually respond to these manipulations, you also need to call <code>drawFrame()</code> when you are done. <code>drawFrame</code> is the only <span class="footnote">“non-instantaneous” function<span>Commonly called “blocking” functions.</span></span>. It takes roughly 20ms for it to finish, during which time it uses a persistent of vision method to rapidly flash the small LEDs as necessary to mimic the required color. This lends itself to making 50 frames-per-second animations. By using <code>drawFrame()</code> you can make multiple modifications, preparing the final image, without the intermediate unfinished images showing up.</p>
+<h3 id="turn-on-leds-with-drawframe">Turn on LEDs with ‘drawFrame()’</h3>
+<p>Below we will introduce a number of functions that let you control the LEDs. However, for the LEDs to change in brightness to relect these functions, you also need to call <code>drawFrame()</code> when you are done. <code>drawFrame</code> is the only <span class="footnote">“non-instantaneous” function<span>Commonly called “blocking” functions.</span></span>. It takes roughly 20ms for it to finish, during which time it uses a persistent of vision method to rapidly flash the small LEDs as necessary to mimic the required color. This lends itself to making 50 frames-per-second animations. By using <code>drawFrame()</code> you can make multiple modifications, preparing the final image, without the intermediate unfinished images showing up.</p>
+<h3 id="turn-off-all-leds-with-spinwheel.clearallleds">Turn off all LEDs with <code>SpinWheel.clearALLLEDs()</code></h3>
 <p>If you want to reset the image, you can call <code>SpinWheel.clearAllLEDs()</code>, which will set all LEDs to be dark, deleting any color information that they were previously set to.</p>
 <h3 id="turn-on-all-the-large-leds-with-setlargeledsuniform">Turn on all the Large LEDs with <code>setLargeLEDsUniform</code></h3>
 <p><code>setLargeLEDsUniform</code> takes three arguments, the red, green, and blue components of the desired color. Their range is between 0 and 255 (one byte).</p>
@@ -117,8 +122,11 @@ void loop() {
 }
 </pre>
 </div>
+<figure>
+<img src="/images/spinwheel_with_numbers.png" title="SpinWheel LED numbering" alt="" /><figcaption>To control specific LEDs in the commands presented below use the numbering illustrated here.</figcaption>
+</figure>
 <h3 id="control-a-specific-large-led-with-setlargeled">Control a Specific Large LED with <code>setLargeLED</code></h3>
-<p>The first argument of <code>setLargeLED</code> is a number between 0 and 7, denoting which of the 8 LEDs is to be turned on. The other three arguments are the red, green, and blue components of the color.</p>
+<p>The first argument of <code>setLargeLED</code> is a number between 0 and 7, denoting which of the 8 LEDs is to be turned on. See the above diagram for the numbering system. The other three arguments are the red, green, and blue components of the color.</p>
 <div class="ssw-codecontent" data-markdown="0">
 <pre class="ssw-codeblock">
 void loop() {
@@ -198,8 +206,11 @@ void loop() {
 <p>Thanks to these functions you can easily set all of the LEDs to a preset pattern. They are useful building blocks for commonly used patterns that do not require significant customization. These functions are not implemented in the SpinWheel simulator yet.</p>
 <!--TODO: implement these in the virtual spinwheel and demonstrate them here-->
 <h3 id="rainbow-pattern-with-setsmallledsrainbow">Rainbow pattern with <code>setSmallLEDsRainbow</code></h3>
+<p>This function takes only one argument, between 0 and 255, that determines where a rainbow pattern in the small LEDs starts. For instance, if you use <code>setSmallLEDsRainbow(0)</code>, the start of the rainbow will be at small LED 0. To start the rainbow a half turn around the SpinWheel, instead use <code>setSmallLEDsRainbow(125)</code>.</p>
 <h3 id="circular-progress-bar-with-setsmallledsprogress">Circular progress bar with <code>setSmallLEDsProgress</code></h3>
+<p>You can use this to create an arc around the SpinWheel with the small LEDs. It has four arguments: an angle that specifies the extent of the arc, and the red, green, and blue LEDs brightness. Each goes from 0 to 255. To have an arc that lights up LEDs 0-9 in blue, use <code>setSmallLEDsProgress(200, 0, 0, 255)</code>. You can also provide only two arguments, the angle and an rgb color.</p>
 <h3 id="circular-pointer-with-setsmallledspointer">Circular pointer with <code>setSmallLEDsPointer</code></h3>
+<p>This is similar to the above function, but instead you can specify the middle of the arc. To use our default arc length (check out our <a href="codedoc/SpinWearables.h.html">annotated source code</a>), simply specify the angle for the middle of the arc (0-255) and the color (either the red, green, and blue components individually or as rgb).</p>
 <h2 id="color-and-brightness-helpers">Color and Brightness Helpers</h2>
 <p>Various functions that help prepare colors or map a given number to a continuously changing brightness. A good place to see why these functions are useful is the set of lessons on <a href="/animation">animations</a>.</p>
 <h3 id="a-colorwheel">A <code>colorWheel</code></h3>
@@ -218,9 +229,35 @@ void loop() {
 }
 </pre>
 </div>
-<h3 id="pulsing-functions-like-triangularwave-and-parabolawave">Pulsing functions like <code>triangularWave</code> and <code>parabolaWave</code></h3>
-<p>The <code>triangularWave</code> and <code>parabolaWave</code> functions provide for convenient periodic patterns, useful in animations.</p>
-<!--TODO: add plots-->
+<h3 id="the-triangularwave-function-creates-a-pulsing-pattern">The <code>triangularWave</code> function creates a pulsing pattern</h3>
+<p>The <code>triangularWave</code> function provides a convenient periodic function, useful in animations.</p>
+<figure>
+<video src="/images/bookpics/triangular_wave.mp4" muted autoplay playsinline loop>
+</video>
+<figcaption>
+Here is an illustration of the triangular wave function.
+</figcaption>
+</figure>
+<div class="ssw-codecontent" data-markdown="0">
+<pre class="ssw-codeblock">
+void loop() {
+</pre>
+<textarea class="ssw-codeblock">
+  // Change the argument between 0 and 255.
+  int b = triangularWave(150);
+  SpinWheel.setLargeLEDsUniform(0, b, b);
+  SpinWheel.drawFrame();
+</textarea>
+<pre class="ssw-codeblock">
+}
+</pre>
+</div>
+<h3 id="the-parabolawave-function-creates-another-pulsing-pattern">The <code>parabolaWave</code> function creates another pulsing pattern</h3>
+<p>Similar to the above function, the <code>parabolaWave</code> function creates a different periodic function based on the profile below.</p>
+<figure>
+<img src="/images/bookpics/parabola_wave.png" title="Illustration of the parabolic wave function." alt="" /><figcaption>The parabolic wave function.</figcaption>
+</figure>
+<!--TODO:add parabolaWave function-->
 <!--TODO:finish documenting and implementing the various filters-->
 <!--The `faston_slowoff` function can be used to pleasantly filter time-dependent measurements. For instance, it can be used to rapidly brighten an LED when a motion is detected and then slowly let the light decay after the motion stops.-->
 <h2 id="motion-sensing-and-compass-with-readimu">Motion Sensing and Compass with <code>readIMU</code></h2>
@@ -231,7 +268,7 @@ void loop() {
 </figure>
 <!--TODO: implement something to use the button-->
 <h2 id="advance-direct-use-of-the-hardware-bypassing-the-spinwheel">Advance direct use of the hardware, bypassing the SpinWheel</h2>
-<p>You can consult the <code>begin</code>, <code>readIMU</code>, <code>drawFrame</code>, <code>setLargeLED</code>, and <code>setSmallLED</code> function in our source code to see how to use the motion sensor, small LEDs, and large LEDs, without relying on the SpinWearables library.</p>
+<p>You can consult the <code>begin</code>, <code>readIMU</code>, <code>drawFrame</code>, <code>setLargeLED</code>, and <code>setSmallLED</code> function in our <a href="codedoc/SpinWearables.h.html">source code</a> to see how to use the motion sensor, small LEDs, and large LEDs, without relying on the SpinWearables library.</p>
 <p>The button is attached to pin 7, and you can use <code>digitalWrite(7, INPUT_PULLUP)</code> to set it up. Then you can use <code>digitalRead(7)</code> to read the button directly or <code>attachInterrupt(digitalPinToInterrupt(7), callback, FALLING)</code> to set up an asynchronous callback.</p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"

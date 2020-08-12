@@ -66,6 +66,7 @@ jQuery(function(){
 
   var quick = graph.newNode({label: "Initial Setup", color: "red"});
   var basic = graph.newNode({label: "Basic Structure of a Program"});
+  var arduino = graph.newNode({label: "Arduino 101", color: "grey"});
   var sight = graph.newNode({label: "Biology of Sight"});
   var strobe = graph.newNode({label: "Stroboscope"});
   var ani = graph.newNode({label: "Intro to Animations"});
@@ -73,21 +74,23 @@ jQuery(function(){
   var step = graph.newNode({label: "Step Counter"});
   var dance = graph.newNode({label: "Dancing Companion"});
   var compass = graph.newNode({label: "Compass"});
-  var progpatterns = graph.newNode({label: "Building Blocks of Coding"});
-  var light = graph.newNode({label: "Light and Color"});
-  var colortheory = graph.newNode({label: "Color Theory"});
-  var inertia = graph.newNode({label: "Inertial Reference Frames"});
-  var rotation = graph.newNode({label: "Rotation"});
-  var magnet = graph.newNode({label: "Magnetism"});
-  var vector = graph.newNode({label: "Vectors and Motion"});
+  var progpatterns = graph.newNode({label: "Building Blocks of Coding", color: "grey"});
+  var light = graph.newNode({label: "Light and Color", color: "grey"});
+  var colortheory = graph.newNode({label: "Color Theory", color: "grey"});
+  var inertia = graph.newNode({label: "Inertial Reference Frames", color: "grey"});
+  var rotation = graph.newNode({label: "Rotation", color: "grey"});
+  var magnet = graph.newNode({label: "Magnetism", color: "grey"});
+  var vector = graph.newNode({label: "Vectors and Motion", color: "grey"});
   
   graph.newEdge(quick, basic);
   graph.newEdge(basic, sight); 
   graph.newEdge(basic, strobe);
   graph.newEdge(basic, ani); 
+  graph.newEdge(basic, arduino);  
   graph.newEdge(sight, light); 
   graph.newEdge(light, colortheory); 
   graph.newEdge(ani, ani2); 
+  graph.newEdge(arduino, progpatterns); 
   graph.newEdge(ani, progpatterns); 
   graph.newEdge(ani2, step); 
   graph.newEdge(ani2, dance);
@@ -122,14 +125,14 @@ jQuery(function(){
 <ol type="1">
 <li><a href="/sight">Biology of Sight</a></li>
 <li><a href="/animation">Intro to Animation</a></li>
-<li>Stroboscope and Stroboscopic Photography (planned)</li>
+<li>Stroboscopes and Stroboscopic Photography (planned)</li>
 </ol>
 <h3 id="associated-lessons">Associated Lessons</h3>
 <ol type="1">
 <li><a href="/lightandcolor">Light and Color</a></li>
 <li><a href="/colortheory">Color Theory</a></li>
 <li><a href="/progpatterns">Coding Building Blocks</a></li>
-<li>Physical Computing (planned)</li>
+<li><a href="/arduino101">Arduino 101</a></li>
 </ol>
 <h2 id="intermediate-adventures">Intermediate Adventures</h2>
 <p>These activities build on the ideas presented in the introductory adventures. If you have coding experience, you can jump right in and then refer back to the earlier adventures and lessons as you have questions.</p>
@@ -143,6 +146,7 @@ jQuery(function(){
 <li><a href="/vectors">Vectors and Motion</a></li>
 <li><a href="/rotation">Rotation and Moving in Circles</a></li>
 <li>Inertial Reference Frames / Free Fall (planned)</li>
+<li>Physical Computing (planned)</li>
 </ol>
 <h2 id="advanced-adventures">Advanced Adventures</h2>
 <p>These are the most challenging SpinWheel activities. We recommend completing at least one earlier adventure before trying them out. If you have completed the other adventures, then you should be able to jump into any of these.</p>
