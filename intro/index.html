@@ -12,7 +12,7 @@
   <meta property="og:image" content="https://spinwearables.com/hanging.jpg" />
   <link rel="image_src" href="https://spinwearables.com/hanging.jpg" />
   <meta name="keywords" content="SpinWheel, getting started, experimenting" />
-  <title>Getting Started</title>
+  <title>Color Coding</title>
   <style>
   </style>
   <link rel="stylesheet" href="/custom.css" />
@@ -46,13 +46,13 @@
  | 
 <a href="/book">The Field Guide</a>
 </div>
-<h1 class="title">Getting Started</h1>
+<h1 class="title">Color Coding</h1>
 </header>
 <main>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
 <script src='/simspinwheel/simspinwheel.js'></script>
 <div class="intro-box">
-<p>Before you dive into programming the SpinWheel, first give this adventure a try to learn more about what the SpinWheel is capable of. We’ll start with some simple animations and end with some code that in later adventures you’ll add to the SpinWheel itself.</p>
+<p>Before you dive into programming the SpinWheel, first give this adventure a try to learn more about what the SpinWheel is capable of. We’ll start with some simple animations and end with some code that you’ll add to the SpinWheel itself in later adventures.</p>
 </div>
 <p>Welcome to the SpinWheel educational materials! This page is the first of many adventures and lessons that we have written to empower you to begin coding the SpinWheel for yourself. If you have never programmed before, we hope that this lesson will help you become more comfortable with looking at code and guessing what it might do. If you already have coding experience, then you may prefer to complete the <a href="/quickstart">initial setup guide</a> and then jump into the later adventures.</p>
 <h2 id="the-spinwheel">The SpinWheel</h2>
@@ -122,9 +122,9 @@ changeColor();
 </div>
 <div class="further-reading">
 <p>To learn why we are mixing colors using red, green, and blue,<br />
-check out our [Biology of Sight] adventure. On this page, you can try this out this on your own SpinWheel, as well as learn more about how our eyes work.</p>
+check out our <a href="/sight">Biology of Sight</a> adventure. On this page, you can try this out this on your own SpinWheel, as well as learn more about how our eyes work.</p>
 </div>
-<p>On your SpinWheel, rather than using sliders to change the color, you will instead use building blocks of code. On the virtual SpinWheel below, you can see how the code that you would run on your physical SpinWheel would change the LED display. For now, focus only on the line <code>SpinWheel.setLargeLEDsUniform(50, 255, 225</code>. It has three numbers that you can change to control the color that the SpinWheel lights up. Like with the sliders, where you created colors by mixing red, green, and blue together, the first number, <code>50</code>, represents the amount of red, the next, <code>255</code>, represents the amount of green, and the final, <code>225</code>, gives the amount of blue. These combinations give a bright blue color. Try changing these numbers for yourself and see what happens.</p>
+<p>On your SpinWheel, rather than using sliders to change the color, you will instead use building blocks of code. On the virtual SpinWheel below, you can see how the code that you would run on your physical SpinWheel would change the LED display. For now, focus only on the line <code>SpinWheel.setLargeLEDsUniform(50, 255, 225)</code>. It has three numbers that you can change to control the color that the SpinWheel lights up. Like with the sliders, where you created colors by mixing red, green, and blue together, the first number, <code>50</code>, represents the amount of red, the next, <code>255</code>, represents the amount of green, and the final, <code>225</code>, gives the amount of blue. These combinations give a bright blue color. Try changing these numbers for yourself and then press “Run for 10 seconds” button to see what happens.</p>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
 <script src='/simspinwheel/simspinwheel.js'></script>
 <div class="ssw-codecontent" data-markdown="0">
@@ -149,7 +149,7 @@ void loop() {
 <p>It is also possible to specifically turn on just one large LED.</p>
 <h4 id="an-interactive-widget-will-be-added-here-to-allow-students-to-try-controlling-each-large-leds-color-independently-of-the-others">an interactive widget will be added here to allow students to try controlling each large LED’s color independently of the others</h4>
 <!-- is there some way that we can hide the code and just have sliders for each LED where they can cahnge the colors?-->
-<p>Now lets try doing the same thing, but using the code you will put on your SpinWheel. To start with, we are just turning on one LED. However, you can copy this line and independently control each large LED. Try this for yourself below!</p>
+<p>Now let’s try doing the same thing, but using the code you will put on your SpinWheel. To start with, we are just turning on one LED. However, you can copy this line and independently control each large LED. Try this for yourself below!</p>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
 <script src='/simspinwheel/simspinwheel.js'></script>
 <div class="ssw-codecontent" data-markdown="0">
@@ -169,7 +169,7 @@ void loop() {
 </pre>
 </div>
 <h3 id="turning-on-the-small-leds">Turning on the Small LEDs</h3>
-<p>You can also turn on only the small LEDs. To do this, rather than using <code>SpinWheel.setLargeLEDsUniform</code>, you instead can use the line <code>SpinWheel.setSmallLEDsUniform</code>. Like above the three numbers represent the red, green, and blue components of the color you want to make.</p>
+<p>You can also turn on only the small LEDs. To do this, rather than using <code>SpinWheel.setLargeLEDsUniform</code>, you instead can use the line <code>SpinWheel.setSmallLEDsUniform</code>. Like above, the three numbers represent the red, green, and blue components of the color you want to make.</p>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
 <script src='/simspinwheel/simspinwheel.js'></script>
 <div class="ssw-codecontent" data-markdown="0">
