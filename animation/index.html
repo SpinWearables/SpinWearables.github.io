@@ -173,15 +173,15 @@ Using time to create a repeating pattern: the value returned by <code>millis()</
 <div class="ssw-codecontent" data-markdown="0">
 <pre class="ssw-codeblock">
 void loop() {
-</pre>
-<textarea class="ssw-codeblock">
   int t = millis();
   int t_repeating = t % 2500;
   int b = t_repeating / 10;
+</pre>
+<textarea class="ssw-codeblock">
   SpinWheel.setLargeLEDsUniform(b, b, b);
-  SpinWheel.drawFrame();
 </textarea>
 <pre class="ssw-codeblock">
+  SpinWheel.drawFrame();
 }
 </pre>
 </div>

@@ -263,6 +263,7 @@ function prep_containers() {
   });
   var finished_containers = document.querySelectorAll('.ssw-container');
   finished_containers.forEach(function (x) {
+    if (x.classList.contains('ssw-skip')) {return;}
     x.SpinWheel = new SpinWheelClass(x);
     var bt_run = x.querySelector('.ssw-bt-run');
     bt_run.onclick = function () {run_sim(x)};
