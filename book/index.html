@@ -64,7 +64,7 @@
 jQuery(function(){
   var graph = new Springy.Graph();
 
-  var intro = graph.newNode({label: "Color Coding"});
+  var intro = graph.newNode({label: "Getting to Know Your SpinWheel", color: "red"});
   var quick = graph.newNode({label: "Initial Setup", color: "red"});
   var basic = graph.newNode({label: "Basic Structure of a Program"});
   var arduino = graph.newNode({label: "Arduino 101", color: "grey"});
@@ -84,16 +84,16 @@ jQuery(function(){
   var vector = graph.newNode({label: "Vectors and Motion", color: "grey"});
   
   graph.newEdge(intro, quick);
-  graph.newEdge(quick, basic);
-  graph.newEdge(basic, sight); 
-  graph.newEdge(basic, strobe);
-  graph.newEdge(basic, ani); 
+  graph.newEdge(quick, sight); 
+  graph.newEdge(quick, strobe);
+  graph.newEdge(sight, ani); 
+  graph.newEdge(ani, basic);
   graph.newEdge(basic, arduino);  
   graph.newEdge(sight, light); 
   graph.newEdge(light, colortheory); 
   graph.newEdge(ani, ani2); 
   graph.newEdge(arduino, progpatterns); 
-  graph.newEdge(ani, progpatterns); 
+  graph.newEdge(ani2, progpatterns); 
   graph.newEdge(ani2, step); 
   graph.newEdge(ani2, dance);
   graph.newEdge(dance, compass); 
@@ -119,9 +119,8 @@ jQuery(function(){
 <h2 id="getting-started">Getting Started</h2>
 <p>These three pages provide the essentials to get started programming your SpinWheel. If you have coding experience, we recommend doing the <a href="/quickstart">Initial Setup Guide</a> before jumping into any of the adventures.</p>
 <ol type="1">
-<li><a href="/intro">Color Coding</a>: Before you download the software for programming your SpinWheel, try out this page to get your first taste of how to control the SpinWheel’s LEDs.</li>
+<li><a href="/intro">Getting to Know Your SpinWheel</a>: Before you download the software for programming your SpinWheel, try out this page to get your first taste of how to control the SpinWheel’s LEDs.</li>
 <li><a href="/quickstart">Initial Setup Guide</a>: This is where we explain how to set up your SpinWheel, download the Arduino software and provide essential information for the rest of the adventures.</li>
-<li><a href="/basics">Basic Structure of a Program</a>: Here we provide introductory information on the structure of programs that will help you jump into the intro adventures, particularly if you have never coded before. As you try the other adventures, refer back to this material and the linked pages again and see what more you understand with the new knowledge of programming you have gained.</li>
 </ol>
 <h2 id="intro-adventures">Intro Adventures</h2>
 <p>These adventures assume that you have no coding experience and are a great way to become comfortable with both the SpinWheel and coding. The associated lessons go into more depth on the concepts that are referenced for the first time in these adventures. We have written the lessons to supplement the content in the adventures and we provide links in each adventure when we recommend checking them out to learn more. We hope these will spark your curiousity to learn even more about the world around you!</p>
@@ -134,31 +133,32 @@ jQuery(function(){
 <ol type="1">
 <li><a href="/lightandcolor">Light and Color</a></li>
 <li><a href="/colortheory">Color Theory</a></li>
-<li><a href="/progpatterns">Coding Building Blocks</a></li>
-<li><a href="/arduino101">Arduino 101</a></li>
+<li><a href="/basics">Basic Structure of a Program</a></li>
 </ol>
 <h2 id="intermediate-adventures">Intermediate Adventures</h2>
 <p>These activities build on the ideas presented in the introductory adventures. If you have coding experience, you can jump right in and then refer back to the earlier adventures and lessons as you have questions.</p>
 <ol type="1">
 <li><a href="/animation2">Animations and Patterns</a></li>
 <li><a href="/stepcounter">Make a Step Counter</a></li>
-<li><a href="/dancing">Dancing with Color</a></li>
 </ol>
 <h3 id="associated-lessons-1">Associated Lessons</h3>
 <ol type="1">
+<li><a href="/progpatterns">Coding Building Blocks</a></li>
+<li><a href="/arduino101">Arduino 101</a></li>
 <li><a href="/vectors">Vectors and Motion</a></li>
-<li><a href="/rotation">Rotation and Moving in Circles</a></li>
 <li>Inertial Reference Frames / Free Fall (planned)</li>
 <li>Physical Computing (planned)</li>
 </ol>
 <h2 id="advanced-adventures">Advanced Adventures</h2>
 <p>These are the most challenging SpinWheel activities. We recommend completing at least one earlier adventure before trying them out. If you have completed the other adventures, then you should be able to jump into any of these.</p>
 <ol type="1">
+<li><a href="/dancing">Dancing with Color</a></li>
 <li>Compass (planned)</li>
 <li><a href="/rnn">Recurrent Neural Networks for Gesture Recognition</a></li>
 </ol>
 <h3 id="associated-lessons-2">Associated Lessons</h3>
 <ol type="1">
+<li><a href="/rotation">Rotation and Moving in Circles</a></li>
 <li>Magnetism (planned)</li>
 <li>Electricity (planned)</li>
 <li>Neural Networks (planned)</li>
