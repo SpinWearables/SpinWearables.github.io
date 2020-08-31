@@ -125,14 +125,10 @@ The code presented on this page can be <a href="./Update_Which_LED.ino">download
 <div class="code">
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-4"><a href="#cb1-4"></a>  SpinWheel.begin();</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="co">// This line ensures that the communication hardware</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="co">// on our device is ready to send messages.</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="co">// The name &quot;Serial&quot; is such for historical reasons</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="co">// (it is the name for this type of communication).</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>  Serial.begin(<span class="dv">9600</span>);<span class="co">// 9600 is the speed of the connection.</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>}</span></code></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  SpinWheel.begin();</span>
+<span id="cb1-6"><a href="#cb1-6"></a>}</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>variable to specify which LED to light up</p>
@@ -144,15 +140,11 @@ The code presented on this page can be <a href="./Update_Which_LED.ino">download
 <span id="cb2-4"><a href="#cb2-4"></a>  <span class="co">// light up the specified LED</span></span>
 <span id="cb2-5"><a href="#cb2-5"></a>  SpinWheel.setLargeLED(which_LED, <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>); </span>
 <span id="cb2-6"><a href="#cb2-6"></a>  SpinWheel.drawFrame(); </span>
-<span id="cb2-7"><a href="#cb2-7"></a>  <span class="co">// Send a message to the connected computer.</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>  <span class="co">// The message will be which LED is lit up.</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>  Serial.println(which_LED);</span>
-<span id="cb2-10"><a href="#cb2-10"></a>  <span class="co">// add in a delay to make the LEDs change at a reasonable speed</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>  delay(<span class="dv">500</span>);</span>
-<span id="cb2-12"><a href="#cb2-12"></a>  <span class="co">// Increase the value of the which_LED by 1.</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a>  which_LED = which_LED + <span class="dv">1</span>; </span>
-<span id="cb2-14"><a href="#cb2-14"></a></span>
-<span id="cb2-15"><a href="#cb2-15"></a>}</span></code></pre></div>
+<span id="cb2-7"><a href="#cb2-7"></a>  <span class="co">// add in a delay to make the LEDs change at a reasonable speed</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>  delay(<span class="dv">500</span>);</span>
+<span id="cb2-9"><a href="#cb2-9"></a>  <span class="co">// Increase the value of which_LED by 1.</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>  which_LED = which_LED + <span class="dv">1</span>; </span>
+<span id="cb2-11"><a href="#cb2-11"></a>}</span></code></pre></div>
 </div>
 </div>
 </body>
