@@ -119,11 +119,11 @@ jQuery(function(){
 :root {
   /* Change this to change the appearance of the hexaons */
   --hex-width: 150px; 
-  --hex-inner-border: 10px;
+  --hex-inner-border: 15px;
   
   /* Other hexagon dimentions */
   --hex-side: calc(var(--hex-width)/2);
-  --hex-height: calc(var(--hex-side)*1.732);
+  --hex-height: calc(var(--hex-side)*1.7320508075688772);
   --hex-tiptotip: calc(var(--hex-side)*3 - var(--hex-inner-border)*0.75);
   --hex-transition: all .2s ease;
 }
@@ -132,7 +132,7 @@ jQuery(function(){
 .hexagon-container {
   display: grid;
   grid-template-columns: var(--hex-tiptotip) var(--hex-tiptotip) var(--hex-tiptotip) var(--hex-tiptotip);
-  grid-auto-rows: calc(var(--hex-height)/2 - var(--hex-inner-border)*0.216);
+  grid-auto-rows: calc(var(--hex-height)/2 - var(--hex-inner-border)*1.7320508075688772/8);
   grid-gap: 0 0;
   font-family: xkcd;
 }
@@ -160,23 +160,39 @@ jQuery(function(){
 
 .hexagon * {
   display: block;
-  width: calc(var(--hex-width) - var(--hex-inner-border));
-  height: calc(var(--hex-height) - var(--hex-inner-border)*1.732/2);
   display: flex;
   justify-content: center;
   align-items: center;
   transition: var(--hex-transition);
   clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
   background-color: white;
+}
+
+.hexagon a {
   text-align: center;
-  line-height: 20px;
-  font-size: 18px;
+  line-height: 18px;
+  font-size: 16px;
   text-decoration: none;
 }
 
 .hexagon *:hover {
   background-color: white !important;
-  font-size: 19px !important;
+  font-size: 18px !important;
+}
+
+.hexagon > * {
+  width: calc(var(--hex-width) - var(--hex-inner-border));
+  height: calc(var(--hex-height) - var(--hex-inner-border)*1.7320508075688772/2);
+}
+
+.hexagon > div > div {
+  width: calc(var(--hex-width) - 1.8*var(--hex-inner-border));
+  height: calc(var(--hex-height) - 1.8*var(--hex-inner-border)*1.7320508075688772/2);
+}
+
+.hexagon > div > div > a {
+  width: calc(var(--hex-width) - 2.1*var(--hex-inner-border));
+  height: calc(var(--hex-height) - 2.1*var(--hex-inner-border)*1.7320508075688772/2);
 }
 </style>
 <ul id="hexmap" class="hexagon-container">
@@ -281,11 +297,17 @@ jQuery(function(){
 </ul>
 <script>
 const tiles = [
-{x:1, y:2, bgcolor:"#ffffff", textcolor:"#990000", bordercolor:"#990000", text:"Getting<br>Started<br>with the<br>SpinWheel", href:"intro"},
-{x:2, y:3, bgcolor:"#ff8888", textcolor:"#990000", bordercolor:"#990000", text:"SpinWheel<br>Initial<br>Setup", href:"intro"},
-{x:2, y:5, bgcolor:"#88ff88", textcolor:"#009900", bordercolor:"#009900", text:"Mixing<br>Color with<br>Light", href:"intro"},
-{x:1, y:6, bgcolor:"#ffffff", textcolor:"#009900", bordercolor:"#009900", text:"Biology of<br>Sight", href:"intro"},
-{x:1, y:7, bgcolor:"#ffffff", textcolor:"#009900", bordercolor:"#009900", text:"Color<br>Theory", href:"intro"},
+{x:1, y:2, bgcolor:"#ffffff", textcolor:"#bf1e2e", bordercolor:"#bf1e2e", inner: true, text:"Getting<br>Started<br>with the<br>SpinWheel", href:"intro"},
+{x:2, y:3, bgcolor:"#f2d2d5", textcolor:"#bf1e2e", bordercolor:"#bf1e2e", inner: true, text:"SpinWheel<br>Initial<br>Setup", href:"quickstart"},
+//light
+{x:2, y:5, bgcolor:"#d0eeec", textcolor:"#13a89e", bordercolor:"#13a89e", inner: true, text:"Mixing<br>Color with<br>Light", href:"#"},
+{x:1, y:6, bgcolor:"#ffffff", textcolor:"#13a89e", bordercolor:"#13a89e", inner: true, text:"Biology of<br>Sight", href:"sight"},
+{x:1, y:7, bgcolor:"#ffffff", textcolor:"#13a89e", bordercolor:"#13a89e", inner: false, text:"Color<br>Theory", href:"colortheory"},
+{x:1, y:5, bgcolor:"#ffffff", textcolor:"#13a89e", bordercolor:"#13a89e", inner: false, text:"Light and<br>Color", href:"lightandcolor"},
+//basic prog
+{x:2, y:4, bgcolor:"#d3eef9", textcolor:"#25aae1", bordercolor:"#25aae1", inner: true, text:"Customizing<br>the SpinWheel&#39;s<br>Display", href:"#"},
+{x:2, y:6, bgcolor:"#d3eef9", textcolor:"#25aae1", bordercolor:"#25aae1", inner: true, text:"Arduino<br>101", href:"#"},
+{x:3, y:5, bgcolor:"#ffffff", textcolor:"#25aae1", bordercolor:"#25aae1", inner: false, text:"Basic<br>Structure<br>of a<br>Program", href:"#"},
 ];
 const hexmap = document.getElementById("hexmap");
 const allhexes = hexmap.getElementsByClassName("hexagon");
@@ -293,7 +315,11 @@ for (const tile of tiles) {
   const hex = allhexes[(tile.x-1)+4*(tile.y-1)];
 
   hex.style["background-color"] = tile.bordercolor;
-  hex.innerHTML = `<a href="${tile.href}" style="color:${tile.textcolor};background-color:${tile.bgcolor}">${tile.text}</a>`;
+  var innerHTML = `<a href="${tile.href}" style="color:${tile.textcolor};background-color:${tile.bgcolor}">${tile.text}</a>`;
+  if (tile.inner==true) {
+    innerHTML = `<div style="background-color:${tile.bgcolor}"><div style="background-color:${tile.bordercolor}">${innerHTML}</div></div>`;
+  }
+  hex.innerHTML = innerHTML;
 }
 </script>
 </main>
