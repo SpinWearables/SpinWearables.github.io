@@ -142,10 +142,12 @@ The code presented on this page can be <a href="./Serial_Rotation.ino">downloade
 <span id="cb1-17"><a href="#cb1-17"></a> <span class="co">// The message will just be the value of the SpinWheel&#39;s</span></span>
 <span id="cb1-18"><a href="#cb1-18"></a> <span class="co">// rotation around the x-axis.</span></span>
 <span id="cb1-19"><a href="#cb1-19"></a> Serial.println(SpinWheel.gx);</span>
-<span id="cb1-20"><a href="#cb1-20"></a> <span class="co">// Wait for 500 milliseconds (half a second) before you </span></span>
-<span id="cb1-21"><a href="#cb1-21"></a> <span class="co">// start the loop function again.</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a> delay(<span class="dv">500</span>); </span>
-<span id="cb1-23"><a href="#cb1-23"></a>}</span></code></pre></div>
+<span id="cb1-20"><a href="#cb1-20"></a> <span class="co">// Wait for 20 milliseconds (i.e. repeat 50 times a second)</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a> <span class="co">// before you start the loop function again.</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a> <span class="co">// This value might be different in some of our paper educational materials.</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a> <span class="co">// Changing it simply makes the sensor more or less responsive.</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a> delay(<span class="dv">20</span>); </span>
+<span id="cb1-25"><a href="#cb1-25"></a>}</span></code></pre></div>
 </div>
 </div>
 </body>

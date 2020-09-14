@@ -32,6 +32,7 @@ prepares the LED to accept new colors.
 void setup() {
   SpinWheel.begin();
 }
+
 ```
 </div>
 <div class="side-text">
@@ -67,11 +68,15 @@ Use an **if statement** to check to see if the rotation is
 large enough. If the rotation is large enough, then 
 we will create a snake-like pattern on the device
 where the motion of the snake is based on the motion 
-of the device.  
+of the device. Experiment with changing the `100` threshold
+value if you want to make the SpinWheel more or less
+sensitive. Keep in mind that `gy` measures rotation around
+the y axis, i.e. spinning in place while hanging the SpinWheel
+by the keyring.
 </div>
 <div class="code">
 ```cpp
-  if (abs(SpinWheel.gx) > 50) {
+  if (abs(SpinWheel.gy) > 100) {
      // Add 10 to make it spin at a reasonable speed.
      // Experiment with this number to change the rate
      // with which the snake spins. Can you make the 

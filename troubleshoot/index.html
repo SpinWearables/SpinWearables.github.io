@@ -49,8 +49,6 @@
 <h1 class="title">Troubleshooting Guide</h1>
 </header>
 <main>
-<link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
-<script src='/simspinwheel/simspinwheel.js'></script>
 <div class="intro-box">
 <p>It can be frustrating when your code doesn’t work or you can’t get the Arduino software to recognize your SpinWheel. We’ve created this page to help you become more comfortable troubleshooting SpinWheel issues.</p>
 </div>
@@ -66,7 +64,8 @@
 <h2 id="arduino-wont-recognize-my-spinwheel">Arduino won’t recognize my SpinWheel</h2>
 <p>If nothing appears in the <code>Tools</code> → <code>Port</code> menu when you plug in the SpinWheel there are a few things to try:</p>
 <ol type="1">
-<li><p>First, unplug the SpinWheel from your computer and then plug it in again. When you do this, make sure that you first close the <code>Tools</code> menu. If you didn’t close it before unplugging it, you will not see a change because it doesn’t automatically refresh itself. When you plug your SpinWheel back in, re-open the <code>Tools</code> menu, navigate to <code>Port</code> and see if you see your port appear.</p></li>
+<li><p>First, ensure the switch on the back of the device is set to “USB”, otherwise the device will not be reliably powered (it might be relying on a depleated battery instead of the plentiful power delivery from the USB cable).</p></li>
+<li><p>Unplug the SpinWheel from your computer and then plug it in again. When you do this, make sure that you first close the <code>Tools</code> menu. If you didn’t close it before unplugging it, you will not see a change because it doesn’t automatically refresh itself. When you plug your SpinWheel back in, re-open the <code>Tools</code> menu, navigate to <code>Port</code> and see if you see your port appear.</p></li>
 <li><p>If this doesn’t work, try closing and re-opening the Arduino software. Occasionally this will clear up the problem.</p></li>
 <li><p>If neither of the first two solutions works, your micro USB cable is likely the problem. Do you have another cable you can try? If so, first try your new cable. While most cables are able to communicate with the SpinWheel, some manufacturers have stopped including the extra wires necessary for passing information in their micro USB cables to cut costs (particularly if the cable is only meant to be used for charging). We have had better luck with older cables and those from Kindles: cables that were intended to be used to transfer information and not just for charging.</p></li>
 </ol>
@@ -77,20 +76,24 @@
 </figure>
 <p>Error messages will appear at the bottom of the window with your sketch when you upload it onto the device. You only will be able to see part of the error message with the default layout of the window, but you can resize it to read the full message. We include some example errors below to help with troubleshooting.</p>
 <ol type="1">
-<li><p>First make sure you have the proper board selected. This error message <code>avrdude: ser_open(): can't open device "/dev/cu.usbmodem142101": No such file or directory</code> indicates that you likely need to change which board you chose to the Arduino Leonardo. To fix this, navigate to <code>Tools → Board:</code> and click on <code>Arduino Leonardo</code>.</p></li>
+<li><p>As always, ensure the switch is set to “USB”, otherwise a depleated battery might be cause inconsistent behavior.</p></li>
+<li><p>Try to only “compile” the code, but not upload it. To do this, click on the checkmark “Verify” button (to the left of the arrow “Upload” button). If there is a problem at this step, it means there is a problem with the code and supporting software. If the problem only appears when you click the upload button, it means the problem is in communicating with the SpinWheel.</p></li>
+<li><p>No matter what the error message is, it is worthwhile to retry once or twice, in case of intermitten errors due to poor cable connections.</p></li>
+<li><p>Make sure you have the proper board selected. This error message <code>avrdude: ser_open(): can't open device "/dev/cu.usbmodem...": No such file or directory</code> indicates that you likely need to change which board you chose to the Arduino Leonardo. To fix this, navigate to <code>Tools → Board:</code> and click on <code>Arduino Leonardo</code>.</p></li>
 <li><p>If instead you have the message <code>avrdude: butterfly_recv(): programmer is not responding</code> repeating itself, then you haven’t picked the right port. See the above section “Arduino won’t recognize my SpinWheel” for more help.</p></li>
-<li><p>If you have an error like <code>In file included from [file location] fatal error: Adafruit_NeoPixel.h: No such file or directory #include "Adafruit_NeoPixel.h"</code>, then you likely need to install the SpinWearables library. If you don’t remember doing this, then you can install it using <code>Sketch → Include Library → Manage Libraries...</code>. In the search bar of the Library Manager, search for <code>SpinWearables</code> and then click <code>Install</code>. If you navigate to the libraries installer and you search for <code>SpinWearables</code> and see the word “Installed” next to the library name, your library is already included.</p></li>
+<li><p>If you have an error like <code>In file included from [file location] fatal error: Adafruit_NeoPixel.h: No such file or directory #include "Adafruit_NeoPixel.h"</code>, then you likely need to install the SpinWearables library <em>and its dependencies</em>. This might be the <code>Adafruit_NeoPixel</code> library from the example above, or it might be another one. If you don’t remember installing, then you can install them using <code>Sketch → Include Library → Manage Libraries...</code>. In the search bar of the Library Manager, search for <code>SpinWearables</code> and then click <code>Install</code> and also confirm that you want the dependency libraries to be installed as well. If you navigate to the libraries installer and you search for <code>SpinWearables</code> and see the word “Installed” next to the library name, your library is already included.</p></li>
 <li><p>If you have done all of these things, you can try unplugging your SpinWheel and plugging it back in again or try restarting the Arduino software. These steps will clear issues up from time to time.</p></li>
 </ol>
-<p>If your code won’t upload but you have you installed other scripts to your SpinWheel successfully in the past:</p>
+<p>If your code won’t upload but you have installed other sketches to your SpinWheel successfully in the past:</p>
 <ol type="1">
 <li><p>Try uploading another Example SpinWheel sketch from <code>File</code> → <code>Examples</code>. If this doesn’t work, try the above recommendations to make sure you have the right board and port selected and to ensure that you have the necessary libraries installed.</p></li>
-<li><p>If other sketches work, then it is likely because of a modification that was made to the sketch you are trying to upload. Keep reading the section on “I’ve tried writing my own sketch, but it doesn’t work…” or the specific section for the adventure you are working on to get some more troubleshooting ideas.</p></li>
+<li><p>If other sketches work, then it is likely the problem is due to a modification that was made to the sketch you are trying to upload. Keep reading the section on “I’ve tried writing my own sketch, but it doesn’t work…” or the specific section for the adventure you are working on to get some more troubleshooting ideas.</p></li>
 </ol>
 <h2 id="ive-tried-writing-my-own-sketch-but-it-doesnt-work">I’ve tried writing my own sketch, but it doesn’t work …</h2>
 <p>When you begin to write your own code or modify the existing sketches, troubleshooting becomes more challenging. Everyone gets stuck at times when writing new code. This can be very frustrating, particularly when you are new to a programming language. However, as you write more code, you will become more comfortable with this troubleshooting process. To help you as you do this, here are some suggestions:</p>
 <ol type="1">
-<li><p>First make sure that you have the important setup information for each script that we presented in the <a href="/basics">Basic Structure of a Program lesson</a>.</p></li>
+<li><p>As always, ensure the switch is set to “USB”, otherwise a depleated battery might be cause inconsistent behavior.</p></li>
+<li><p>Make sure that you have the important setup information for each script that we presented in the <a href="/basics">Basic Structure of a Program lesson</a>.</p></li>
 <li><p>Is the error that you no longer have the right port or board selected? This is easy to forget to check, but will lead your code to fail. See above for more information.</p></li>
 <li><p>You may find it helpful to look at your code line-by-line and make sure you are not missing any important pieces. For instance, maybe you are missing a semicolon or forgot to close a parenthesis.</p></li>
 <li><p>Try breaking up the task in your code into simpler parts and testing each one individually. This will help you find the problem and be more likely to fix it. For example, if you are asking your SpinWheel to perform three tasks, try “commenting out” the second and third tasks (by adding <code>\\</code> at the beginning of the line) and making sure the first task works. Then do this for the second and third to try to isolate the problem.</p></li>

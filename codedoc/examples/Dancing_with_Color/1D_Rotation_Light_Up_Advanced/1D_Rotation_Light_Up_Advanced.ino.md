@@ -86,7 +86,7 @@ instruction. Feel free to play around with this number.
 </div>
 <div class="code">
 ```cpp
-  if (SpinWheel.gx > 50) {
+  if (SpinWheel.gx > 100) {
     pos_spin = 255;
     neg_spin = 0;
   }
@@ -101,7 +101,7 @@ then we will follow the given instruction.
 </div>
 <div class="code">
 ```cpp
-  else if (SpinWheel.gx < -50) {
+  else if (SpinWheel.gx < -100) {
     neg_spin = 255;
     pos_spin = 0;
   }

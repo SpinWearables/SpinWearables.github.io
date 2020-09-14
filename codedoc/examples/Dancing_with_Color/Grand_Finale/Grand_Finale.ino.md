@@ -76,7 +76,7 @@ First, we can add a "motion_snake" like in the previous sketch.
 </div>
 <div class="code">
 ```cpp
-  if (abs(SpinWheel.gx) > 50) {
+  if (abs(SpinWheel.gy) > 50) {
      // add 10 to make it spin at a reasonable speed
      angle = angle+10;
      SpinWheel.setSmallLEDsPointer(angle, 255, 255, 255);

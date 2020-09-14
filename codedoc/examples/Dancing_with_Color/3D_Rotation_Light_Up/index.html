@@ -180,7 +180,7 @@ LED. These variables will hold information telling the SpinWheel whether or not 
 <p>Here we will also use if statements. In this case if the rotation in the <strong>x direction</strong> is large, then we will change the value of the <code>red</code> variable. Later, this will be used to turn red component of <strong>each</strong> LED on.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">50</span>) {</span>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">100</span>) {</span>
 <span id="cb8-2"><a href="#cb8-2"></a>    red = <span class="dv">255</span>;</span>
 <span id="cb8-3"><a href="#cb8-3"></a>  }</span></code></pre></div>
 </div>
@@ -189,7 +189,7 @@ LED. These variables will hold information telling the SpinWheel whether or not 
 <strong>y direction</strong> is large, then we will change the value of the <code>green</code> variable. Later this will be use to turn the green component of <strong>each</strong> LED on.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gy) &gt; <span class="dv">50</span>) {</span>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gy) &gt; <span class="dv">100</span>) {</span>
 <span id="cb9-2"><a href="#cb9-2"></a>    green = <span class="dv">255</span>;</span>
 <span id="cb9-3"><a href="#cb9-3"></a>  }</span></code></pre></div>
 </div>
@@ -197,7 +197,7 @@ LED. These variables will hold information telling the SpinWheel whether or not 
 <p>Also, if the rotation in the <strong>z-direction</strong> is large, then we will change the value of the <code>blue</code> variable. Later this will be used to turn the blue component of <strong>each</strong> LED on.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gz) &gt; <span class="dv">50</span>)  {</span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gz) &gt; <span class="dv">100</span>)  {</span>
 <span id="cb10-2"><a href="#cb10-2"></a>    blue = <span class="dv">255</span>;</span>
 <span id="cb10-3"><a href="#cb10-3"></a>  }</span></code></pre></div>
 </div>

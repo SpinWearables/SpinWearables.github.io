@@ -166,10 +166,10 @@ The code presented on this page can be <a href="./Motion_Snake.ino">downloaded</
 <div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a>  SpinWheel.readIMU();</span></code></pre></div>
 </div>
 <div class="side-text">
-<p>Use an <strong>if statement</strong> to check to see if the rotation is large enough. If the rotation is large enough, then we will create a snake-like pattern on the device where the motion of the snake is based on the motion of the device.</p>
+<p>Use an <strong>if statement</strong> to check to see if the rotation is large enough. If the rotation is large enough, then we will create a snake-like pattern on the device where the motion of the snake is based on the motion of the device. Experiment with changing the <code>100</code> threshold value if you want to make the SpinWheel more or less sensitive. Keep in mind that <code>gy</code> measures rotation around the y axis, i.e. spinning in place while hanging the SpinWheel by the keyring.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">50</span>) {</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gy) &gt; <span class="dv">100</span>) {</span>
 <span id="cb7-2"><a href="#cb7-2"></a>     <span class="co">// Add 10 to make it spin at a reasonable speed.</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a>     <span class="co">// Experiment with this number to change the rate</span></span>
 <span id="cb7-4"><a href="#cb7-4"></a>     <span class="co">// with which the snake spins. Can you make the </span></span>
