@@ -115,7 +115,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 <main>
 <div class="intro-box">
-<p>This page will introduce you to many of the typical building blocks programmers use to write code. If this is your first time thinking about computer code, it would be helpful to also consult the <a href="/basics">mini-reference on the particular programming style for the SpinWheel</a>.</p>
+<p>This page will introduce you to many of the typical building blocks programmers use to write code. If this is your first time thinking about computer code, it would be helpful to also consult the <a href="/basics">Basic Structure of a Program lesson</a>, which is a mini-reference on the SpinWheel’s programming style.</p>
 </div>
 <p>Writing a computer program of your own, whether a desktop app, an interactive website, or the hidden brain of a robot, starts by writing a sequence of instructions in one of the many available computer languages. In this lesson, we will use a very popular older language that runs well on simple computers like the SpinWheel’s microcontroller. The name of this language is <code>C++</code>. While <code>C++</code> has a specific set of commands and rules used to write computer programs, the main ideas are common to other programming languages. In fact, the vast majority of computer languages share the same patterns, just like how many human languages share ideas such as the distinction between a noun and a verb, or the difference between a word and a sentence. We will describe the most important such patterns in this chapter.</p>
 <h2 id="variables">Variables</h2>
@@ -209,7 +209,7 @@ In this diagram, you can see the order in which the computer evaluates this piec
 <h2 id="putting-it-all-together">Putting it all together</h2>
 <p>After we have created all the variables and functions we need for our code to do what we want it to do, we need to actually start the program. To do this, the program needs to know what function to run first. In different languages this is done differently. In our particular case, we do it by defining two special functions: <code>setup</code> and <code>loop</code>. Our computer is instructed to run these functions first. It finds the <code>setup</code> function and runs it before anything else. Usually this function is used to <strong>set up</strong> any settings we need in advance. Then the computer repeatedly runs the <code>loop</code> function, which is named this way because it <strong>runs in a loop</strong> (or repeats itself).</p>
 <div class="further-reading">
-<p>To learn more about the <code>setup</code> and <code>loop</code> functions, check out <a href="/basics">the basic structure of a program</a> page.</p>
+<p>To learn more about the <code>setup</code> and <code>loop</code> functions, check out <a href="/basics">the Basic Structure of a Program</a> lesson.</p>
 </div>
 <p>Here is a large example that includes all these features. It will use the <code>Serial.println()</code> function in order to send messages to the computer. Use the <code>Serial Monitor</code> tool in the Arduino software in order to see these messages being sent back over the USB cable (<code>Tools → Serial Monitor</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">// Here we define a convenient pausing function</span></span>
@@ -245,7 +245,7 @@ In this diagram, you can see the order in which the computer evaluates this piec
 <span id="cb12-31"><a href="#cb12-31"></a>  delay_seconds(<span class="dv">1</span>);</span>
 <span id="cb12-32"><a href="#cb12-32"></a>}</span></code></pre></div>
 <div class="further-reading">
-<p>We provide more information about the <code>Serial Monitor</code> in our <a href="/arduino101">intro to the Arduino software</a> page. The Arduino community also has very detailed resources on the programming language that we are using. You can start with their <a href="https://www.arduino.cc/en/Tutorial/Foundations">tutorial</a> for instance.</p>
+<p>We provide more information about the <code>Serial Monitor</code> in our <a href="/arduino101">intro to the Arduino Software</a> page. The Arduino community also has very detailed resources on the programming language that we are using. You can start with their <a href="https://www.arduino.cc/en/Tutorial/Foundations">tutorial</a> for instance.</p>
 </div>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"

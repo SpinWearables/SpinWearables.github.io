@@ -86,7 +86,7 @@
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
 <script src='/simspinwheel/simspinwheel.js'></script>
 <div class="intro-box">
-<p>This document lists some of the most important functions available with the SpinWheel code library. With these functions you can detect motion and set the LEDs to different color patterns. If you have never programmed with Arduino before, be sure to read our <a href="/quickstart">initial setup guide</a> and <a href="/basics">guide on the basic structure of a program</a>. To learn more about the building blocks of coding, check out the <a href="/progpatterns">coding building blocks page</a>. For more details, you can consult the <a href="/codedoc/SpinWearables.h.html">annotated source code</a>, listing everything available in the library. This will serve as a reference as you code the SpinWheel in whatever designs you imagine.</p>
+<p>This document lists some of the most important functions available with the SpinWheel code library. With these functions you can detect motion and set the LEDs to different color patterns. If you have never programmed with Arduino before, be sure to read our <a href="/quickstart">Initial Setup Guide</a> and <a href="/basics">guide on the basic structure of a program</a>. To learn more about the building blocks of coding, check out the <a href="/progpatterns">coding building blocks page</a>. For more details, you can consult the <a href="/codedoc/SpinWearables.h.html">annotated source code</a>, listing everything available in the library. This will serve as a reference as you code the SpinWheel in whatever designs you imagine.</p>
 </div>
 <p>You can use the virtual SpinWheel simulator to test each of these functions. If a function involves the motion sensor, you can grab the virtual device with your mouse and shake it, simulating how the physical sensor would respond to real motion.</p>
 <h2 id="led-manipulation">LED Manipulation</h2>
@@ -264,7 +264,7 @@ void loop() {
 <!--The `faston_slowoff` function can be used to pleasantly filter time-dependent measurements. For instance, it can be used to rapidly brighten an LED when a motion is detected and then slowly let the light decay after the motion stops.-->
 <h2 id="motion-sensing-and-compass-with-readimu">Motion Sensing and Compass with <code>readIMU</code></h2>
 <p>To request measurements from the sensor you need to call <code>readIMU</code>. Then the measurement data will be available in <code>ax,ay,az,gx,gy,gz,mx,my,mz</code>. The acceleration along the three axes <code>ax, ay, az</code> is measured in units of <span class="math inline">\(g\)</span>, i.e. the <a href="https://en.wikipedia.org/wiki/Standard_gravity">standard gravitational acceleration at Earth’s surface</a>. The angular velocity components <code>gx, gy, gz</code> is measured in units of degrees per second. Lastly, the magnetic field <code>mx, my, mz</code> is measured in units of μT. There is also a temperature sensor, but we do not yet provide direct access to it.</p>
-<p>The <a href="\dancing">dancing with color adventure</a> gives ideas of how the sensor can be used.</p>
+<p>The <a href="\dancing">Dancing with Color adventure</a> gives ideas of how the sensor can be used.</p>
 <figure>
 <img src="/images/bookpics/dance_axis.png" alt="" /><figcaption>The axes orientations of the SpinWheel motion sensor. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
 </figure>

@@ -376,8 +376,7 @@ The code presented on this page can be <a href="./SpinWearables.h">downloaded</a
 <div class="code">
 <div class="sourceCode" id="cb25"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1"></a>    ICM_20948_I2C IMU;</span>
 <span id="cb25-2"><a href="#cb25-2"></a>    <span class="dt">float</span> ax, ay, az, gx, gy, gz, mx, my, mz;</span>
-<span id="cb25-3"><a href="#cb25-3"></a>    <span class="dt">int8_t</span> ax_int, ay_int, az_int, gx_int, gy_int, gz_int, mx_int, my_int, mz_int;</span>
-<span id="cb25-4"><a href="#cb25-4"></a>    <span class="dt">int32_t</span> taxsmooth, taysmooth, tazsmooth, tgxsmooth, tgysmooth, tgzsmooth, tmxsmooth, tmysmooth, tmzsmooth;</span></code></pre></div>
+<span id="cb25-3"><a href="#cb25-3"></a>    <span class="dt">int32_t</span> taxsmooth, taysmooth, tazsmooth, tgxsmooth, tgysmooth, tgzsmooth, tmxsmooth, tmysmooth, tmzsmooth;</span></code></pre></div>
 </div>
 <section id="and-the-list-of-animations-and-the-currently-running-animation-is-stored-here." class="side-text">
 <h3>And the list of animations and the currently running animation is stored here.</h3>
@@ -482,15 +481,15 @@ x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> i
 <span id="cb36-7"><a href="#cb36-7"></a>        tmxsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.mag.axes.x)*FILTER_A + tmxsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
 <span id="cb36-8"><a href="#cb36-8"></a>        tmysmooth = (((<span class="dt">int32_t</span>)IMU.agmt.mag.axes.y)*FILTER_A + tmysmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
 <span id="cb36-9"><a href="#cb36-9"></a>        tmzsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.mag.axes.z)*FILTER_A + tmzsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
-<span id="cb36-10"><a href="#cb36-10"></a>        ax =  taxsmooth / <span class="fl">16384.</span>; <span class="co">// Units of 1g because the range is +/-2g at +/-2**15</span></span>
-<span id="cb36-11"><a href="#cb36-11"></a>        ay = -taysmooth / <span class="fl">16384.</span>;</span>
-<span id="cb36-12"><a href="#cb36-12"></a>        az = -tazsmooth / <span class="fl">16384.</span>;</span>
-<span id="cb36-13"><a href="#cb36-13"></a>        gx =  tgxsmooth / <span class="fl">131.07</span>; <span class="co">// Units of dps because the range is +/-250dps at +/-2**15</span></span>
-<span id="cb36-14"><a href="#cb36-14"></a>        gy = -tgysmooth / <span class="fl">131.07</span>; <span class="co">// 131.072 = 2**15/250</span></span>
-<span id="cb36-15"><a href="#cb36-15"></a>        gz = -tgzsmooth / <span class="fl">131.07</span>;</span>
-<span id="cb36-16"><a href="#cb36-16"></a>        mx =  tmxsmooth / <span class="fl">6.6873</span>; <span class="co">// Units of because the range is 4900uT at +/-2**15</span></span>
-<span id="cb36-17"><a href="#cb36-17"></a>        my =  tmysmooth / <span class="fl">6.6873</span>; <span class="co">// 6.68734 = 2**15/4900</span></span>
-<span id="cb36-18"><a href="#cb36-18"></a>        mz =  tmzsmooth / <span class="fl">6.6873</span>;</span>
+<span id="cb36-10"><a href="#cb36-10"></a>        ax = -taxsmooth / <span class="fl">16384.</span>; <span class="co">// Units of 1g because the range is +/-2g at +/-2**15</span></span>
+<span id="cb36-11"><a href="#cb36-11"></a>        ay =  taysmooth / <span class="fl">16384.</span>;</span>
+<span id="cb36-12"><a href="#cb36-12"></a>        az =  tazsmooth / <span class="fl">16384.</span>;</span>
+<span id="cb36-13"><a href="#cb36-13"></a>        gx = -tgxsmooth / <span class="fl">131.07</span>; <span class="co">// Units of dps because the range is +/-250dps at +/-2**15</span></span>
+<span id="cb36-14"><a href="#cb36-14"></a>        gy =  tgysmooth / <span class="fl">131.07</span>; <span class="co">// 131.072 = 2**15/250</span></span>
+<span id="cb36-15"><a href="#cb36-15"></a>        gz =  tgzsmooth / <span class="fl">131.07</span>;</span>
+<span id="cb36-16"><a href="#cb36-16"></a>        mx = -tmxsmooth / <span class="fl">6.6873</span>; <span class="co">// Units of because the range is 4900uT at +/-2**15</span></span>
+<span id="cb36-17"><a href="#cb36-17"></a>        my = -tmysmooth / <span class="fl">6.6873</span>; <span class="co">// 6.68734 = 2**15/4900</span></span>
+<span id="cb36-18"><a href="#cb36-18"></a>        mz = -tmzsmooth / <span class="fl">6.6873</span>;</span>
 <span id="cb36-19"><a href="#cb36-19"></a>    </span>
 <span id="cb36-20"><a href="#cb36-20"></a>      }</span>
 <span id="cb36-21"><a href="#cb36-21"></a>    }</span></code></pre></div>
@@ -726,13 +725,13 @@ x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> i
 </section>
 <div class="code">
 <div class="sourceCode" id="cb43"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb43-1"><a href="#cb43-1"></a><span class="dt">void</span> tiltSensor() {</span>
-<span id="cb43-2"><a href="#cb43-2"></a>  <span class="dt">int8_t</span> x = SpinWheel.ax_int;  </span>
-<span id="cb43-3"><a href="#cb43-3"></a>  <span class="dt">int8_t</span> y = SpinWheel.ay_int;</span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
+<span id="cb43-3"><a href="#cb43-3"></a>  <span class="dt">int</span> y = SpinWheel.ay*<span class="dv">255</span>;</span>
 <span id="cb43-4"><a href="#cb43-4"></a>  SpinWheel.clearLargeLEDs();</span>
 <span id="cb43-5"><a href="#cb43-5"></a>  <span class="cf">if</span> (x&gt;<span class="dv">0</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x,<span class="dv">0</span>,x);</span>
 <span id="cb43-6"><a href="#cb43-6"></a>  <span class="cf">else</span> SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x,<span class="dv">0</span>,-x);</span>
-<span id="cb43-7"><a href="#cb43-7"></a>  <span class="cf">if</span> (y&gt;<span class="dv">0</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,y,<span class="dv">0</span>,y);</span>
-<span id="cb43-8"><a href="#cb43-8"></a>  <span class="cf">else</span> SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,-y,<span class="dv">0</span>,-y);</span>
+<span id="cb43-7"><a href="#cb43-7"></a>  <span class="cf">if</span> (y&gt;<span class="dv">0</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,y,<span class="dv">0</span>,y);</span>
+<span id="cb43-8"><a href="#cb43-8"></a>  <span class="cf">else</span> SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,-y,<span class="dv">0</span>,-y);</span>
 <span id="cb43-9"><a href="#cb43-9"></a>}</span></code></pre></div>
 </div>
 <section id="compass" class="side-text">
@@ -741,8 +740,8 @@ x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> i
 </section>
 <div class="code">
 <div class="sourceCode" id="cb44"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb44-1"><a href="#cb44-1"></a><span class="dt">void</span> compass() {</span>
-<span id="cb44-2"><a href="#cb44-2"></a>  <span class="dt">int8_t</span> x = SpinWheel.ax_int;  </span>
-<span id="cb44-3"><a href="#cb44-3"></a>  <span class="dt">int8_t</span> y = SpinWheel.ay_int;</span>
+<span id="cb44-2"><a href="#cb44-2"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
+<span id="cb44-3"><a href="#cb44-3"></a>  <span class="dt">int</span> y = SpinWheel.ay*<span class="dv">255</span>;</span>
 <span id="cb44-4"><a href="#cb44-4"></a>  SpinWheel.clearLargeLEDs();</span>
 <span id="cb44-5"><a href="#cb44-5"></a>  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
 <span id="cb44-6"><a href="#cb44-6"></a>  <span class="cf">else</span> <span class="cf">if</span> (x&lt;-<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
@@ -750,13 +749,13 @@ x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> i
 <span id="cb44-8"><a href="#cb44-8"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(x));</span>
 <span id="cb44-9"><a href="#cb44-9"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(x));</span>
 <span id="cb44-10"><a href="#cb44-10"></a>  }</span>
-<span id="cb44-11"><a href="#cb44-11"></a>  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
-<span id="cb44-12"><a href="#cb44-12"></a>  <span class="cf">else</span> <span class="cf">if</span> (y&lt;-<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
+<span id="cb44-11"><a href="#cb44-11"></a>  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
+<span id="cb44-12"><a href="#cb44-12"></a>  <span class="cf">else</span> <span class="cf">if</span> (y&lt;-<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
 <span id="cb44-13"><a href="#cb44-13"></a>  <span class="cf">else</span> {</span>
 <span id="cb44-14"><a href="#cb44-14"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(y));</span>
 <span id="cb44-15"><a href="#cb44-15"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(y));</span>
 <span id="cb44-16"><a href="#cb44-16"></a>  }</span>
-<span id="cb44-17"><a href="#cb44-17"></a>  <span class="dt">uint8_t</span> angle = (atan2(SpinWheel.my_int, SpinWheel.mx_int)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
+<span id="cb44-17"><a href="#cb44-17"></a>  <span class="dt">uint8_t</span> angle = (-atan2(SpinWheel.my, SpinWheel.mx)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
 <span id="cb44-18"><a href="#cb44-18"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
 <span id="cb44-19"><a href="#cb44-19"></a>}</span></code></pre></div>
 </div>
@@ -766,7 +765,7 @@ x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> i
 </section>
 <div class="code">
 <div class="sourceCode" id="cb45"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb45-1"><a href="#cb45-1"></a><span class="dt">void</span> tiltSensor2() {</span>
-<span id="cb45-2"><a href="#cb45-2"></a>  <span class="dt">uint8_t</span> angle = (atan2(SpinWheel.ay_int, SpinWheel.ax_int)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
+<span id="cb45-2"><a href="#cb45-2"></a>  <span class="dt">uint8_t</span> angle = (-atan2(SpinWheel.ay, SpinWheel.ax)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
 <span id="cb45-3"><a href="#cb45-3"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
 <span id="cb45-4"><a href="#cb45-4"></a>}</span></code></pre></div>
 </div>
@@ -776,8 +775,8 @@ x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> i
 </section>
 <div class="code">
 <div class="sourceCode" id="cb46"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb46-1"><a href="#cb46-1"></a><span class="dt">void</span> tiltSensor3() {</span>
-<span id="cb46-2"><a href="#cb46-2"></a>  <span class="dt">int8_t</span> x = SpinWheel.ax_int;  </span>
-<span id="cb46-3"><a href="#cb46-3"></a>  <span class="dt">int8_t</span> y = SpinWheel.ay_int;</span>
+<span id="cb46-2"><a href="#cb46-2"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
+<span id="cb46-3"><a href="#cb46-3"></a>  <span class="dt">int</span> y = SpinWheel.ay*<span class="dv">255</span>;</span>
 <span id="cb46-4"><a href="#cb46-4"></a>  SpinWheel.setLargeLEDsUniform(<span class="bn">0xffffff</span>);</span>
 <span id="cb46-5"><a href="#cb46-5"></a>  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) {</span>
 <span id="cb46-6"><a href="#cb46-6"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,x-<span class="dv">8</span>);</span>
@@ -788,14 +787,14 @@ x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> i
 <span id="cb46-11"><a href="#cb46-11"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">1</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,-x+<span class="dv">8</span>);</span>
 <span id="cb46-12"><a href="#cb46-12"></a>  }</span>
 <span id="cb46-13"><a href="#cb46-13"></a>  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) {</span>
-<span id="cb46-14"><a href="#cb46-14"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
-<span id="cb46-15"><a href="#cb46-15"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">0</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
+<span id="cb46-14"><a href="#cb46-14"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
+<span id="cb46-15"><a href="#cb46-15"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">2</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
 <span id="cb46-16"><a href="#cb46-16"></a>  }</span>
 <span id="cb46-17"><a href="#cb46-17"></a>  <span class="cf">else</span> <span class="cf">if</span> (y&lt;-<span class="dv">10</span>) {</span>
-<span id="cb46-18"><a href="#cb46-18"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
-<span id="cb46-19"><a href="#cb46-19"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">2</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
+<span id="cb46-18"><a href="#cb46-18"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
+<span id="cb46-19"><a href="#cb46-19"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">0</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
 <span id="cb46-20"><a href="#cb46-20"></a>  }</span>
-<span id="cb46-21"><a href="#cb46-21"></a>  <span class="dt">uint8_t</span> angle = (atan2(SpinWheel.ay_int, SpinWheel.ax_int)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
+<span id="cb46-21"><a href="#cb46-21"></a>  <span class="dt">uint8_t</span> angle = (-atan2(SpinWheel.ay, SpinWheel.ax)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
 <span id="cb46-22"><a href="#cb46-22"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
 <span id="cb46-23"><a href="#cb46-23"></a>}</span></code></pre></div>
 </div>

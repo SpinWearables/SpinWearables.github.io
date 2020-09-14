@@ -12,7 +12,7 @@
   <meta property="og:image" content="https://spinwearables.com/hanging.jpg" />
   <link rel="image_src" href="https://spinwearables.com/hanging.jpg" />
   <meta name="keywords" content="animations, frames, timing" />
-  <title>Animations and patterns</title>
+  <title>Animations and Patterns</title>
   <style>
   </style>
   <link rel="stylesheet" href="/custom.css" />
@@ -46,7 +46,7 @@
  | 
 <a href="/book">The Field Guide</a>
 </div>
-<h1 class="title">Animations and patterns</h1>
+<h1 class="title">Animations and Patterns</h1>
 </header>
 <main>
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
@@ -60,9 +60,9 @@
 <div class="warning">
 <p>If you haven’t already done the <a href="/animation">Intro to Animation</a> adventure, we recommend looking it over before starting this lesson.</p>
 </div>
-<p>There is a whole universe of patterns you can create with the SpinWheel: simply grab a piece of paper, draw the pattern you desire, and translate it into an expression of code and math that implements it. However, that much freedom can be daunting at first. Here we will start by modifying the animation that you created in the <a href="/animation">intro adventure on animation</a>. Then we will present some additional sketches that allow you to create animations with changing colors and where you can control each LED separately. We invite you upload these sketches from <code>Examples → SpinWearables → Animations_and_Patterns</code> to see what they do on your SpinWheel and then experiment with modifying them.</p>
+<p>There is a whole universe of patterns you can create with the SpinWheel: simply grab a piece of paper, draw the pattern you desire, and translate it into an expression of code and math that implements it. However, that much freedom can be daunting at first. Here we will start by modifying the animation that you created in the <a href="/animation">Intro to Animation adventure</a>. Then we will present some additional sketches that allow you to create animations with changing colors and where you can control each LED separately. We invite you upload these sketches from <code>Examples → SpinWearables → Animations_and_Patterns</code> to see what they do on your SpinWheel and then experiment with modifying them.</p>
 <h3 id="smoother-pulsing">Smoother pulsing</h3>
-<p>You may have noticed that the brightness of the LEDs in the <a href="/codedoc/examples/Animations_and_Patterns/Simple_Blink">sketch we present in the intro to animation</a> was abruptly cut off. Wouldn’t it be prettier if we gently turned off the LEDs, similarly to how gently we are ramping them up? We can implement this by writing a function that first goes up and then slowly goes back down. We have already written such a function for you to use and called it <a href="/codedoc/SpinWearables.h.html#triangular-wave"><code>triangularWave</code></a>, because when you plot it, it looks like a series of triangles.</p>
+<p>You may have noticed that the brightness of the LEDs in the <a href="/codedoc/examples/Animations_and_Patterns/Simple_Blink">sketch we present in the Intro to Animation adventure</a> was abruptly cut off. Wouldn’t it be prettier if we gently turned off the LEDs, similarly to how gently we are ramping them up? We can implement this by writing a function that first goes up and then slowly goes back down. We have already written such a function for you to use and called it <a href="/codedoc/SpinWearables.h.html#triangular-wave"><code>triangularWave</code></a>, because when you plot it, it looks like a series of triangles.</p>
 <figure>
 <video src="/images/bookpics/triangular_wave.mp4" muted autoplay playsinline loop>
 </video>
@@ -90,7 +90,7 @@ void loop() {
 </pre>
 </div>
 <div class="further-reading">
-<p>If you want to learn more about controlling the SpinWheel’s LEDs, then try out our <a href="/sight">Biology of Sight</a> Adventure. The <a href="/colortheory">color theory</a> lesson provides more information about why we can use red, green, and blue LEDs to represent all the colors of the rainbow.</p>
+<p>If you want to learn more about controlling the SpinWheel’s LEDs, then try out our <a href="/sight">Biology of Sight</a> adventure. The <a href="/colortheory">Color Theory</a> lesson provides more information about why we can use red, green, and blue LEDs to represent all the colors of the rainbow.</p>
 </div>
 <h3 id="the-color-wheel">The color wheel</h3>
 <p>Up until now we have discussed how to turn a time-dependent number into a brightness. However, instead of having time-dependent intensity of light, we might be more interested in a time-dependent hue. One particularly lovely way to achieve this is to use a color wheel, where we assign a color to each point of a circle, and use it as a reference when turning numbers into colors. We provide you with a function, <code>colorWheel()</code>, that converts the numbers between 0 and 255 to a color as seen in the image below. For each input number, the appropriate red, blue and green components of a color from the colorWheel are calculated and used to color our LED lights.</p>
@@ -117,7 +117,7 @@ void loop() {
 <p>Lastly, we would like to have a pattern that illuminates different LEDs differently. To set the color of all of the larger LEDs to a single uniform color, we have already seen that we need to use <code>SpinWheel.setLargeLEDsUniform(r,g,b)</code>, where <code>r</code>, <code>g</code>, and <code>b</code> are the red, green, and blue components of the color we desire. They need to be between 0 (turned off) and 255 (maximum intensity). To do the same to the smaller LEDs, we can use <code>SpinWheel.setSmallLEDsUniform(r,g,b)</code>.</p>
 <p>If we want to illuminate a single large LED (numbered from 0 to 7), we can use <code>SpinWheel.setLargeLED(i,r,g,b)</code>, where the first argument <code>i</code> is the number of the LED we want to change. Similarly, we use <code>SpinWheel.setSmallLED(i,r,g,b)</code> to do the same for the smaller LEDs.</p>
 <div class="further-reading">
-<p>For a refresher on how to control individual LEDs and a reminder of the number that corresponds to each LED, you can refer back to our <a href="/basics">basic structure of a program guide</a>.</p>
+<p>For a refresher on how to control individual LEDs and a reminder of the number that corresponds to each LED, you can refer back to our <a href="/basics">Basic Structure of a Program lesson</a>.</p>
 </div>
 <p>By accessing individual LEDs, we can create an interesting time-dependent pattern where different LEDs show different colors and intensities. Consider this case, in which only two of the LEDs (number 0 and number 2) are enabled, but with different patterns.</p>
 <div class="ssw-codecontent" data-markdown="0">
@@ -165,7 +165,7 @@ void loop() {
 <p>This code is <a href="/codedoc/examples/Animations_and_Patterns/Rainbow_Chase">in the <code>Rainbow_Chase</code> example</a>.</p>
 <p>You now have the tools you need to control each LED of the SpinWheel and create a time dependent color or brightness. Use these sketches and the building blocks introduced in them to create new and exciting patterns on your SpinWheel! We have created a <a href="/allcommands">reference</a> with the various commands (like <code>setLargeLED()</code> and <code>setSmallLEDsUniform()</code>), that we introduced above, as well as some new ones for programming the SpinWheel in even more ways. As you try out the other adventures and begin to program the SpinWheel for yourself, we hope that you will find these functions useful. These functions also have virtual SpinWheels embedded in the page to allow you to experiment with the code and see how they work more easily!</p>
 <div class="further-reading">
-<p>If you are interested in learning more about mixing of colors with LEDs and how the human eye works, then check out our <a href="/sight">adventure on the biology of the human eye</a>. You can also delve deeper into <a href="/progpatterns">the tools that this programming language provides</a>, which could enable you to write more sophisticated programs and patterns.</p>
+<p>If you are interested in learning more about mixing of colors with LEDs and how the human eye works, then check out our <a href="/sight">Biology of Sight adventure</a>. You can also delve deeper into <a href="/progpatterns">the building blocks of this programming language</a>, which could enable you to write more sophisticated programs and patterns.</p>
 </div>
 Overwhelmed by the possibilities of how you can modify the above sketches? Here are some suggestions:
 <ul>

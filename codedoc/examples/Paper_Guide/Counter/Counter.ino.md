@@ -1,6 +1,6 @@
 <div class="flex-container"><div class="side-text">
 Here we define a convenient pausing function
-that waits a given number of seconds
+that waits a given number of seconds.
 </div>
 <div class="code">
 ```cpp

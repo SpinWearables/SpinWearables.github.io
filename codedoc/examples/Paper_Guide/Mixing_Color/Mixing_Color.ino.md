@@ -1,7 +1,7 @@
 <div class="flex-container"><div class="code">
 ```cpp
- #include "SpinWearables.h"
- using namespace SpinWearables;
+#include "SpinWearables.h"
+using namespace SpinWearables;
 
 void setup() {
   SpinWheel.begin();
