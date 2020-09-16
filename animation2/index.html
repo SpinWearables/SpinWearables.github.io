@@ -61,7 +61,7 @@
 <p>If you haven’t already done the <a href="/animation">Intro to Animation</a> adventure, we recommend looking it over before starting this lesson.</p>
 </div>
 <p>There is a whole universe of patterns you can create with the SpinWheel: simply grab a piece of paper, draw the pattern you desire, and translate it into an expression of code and math that implements it. However, that much freedom can be daunting at first. Here we will start by modifying the animation that you created in the <a href="/animation">Intro to Animation adventure</a>. Then we will present some additional sketches that allow you to create animations with changing colors and where you can control each LED separately. We invite you upload these sketches from <code>Examples → SpinWearables → Animations_and_Patterns</code> to see what they do on your SpinWheel and then experiment with modifying them.</p>
-<h3 id="smoother-pulsing">Smoother pulsing</h3>
+<h2 id="smoother-pulsing">Smoother pulsing</h2>
 <p>You may have noticed that the brightness of the LEDs in the <a href="/codedoc/examples/Animations_and_Patterns/Simple_Blink">sketch we present in the Intro to Animation adventure</a> was abruptly cut off. Wouldn’t it be prettier if we gently turned off the LEDs, similarly to how gently we are ramping them up? We can implement this by writing a function that first goes up and then slowly goes back down. We have already written such a function for you to use and called it <a href="/codedoc/SpinWearables.h.html#triangular-wave"><code>triangularWave</code></a>, because when you plot it, it looks like a series of triangles.</p>
 <figure>
 <video src="/images/bookpics/triangular_wave.mp4" muted autoplay playsinline loop>
@@ -92,7 +92,7 @@ void loop() {
 <div class="further-reading">
 <p>If you want to learn more about controlling the SpinWheel’s LEDs, then try out our <a href="/sight">Biology of Sight</a> adventure. The <a href="/colortheory">Color Theory</a> lesson provides more information about why we can use red, green, and blue LEDs to represent all the colors of the rainbow.</p>
 </div>
-<h3 id="the-color-wheel">The color wheel</h3>
+<h2 id="the-color-wheel">The color wheel</h2>
 <p>Up until now we have discussed how to turn a time-dependent number into a brightness. However, instead of having time-dependent intensity of light, we might be more interested in a time-dependent hue. One particularly lovely way to achieve this is to use a color wheel, where we assign a color to each point of a circle, and use it as a reference when turning numbers into colors. We provide you with a function, <code>colorWheel()</code>, that converts the numbers between 0 and 255 to a color as seen in the image below. For each input number, the appropriate red, blue and green components of a color from the colorWheel are calculated and used to color our LED lights.</p>
 <figure>
 <img src="/images/bookpics/colorwheel.png" title="The color wheel lets you generate a color based on a single continuously changing (maybe time-dependent) number." alt="" /><figcaption>The color wheel lets you generate a color based on a single continuously changing (maybe time-dependent) number. The red, blue and green components of the colors in the color wheel are shown in the plot on the right.</figcaption>
@@ -113,7 +113,7 @@ void loop() {
 </pre>
 </div>
 <p>In this case, rather than independently controlling the red, green, and blue components of each LED, you are providing one number that represents the color. In the color wheel diagram above, you can see on the right the relative amounts of red, green, and blue light that go into each color on the left. As usual, <a href="/codedoc/examples/Animations_and_Patterns/Color_Wheel">the entirety of the code is documented on its own page</a>, and in the Arduino examples menu under <code>Animations_and_Patterns → Color_Wheel</code></p>
-<h3 id="non-uniform-patterns-and-accessing-separate-leds">Non-uniform patterns and accessing separate LEDs</h3>
+<h2 id="non-uniform-patterns-and-accessing-separate-leds">Non-uniform patterns and accessing separate LEDs</h2>
 <p>Lastly, we would like to have a pattern that illuminates different LEDs differently. To set the color of all of the larger LEDs to a single uniform color, we have already seen that we need to use <code>SpinWheel.setLargeLEDsUniform(r,g,b)</code>, where <code>r</code>, <code>g</code>, and <code>b</code> are the red, green, and blue components of the color we desire. They need to be between 0 (turned off) and 255 (maximum intensity). To do the same to the smaller LEDs, we can use <code>SpinWheel.setSmallLEDsUniform(r,g,b)</code>.</p>
 <p>If we want to illuminate a single large LED (numbered from 0 to 7), we can use <code>SpinWheel.setLargeLED(i,r,g,b)</code>, where the first argument <code>i</code> is the number of the LED we want to change. Similarly, we use <code>SpinWheel.setSmallLED(i,r,g,b)</code> to do the same for the smaller LEDs.</p>
 <div class="further-reading">

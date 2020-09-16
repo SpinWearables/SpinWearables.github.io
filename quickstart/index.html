@@ -77,12 +77,13 @@
 <div class="warning">
 <p>The SpinWheel will not work properly if connected to a computer/charger without having the switch set to USB. It will not charge and programming it would be extremely unreliable.</p>
 </div>
-<h2 id="setting-up-the-arduino-software">Setting Up the Arduino Software</h2>
+<h2 id="installing-the-arduino-software">Installing the Arduino Software</h2>
 <p>Much of the joy of the SpinWheel comes from your ability to change it and make it do whatever you wish! The rest of the guide will walk you through adding a new animation to your SpinWheel. Do not worry if you find this part challenging, learning new things can be confusing at first. If you get stuck, check out the <a href="/troubleshoot">Troubleshooting Guide</a> and don’t be afraid to experiment. While feeling confused is normal, it will get easier as you go!</p>
 <p>In order to write new animations for the SpinWheel, you will need a way to reprogram the computer on the SpinWheel. We use the Arduino programming language to communicate with the SpinWheel.</p>
 <ol type="1">
 <li>Start by installing the Arduino software on your computer, which you can download for free from <a href="https://arduino.cc/en/Main/Software#download">arduino.cc/en/Main/Software</a>. For step by step help, Arduino has provided <a href="https://www.arduino.cc/en/Guide">instructions</a> for each operating system.</li>
 </ol>
+<h2 id="configuring-the-arduino-software">Configuring the Arduino Software</h2>
 <p>Once the software is installed, we have to configure it to communicate with the SpinWheel.</p>
 <ol start="2" type="1">
 <li><p>Plug your SpinWheel into your computer with a micro USB cable and flip the switch to the position labeled “USB”.</p></li>
@@ -95,9 +96,7 @@
 <img src="/images/quickstart/port_and_board_screenshot.png" title="Use `Tools→ Port` and `Tools→ Board` to change the settings on the Arduino software." alt="" /><figcaption>Use <code>Tools → Port</code> and <code>Tools → Board</code> to pick the port corresponding to the SpinWheel and the “Leonardo” board type. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
 </figure>
 <p>Properly selecting the board and port are essential for the Arduino software to communicate with the SpinWheel. If you are unable to upload code to the Spinwheel in the next section, double check that the switch is set to “USB” and that you have the correct board and port selected.</p>
-<h2 id="programming-the-spinwheel">Programming the SpinWheel</h2>
-<p>Learning to code is just like learning a new language - you will understand only a couple of words and commands at first, but as your skills grow you will be able to command the computer to do more sophisticated tasks!</p>
-<h3 id="installing-the-spinwheel-libraries">Installing the SpinWheel libraries</h3>
+<h2 id="installing-the-spinwheel-libraries">Installing the SpinWheel Libraries</h2>
 <ol type="1">
 <li><p>To get the first set of examples of this new language and the other libraries necessary to run the SpinWheel code, download our SpinWearables Arduino Library using <code>Sketch → Include Library → Manage Libraries...</code>.</p></li>
 <li><p>In the search bar of the Library Manager, search for <code>SpinWearables</code> and then click <code>Install</code>.</p></li>
@@ -106,7 +105,7 @@
 <figure>
 <img src="/images/quickstart/adding_libraries_screenshot.png" title="Installing Arduino libraries." style="max-width:90%" alt="" /><figcaption>Installing Arduino libraries. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
 </figure>
-<h3 id="running-a-program-on-the-spinwheel">Running a program on the SpinWheel</h3>
+<h2 id="running-a-program-on-the-spinwheel">Running a Program on the SpinWheel</h2>
 <p>To test that your SpinWheel is working properly, you can install a new program, or sketch, from the example files to animate your SpinWheel.</p>
 <ol type="1">
 <li><p>Choose a file to install by opening <code>File → Examples → SpinWearables</code> and picking one of the examples. For instance, pick <a href="/codedoc/examples/BlinkingFirmware"><code>BlinkingFirmware</code></a>. This will open a new window with the code.</p></li>
@@ -116,6 +115,7 @@
 <img src="/images/quickstart/upload_button_screenshot.png" title="Upload programs to your SpinWheel using the `Upload` button (highlighted in white)." style="max-width:388px" alt="" /><figcaption>Upload programs to your SpinWheel using the <code>Upload</code> button (highlighted in white).</figcaption>
 </figure>
 <p>Now your SpinWheel will have the new colorful blinking pattern (from <code>BlinkingFirmware</code>) you just uploaded. If you get an error here, then check out our <a href="/troubleshoot">Troubleshooting Guide</a> for help on some common problems.</p>
+<h2 id="exploring-the-spinwheel-further">Exploring the SpinWheel further</h2>
 <p>Feel free to open any of the other SpinWheel sketches and upload them onto the device. Do not worry about understanding what the code does, you will learn more about this language in future lessons. We encourage you to experiment with these examples! If you want to save any changes, you will be prompted to save the sketch in a new location (can be anywhere on your computer). The original file will always be available to open again.</p>
 <p>Uploading a new sketch to your SpinWheel will overwrite the preloaded sketch that came on it. If you want your SpinWheel to have the sketch that it came with, simply open the <a href="/codedoc/examples/SpinWheelStockFirmware"><code>SpinWheelStockFirmware</code></a> example and upload it.</p>
 <p>In future SpinWheel activities, you will be writing new sketches to animate the SpinWheel. To transfer a sketch from your computer to your SpinWheel, simply connect your SpinWheel to your computer, change the switch to “USB”, open the code of your new sketch in the Arduino software and press the upload button.</p>
