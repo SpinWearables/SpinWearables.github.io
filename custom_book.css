@@ -79,7 +79,7 @@ div.further-reading > p:first-child {
 }
 
 div.further-reading > p:first-child:before {
-  content: "💡 Further reading: ";
+  content: "💡 ";
   font-weight: bold;
 }
 
