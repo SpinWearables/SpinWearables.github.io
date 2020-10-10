@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="apple-touch-icon-precomposed" href="/colorwheel180.png">
+  <link rel="icon" href="/colorwheel196.png">
+  <meta property="og:title" content="The SpinWheel" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="Children have the natural curiosity and capacity to engineer a better world. Our kits just remind them." />
+  <meta property="og:image" content="https://spinwearables.com/hanging.jpg" />
+  <link rel="image_src" href="https://spinwearables.com/hanging.jpg" />
+  <meta name="keywords" content="tilt sensor, gravitation, motion, acceleration" />
+  <title>Making a Tilt Sensor</title>
+  <style>
+  </style>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="/custom.css" />
+  <link rel="stylesheet" href="/custom_book.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.spinwearables.com/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+</head>
+<body>
+<!-- Matomo Image Tracker-->
+<noscript><img src="https://matomo.spinwearables.com/matomo.php?idsite=1&amp;rec=1" style="border:0" alt="" /></noscript>
+<!-- End Matomo -->
+<header>
+<div class="nav">
+<a href="/">The SpinWheel</a>
+ | 
+<a href="/book">The Field Guide</a>
+</div>
+<h1 class="title">Making a Tilt Sensor</h1>
+</header>
+<main>
+<div class="intro-box">
+<p>The motion sensor in the SpinWheel can be used to detect the direction of gravity, which in turn can be visualized, creating a colorful digital level or tilt sensor. Here is one way to do this, which will also introduce you in a new way to the notion of vectors.</p>
+</div>
+<p>Gravity is vector, vector has components, sensor detects these components, used to present useful stuff about tilts. See vector lesson about vectors. See inertia lesson about how gravity and acceleration can not be distinguished.</p>
+<style>
+#grid2d {
+  text-align: center;
+}
+.grid2dcontrol > input {
+  width: 40px;
+}
+.xcom {
+  color: #228e2c;
+}
+.ycom {
+  color: #2676b3;
+}
+</style>
+<div id="grid2d">
+<div id="vectorGrid">
+<canvas class="trajectory1D" width="400" height="400">
+</canvas>
+</div>
+<div id="values">
+<div class="grid2dcontrol xcom">
+X component: <span id="xshow">0</span>
+</div>
+<div>
+<input type="range" min="-10" max="10"  id="xvalue">
+</div>
+<div class="grid2dcontrol ycom">
+Y component: <span id="yshow">0</span>
+</div>
+<div>
+<input type="range" min="-10" max="10"  id="yvalue">
+</div>
+<div class="grid2dcontrol">
+Magnitude: <span id="magshow">0</span>
+</div>
+<!--<div class="grid2dcontrol">Angle: <span id="angshow">0</span>&deg;</div>-->
+</div>
+</div>
+<script>
+function canvas_arrow(context, fromx, fromy, tox, toy) {
+  var headlen = 10;
+  var dx = tox - fromx;
+  var dy = toy - fromy;
+  var angle = Math.atan2(dy, dx);
+  context.moveTo(fromx, fromy);
+  context.lineTo(tox, toy);
+  context.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+  context.moveTo(tox, toy);
+  context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+}
+
+const v_to_path2D = document.getElementById('vectorGrid');
+const ctx2D = v_to_path2D.getElementsByClassName('trajectory1D')[0].getContext('2d');
+var xElement = document.getElementById("xvalue");
+var yElement = document.getElementById("yvalue");
+xElement.value = 2;
+yElement.value = 2;
+var xcurrent = 0;
+var ycurrent = 0;
+ctx2D.textAlign = 'center';
+ctx2D.textBaseline = 'middle';
+
+function canvas_axis(context, maxX, maxY) {
+  var midX = maxX/2;
+  var midY = maxY/2;
+  var stepX = maxX/20;
+  var stepY = maxY/20;
+  context.strokeStyle='rgba(0,0,0,0.5)';
+  context.lineWidth=1;
+  context.moveTo(midX, 0);
+  context.lineTo(midX,maxY);
+  context.moveTo(0, midY);
+  context.lineTo(maxX, midY);
+  context.stroke();
+  context.strokeStyle='rgba(0,0,0,0.1)';
+  for (var i=-10; i<=10; i++) {
+    context.moveTo(0,midY+i*stepY);
+    context.lineTo(maxX,midY+i*stepY);
+    context.moveTo(midX+i*stepX,0);
+    context.lineTo(midX+i*stepX,maxY);
+  }
+  context.stroke();
+}
+
+function plot_all(){
+    xcurrent = 0.8*xcurrent + 0.2*xElement.value;
+    ycurrent = 0.8*ycurrent + 0.2*yElement.value;
+    var x = xcurrent;
+    var y = ycurrent;
+    x_scale = x*20 + 200;
+    y_scale = -y*20 + 200;
+  
+    ctx2D.clearRect(0,0,400,400);
+    ctx2D.beginPath();
+    canvas_axis(ctx2D, 400, 400);
+    ctx2D.font = '14px sans';
+    ctx2D.fillStyle = '#228e2c';
+    ctx2D.strokeStyle = '#228e2c';
+    ctx2D.beginPath();ctx2D.moveTo(x_scale,y_scale);ctx2D.lineTo(200,y_scale);ctx2D.stroke();
+    ctx2D.fillText('X = '+xcurrent.toFixed(1),x*10+200,y_scale-10*Math.sign(y));
+    ctx2D.fillStyle = '#2676b3';
+    ctx2D.strokeStyle = '#2676b3';
+    ctx2D.beginPath();ctx2D.moveTo(x_scale,y_scale);ctx2D.lineTo(x_scale,200);ctx2D.stroke();
+    ctx2D.fillText('Y = '+ycurrent.toFixed(1),x_scale+40*Math.sign(x),-y*10+200);
+    ctx2D.beginPath();
+    ctx2D.strokeStyle='black';
+    ctx2D.lineWidth=2;
+    canvas_arrow(ctx2D,200,200,x_scale, y_scale);
+    ctx2D.stroke();
+    var magnitude = Math.sqrt(x*x  + y*y);
+    var direction_angle = Math.atan2(y,x)/Math.PI*180;
+    if (direction_angle < 0){
+        direction_angle = direction_angle + 360;
+    }
+    document.getElementById("xshow").innerHTML=xcurrent.toFixed(1);
+    document.getElementById("yshow").innerHTML=ycurrent.toFixed(1);
+    document.getElementById("magshow").innerHTML=magnitude.toFixed(1);
+    //document.getElementById("angshow").innerHTML=direction_angle.toFixed(0);
+}
+
+setInterval(plot_all, 50);
+</script>
+<figure>
+<img src="/images/bookpics/dance_axis.png" alt="" /><figcaption>This picture demonstrates the three axes that the SpinWheel can detect acceleration along. For instance, if you have the SpinWheel resting flat on the table and pick it up, the SpinWheel’s acceleration sensor will detect acceleration only along the z axis. More complicated motions will have an x, y, and z axis component. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
+</figure>
+<p>You can drag, ctrl+drag, or scroll on the 3D image to rotate, pan, or zoom the camera.</p>
+<div id="threediv">
+<div id="threejsanim">
+
+</div>
+Tilt back and forth:<input id="fbtilt" type="range" min="-100" max="+100" value="30">Tilt sideways:<input id="lrtilt" type="range" min="-100" max="+100">Rotate face:<input id="frotate" type="range" min="-100" max="+100">
+</div>
+<style>
+#threediv {
+  text-align: center;
+  width: 100%;
+}
+#threediv > * {
+  display: block;
+  margin: auto;
+}
+</style>
+<script type="module">
+
+import * as THREE from '/three/three.module.js';
+
+import { OrbitControls } from '/three/OrbitControls.js';
+ 
+function makeSpinWheel() {
+  var outerbox = new THREE.Group();
+  var box = new THREE.Group();
+  var geometry = new THREE.CylinderGeometry(20,20,1,24);
+  var material = new THREE.MeshPhongMaterial({color: 0x111111, transparent: true, opacity: 0.90});
+  var disk = new THREE.Mesh( geometry, material );
+  box.add(disk);
+  var sgeometry = new THREE.CylinderGeometry(1.5,1.5,1,24);
+  var sdisk = new THREE.Mesh( sgeometry, material );
+  sdisk.position.set(21/1.414,0,21/1.414);
+  box.add(sdisk);
+  for (var i=0; i<4; i++) {
+    var bgeometry = new THREE.BoxGeometry(5,1.5,5);
+    var wmaterial = new THREE.MeshPhongMaterial({color: 0xbbbbbb});
+    var square1 = new THREE.Mesh(bgeometry, wmaterial);
+    var square2 = new THREE.Mesh(bgeometry, wmaterial);
+    var x = (-1)**i;
+    var z = (-1)**(i>>1);
+    square1.position.set(x*10,1.25,z*10);
+    square2.position.set(x*3,1.25,z*3);
+    //square1.rotation.z += Math.PI/2;
+    box.add(square1);
+    box.add(square2);
+  }
+  box.rotation.y = Math.PI*3/4;
+  outerbox.add(box);
+  return outerbox;
+}
+
+function makeScene() {
+  var scene = new THREE.Scene();
+  scene.background = new THREE.Color( 0xffffff );
+
+  var lights = [];
+  lights[ 0 ] = new THREE.PointLight( 0xaaaaaa, 1, 0 );
+  lights[ 1 ] = new THREE.PointLight( 0xaaaaaa, 1, 0 );
+  lights[ 2 ] = new THREE.PointLight( 0xaaaaaa, 1, 0 );
+  lights[ 0 ].position.set( 0, 200, 100 );
+  lights[ 1 ].position.set( 0, 0, 100 );
+  lights[ 2 ].position.set( 0, - 200, 100 );
+  
+  scene.add( lights[ 0 ] );
+  scene.add( lights[ 1 ] );
+  scene.add( lights[ 2 ] );
+
+  var grid = new THREE.GridHelper( 1500, 70 );
+  grid.position.set(0,-100,0);
+  scene.add(grid);
+
+  return scene;
+}
+
+var camera, scene, renderer;
+var box;
+var arrow;
+var xarrow, yarrow, zarrow;
+var sphere;
+const size = 400;
+const animdiv = document.getElementById('threejsanim');
+const fgtilt = document.getElementById('fbtilt');
+const lrtilt = document.getElementById('lrtilt');
+const frotate = document.getElementById('frotate');
+   
+function init() {
+  scene = makeScene();
+  
+  box = makeSpinWheel();
+  scene.add(box);
+
+  arrow = new THREE.ArrowHelper(
+    new THREE.Vector3(0,1,0),
+    new THREE.Vector3(0,0,0),
+    //40, 0xf58559,
+    40, 0xaaaaaa,
+    10, 4
+  );
+  scene.add(arrow);
+
+  xarrow = new THREE.ArrowHelper(
+    new THREE.Vector3(1,0,0),
+    new THREE.Vector3(0,2,0),
+    40, 0x92bd80,
+    10, 4
+  );
+  box.add(xarrow);
+
+  yarrow = new THREE.ArrowHelper(
+    new THREE.Vector3(0,0,-1),
+    new THREE.Vector3(0,2,0),
+    40, 0x8fb0d3,
+    10, 4
+  );
+  box.add(yarrow);
+
+  zarrow = new THREE.ArrowHelper(
+    new THREE.Vector3(0,1,0),
+    new THREE.Vector3(0,2,0),
+    40, 0xf58559,
+    10, 4
+  );
+  box.add(zarrow);
+
+  /*
+  var sgeometry = new THREE.SphereGeometry( 3, 12, 12 );
+  var smaterial = new THREE.MeshBasicMaterial( {color: 0xf58559} );
+  sphere = new THREE.Mesh( sgeometry, smaterial );
+  scene.add(sphere);
+  */ 
+
+  var fov = 60;
+  var aspect = 2;
+  var near = 0.10;
+  var far = 500;
+  camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+  camera.position.z = 80;
+  
+  renderer = new THREE.WebGLRenderer( { antialias: true } );
+  renderer.setSize( size, size/2 );
+  animdiv.appendChild( renderer.domElement );
+
+  var controls = new OrbitControls(camera, renderer.domElement);
+}
+ 
+function animate() {
+  requestAnimationFrame( animate );
+  const fb = fbtilt.value*Math.PI/2/100;
+  const lr = lrtilt.value*Math.PI/2/100;
+  const r = frotate.value*Math.PI/2/100;
+  const euler = new THREE.Euler(fb,r,lr,'ZXY');
+  box.setRotationFromEuler(euler);
+  const g = new THREE.Vector3(0,1,0);
+  const py0 = new THREE.Vector3(0,0,-1);
+  const my0 = new THREE.Vector3(0,0,1);
+  const y0 = new THREE.Vector3(0,0,-1).applyEuler(euler);
+  const ly = y0.dot(g);
+  const aly = Math.abs(ly)*40
+  yarrow.setLength(aly, Math.min(10,aly), 4);
+  var dy;
+  if (ly > 0) {
+    dy = py0;
+  } else {
+    dy = my0;
+  }
+  const px0 = new THREE.Vector3(1,0,0);
+  const mx0 = new THREE.Vector3(-1,0,0);
+  const x0 = new THREE.Vector3(1,0,0).applyEuler(euler);
+  const lx = x0.dot(g);
+  const alx = Math.abs(lx)*40
+  xarrow.setLength(alx, Math.min(10,alx), 4);
+  var dx;
+  if (lx > 0) {
+    dx = px0;
+  } else {
+    dx = mx0;
+  }
+  const pz0 = new THREE.Vector3(0,1,0);
+  const mz0 = new THREE.Vector3(0,-1,0);
+  const z0 = new THREE.Vector3(0,1,0).applyEuler(euler);
+  const lz = z0.dot(g);
+  const alz = Math.abs(lz)*40
+  zarrow.setLength(alz, Math.min(10,alz), 4);
+  var dz;
+  if (lz > 0) {
+    dz = pz0;
+  } else {
+    dz = mz0;
+  }
+  xarrow.setDirection(dx);
+  yarrow.setDirection(dy);
+  zarrow.setDirection(dz);
+  /*
+  const xy = x0.clone()
+               .multiplyScalar(lx*40);
+  xy.add(y0.clone()
+           .multiplyScalar(ly*40));
+  sphere.position.copy(xy);
+  */
+  renderer.render( scene, camera );
+}
+ 
+init();
+animate();
+ 
+</script>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  SpinWheel.readIMU();</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="dt">int</span> y = SpinWheel.ay*<span class="dv">255</span>;</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  SpinWheel.setLargeLEDsUniform(<span class="bn">0xffffff</span>);</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) {</span>
+<span id="cb1-10"><a href="#cb1-10"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,x-<span class="dv">8</span>);</span>
+<span id="cb1-11"><a href="#cb1-11"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">3</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,x-<span class="dv">8</span>);</span>
+<span id="cb1-12"><a href="#cb1-12"></a>  }</span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="cf">else</span> <span class="cf">if</span> (x&lt;-<span class="dv">10</span>) {</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,-x+<span class="dv">8</span>);</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">1</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,-x+<span class="dv">8</span>);</span>
+<span id="cb1-16"><a href="#cb1-16"></a>  }</span>
+<span id="cb1-17"><a href="#cb1-17"></a></span>
+<span id="cb1-18"><a href="#cb1-18"></a>  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) {</span>
+<span id="cb1-19"><a href="#cb1-19"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
+<span id="cb1-20"><a href="#cb1-20"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">2</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
+<span id="cb1-21"><a href="#cb1-21"></a>  }</span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="cf">else</span> <span class="cf">if</span> (y&lt;-<span class="dv">10</span>) {</span>
+<span id="cb1-23"><a href="#cb1-23"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
+<span id="cb1-24"><a href="#cb1-24"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">0</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
+<span id="cb1-25"><a href="#cb1-25"></a>  }</span>
+<span id="cb1-26"><a href="#cb1-26"></a></span>
+<span id="cb1-27"><a href="#cb1-27"></a>  <span class="dt">uint8_t</span> angle = (-atan2(SpinWheel.ay, SpinWheel.ax)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
+<span id="cb1-28"><a href="#cb1-28"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
+<span id="cb1-29"><a href="#cb1-29"></a></span>
+<span id="cb1-30"><a href="#cb1-30"></a>  SpinWheel.drawFrame();</span>
+<span id="cb1-31"><a href="#cb1-31"></a>}</span></code></pre></div>
+<figure>
+<video src="/images/bookpics/preloaded_tilt3.mp4" muted autoplay playsinline loop>
+</video>
+<figcaption>
+</figcaption>
+</figure>
+<p>See dancing with colors and making a step counter.</p>
+<script data-isso="//comments.spinwearables.com/"
+data-isso-reply-to-self="false"
+data-isso-require-author="true"
+data-isso-require-email="true"
+data-isso-avatar="false"
+data-isso-vote="false"
+src="//comments.spinwearables.com/js/embed.min.js"></script>
+<section id="isso-thread"></section>
+<script>
+document.querySelector("#isso-thread").addEventListener(
+  "click",
+  function () {
+    document.querySelectorAll("#isso-thread > div").forEach(function (x) {x.style.display = "block";});
+  });
+</script>
+</main>
+<div id="license">
+<!--<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc-by-sa.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.-->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc-by-nc-sa.png" /></a></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. © SpinWearables LLC (<a href="/license">license and trademark details</a>)
+</div>
+</body>
+</html>
