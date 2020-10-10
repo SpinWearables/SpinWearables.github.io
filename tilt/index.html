@@ -81,6 +81,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </style>
   <link rel="stylesheet" href="/custom.css" />
   <link rel="stylesheet" href="/custom_book.css" />
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -116,7 +117,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="intro-box">
 <p>The motion sensor in the SpinWheel can be used to detect the direction of gravity, which in turn can be visualized, creating a colorful digital level or tilt sensor. Here is one way to do this, which will also introduce you in a new way to the notion of vectors.</p>
 </div>
-<p>Gravity is vector, vector has components, sensor detects these components, used to present useful stuff about tilts. See vector lesson about vectors. See inertia lesson about how gravity and acceleration can not be distinguished.</p>
+<p>On our planet what is horizontal and what is vertical is defined with respect to the direction of Earth’s gravitational pull. This makes it easy to measure how level a surface is by observing whether gravity can pull something off the surface, e.g., make a steel ball roll off. One can even use a toy like a <a href="https://en.wikipedia.org/wiki/Ball-in-a-maze_puzzle">ball-in-a-maze puzzle</a> as a simple tilt sensor.</p>
+<figure>
+<img src="/images/bookpics/round_maze.jpg" alt="" /><figcaption>A toy in which the tilt can force a ball to roll in a given direction. <a class="imagecredit" href="https://commons.wikimedia.org/wiki/File:Round_maze.jpg">image credit Wikimedia</a></figcaption>
+</figure>
+<p>More commonly, an actual bubble level is used, where a small bubble encosed in a container with liquid is used to point out whether a surface is flat. The bubble tries to go as far up as possible, i.e., it rises against the direction of gravity. If the surface is not flat, the buble will not be centered in the domed top of the container.</p>
+<figure>
+<img src="/images/bookpics/onebubble.jpg" alt="" /><figcaption>A bubble level. <a class="imagecredit" href="https://publiclab.org/notes/mathew/10-26-2015/deploying-passive-particle-monitors">image credit Public Lab</a></figcaption>
+</figure>
+<p>We can do the same measurement using the SpinWheel. It contains a motion sensor, which is capable of measuring acceleration. Moreover, as the sensation of accelerating can not be distinguished from the senation of being pulled by gravity, this same sensor also reports Earth’s gravity.</p>
+<div class="further-reading">
+<p>The indistinguishability of gavity and acceleration is a fascinating topic that has puzzled scientists and physics students for centuries. It is what has inspired Einstein to work on his general theory of relativity. You can learn more about it in our <a href="/inertia">lesson on inertia and free fall</a>.</p>
+</div>
+<p>Now we need to find a convenient way to encode this notion of “direction of gravity” in a way that a piece of computer code can understand. The main difficulty is that gravity does not only have a certain strength (or intensity), but also a direction, therefore one single number is not sufficient to fully describe the measurement. For instance, notice how in the bubble level above, it is not only the distance between the bubble and the center of the dome that matters, but also, the direction in which the bubble has been displaced. For our solution, we can continue being inspired by other types of bubble levels.</p>
+<figure>
+<img src="/images/bookpics/twobubble.jpg" alt="" /><figcaption>A bubble level with separate sensors for each axis of tilt. <a class="imagecredit" href="https://publiclab.org/notes/mathew/10-26-2015/deploying-passive-particle-monitors">image credit Public Lab</a></figcaption>
+</figure>
+<p>Notice how in this new level, we are using two separate tubes, perpendicular to each other, instead of one single dome. Now we can use one number per bubble, simply denoting its displacement away from the middle of its tube. Those two numbers together contain all the information about the tilt of the surface. We just described a <span class="footnote">position in the two-dimensional plane<span>Something that can not be expressed by a single number.</span></span>, by using a <span class="footnote">pair of numbers<span>Each giving the displacements along a single axis.</span></span>. Mathematicians call this operation <a href="/vectors">vector decomposition</a>.</p>
+<p>You can gain some more intuition about this decomposition procedure below. The black arrow is <span class="footnote">the two-dimensional object <span>Having not only length but also a direction in a 2D plane.</span></span> that we want to represent by splitting it in a component along the <span class="math inline">\(x\)</span> axis and a component along the <span class="math inline">\(y\)</span> axis (green and blue, respectively).</p>
 <style>
 #grid2d {
   text-align: center;
@@ -239,10 +257,10 @@ function plot_all(){
 
 setInterval(plot_all, 50);
 </script>
-<figure>
-<img src="/images/bookpics/dance_axis.png" alt="" /><figcaption>This picture demonstrates the three axes that the SpinWheel can detect acceleration along. For instance, if you have the SpinWheel resting flat on the table and pick it up, the SpinWheel’s acceleration sensor will detect acceleration only along the z axis. More complicated motions will have an x, y, and z axis component. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
-</figure>
-<p>You can drag, ctrl+drag, or scroll on the 3D image to rotate, pan, or zoom the camera.</p>
+<div class="further-reading">
+<p>You can learn more about how to describe and work with quantities that have a direction from our <a href="/vectors">lesson on vectors</a>.</p>
+</div>
+<p>Now we have everything we need to start working with measurements of tilt (direction of gravity) on the SpinWheel. We will use the <code>readIMU()</code> function to ask the Inertial Measurement Unit (IMU) to measure the three components of the gravitational vector (shown in grey in the visualization below). Below you can see how the three axes, <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> are defined. We will use only the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> components as they are the ones corresponding to the displacement of the air bubbles seen in the bubble levels above. You can gain intuition about how these components will behave by exploring the interactive SpinWheel visualization below and carefully observing how the green and blue components change.</p>
 <div id="threediv">
 <div id="threejsanim">
 
@@ -449,44 +467,50 @@ init();
 animate();
  
 </script>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-2"><a href="#cb1-2"></a>  SpinWheel.readIMU();</span>
+<figure>
+<img src="/images/bookpics/dance_axis.png" alt="" /><figcaption>These are the three axes that the SpinWheel can detect acceleration and gravity along. In the interactive 3D diagram you can see how the vector of gravitational acceleration (in grey) is decomposed along these three axes. You can drag, ctrl+drag, or scroll on the 3D image to rotate, pan, or zoom the camera.<a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
+</figure>
+<p>Our code needs little more than reading the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> components and trigger the corresponding LEDs. This is a rather minimal example that reads only the gravity and acceleration along <span class="math inline">\(x\)</span>, interpreting that value as a description of the tilt along that axis, and then lits a corresponding LED along the same axis as appropriate. The value is contained in the <span class="math inline">\(SpinWheel.ax\)</span> variable.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="dt">int</span> y = SpinWheel.ay*<span class="dv">255</span>;</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>  SpinWheel.setLargeLEDsUniform(<span class="bn">0xffffff</span>);</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  SpinWheel.begin();</span>
+<span id="cb1-7"><a href="#cb1-7"></a>}</span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a>  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) {</span>
-<span id="cb1-10"><a href="#cb1-10"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,x-<span class="dv">8</span>);</span>
-<span id="cb1-11"><a href="#cb1-11"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">3</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,x-<span class="dv">8</span>);</span>
-<span id="cb1-12"><a href="#cb1-12"></a>  }</span>
-<span id="cb1-13"><a href="#cb1-13"></a>  <span class="cf">else</span> <span class="cf">if</span> (x&lt;-<span class="dv">10</span>) {</span>
-<span id="cb1-14"><a href="#cb1-14"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,-x+<span class="dv">8</span>);</span>
-<span id="cb1-15"><a href="#cb1-15"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">1</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,-x+<span class="dv">8</span>);</span>
-<span id="cb1-16"><a href="#cb1-16"></a>  }</span>
-<span id="cb1-17"><a href="#cb1-17"></a></span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) {</span>
-<span id="cb1-19"><a href="#cb1-19"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
-<span id="cb1-20"><a href="#cb1-20"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">2</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
-<span id="cb1-21"><a href="#cb1-21"></a>  }</span>
-<span id="cb1-22"><a href="#cb1-22"></a>  <span class="cf">else</span> <span class="cf">if</span> (y&lt;-<span class="dv">10</span>) {</span>
-<span id="cb1-23"><a href="#cb1-23"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
-<span id="cb1-24"><a href="#cb1-24"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">0</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
-<span id="cb1-25"><a href="#cb1-25"></a>  }</span>
-<span id="cb1-26"><a href="#cb1-26"></a></span>
-<span id="cb1-27"><a href="#cb1-27"></a>  <span class="dt">uint8_t</span> angle = (-atan2(SpinWheel.ay, SpinWheel.ax)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
-<span id="cb1-28"><a href="#cb1-28"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
-<span id="cb1-29"><a href="#cb1-29"></a></span>
-<span id="cb1-30"><a href="#cb1-30"></a>  SpinWheel.drawFrame();</span>
-<span id="cb1-31"><a href="#cb1-31"></a>}</span></code></pre></div>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-10"><a href="#cb1-10"></a>  <span class="co">// Read all sensor data.</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  SpinWheel.readIMU();</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="co">// Save the x-axis measurement in a variable.</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  <span class="co">// Turn off all LEDs.</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>  SpinWheel.clearAllLEDs();</span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a>  <span class="co">// If the tilt is in a given direction,</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>  <span class="co">// turn on the corresponding LED.</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) {</span>
+<span id="cb1-22"><a href="#cb1-22"></a>    SpinWheel.setLargeLED(<span class="dv">5</span>,-x, -x,-x);</span>
+<span id="cb1-23"><a href="#cb1-23"></a>  }</span>
+<span id="cb1-24"><a href="#cb1-24"></a>  <span class="cf">else</span> <span class="cf">if</span> (x&lt;-<span class="dv">10</span>) {</span>
+<span id="cb1-25"><a href="#cb1-25"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>, x, x, x);</span>
+<span id="cb1-26"><a href="#cb1-26"></a>  }</span>
+<span id="cb1-27"><a href="#cb1-27"></a></span>
+<span id="cb1-28"><a href="#cb1-28"></a>  SpinWheel.drawFrame();</span>
+<span id="cb1-29"><a href="#cb1-29"></a>}</span></code></pre></div>
+<p>You can upload this code directly from the Examples menu in the Arduino software. <code>Examples → SpinWearables → Tilt_Sensor →  Simple</code> has a slightly more detailed version of the above code, sensing both along <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. However, you should feel free to explore your artistic tendencies, making more elaborate visualizations. A visualization similar to the one shown below can be found in <code>Examples → SpinWearables → Tilt_Sensor →  Fancy</code>.</p>
+<p>Both the <a href="/codedoc/examples/Tilt_Sensor/Simple/Simple.ino.html"><code>Simple</code></a> and the <a href="/codedoc/examples/Tilt_Sensor/Fancy/Fancy.ino.html"><code>Fancy</code></a> code examples can also be seen through the browser in literate programming renditions.</p>
 <figure>
 <video src="/images/bookpics/preloaded_tilt3.mp4" muted autoplay playsinline loop>
 </video>
 <figcaption>
 </figcaption>
 </figure>
-<p>See dancing with colors and making a step counter.</p>
+<div class="further-reading">
+<p>We have <a href="/allcommands">a list of visualization functions</a> that can be of use when making more elaborate tilt visualizations. You might also be interested in the <a href="/dancing">dancing with colors</a> or <a href="/stepcounter">step counter</a> projects, which explore different ways to depict motion with the SpinWheel.</p>
+</div>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
 data-isso-require-author="true"
