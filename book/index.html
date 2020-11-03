@@ -262,6 +262,7 @@
 <p>These activities build on the ideas presented in the introductory adventures. If you have coding experience, you can jump right in and then refer back to the earlier adventures and lessons as you have questions.</p>
 <ol type="1">
 <li><a href="/animation2">Animations and Patterns</a></li>
+<li><a href="/tilt">Make a Tilt Sensor</a></li>
 <li><a href="/dancing">Dancing with Color: Linear Motion</a></li>
 <li><a href="/stepcounter">Make a Step Counter</a></li>
 </ol>
@@ -286,7 +287,25 @@
 <li>Magnetism (planned)</li>
 <li>Electricity (planned)</li>
 </ol>
-<h2 id="concept-map">Concept Map</h2>
+<h2 id="appendix">Appendix</h2>
+<h3 id="spinwheel-commands">SpinWheel Commands</h3>
+<p>Here’s a <a href="/allcommands">list of the commands</a> for controlling the SpinWheel’s LEDs. While this has been written for those who are discovering coding for the first time, it can also be used as a reference to create your own SpinWheel designs if you are comfortable with programming. We recommend using it as a reference as you are going through the adventures, either way!</p>
+<h3 id="notes-about-interacting-with-this-guide">Notes about Interacting with this Guide</h3>
+<p>Throughout this guide we use a number of text formatting tools to bring attention to important conceps. Footnotes (actually hovernotes) are visible when you hover <span class="footnote">over dotted text like this<span>Such hovernotes frequently carry interesting additional information.</span></span>. Further reading blocks look as follows:</p>
+<div class="further-reading">
+<p>These boxes denote additional sources of information you might be interested in, either on our own website or elsewhere on the web.</p>
+</div>
+<p>On a few occasions we have warning blocks:</p>
+<div class="warning">
+<p>These denote important considerations about health and device care that should be seen before attempting an activity.</p>
+</div>
+<p>We have a variety of interactive visualizations throughout these pages, that work well on desktop browsers like Firefox and Chrome. Lastly, we have many code examples in our pages that explain how to program the device, <a href="/intro">including some interactive simulations of the device with which you can play directly from the browser</a>.</p>
+<div class="warning">
+<p>The virtual SpinWheel simulations and some of the other interactive widgets do not currently work in all browsers (particularly Safari and on phones). We are actively working on ensuring that all interactive elements are enjoyable across platforms.</p>
+</div>
+<h3 id="engineers-diary">Engineer’s Diary</h3>
+<p>Learn more about how the SpinWheel was created and running our Kickstarter on our <a href="/diary">engineer’s diary</a> page!</p>
+<h3 id="concept-map">Concept Map</h3>
 <p>This concept map illustrates how the lessons and adventures are connected and build upon each other. Here you will find both sophisticated engineering adventures that use the SpinWheel directly (double-lined hexagons), along with companion lessons that further explore some of the key concepts you’ll encounter in the adventures (single-lined hexagons).</p>
 <p>The three shaded hexagons are gentler introductory lessons found only in the <a href="/paper_booklet/">paper booklet</a>. Feel free to skip them and jump directly into the adventures. We do recommend skimming through them if this is the first time you have attempted to write a program.</p>
 <ul id="hexmap2" class="hexagon-container">
@@ -392,35 +411,35 @@
 <script>
 const tiles = [
 {x:1, y:1, bgcolor:"#ffffff", textcolor:"#fffff", bordercolor:"#ffffff", inner: false, text:"Begin Here ➘", href:""},
-{x:1, y:2, bgcolor:"#ffffff", textcolor:"#bf1e2e", bordercolor:"#bf1e2e", inner: true, text:"Getting<br>Started<br>with the<br>SpinWheel", href:"/intro"},
-{x:2, y:3, bgcolor:"#ffffff", textcolor:"#bf1e2e", bordercolor:"#bf1e2e", inner: true, text:"SpinWheel<br>Initial<br>Setup", href:"/quickstart"},
-{x:2, y:2, bgcolor:"#ffffff", textcolor:"#bf1e2e", bordercolor:"#bf1e2e", inner: false, text:"SpinWheel<br>Troubleshooting<br>Guide", href:"/troubleshoot"},
+{x:2, y:3, bgcolor:"#ffffff", textcolor:"#25aae1", bordercolor:"#25aae1", inner: true, text:"SpinWheel<br>Initial<br>Setup", href:"/quickstart"},
+{x:2, y:2, bgcolor:"#ffffff", textcolor:"#25aae1", bordercolor:"#25aae1", inner: true, text:"SpinWheel<br>Troubleshooting<br>Guide", href:"/troubleshoot"},
+{x:2, y:6, bgcolor:"#ffffff", textcolor:"#25aae1", bordercolor:"#25aae1", inner: false, text:"Arduino<br>101", href:"/arduino101"},
 //light
 {x:2, y:5, bgcolor:"#d0eeec", textcolor:"#13a89e", bordercolor:"#13a89e", inner: true, text:"Mixing<br>Color with<br>Light", href:"/paper_booklet"},
 {x:1, y:6, bgcolor:"#ffffff", textcolor:"#13a89e", bordercolor:"#13a89e", inner: true, text:"Biology of<br>Sight", href:"/sight"},
 {x:1, y:7, bgcolor:"#ffffff", textcolor:"#13a89e", bordercolor:"#13a89e", inner: false, text:"Color<br>Theory", href:"/colortheory"},
 {x:1, y:5, bgcolor:"#ffffff", textcolor:"#13a89e", bordercolor:"#13a89e", inner: false, text:"Light and<br>Color", href:"/lightandcolor"},
-//basic prog
-{x:2, y:4, bgcolor:"#d3eef9", textcolor:"#25aae1", bordercolor:"#25aae1", inner: true, text:"Customizing<br>the SpinWheel&#39;s<br>Display", href:"/paper_booklet"},
-{x:2, y:6, bgcolor:"#ffffff", textcolor:"#25aae1", bordercolor:"#25aae1", inner: true, text:"Arduino<br>101", href:"/arduino101"},
-{x:3, y:5, bgcolor:"#ffffff", textcolor:"#25aae1", bordercolor:"#25aae1", inner: false, text:"Basic<br>Structure<br>of a<br>Program", href:"/basics"},
 //animations
+{x:1, y:2, bgcolor:"#ffffff", textcolor:"#0e75bc", bordercolor:"#0e75bc", inner: true, text:"Getting<br>Started<br>with the<br>SpinWheel", href:"/intro"},
+{x:2, y:4, bgcolor:"#d3eef9", textcolor:"#0e75bc", bordercolor:"#0e75bc", inner: true, text:"Customizing<br>the SpinWheel&#39;s<br>Display", href:"/paper_booklet"},
+{x:3, y:1, bgcolor:"#ffffff", textcolor:"#0e75bc", bordercolor:"#0e75bc", inner: false, text:"Basic<br>Structure<br>of a<br>Program", href:"/basics"},
 {x:3, y:3, bgcolor:"#d2e2f0", textcolor:"#0e75bc", bordercolor:"#0e75bc", inner: true, text:"Creating<br>Animations<br>with the<br>SpinWheel", href:"/paper_booklet"},
 {x:3, y:2, bgcolor:"#ffffff", textcolor:"#0e75bc", bordercolor:"#0e75bc", inner: false, text:"Coding<br>Building<br>Blocks", href:"/progpatterns"},
 {x:3, y:4, bgcolor:"#ffffff", textcolor:"#0e75bc", bordercolor:"#0e75bc", inner: true, text:"Intro to<br>Animation", href:"/animation"},
 {x:4, y:5, bgcolor:"#ffffff", textcolor:"#0e75bc", bordercolor:"#0e75bc", inner: true, text:"Animations<br>and<br>Patterns", href:"/animation2"},
 //motion
-{x:4, y:7, bgcolor:"#ffffff", textcolor:"#9678b6", bordercolor:"#9678b6", inner: true, text:"Make a<br>Step Counter", href:"/stepcounter"},
-{x:4, y:8, bgcolor:"#ffffff", textcolor:"#9678b6", bordercolor:"#9678b6", inner: false, text:"Vectors<br>and<br>Motion", href:"/vectors"},
+{x:3, y:6, bgcolor:"#ffffff", textcolor:"#9678b6", bordercolor:"#9678b6", inner: true, text:"Make a<br>Tilt Sensor", href:"/tilt"},
+{x:3, y:8, bgcolor:"#ffffff", textcolor:"#9678b6", bordercolor:"#9678b6", inner: true, text:"Make a<br>Step Counter", href:"/stepcounter"},
+{x:4, y:7, bgcolor:"#ffffff", textcolor:"#9678b6", bordercolor:"#9678b6", inner: false, text:"Vectors<br>and<br>Motion", href:"/vectors"},
 {x:4, y:6, bgcolor:"#ffffff", textcolor:"#9678b6", bordercolor:"#9678b6", inner: true, text:"Dancing<br>with Color:<br>Linear<br>Motion", href:"/dancing"},
-{x:4, y:9, bgcolor:"#ffffff", textcolor:"#9678b6", bordercolor:"#9678b6", inner: true, text:"Dancing<br>with Color:<br>Rotational<br>Motion", href:"/dancing2"},
-//{x:4, y:8, bgcolor:"#ffffff", textcolor:"#9678b6", bordercolor:"#9678b6", inner: false, text:"Inertial<br>Reference<br>Frames<br>(planned)", href:"/inertia"},
-{x:3, y:10, bgcolor:"#ffffff", textcolor:"#9678b6", bordercolor:"#9678b6", inner: false, text:"Rotation<br>and<br>Circular<br>Motion", href:"/rotation"},
+{x:4, y:8, bgcolor:"#ffffff", textcolor:"#9678b6", bordercolor:"#9678b6", inner: true, text:"Dancing<br>with Color:<br>Rotational<br>Motion", href:"/dancing2"},
+//{x:4, y:9, bgcolor:"#ffffff", textcolor:"#9678b6", bordercolor:"#9678b6", inner: false, text:"Inertial<br>Reference<br>Frames", href:"/inertia"},
+{x:4, y:10, bgcolor:"#ffffff", textcolor:"#9678b6", bordercolor:"#9678b6", inner: false, text:"Rotation<br>and<br>Circular<br>Motion", href:"/rotation"},
 //magnetism
-//{x:3, y:10, bgcolor:"#ffffff", textcolor:"#ef5188", bordercolor:"#ef5188", inner: true, text:"Make a<br>Compass<br>(planned)", href:"/compass"},
-//{x:3, y:11, bgcolor:"#ffffff", textcolor:"#ef5188", bordercolor:"#ef5188", inner: false, text:"Magnetism<br>(planned)", href:"/magnetism"},
+//{x:3, y:9, bgcolor:"#ffffff", textcolor:"#ef5188", bordercolor:"#ef5188", inner: true, text:"Make a<br>Compass", href:"/compass"},
+//{x:2, y:10, bgcolor:"#ffffff", textcolor:"#ef5188", bordercolor:"#ef5188", inner: false, text:"Magnetism", href:"/magnetism"},
 //reference
-{x:4, y:1, bgcolor:"#ffffff", textcolor:"#bf1e2e", bordercolor:"#bf1e2e", inner: false, text:"SpinWheel<br>Functions<br>Reference", href:"/allcommands"},
+{x:4, y:1, bgcolor:"#ffffff", textcolor:"#25aae1", bordercolor:"#25aae1", inner: true, text:"SpinWheel<br>Functions<br>Reference", href:"/allcommands"},
 ];
 
 function render_hexmap(id) {
@@ -443,30 +462,6 @@ render_hexmap("hexmap2");
 
 </script>
 <p>Some adventures, like <a href="/sight">Biology of Sight</a>, directly extend material from <a href="/paper_booklet">the paper field guide</a>. Others, like <a href="/dancing">Dancing with Color</a>, are completely new and will help you use the SpinWheel in even more exciting ways. The paper book isn’t required to get started, but it complements the online resources.</p>
-<h2 id="appendix">Appendix</h2>
-<p>Here’s a <a href="/allcommands">list of the commands</a> for controlling the SpinWheel’s LEDs. While this has been written for those who are discovering coding for the first time, it can also be used as a reference to create your own SpinWheel designs if you are comfortable with programming. We recommend using it as a reference as you are going through the adventures, either way!</p>
-<p>Throughout this guide we use a number of text formatting tools to bring attention to important conceps. Footnotes (actually hovernotes) are visible when you hover <span class="footnote">over dotted text like this<span>Such hovernotes frequently carry interesting additional information.</span></span>. Further reading blocks look as follows:</p>
-<div class="further-reading">
-<p>These boxes denote additional sources of information you might be interested in, either on our own website or elsewhere on the web.</p>
-</div>
-<p>On a few occasions we have warning blocks:</p>
-<div class="warning">
-<p>These denote important considerations about health and device care that should be seen before attempting an activity.</p>
-</div>
-<p>We have a variety of interactive visualizations throughout these pages, that work well on desktop browsers like Firefox and Chrome. Lastly, we have many code examples in our pages that explain how to program the device, <a href="/intro">including some interactive simulations of the device with which you can play directly from the browser</a>.</p>
-<div class="warning">
-<p>The virtual SpinWheel simulations and some of the other interactive widgets do not currently work in all browsers (particularly Safari and on phones). We are actively working on ensuring that all interactive elements are enjoyable across platforms.</p>
-</div>
-<h2 id="engineers-diary">Engineer’s Diary</h2>
-<p>Want to learn more about how the SpinWheel was created? We’ll be adding additional lessons about designing the SpinWheel to empower you to design your own electronic creations!</p>
-<ol type="1">
-<li><a href="/behindthescenes_long/">Behind the Scenes Overview</a></li>
-<li><a href="/specs">Technical Specifications</a></li>
-<li><a href="/transpile">Creating the Virtual SpinWheel</a></li>
-<li>Circuit Design</li>
-<li>Hardware Testing</li>
-<li>Kickstarter Setup and Manufacturing Partner</li>
-</ol>
 <p><a class="imagecredit" href="https://johnhegarty8.wixsite.com/johnhegarty">Header image credit: Jack Hegarty</a></p>
 </main>
 <div id="license">

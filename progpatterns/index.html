@@ -131,6 +131,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">float</span> pi = <span class="fl">3.1415</span>;</span></code></pre></div>
 <p>Here we stored an approximation of the number <span class="math inline">\(\pi\)</span> in a variable with the name <code>pi</code>. We could then use this variable in other parts of our code to do computations that involve circles.</p>
 <p>Notice that throughout all of our code we have used the equality sign <code>=</code> to mean “store the value on the right in the memory cell on the left”. This differs from the usual mathematical meaning of the sign, which usually means “check if the left and right side have the same value”. You can blame early computer scientists and their laziness for the misuse of this sign in most modern programming languages.</p>
+<p>Now that you’ve learned more about variables, we encourage you to look at the start of <a href="/arduino101">Arduino 101</a> that discusses variables again. As you move through the online material and deepen your understanding of the SpinWheel, we encourage you to go back and forth between the various online pages.</p>
 <h2 id="functions">Functions</h2>
 <p>In computer programming, functions are commands that take a few variables and do something useful with them. Functions are reusable pieces of code. A function can act like a calculator, computing a new value based on the variables that are given to it. A function can also do something that affects the world around it, like blinking an LED, playing a sound, or sending a message.</p>
 <p>Most programing languages have some functions built into them, similar to how a new cellphone comes with pre-installed apps. We can use these functions without having to write them ourselves. Here is some code that uses an example function called <code>max</code> that takes two numbers as input and returns the larger number. The input values are also called the <strong>arguments</strong> of the function.</p>
@@ -141,7 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><code>int number_a = 5</code> assigns the value of 5 to the integer variable <code>number_a</code></li>
 <li><code>int number_b = 7</code> assigns the value of 7 to the integer variable <code>number_b</code></li>
-<li><code>int resulting_number = max(....)</code> store the result of the function <code>max(...)</code> in the integer variable <code>resulting number</code></li>
+<li><code>int resulting_number = max(....)</code> store the result of the function <code>max(...)</code> in the integer variable <code>resulting_number</code></li>
 <li><code>max(number_a, number_b)</code> calls, or uses, the function <code>max(...)</code> with two arguments, <code>number_a</code> and <code>number_b</code>, and returns the larger number.</li>
 </ul>
 <p>The value stored in <code>resulting_number</code> in this case would be <code>7</code>.</p>
@@ -161,7 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <video src="/images/bookpics/calc_tree.mp4" muted autoplay playsinline loop>
 </video>
 <figcaption>
-In this diagram, you can see the order in which the computer evaluates this piece of code. It first subtracts <code>1</code> from <code>number_a</code>, then evaluates the functions <code>sqrt()</code> and <code>min()</code>, next multiplies the output of <code>sqrt()</code> by <code>2</code>, and finally evaluates <code>max()</code>. This is similar to how when solving a math equation, you first do anything within parenthenses and then work your way out.
+In this diagram, you can see the order in which the computer evaluates this piece of code. It first finds the minimum of <code>number_b</code> and <code>2</code>. It then subtracts <code>1</code> from <code>number_a</code>, then evaluates the <code>sqrt()</code> function and multiples the output by <code>2</code>. Finally, it evaluates <code>max()</code>. This is similar to how when solving a math equation, you first do anything within parenthenses and then work your way out.
 </figcaption>
 </figure>
 <h2 id="creating-your-own-functions">Creating your own functions</h2>
@@ -211,7 +212,7 @@ In this diagram, you can see the order in which the computer evaluates this piec
 <div class="further-reading">
 <p>To learn more about the <code>setup</code> and <code>loop</code> functions, check out <a href="/basics">the Basic Structure of a Program</a> lesson.</p>
 </div>
-<p>Here is a large example that includes all these features. It will use the <code>Serial.println()</code> function in order to send messages to the computer. Use the <code>Serial Monitor</code> tool in the Arduino software in order to see these messages being sent back over the USB cable (<code>Tools → Serial Monitor</code>.</p>
+<p>Here is a large example that includes all these features. It will use the <code>Serial.println()</code> function in order to send messages to the computer. Use the <code>Serial Monitor</code> tool in the Arduino software in order to see these messages being sent back over the USB cable (<code>Tools → Serial Monitor</code>).</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">// Here we define a convenient pausing function</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="co">// that waits a given number of seconds</span></span>
 <span id="cb12-3"><a href="#cb12-3"></a><span class="dt">void</span> delay_seconds(<span class="dt">int</span> number_of_seconds) {</span>
@@ -244,6 +245,9 @@ In this diagram, you can see the order in which the computer evaluates this piec
 <span id="cb12-30"><a href="#cb12-30"></a>  <span class="co">// Wait for a second before you start the loop function again.</span></span>
 <span id="cb12-31"><a href="#cb12-31"></a>  delay_seconds(<span class="dv">1</span>);</span>
 <span id="cb12-32"><a href="#cb12-32"></a>}</span></code></pre></div>
+<p>Read the comments in the code above to try to understand what each line does. One great way to test your understanding is to consider what would happen if you change the code. For example, if you changed the line <code>counter = counter + 1</code> to the line below, how would the output change?</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1"></a>counter = counter + <span class="dv">2</span></span></code></pre></div>
+<p>Variables and functions are two of the most important building blocks of programming. At this point, we encourage you to continue to <a href="/animation">Intro to Animation</a> to continue discovering more about programming!</p>
 <div class="further-reading">
 <p>We provide more information about the <code>Serial Monitor</code> in our <a href="/arduino101">intro to the Arduino Software</a> page. The Arduino community also has very detailed resources on the programming language that we are using. You can start with their <a href="https://www.arduino.cc/en/Tutorial/Foundations">tutorial</a> for instance.</p>
 </div>

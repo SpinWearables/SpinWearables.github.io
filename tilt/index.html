@@ -115,26 +115,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 <main>
 <div class="intro-box">
-<p>The motion sensor in the SpinWheel can be used to detect the direction of gravity, which in turn can be visualized, creating a colorful digital level or tilt sensor. Here is one way to do this, which will also introduce you in a new way to the notion of vectors.</p>
+<p>The motion sensor in the SpinWheel can be used to detect the direction of gravity, which in turn can be visualized, creating a colorful digital level or tilt sensor. In this adventure, we’ll cover one way to make a tilt sensor, which will also introduce vectors in a new way.</p>
 </div>
-<p>On our planet what is horizontal and what is vertical is defined with respect to the direction of Earth’s gravitational pull. This makes it easy to measure how level a surface is by observing whether gravity can pull something off the surface, e.g., make a steel ball roll off. One can even use a toy like a <a href="https://en.wikipedia.org/wiki/Ball-in-a-maze_puzzle">ball-in-a-maze puzzle</a> as a simple tilt sensor.</p>
+<h2 id="simple-levels">Simple Levels</h2>
+<p>On our planet, what is horizontal and what is vertical is defined with respect to the direction of Earth’s gravitational pull. This makes it easy to measure how level a surface is by observing whether gravity can pull something off the surface. For example, what happens if you put a ball on a table that is not level? The ball will roll off and fall to the ground. One can even use a toy like a <a href="https://en.wikipedia.org/wiki/Ball-in-a-maze_puzzle">ball-in-a-maze puzzle</a> as a simple tilt sensor.</p>
 <figure>
 <img src="/images/bookpics/round_maze.jpg" alt="" /><figcaption>A toy in which the tilt can force a ball to roll in a given direction. <a class="imagecredit" href="https://commons.wikimedia.org/wiki/File:Round_maze.jpg">image credit Wikimedia</a></figcaption>
 </figure>
-<p>More commonly, an actual bubble level is used, where a small bubble encosed in a container with liquid is used to point out whether a surface is flat. The bubble tries to go as far up as possible, i.e., it rises against the direction of gravity. If the surface is not flat, the buble will not be centered in the domed top of the container.</p>
+<p>More commonly, to check whether a surface is level or not, an actual <a href="https://en.wikipedia.org/wiki/Spirit_level">bubble level</a> is used. You may have tried using one when hanging pictures or other decorations on a wall!</p>
+<p>To understand how a bubble level works, imagine what would happen if you took a glass of water and placed it on a table. If the table was perfectly horizontal, you would see the surface of the water in the glass appears horizontal too. What if the table has two legs that are slightly shorter than the others? Then, you might notice the surface of water in the glass appears tilted. You observe this tilt in the surface of the water because the surface is trying to remain perpendicular to gravity.</p>
+<p>Now, what happens if you replace your water with soda? On the tilted table, you should observe the surface of the soda in the glass to appear tilted, and the bubbles in your soda to be rising perpendicularly to the soda surface. Try this out and see what happens! The bubbles in your soda are made of gas (carbon dioxide in this case), and since carbon dioxide gas is less dense than your liquid soda, the gas bubbles will rise to the top of the liquid soda.</p>
+<!-- TODO: add a sketch of the table and glass of water and soda with bubbles? Also, I don't know about the "perpendicular to gravity" thing... but we could show the direction of gravity in the sketch
+-->
+<p>In a real bubble level, a small bubble enclosed in a container with liquid surrounding it. The bubble tries to go as far up in its enclosure as possible, since the bubble is made of air and air is lighter than the surrounding liquid. This means that the bubble will rise against the direction of gravity (just think of what happened to bubbles in your soda glass).</p>
+<p>The top of the bubble level enclosure is slightly domed. This means that if the surface you’ve placed the level on is flat, the highest point in the bubble level enclosure is the center of level and the bubble will move there (since the bubble is trying to rise as far up as it can). If the surface is not flat, the bubble will still rise to the highest point in the enclosure, but the bubble will not be centered in this case.</p>
+<!-- Could we maybe add some images of examples with a level and not level surface, showing what the bubble level looks like in each case? Also maybe a close up of the domed shape? Video of bubble level?
+-->
 <figure>
 <img src="/images/bookpics/onebubble.jpg" alt="" /><figcaption>A bubble level. <a class="imagecredit" href="https://publiclab.org/notes/mathew/10-26-2015/deploying-passive-particle-monitors">image credit Public Lab</a></figcaption>
 </figure>
-<p>We can do the same measurement using the SpinWheel. It contains a motion sensor, which is capable of measuring acceleration. Moreover, as the sensation of accelerating can not be distinguished from the senation of being pulled by gravity, this same sensor also reports Earth’s gravity.</p>
+<p>We can program the SpinWheel to make this same measurement. The SpinWheel contains a motion sensor, which is capable of measuring acceleration. Because the sensation of accelerating cannot be distinguished from the sensation of being pulled by gravity, so this same sensor also reports Earth’s gravity.</p>
+<p>Before jumping into the rest of this adventure, upload the tilt sensor code from <code>Examples → SpinWearables → Tilt_Sensor →  Simple</code>, and see what happens when you move the SpinWheel around!</p>
+<figure>
+<video src="/images/bookpics/preloaded_tilt3.mp4" muted autoplay playsinline loop>
+</video>
+<figcaption>
+</figcaption>
+</figure>
 <div class="further-reading">
-<p>The indistinguishability of gavity and acceleration is a fascinating topic that has puzzled scientists and physics students for centuries. It is what has inspired Einstein to work on his general theory of relativity. You can learn more about it in our <a href="/inertia">lesson on inertia and free fall</a>.</p>
+<p>The indistinguishability of gravity and acceleration is a fascinating topic that has puzzled scientists and physics students for centuries. It even inspired Einstein to work on his general theory of relativity! You can learn more about it in our lesson on inertia and free fall.</p>
 </div>
-<p>Now we need to find a convenient way to encode this notion of “direction of gravity” in a way that a piece of computer code can understand. The main difficulty is that gravity does not only have a certain strength (or intensity), but also a direction, therefore one single number is not sufficient to fully describe the measurement. For instance, notice how in the bubble level above, it is not only the distance between the bubble and the center of the dome that matters, but also, the direction in which the bubble has been displaced. For our solution, we can continue being inspired by other types of bubble levels.</p>
+<p>Now, let’s dive into how exactly the tilt sensor you just experimented with works.</p>
+<h2 id="measuring-gravity-in-two-dimensions">Measuring Gravity in Two Dimensions</h2>
+<p>Now we need to find a convenient way to encode the “direction of gravity” measured by the SpinWheel’s acceleration sensor in a way that a piece of computer code can understand. The main difficulty is that gravity does not only have a certain strength (or intensity), but also a direction. Therefore, we cannot fully describe the measurement with one number. For instance, notice how in the bubble level above, both the direction in which the bubble has been displaced and the distance between the bubble and the center of the dome matters. Other types of bubble levels offer the inspiration for solving this problem.</p>
 <figure>
 <img src="/images/bookpics/twobubble.jpg" alt="" /><figcaption>A bubble level with separate sensors for each axis of tilt. <a class="imagecredit" href="https://publiclab.org/notes/mathew/10-26-2015/deploying-passive-particle-monitors">image credit Public Lab</a></figcaption>
 </figure>
-<p>Notice how in this new level, we are using two separate tubes, perpendicular to each other, instead of one single dome. Now we can use one number per bubble, simply denoting its displacement away from the middle of its tube. Those two numbers together contain all the information about the tilt of the surface. We just described a <span class="footnote">position in the two-dimensional plane<span>Something that can not be expressed by a single number.</span></span>, by using a <span class="footnote">pair of numbers<span>Each giving the displacements along a single axis.</span></span>. Mathematicians call this operation <a href="/vectors">vector decomposition</a>.</p>
-<p>You can gain some more intuition about this decomposition procedure below. The black arrow is <span class="footnote">the two-dimensional object <span>Having not only length but also a direction in a 2D plane.</span></span> that we want to represent by splitting it in a component along the <span class="math inline">\(x\)</span> axis and a component along the <span class="math inline">\(y\)</span> axis (green and blue, respectively).</p>
+<p>Notice how in this new level, we are using two separate tubes that are perpendicular to each other, instead of one single dome. Now we can use one number per bubble, simply denoting its displacement away from the middle of its tube. These two numbers together contain all the information about the tilt of the surface. We just described a <span class="footnote">position in the two-dimensional plane<span>Something that cannot be expressed by a single number.</span></span>, by using a <span class="footnote">pair of numbers<span>Each giving the displacements along a single axis.</span></span>. Mathematicians call this operation <a href="/vectors">vector decomposition</a>.</p>
+<p>You can gain some more intuition about this decomposition procedure below. The black arrow is <span class="footnote">the two-dimensional object <span>Having both length and direction in a 2D plane.</span></span> that we want to represent by splitting it in a component along the <span class="math inline">\(x\)</span> axis and a component along the <span class="math inline">\(y\)</span> axis (green and blue, respectively). The black arrow is called a vector.</p>
+<div class="further-reading">
+<p>You can learn more about how to describe and work with quantities that have a direction from our <a href="/vectors">lesson on vectors</a>.</p>
+</div>
 <style>
 #grid2d {
   text-align: center;
@@ -257,10 +278,18 @@ function plot_all(){
 
 setInterval(plot_all, 50);
 </script>
-<div class="further-reading">
-<p>You can learn more about how to describe and work with quantities that have a direction from our <a href="/vectors">lesson on vectors</a>.</p>
-</div>
-<p>Now we have everything we need to start working with measurements of tilt (direction of gravity) on the SpinWheel. We will use the <code>readIMU()</code> function to ask the Inertial Measurement Unit (IMU) to measure the three components of the gravitational vector (shown in grey in the visualization below). Below you can see how the three axes, <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> are defined. We will use only the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> components as they are the ones corresponding to the displacement of the air bubbles seen in the bubble levels above. You can gain intuition about how these components will behave by exploring the interactive SpinWheel visualization below and carefully observing how the green and blue components change.</p>
+<!-- TODO: Stefan will be modifying this to better link with the bubble sensors.
+-->
+<h2 id="measuring-gravity-with-the-spinwheel">Measuring Gravity with the SpinWheel</h2>
+<p>The SpinWheel has sensors that can measure gravity along <span class="footnote">three axes<span>Below the interactive SpinWheel animation, you can see how these three axes, <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span>, are defined.</span></span>. Before we use this information to create a tilt sensor, first play with the interactive SpinWheel animation below. Pay close attention to the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> components as they are the ones corresponding to the displacement of the air bubbles seen in the bubble levels above. You can gain intuition about how these components of gravity will behave by exploring the interactive SpinWheel visualization below and carefully observing how <span class="footnote">the green and blue components change<span>Representing the x and y axes.</span></span>.</p>
+<!-- I think this needs more explanation.
+-->
+<!-- Are x, y, z labels possible to add to the interactive animation? So that people don't need to match the colors? 
+-->
+<!-- This animation is fun, but I do not understand what I am supposed to be doing with it? 
+-->
+<!-- TODO: add some pictures showing how if the SpinWheel is tilted, gravity is no longer perpendicular to the plane and that is how the measurements work
+-->
 <div id="threediv">
 <div id="threejsanim">
 
@@ -470,46 +499,92 @@ animate();
 <figure>
 <img src="/images/bookpics/dance_axis.png" alt="" /><figcaption>These are the three axes that the SpinWheel can detect acceleration and gravity along. In the interactive 3D diagram you can see how the vector of gravitational acceleration (in grey) is decomposed along these three axes. You can drag, ctrl+drag, or scroll on the 3D image to rotate, pan, or zoom the camera.<a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
 </figure>
-<p>Our code needs little more than reading the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> components and trigger the corresponding LEDs. This is a rather minimal example that reads only the gravity and acceleration along <span class="math inline">\(x\)</span>, interpreting that value as a description of the tilt along that axis, and then lits a corresponding LED along the same axis as appropriate. The value is contained in the <code>SpinWheel.ax</code> variable.</p>
+<h2 id="coding-your-own-tilt-sensor">Coding your own Tilt Sensor</h2>
+<p>Now that we have experimented with how the SpinWheel measures gravity, let’s start writing the code for the tilt sensor! To start, we’ll have two of the SpinWheel’s LEDs respond to tilt along the <span class="math inline">\(x\)</span> axis. The SpinWheel will read the gravity and acceleration along the <span class="math inline">\(x\)</span> axis, interpret that value as a description of the tilt along that axis, and then light up a corresponding LED along the same axis as appropriate.</p>
+<h3 id="from-an-empty-sketch">From an Empty Sketch</h3>
+<p>We will build our tilt sensor program step by step, starting with this empty sketch. A good first step is to write some simple test code that just prints a few messages, confirming that your device is still functioning. For instance, copy the following code into your file. This code, once running on the SpinWheel, will repeatedly send the message “I am working!” to the computer that your SpinWheel is attached to. As always, we will add comments to the code, so that the purpose of each line is explained. (A comment is a line of code that is not run by the computer, but meant to be interpreted by humans. In this code, comment lines start with <code>//</code>).</p>
+<div class="further-reading">
+<p>You can consult our <a href="/basics">SpinWheel basic commands page</a> to remind yourself how to read the computer code shown below. For more details about coding itself, check out the <a href="/progpatterns">Coding Building Blocks page</a>.</p>
+</div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>  SpinWheel.begin();</span>
-<span id="cb1-7"><a href="#cb1-7"></a>}</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="co">// Read all sensor data.</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>  SpinWheel.readIMU();</span>
-<span id="cb1-12"><a href="#cb1-12"></a></span>
-<span id="cb1-13"><a href="#cb1-13"></a>  <span class="co">// Save the x-axis measurement in a variable.</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a>  <span class="co">// Turn off all LEDs.</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>  SpinWheel.clearAllLEDs();</span>
-<span id="cb1-18"><a href="#cb1-18"></a></span>
-<span id="cb1-19"><a href="#cb1-19"></a>  <span class="co">// If the tilt is in a given direction,</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>  <span class="co">// turn on the corresponding LED.</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) {</span>
-<span id="cb1-22"><a href="#cb1-22"></a>    SpinWheel.setLargeLED(<span class="dv">5</span>,-x, -x,-x);</span>
-<span id="cb1-23"><a href="#cb1-23"></a>  }</span>
-<span id="cb1-24"><a href="#cb1-24"></a>  <span class="cf">else</span> <span class="cf">if</span> (x&lt;-<span class="dv">10</span>) {</span>
-<span id="cb1-25"><a href="#cb1-25"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>, x, x, x);</span>
-<span id="cb1-26"><a href="#cb1-26"></a>  }</span>
-<span id="cb1-27"><a href="#cb1-27"></a></span>
-<span id="cb1-28"><a href="#cb1-28"></a>  SpinWheel.drawFrame();</span>
-<span id="cb1-29"><a href="#cb1-29"></a>}</span></code></pre></div>
-<p>You can upload this code directly from the Examples menu in the Arduino software. <code>Examples → SpinWearables → Tilt_Sensor →  Simple</code> has a slightly more detailed version of the above code, sensing both along <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. However, you should feel free to explore your artistic tendencies, making more elaborate visualizations. A visualization similar to the one shown below can be found in <code>Examples → SpinWearables → Tilt_Sensor →  Fancy</code>.</p>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="co">// Connect to the computer, so we can read status messages.</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  Serial.begin(<span class="dv">115200</span>);</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="co">// Ensure the special SpinWheel hardware is working.</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  SpinWheel.begin();  </span>
+<span id="cb1-9"><a href="#cb1-9"></a>}</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="co">// Send a confirmation message over and over.</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  Serial.println(<span class="st">&quot;I am working!&quot;</span>); </span>
+<span id="cb1-14"><a href="#cb1-14"></a>}</span></code></pre></div>
+<p>If you upload this sketch to the SpinWheel, you won’t be able to see anything happen. It doesn’t turn on the LEDs, instead the sketch simply set ups the SpinWheel and sends a confirmation message (“I am working!”) repeatedly using <code>Serial.println()</code>. If you want to see this message, navigate to <code>Tools -&gt; Serial Monitor</code> in the Arduino software.</p>
+<h3 id="measuring-tilt">Measuring Tilt</h3>
+<p>Now we can start working with measurements of tilt (direction of gravity) on the SpinWheel. We do this by calling the <code>SpinWheel.readIMU()</code> function to measure the three components of the gravitational vector (shown in grey in the visualization below). IMU stands for Inertial Measurement Unit: a fancy name for something that senses motion. This function will return 3 values, one for each direction of motion. Below you can see how the three axes, <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> are defined. To begin with, we will only use the <span class="math inline">\(x\)</span> components of the measurement.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>  SpinWheel.begin();</span>
+<span id="cb2-7"><a href="#cb2-7"></a>}</span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="dt">void</span> loop() {</span>
+<span id="cb2-10"><a href="#cb2-10"></a>  <span class="co">// Read all sensor data.</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>  SpinWheel.readIMU();</span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a>  <span class="co">// Save the x-axis measurement in a variable.</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
+<span id="cb2-15"><a href="#cb2-15"></a>}</span></code></pre></div>
+<p>In the sketch above, the measurement of gravity and acceleration is contained in the <code>SpinWheel.ax</code> variable. We aren’t using this measurement to do anything yet, however. In the next section, we’ll begin changing the LEDs based on this information.</p>
+<h3 id="responding-to-tilt-along-the-x-axis">Responding to Tilt Along the X-axis</h3>
+<p>To make a useful level, we need the LEDs to change in response to how the SpinWheel is tilted. The code below lights up either the large LED 5 or 7 depending on which LED is pointing down. Upload the below code onto your SpinWheel and experiment some to see how it works.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  SpinWheel.begin();</span>
+<span id="cb3-7"><a href="#cb3-7"></a>}</span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="dt">void</span> loop() {</span>
+<span id="cb3-10"><a href="#cb3-10"></a>  <span class="co">// Read all sensor data.</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>  SpinWheel.readIMU();</span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a>  <span class="co">// Save the x-axis measurement in a variable.</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
+<span id="cb3-15"><a href="#cb3-15"></a></span>
+<span id="cb3-16"><a href="#cb3-16"></a>  <span class="co">// Turn off all LEDs.</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>  SpinWheel.clearAllLEDs();</span>
+<span id="cb3-18"><a href="#cb3-18"></a></span>
+<span id="cb3-19"><a href="#cb3-19"></a>  <span class="co">// If the tilt is in a given direction,</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a>  <span class="co">// turn on the corresponding LED.</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a>  <span class="co">// We only want the SpinWheel to register</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a>  <span class="co">// if the tilt is sufficiently large.</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a>  <span class="cf">if</span> (x &gt; <span class="dv">10</span>) {</span>
+<span id="cb3-24"><a href="#cb3-24"></a>    SpinWheel.setLargeLED(<span class="dv">5</span>,-x, -x,-x);</span>
+<span id="cb3-25"><a href="#cb3-25"></a>  }</span>
+<span id="cb3-26"><a href="#cb3-26"></a>  <span class="cf">else</span> <span class="cf">if</span> (x &lt; -<span class="dv">10</span>) {</span>
+<span id="cb3-27"><a href="#cb3-27"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>, x, x, x);</span>
+<span id="cb3-28"><a href="#cb3-28"></a>  }</span>
+<span id="cb3-29"><a href="#cb3-29"></a></span>
+<span id="cb3-30"><a href="#cb3-30"></a>  SpinWheel.drawFrame();</span>
+<span id="cb3-31"><a href="#cb3-31"></a>}</span></code></pre></div>
+<p>Because the SpinWheel’s motion sensors are very sensitive, we only want the LEDs to light up if the SpinWheel tilts enough. We have decided that if <code>SpinWheel.ax</code>, or <code>x</code> in the code above, is bigger than 10, then we want the LED to light up. You could decide to make your tilt sensor more or less sensitive by adjusting the value in the lines: <code>if (x &gt; 10)</code> and <code>else if (x &lt; -10)</code>. You could instead have the LED on the side that is higher light up by swapping which LED is called (replacing <code>5</code> with <code>7</code> in the first instance of <code>setLargeLED</code> and <code>7</code> with <code>5</code> in the second instance, so your code looks like the following:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a>  <span class="cf">if</span> (x &gt; <span class="dv">10</span>) {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>,-x, -x,-x);</span>
+<span id="cb4-3"><a href="#cb4-3"></a>  }</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="cf">else</span> <span class="cf">if</span> (x &lt; -<span class="dv">10</span>) {</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    SpinWheel.setLargeLED(<span class="dv">5</span>, x, x, x);</span>
+<span id="cb4-6"><a href="#cb4-6"></a>  }</span></code></pre></div>
+<p>You can experiment with the code in other ways as well. For instance, you could change the color that LED 5 and 7 light up or have more LEDs also light up.</p>
+<h3 id="improving-the-tilt-sensor">Improving the Tilt Sensor</h3>
+<p>If you want your tilt sensor to behave more like the second level in the pictures above, then you can upload a slightly more detailed version of the above code that senses both along <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. Go to the Examples menu in the Arduino software, and open the file here: <code>Examples → SpinWearables → Tilt_Sensor →  Simple</code>. After looking at this version, feel free to modify the code further, creating more elaborate visualizations. A version similar to the one shown below can be found in <code>Examples → SpinWearables → Tilt_Sensor →  Fancy</code>.</p>
 <p>Both the <a href="/codedoc/examples/Tilt_Sensor/Simple/Simple.ino.html"><code>Simple</code></a> and the <a href="/codedoc/examples/Tilt_Sensor/Fancy/Fancy.ino.html"><code>Fancy</code></a> code examples can also be seen through the browser in literate programming renditions.</p>
-<figure>
-<video src="/images/bookpics/preloaded_tilt3.mp4" muted autoplay playsinline loop>
-</video>
-<figcaption>
-</figcaption>
-</figure>
 <div class="further-reading">
-<p>We have <a href="/allcommands">a list of visualization functions</a> that can be of use when making more elaborate tilt visualizations. You might also be interested in the <a href="/dancing">dancing with colors</a> or <a href="/stepcounter">step counter</a> projects, which explore different ways to depict motion with the SpinWheel.</p>
+<p>We have <a href="/allcommands">a list of visualization functions</a> that can be of use when making more elaborate tilt visualizations. You might also be interested in the <a href="/dancing">dancing with color</a> or <a href="/stepcounter">step counter</a> projects, which explore different ways to depict motion with the SpinWheel.</p>
 </div>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"

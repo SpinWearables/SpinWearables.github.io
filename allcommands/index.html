@@ -86,7 +86,7 @@
 <link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
 <script src='/simspinwheel/simspinwheel.js'></script>
 <div class="intro-box">
-<p>This document lists some of the most important functions available with the SpinWheel code library. With these functions you can detect motion and set the LEDs to different color patterns. If you have never programmed with Arduino before, be sure to read our <a href="/quickstart">Initial Setup Guide</a> and <a href="/basics">guide on the basic structure of a program</a>. To learn more about the building blocks of coding, check out the <a href="/progpatterns">coding building blocks page</a>. For more details, you can consult the <a href="/codedoc/SpinWearables.h.html">annotated source code</a>, listing everything available in the library. This will serve as a reference as you code the SpinWheel in whatever designs you imagine.</p>
+<p>This document lists some of the most important functions available with the SpinWheel code library. With these functions you can detect motion and set the LEDs to different color patterns. If you have never programmed with Arduino before, be sure to read our <a href="/quickstart">Initial Setup Guide</a> and <a href="/basics">guide on the basic structure of a program</a>. To learn more about the building blocks of coding, check out the <a href="/progpatterns">coding building blocks page</a>. For more details, you can consult the <a href="/codedoc/src/SpinWearables.h.html">annotated source code</a>, listing everything available in the library. This will serve as a reference as you code the SpinWheel in whatever designs you imagine.</p>
 </div>
 <p>You can use the virtual SpinWheel simulator to test each of these functions. If a function involves the motion sensor, you can grab the virtual device with your mouse and shake it, simulating how the physical sensor would respond to real motion.</p>
 <h2 id="led-manipulation">LED Manipulation</h2>
@@ -210,7 +210,7 @@ void loop() {
 <h3 id="circular-progress-bar-with-setsmallledsprogress">Circular progress bar with <code>setSmallLEDsProgress</code></h3>
 <p>You can use this to create an arc around the SpinWheel with the small LEDs. It has four arguments: an angle that specifies the extent of the arc, and the red, green, and blue LEDs brightness. Each goes from 0 to 255. To have an arc that lights up LEDs 0-9 in blue, use <code>setSmallLEDsProgress(200, 0, 0, 255)</code>. You can also provide only two arguments, the angle and an rgb color.</p>
 <h3 id="circular-pointer-with-setsmallledspointer">Circular pointer with <code>setSmallLEDsPointer</code></h3>
-<p>This is similar to the above function, but instead you can specify the middle of the arc. To use our default arc length (check out our <a href="codedoc/SpinWearables.h.html">annotated source code</a>), simply specify the angle for the middle of the arc (0-255) and the color (either the red, green, and blue components individually or as rgb).</p>
+<p>This is similar to the above function, but instead you can specify the middle of the arc. To use our default arc length (check out our <a href="/codedoc/src/SpinWearables.h.html">annotated source code</a>), simply specify the angle for the middle of the arc (0-255) and the color (either the red, green, and blue components individually or as rgb).</p>
 <h2 id="color-and-brightness-helpers">Color and Brightness Helpers</h2>
 <p>Various functions that help prepare colors or map a given number to a continuously changing brightness. A good place to see why these functions are useful is the set of lessons on <a href="/animation">animations</a>.</p>
 <h3 id="a-colorwheel">A <code>colorWheel</code></h3>
@@ -270,7 +270,7 @@ void loop() {
 </figure>
 <!--TODO: implement something to use the button-->
 <h2 id="advance-direct-use-of-the-hardware-bypassing-the-spinwheel">Advance direct use of the hardware, bypassing the SpinWheel</h2>
-<p>You can consult the <code>begin</code>, <code>readIMU</code>, <code>drawFrame</code>, <code>setLargeLED</code>, and <code>setSmallLED</code> function in our <a href="codedoc/SpinWearables.h.html">source code</a> to see how to use the motion sensor, small LEDs, and large LEDs, without relying on the SpinWearables library.</p>
+<p>You can consult the <code>begin</code>, <code>readIMU</code>, <code>drawFrame</code>, <code>setLargeLED</code>, and <code>setSmallLED</code> function in our <a href="/codedoc/src/SpinWearables.h.html">source code</a> to see how to use the motion sensor, small LEDs, and large LEDs, without relying on the SpinWearables library.</p>
 <p>The button is attached to pin 7, and you can use <code>digitalWrite(7, INPUT_PULLUP)</code> to set it up. Then you can use <code>digitalRead(7)</code> to read the button directly or <code>attachInterrupt(digitalPinToInterrupt(7), callback, FALLING)</code> to set up an asynchronous callback.</p>
 <script data-isso="//comments.spinwearables.com/"
 data-isso-reply-to-self="false"
