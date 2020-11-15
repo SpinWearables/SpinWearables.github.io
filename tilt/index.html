@@ -124,21 +124,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </figure>
 <p>More commonly, to check whether a surface is level or not, an actual <a href="https://en.wikipedia.org/wiki/Spirit_level">bubble level</a> is used. You may have tried using one when hanging pictures or other decorations on a wall!</p>
 <p>To understand how a bubble level works, imagine what would happen if you took a glass of water and placed it on a table. If the table was perfectly horizontal, you would see the surface of the water in the glass appears horizontal too. What if the table has two legs that are slightly shorter than the others? Then, you might notice the surface of water in the glass appears tilted. You observe this tilt in the surface of the water because the surface is trying to remain perpendicular to gravity.</p>
-<p>Now, what happens if you replace your water with soda? On the tilted table, you should observe the surface of the soda in the glass to appear tilted, and the bubbles in your soda to be rising perpendicularly to the soda surface. Try this out and see what happens! The bubbles in your soda are made of gas (carbon dioxide in this case), and since carbon dioxide gas is less dense than your liquid soda, the gas bubbles will rise to the top of the liquid soda.</p>
+<p>Now, what happens if you replace your water with soda? On the tilted table, you should observe the surface of the soda in the glass shifts to remain parallel to the ground, and the bubbles in your soda still rise straight up (perpindicular to the soda’s surface, but not to the bottom of the glass). Try this out and see what happens! The bubbles in your soda are made of gas (carbon dioxide in this case), and since carbon dioxide gas is less dense than your liquid soda, the gas bubbles rise to the top of the liquid soda.</p>
 <figure>
 <img src="/images/bookpics/level_and_glass.png" style="max-width:90%">
 <figcaption>
 Bubbles rise against gravity, both in the cylinder of the level and in a glass of carbonated water.<a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a>
 </figcaption>
 </figure>
-<p>In a real bubble level, a small bubble enclosed in a container with liquid surrounding it. The bubble tries to go as far up in its enclosure as possible, since the bubble is made of air and air is lighter than the surrounding liquid. This means that the bubble will rise against the direction of gravity (just think of what happened to bubbles in your soda glass).</p>
+<p>In a real bubble level, a small bubble is enclosed in a container with liquid surrounding it. The bubble tries to go as far up in its enclosure as possible, since the bubble is made of air and air is lighter than the surrounding liquid. This means that the bubble will rise against the direction of gravity (just think of what happened to bubbles in your soda glass). You can see this illustrated in the picture above where the bubble in the level on the tilted table rises to the highest point (to the right).</p>
 <p>The top of the bubble level enclosure is slightly domed. This means that if the surface you’ve placed the level on is flat, the highest point in the bubble level enclosure is the center of level and the bubble will move there (since the bubble is trying to rise as far up as it can). If the surface is not flat, the bubble will still rise to the highest point in the enclosure, but the bubble will not be centered in this case.</p>
 <!-- Could we maybe add some images of examples with a level and not level surface, showing what the bubble level looks like in each case? Also maybe a close up of the domed shape? Video of bubble level?
 -->
 <figure>
 <img src="/images/bookpics/onebubble.jpg" alt="" /><figcaption>A bubble level. <a class="imagecredit" href="https://publiclab.org/notes/mathew/10-26-2015/deploying-passive-particle-monitors">image credit Public Lab</a></figcaption>
 </figure>
-<p>We can program the SpinWheel to make this same measurement. The SpinWheel contains a motion sensor, which is capable of measuring acceleration. Because the sensation of accelerating cannot be distinguished from the sensation of being pulled by gravity, so this same sensor also reports Earth’s gravity.</p>
+<p>We can program the SpinWheel to make this same measurement. The SpinWheel contains a motion sensor, which is capable of measuring acceleration. Because the sensation of accelerating cannot be distinguished from the sensation of being pulled by gravity, this same sensor also reports Earth’s gravity.</p>
 <p>Before jumping into the rest of this adventure, upload the tilt sensor code from <code>Examples → SpinWearables → Tilt_Sensor →  Simple</code>, and see what happens when you move the SpinWheel around!</p>
 <figure>
 <video src="/images/bookpics/preloaded_tilt3.mp4" muted autoplay playsinline loop>
@@ -149,17 +149,13 @@ Bubbles rise against gravity, both in the cylinder of the level and in a glass o
 <div class="further-reading">
 <p>The indistinguishability of gravity and acceleration is a fascinating topic that has puzzled scientists and physics students for centuries. It even inspired Einstein to work on his general theory of relativity! You can learn more about it in our lesson on inertia and free fall.</p>
 </div>
-<p>Now, let’s dive into how exactly the tilt sensor you just experimented with works.</p>
 <h2 id="measuring-gravity-in-two-dimensions">Measuring Gravity in Two Dimensions</h2>
-<p>Now we need to find a convenient way to encode the “direction of gravity” measured by the SpinWheel’s acceleration sensor in a way that a piece of computer code can understand. The main difficulty is that gravity does not only have a certain strength (or intensity), but also a direction. Therefore, we cannot fully describe the measurement with one number. For instance, notice how in the bubble level above, both the direction in which the bubble has been displaced and the distance between the bubble and the center of the dome matters. Other types of bubble levels offer the inspiration for solving this problem.</p>
+<p>To create this tilt sensor, we need to find a convenient way to encode the “direction of gravity” measured by the SpinWheel’s acceleration sensor in a way that a piece of computer code can understand. The main difficulty is that gravity does not only have a certain strength (or intensity), but also a direction. Therefore, we cannot fully describe the measurement with one number. For instance, notice how in the bubble level above, both the direction in which the bubble has been displaced and the distance between the bubble and the center of the dome give information about the tilt of the surface. If a surface is more tilted, the bubble will move farther from the center, for instance. Other types of bubble levels offer the inspiration for solving this problem.</p>
 <figure>
 <img src="/images/bookpics/twobubble.jpg" alt="" /><figcaption>A bubble level with separate sensors for each axis of tilt. <a class="imagecredit" href="https://publiclab.org/notes/mathew/10-26-2015/deploying-passive-particle-monitors">image credit Public Lab</a></figcaption>
 </figure>
 <p>Notice how in this new level, we are using two separate tubes that are perpendicular to each other, instead of one single dome. Now we can use one number per bubble, simply denoting its displacement away from the middle of its tube. These two numbers together contain all the information about the tilt of the surface. We just described a <span class="footnote">position in the two-dimensional plane<span>Something that cannot be expressed by a single number.</span></span>, by using a <span class="footnote">pair of numbers<span>Each giving the displacements along a single axis.</span></span>. Mathematicians call this operation <a href="/vectors">vector decomposition</a>.</p>
-<p>You can gain some more intuition about this decomposition procedure below. The black arrow is <span class="footnote">the two-dimensional object<span>Having both length and direction in a 2D plane.</span></span> that we want to represent by splitting it in a component along the <span class="math inline">\(x\)</span> axis and a component along the <span class="math inline">\(y\)</span> axis (green and blue, respectively). The black arrow is called a vector.</p>
-<div class="further-reading">
-<p>You can learn more about how to describe and work with quantities that have a direction from our <a href="/vectors">lesson on vectors</a>.</p>
-</div>
+<p>You can gain some more intuition about this decomposition procedure below. Imagine that the bubble from the first tilt sensor is at the end of the black arrow. The arrow represents how the bubble moves from the center if you were to tilt the surface it is resting on. The bubbles on the side represent the two tubes of a level like that shown above. The black arrow is <span class="footnote">the two-dimensional object<span>Having both length and direction in a 2D plane.</span></span> that we want to represent by splitting it in a component along the <span class="math inline">\(x\)</span> axis (green) and a component along the <span class="math inline">\(y\)</span> axis (blue). The black arrow is called a vector.</p>
 <style>
 #grid2d {
   text-align: center;
@@ -296,8 +292,11 @@ setInterval(plot_all, 50);
 </script>
 <!-- TODO: Stefan will be modifying this to better link with the bubble sensors.
 -->
+<div class="further-reading">
+<p>You can learn more about how to describe and work with quantities that have a direction from our <a href="/vectors">lesson on vectors</a>.</p>
+</div>
 <h2 id="measuring-gravity-with-the-spinwheel">Measuring Gravity with the SpinWheel</h2>
-<p>The SpinWheel has sensors that can measure gravity along <span class="footnote">three axes<span>Below the interactive SpinWheel animation, you can see how these three axes, <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span>, are defined.</span></span>. Before we use this information to create a tilt sensor, first play with the interactive SpinWheel animation below. Pay close attention to the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> components as they are the ones corresponding to the displacement of the air bubbles seen in the bubble levels above. You can gain intuition about how these components of gravity will behave by exploring the interactive SpinWheel visualization above and carefully observing how <span class="footnote">the green and blue components change<span>Representing the x and y axes.</span></span>.</p>
+<p>The SpinWheel has sensors that can measure gravity along <span class="footnote">three axes<span>Below the interactive SpinWheel animation, you can see how these three axes, x, y, and z, are defined.</span></span>. Before we use this information to create a tilt sensor, first play with the interactive SpinWheel animation below. Pay close attention to the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> components as they are the ones corresponding to the displacement of the air bubbles seen in the bubble levels above. You can gain intuition about how these components of gravity will behave by exploring the interactive SpinWheel visualization above and carefully observing how <span class="footnote">the green and blue components change<span>Representing the x and y axes.</span></span>.</p>
 <!-- I think this needs more explanation.
 -->
 <!-- Are x, y, z labels possible to add to the interactive animation? So that people don't need to match the colors? 
@@ -310,7 +309,7 @@ setInterval(plot_all, 50);
 <div id="threejsanim">
 
 </div>
-Tilt back and forth:<input id="fbtilt" type="range" min="-100" max="+100" value="30">Tilt sideways:<input id="lrtilt" type="range" min="-100" max="+100">Rotate face:<input id="frotate" type="range" min="-100" max="+100">
+<span id="xlenp">X component: <span id="xlen"></span></span><span id="ylenp">Y component: <span id="ylen"></span></span>Tilt back and forth:<input id="fbtilt" type="range" min="-100" max="+100" value="30">Tilt sideways:<input id="lrtilt" type="range" min="-100" max="+100">Rotate face:<input id="frotate" type="range" min="-100" max="+100">
 </div>
 <style>
 #threediv {
@@ -320,6 +319,12 @@ Tilt back and forth:<input id="fbtilt" type="range" min="-100" max="+100" value=
 #threediv > * {
   display: block;
   margin: auto;
+}
+#threediv #xlenp {
+  color: #228e2c;
+}
+#threediv #ylenp {
+  color: #2676b3;
 }
 </style>
 <script type="module">
@@ -385,11 +390,14 @@ var box;
 var arrow;
 var xarrow, yarrow, zarrow;
 var sphere;
+var lx_glob, ly_glob;
 const size = 400;
 const animdiv = document.getElementById('threejsanim');
 const fgtilt = document.getElementById('fbtilt');
 const lrtilt = document.getElementById('lrtilt');
 const frotate = document.getElementById('frotate');
+const xlen = document.getElementById('xlen');
+const ylen = document.getElementById('ylen');
    
 function init() {
   scene = makeScene();
@@ -428,7 +436,7 @@ function init() {
     40, 0xf58559,
     10, 4
   );
-  box.add(zarrow);
+  //box.add(zarrow);
 
   /*
   var sgeometry = new THREE.SphereGeometry( 3, 12, 12 );
@@ -488,7 +496,7 @@ function animate() {
   const z0 = new THREE.Vector3(0,1,0).applyEuler(euler);
   const lz = z0.dot(g);
   const alz = Math.abs(lz)*40
-  zarrow.setLength(alz, Math.min(10,alz), 4);
+  //zarrow.setLength(alz, Math.min(10,alz), 4);
   var dz;
   if (lz > 0) {
     dz = pz0;
@@ -497,7 +505,7 @@ function animate() {
   }
   xarrow.setDirection(dx);
   yarrow.setDirection(dy);
-  zarrow.setDirection(dz);
+  //zarrow.setDirection(dz);
   /*
   const xy = x0.clone()
                .multiplyScalar(lx*40);
@@ -506,6 +514,10 @@ function animate() {
   sphere.position.copy(xy);
   */
   renderer.render( scene, camera );
+  lx_glob = lx;
+  ly_glob = ly;
+  xlen.innerHTML = Math.round(lx_glob*100)/100;
+  ylen.innerHTML = Math.round(ly_glob*100)/100;
 }
  
 init();
