@@ -125,8 +125,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>More commonly, to check whether a surface is level or not, an actual <a href="https://en.wikipedia.org/wiki/Spirit_level">bubble level</a> is used. You may have tried using one when hanging pictures or other decorations on a wall!</p>
 <p>To understand how a bubble level works, imagine what would happen if you took a glass of water and placed it on a table. If the table was perfectly horizontal, you would see the surface of the water in the glass appears horizontal too. What if the table has two legs that are slightly shorter than the others? Then, you might notice the surface of water in the glass appears tilted. You observe this tilt in the surface of the water because the surface is trying to remain perpendicular to gravity.</p>
 <p>Now, what happens if you replace your water with soda? On the tilted table, you should observe the surface of the soda in the glass to appear tilted, and the bubbles in your soda to be rising perpendicularly to the soda surface. Try this out and see what happens! The bubbles in your soda are made of gas (carbon dioxide in this case), and since carbon dioxide gas is less dense than your liquid soda, the gas bubbles will rise to the top of the liquid soda.</p>
-<!-- TODO: add a sketch of the table and glass of water and soda with bubbles? Also, I don't know about the "perpendicular to gravity" thing... but we could show the direction of gravity in the sketch
--->
+<figure>
+<img src="/images/bookpics/level_and_glass.png" style="max-width:90%">
+<figcaption>
+Bubbles rise against gravity, both in the cylinder of the level and in a glass of carbonated water.<a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a>
+</figcaption>
+</figure>
 <p>In a real bubble level, a small bubble enclosed in a container with liquid surrounding it. The bubble tries to go as far up in its enclosure as possible, since the bubble is made of air and air is lighter than the surrounding liquid. This means that the bubble will rise against the direction of gravity (just think of what happened to bubbles in your soda glass).</p>
 <p>The top of the bubble level enclosure is slightly domed. This means that if the surface you’ve placed the level on is flat, the highest point in the bubble level enclosure is the center of level and the bubble will move there (since the bubble is trying to rise as far up as it can). If the surface is not flat, the bubble will still rise to the highest point in the enclosure, but the bubble will not be centered in this case.</p>
 <!-- Could we maybe add some images of examples with a level and not level surface, showing what the bubble level looks like in each case? Also maybe a close up of the domed shape? Video of bubble level?
@@ -152,7 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="/images/bookpics/twobubble.jpg" alt="" /><figcaption>A bubble level with separate sensors for each axis of tilt. <a class="imagecredit" href="https://publiclab.org/notes/mathew/10-26-2015/deploying-passive-particle-monitors">image credit Public Lab</a></figcaption>
 </figure>
 <p>Notice how in this new level, we are using two separate tubes that are perpendicular to each other, instead of one single dome. Now we can use one number per bubble, simply denoting its displacement away from the middle of its tube. These two numbers together contain all the information about the tilt of the surface. We just described a <span class="footnote">position in the two-dimensional plane<span>Something that cannot be expressed by a single number.</span></span>, by using a <span class="footnote">pair of numbers<span>Each giving the displacements along a single axis.</span></span>. Mathematicians call this operation <a href="/vectors">vector decomposition</a>.</p>
-<p>You can gain some more intuition about this decomposition procedure below. The black arrow is <span class="footnote">the two-dimensional object <span>Having both length and direction in a 2D plane.</span></span> that we want to represent by splitting it in a component along the <span class="math inline">\(x\)</span> axis and a component along the <span class="math inline">\(y\)</span> axis (green and blue, respectively). The black arrow is called a vector.</p>
+<p>You can gain some more intuition about this decomposition procedure below. The black arrow is <span class="footnote">the two-dimensional object<span>Having both length and direction in a 2D plane.</span></span> that we want to represent by splitting it in a component along the <span class="math inline">\(x\)</span> axis and a component along the <span class="math inline">\(y\)</span> axis (green and blue, respectively). The black arrow is called a vector.</p>
 <div class="further-reading">
 <p>You can learn more about how to describe and work with quantities that have a direction from our <a href="/vectors">lesson on vectors</a>.</p>
 </div>
@@ -180,13 +184,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 X component: <span id="xshow">0</span>
 </div>
 <div>
-<input type="range" min="-10" max="10"  id="xvalue">
+<input type="range" min="-6" max="6"  id="xvalue">
 </div>
 <div class="grid2dcontrol ycom">
 Y component: <span id="yshow">0</span>
 </div>
 <div>
-<input type="range" min="-10" max="10"  id="yvalue">
+<input type="range" min="-6" max="6"  id="yvalue">
 </div>
 <div class="grid2dcontrol">
 Magnitude: <span id="magshow">0</span>
@@ -207,6 +211,14 @@ function canvas_arrow(context, fromx, fromy, tox, toy) {
   context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
 }
 
+const level_tube_img = new Image();
+level_tube_img.src = "/images/bookpics/level_canvas_tube.png";
+const level_bubble_img = new Image();
+level_bubble_img.src = "/images/bookpics/level_canvas_bubble.png";
+const level_tube_img_r = new Image();
+level_tube_img_r.src = "/images/bookpics/level_canvas_tube_r.png";
+const level_bubble_img_r = new Image();
+level_bubble_img_r.src = "/images/bookpics/level_canvas_bubble_r.png";
 const v_to_path2D = document.getElementById('vectorGrid');
 const ctx2D = v_to_path2D.getElementsByClassName('trajectory1D')[0].getContext('2d');
 var xElement = document.getElementById("xvalue");
@@ -238,6 +250,8 @@ function canvas_axis(context, maxX, maxY) {
     context.lineTo(midX+i*stepX,maxY);
   }
   context.stroke();
+  context.drawImage(level_tube_img,45,360, 310, 34);
+  context.drawImage(level_tube_img_r,6,45, 34, 310);
 }
 
 function plot_all(){
@@ -251,6 +265,8 @@ function plot_all(){
     ctx2D.clearRect(0,0,400,400);
     ctx2D.beginPath();
     canvas_axis(ctx2D, 400, 400);
+    ctx2D.drawImage(level_bubble_img,x_scale-22,360, 44, 34);
+    ctx2D.drawImage(level_bubble_img_r,6,y_scale-22, 34, 44);
     ctx2D.font = '14px sans';
     ctx2D.fillStyle = '#228e2c';
     ctx2D.strokeStyle = '#228e2c';
@@ -281,7 +297,7 @@ setInterval(plot_all, 50);
 <!-- TODO: Stefan will be modifying this to better link with the bubble sensors.
 -->
 <h2 id="measuring-gravity-with-the-spinwheel">Measuring Gravity with the SpinWheel</h2>
-<p>The SpinWheel has sensors that can measure gravity along <span class="footnote">three axes<span>Below the interactive SpinWheel animation, you can see how these three axes, <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span>, are defined.</span></span>. Before we use this information to create a tilt sensor, first play with the interactive SpinWheel animation below. Pay close attention to the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> components as they are the ones corresponding to the displacement of the air bubbles seen in the bubble levels above. You can gain intuition about how these components of gravity will behave by exploring the interactive SpinWheel visualization below and carefully observing how <span class="footnote">the green and blue components change<span>Representing the x and y axes.</span></span>.</p>
+<p>The SpinWheel has sensors that can measure gravity along <span class="footnote">three axes<span>Below the interactive SpinWheel animation, you can see how these three axes, <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span>, are defined.</span></span>. Before we use this information to create a tilt sensor, first play with the interactive SpinWheel animation below. Pay close attention to the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> components as they are the ones corresponding to the displacement of the air bubbles seen in the bubble levels above. You can gain intuition about how these components of gravity will behave by exploring the interactive SpinWheel visualization above and carefully observing how <span class="footnote">the green and blue components change<span>Representing the x and y axes.</span></span>.</p>
 <!-- I think this needs more explanation.
 -->
 <!-- Are x, y, z labels possible to add to the interactive animation? So that people don't need to match the colors? 
@@ -522,7 +538,7 @@ animate();
 <span id="cb1-14"><a href="#cb1-14"></a>}</span></code></pre></div>
 <p>If you upload this sketch to the SpinWheel, you won’t be able to see anything happen. It doesn’t turn on the LEDs, instead the sketch simply set ups the SpinWheel and sends a confirmation message (“I am working!”) repeatedly using <code>Serial.println()</code>. If you want to see this message, navigate to <code>Tools -&gt; Serial Monitor</code> in the Arduino software.</p>
 <h3 id="measuring-tilt">Measuring Tilt</h3>
-<p>Now we can start working with measurements of tilt (direction of gravity) on the SpinWheel. We do this by calling the <code>SpinWheel.readIMU()</code> function to measure the three components of the gravitational vector (shown in grey in the visualization below). IMU stands for Inertial Measurement Unit: a fancy name for something that senses motion. This function will return 3 values, one for each direction of motion. Below you can see how the three axes, <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> are defined. To begin with, we will only use the <span class="math inline">\(x\)</span> components of the measurement.</p>
+<p>Now we can start working with measurements of tilt (direction of gravity) on the SpinWheel. We do this by calling the <code>SpinWheel.readIMU()</code> function to measure the three components of the gravitational vector (shown in grey in the visualization below). IMU stands for Inertial Measurement Unit: a fancy name for something that senses motion. This function will record 3 values, one for each direction of motion. Below you can see how the three axes, <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> are defined. To begin with, we will only use the <span class="math inline">\(x\)</span> components of the measurement.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
 <span id="cb2-3"><a href="#cb2-3"></a></span>
@@ -538,7 +554,7 @@ animate();
 <span id="cb2-13"><a href="#cb2-13"></a>  <span class="co">// Save the x-axis measurement in a variable.</span></span>
 <span id="cb2-14"><a href="#cb2-14"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
 <span id="cb2-15"><a href="#cb2-15"></a>}</span></code></pre></div>
-<p>In the sketch above, the measurement of gravity and acceleration is contained in the <code>SpinWheel.ax</code> variable. We aren’t using this measurement to do anything yet, however. In the next section, we’ll begin changing the LEDs based on this information.</p>
+<p>In the sketch above, the measurement of gravity and acceleration along the <span class="math inline">\(x\)</span> axis is contained in the <code>SpinWheel.ax</code> variable. We aren’t using this measurement to do anything yet, however. In the next section, we’ll begin changing the LEDs based on this information.</p>
 <h3 id="responding-to-tilt-along-the-x-axis">Responding to Tilt Along the X-axis</h3>
 <p>To make a useful level, we need the LEDs to change in response to how the SpinWheel is tilted. The code below lights up either the large LED 5 or 7 depending on which LED is pointing down. Upload the below code onto your SpinWheel and experiment some to see how it works.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
