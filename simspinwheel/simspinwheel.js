@@ -272,6 +272,7 @@ function prep_containers() {
 
     var textareas = x.querySelectorAll('textarea')
     textareas.forEach(function (text) {
+      text.setAttribute("spellcheck","false");
       text.value = text.innerHTML.replace(/^\n+|\n+$/g, '');
       opdictionary.forEach(function (pair) {
         text.value = text.value.replace(pair[0], pair[1]);

@@ -1,6 +1,7 @@
 .ssw-container {
   display: flex;
   flex-direction: row;
+  text-align: left !important; /* because of slides */
 }
 .ssw-code {
   flex-grow: 1;
@@ -16,8 +17,8 @@
   width: 100%;
 }
 .ssw-codeblock {
-  padding: 0 2px 0 2px;
-  margin: 2px 0 2px 0;
+  padding: 0 2px 0 2px !important; /* "!imp" because of slides */
+  margin: 2px 0 2px 0 !important;  /* "!imp" because of slides */
 }
 textarea.ssw-codeblock {
   scrollbar-width: none;
@@ -41,6 +42,9 @@ textarea.ssw-codeblock {
   flex-shrink: 1;
 }
 .ssw-vis {
+  font-family: monospace; /* because of slides */
+  font-size: 1px;         /* because of slides */
+  line-height: 1;         /* because of slides */
 }
 .ssw-vis > div {
   max-width: 200px;
@@ -50,6 +54,10 @@ textarea.ssw-codeblock {
 .ssw-vis > div > img {
   position: relative; left: 0; top: 0;
   width: 100%;
+  max-width: unset;  /* because of slides */
+  max-height: unset; /* because of slides */
+  border: unset;     /* because of slides */
+  margin: unset;     /* because of slides */ 
 }
 .ssw-large-led {
   position: absolute;
