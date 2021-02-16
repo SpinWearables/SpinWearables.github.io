@@ -71,7 +71,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="/custom.css" type="text/css" />
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="/usr/share/javascript/mathjax/tex-mml-chtml.js" type="text/javascript"></script>
 <style>
 h1, h2, h3 {
   margin: auto;
@@ -144,25 +144,25 @@ The code presented on this page can be <a href="./SpinWearables.h">downloaded</a
 <p>The <code>NeoPixel</code> library from Adafruit provides the functions we will use to talk to the large LEDs.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;Adafruit_NeoPixel.h&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;Adafruit_NeoPixel.h&quot;</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>The <code>ICM_20948</code> library from Sparkfun provides the functions to talk to the motion sensor.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include </span><span class="im">&quot;ICM_20948.h&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;ICM_20948.h&quot;</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>And the <code>math</code> standard library gives us access to frequently used mathematical functions (e.g. trigonometrics and exponents).</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Here the implementation of our own new library starts. We will call it <code>SpinWearables</code>, after the name of our volunteer organization.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">namespace</span> SpinWearables {</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">namespace</span> SpinWearables {</span></code></pre></div>
 </div>
 <section id="constants" class="side-text">
 <h2>Constants</h2>
@@ -175,45 +175,45 @@ The code presented on this page can be <a href="./SpinWearables.h">downloaded</a
 <p>In many parts of the code we use a <code>byte</code> to represent a position on a circle. One byte can contain any number between 0 and 255. Given that we have 12 small LEDs, we would frequently want to know what one 12th of 255 is, i.e. <span class="math inline">\(\left\lfloor\frac{255}{12}\right\rfloor=21\)</span>, hence we put it here as a easy-to-reuse constant.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a><span class="pp">#define ONETWELFTH </span><span class="dv">21</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="pp">#define ONETWELFTH </span><span class="dv">21</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>The maximum number of animation routines the firmware permits (an arbitrary limit, simply ensuring we do not reserve too much memory). See <code>addAnimationRoutine</code> for details.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a><span class="pp">#define MAXROUTINES </span><span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="pp">#define MAXROUTINES </span><span class="dv">10</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>A parameter related to how many times we repeat a frame on the small LEDs. This is the main source of delay in our code. See <code>drawSmallLEDFrame</code>.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a><span class="pp">#define SMALLLEDTIMEDIV </span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="pp">#define SMALLLEDTIMEDIV </span><span class="dv">1</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Parameters for the smoothing filters we use in order to make the readings of the motion sensor less jittery.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a><span class="pp">#define FILTER_DIV </span><span class="dv">8</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="pp">#define FILTER_A </span><span class="dv">64</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="pp">#define FILTER_B </span>((<span class="dv">1</span>&lt;&lt;FILTER_DIV)<span class="pp"> </span>-<span class="pp"> </span>FILTER_A)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="pp">#define FILTER_DIV </span><span class="dv">8</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="pp">#define FILTER_A </span><span class="dv">64</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a><span class="pp">#define FILTER_B </span>((<span class="dv">1</span>&lt;&lt;FILTER_DIV)<span class="pp"> </span>-<span class="pp"> </span>FILTER_A)</span></code></pre></div>
 </div>
 <section id="profiling-functions" class="side-text">
 <h2>Profiling functions</h2>
 <p>We use this function to measure how fast our code is. When you run it, it tells you how many milliseconds have passes since the previous time it was invoked.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1"></a><span class="dt">long</span> executionTime() {</span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="at">static</span> <span class="dt">long</span> t = millis();</span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="dt">long</span> r = millis()-t;</span>
-<span id="cb10-4"><a href="#cb10-4"></a>  t = millis();</span>
-<span id="cb10-5"><a href="#cb10-5"></a>}</span>
-<span id="cb10-6"><a href="#cb10-6"></a></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="dt">long</span> executionTimeMicros() {</span>
-<span id="cb10-8"><a href="#cb10-8"></a>  <span class="at">static</span> <span class="dt">long</span> t = micros();</span>
-<span id="cb10-9"><a href="#cb10-9"></a>  <span class="dt">long</span> r = micros()-t;</span>
-<span id="cb10-10"><a href="#cb10-10"></a>  t = micros();</span>
-<span id="cb10-11"><a href="#cb10-11"></a>  <span class="cf">return</span> r;</span>
-<span id="cb10-12"><a href="#cb10-12"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="dt">long</span> executionTime() {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a>  <span class="at">static</span> <span class="dt">long</span> t = millis();</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a>  <span class="dt">long</span> r = millis()-t;</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a>  t = millis();</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a>}</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a><span class="dt">long</span> executionTimeMicros() {</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a>  <span class="at">static</span> <span class="dt">long</span> t = micros();</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a>  <span class="dt">long</span> r = micros()-t;</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true"></a>  t = micros();</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true"></a>  <span class="cf">return</span> r;</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <section id="drawing-convenience-functions" class="side-text">
 <h2>Drawing convenience functions</h2>
@@ -227,51 +227,51 @@ The code presented on this page can be <a href="./SpinWearables.h">downloaded</a
 <p>Some of our code expects the value of a color to be provided as a 32-bit word of which the bottom 24 bits (3 bytes) contain information about the red, green, and blue components of the color. This function lets us turn 3 bytes, one for each component into a single 32-bit word.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1"></a><span class="dt">uint32_t</span> color(<span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="cf">return</span> (((<span class="dt">uint32_t</span>)r)&lt;&lt;<span class="dv">16</span>)+(((<span class="dt">uint32_t</span>)g)&lt;&lt;<span class="dv">8</span>)+b;  </span>
-<span id="cb11-3"><a href="#cb11-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="dt">uint32_t</span> color(<span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a>  <span class="cf">return</span> (((<span class="dt">uint32_t</span>)r)&lt;&lt;<span class="dv">16</span>)+(((<span class="dt">uint32_t</span>)g)&lt;&lt;<span class="dv">8</span>)+b;  </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <section id="color-wheel" class="side-text">
 <h4>Color wheel</h4>
 <p>Frequently one needs to access the color (or hue) wheel. It is particularly important when making rainbows for instance. This function takes a coordinate on the circle (a single byte, 0 to 255, where 255 denotes a whole turn), and turns it into the corresponding hue. <img src="./colorwheel.png" alt="Depiction of the colorwheel." /></p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1"></a><span class="dt">uint32_t</span> colorWheel(<span class="dt">uint8_t</span> wheelPos) {</span>
-<span id="cb12-2"><a href="#cb12-2"></a>  wheelPos = <span class="dv">255</span> - wheelPos;</span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="cf">if</span>(wheelPos &lt; <span class="dv">85</span>) {</span>
-<span id="cb12-4"><a href="#cb12-4"></a>    <span class="cf">return</span> color(<span class="dv">255</span> - wheelPos * <span class="dv">3</span>, <span class="dv">0</span>, wheelPos * <span class="dv">3</span>);</span>
-<span id="cb12-5"><a href="#cb12-5"></a>  }</span>
-<span id="cb12-6"><a href="#cb12-6"></a>  <span class="cf">if</span>(wheelPos &lt; <span class="dv">170</span>) {</span>
-<span id="cb12-7"><a href="#cb12-7"></a>    wheelPos -= <span class="dv">85</span>;</span>
-<span id="cb12-8"><a href="#cb12-8"></a>    <span class="cf">return</span> color(<span class="dv">0</span>, wheelPos * <span class="dv">3</span>, <span class="dv">255</span> - wheelPos * <span class="dv">3</span>);</span>
-<span id="cb12-9"><a href="#cb12-9"></a>  }</span>
-<span id="cb12-10"><a href="#cb12-10"></a>  wheelPos -= <span class="dv">170</span>;</span>
-<span id="cb12-11"><a href="#cb12-11"></a>  <span class="cf">return</span> color(wheelPos * <span class="dv">3</span>, <span class="dv">255</span> - wheelPos * <span class="dv">3</span>, <span class="dv">0</span>);</span>
-<span id="cb12-12"><a href="#cb12-12"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="dt">uint32_t</span> colorWheel(<span class="dt">uint8_t</span> wheelPos) {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>  wheelPos = <span class="dv">255</span> - wheelPos;</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a>  <span class="cf">if</span>(wheelPos &lt; <span class="dv">85</span>) {</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a>    <span class="cf">return</span> color(<span class="dv">255</span> - wheelPos * <span class="dv">3</span>, <span class="dv">0</span>, wheelPos * <span class="dv">3</span>);</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a>  }</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a>  <span class="cf">if</span>(wheelPos &lt; <span class="dv">170</span>) {</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a>    wheelPos -= <span class="dv">85</span>;</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a>    <span class="cf">return</span> color(<span class="dv">0</span>, wheelPos * <span class="dv">3</span>, <span class="dv">255</span> - wheelPos * <span class="dv">3</span>);</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a>  }</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true"></a>  wheelPos -= <span class="dv">170</span>;</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true"></a>  <span class="cf">return</span> color(wheelPos * <span class="dv">3</span>, <span class="dv">255</span> - wheelPos * <span class="dv">3</span>, <span class="dv">0</span>);</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <section id="triangular-wave" class="side-text">
 <h4>Triangular wave</h4>
 <p>This function takes a number between 0 and 255 and provides a periodic triangular pattern, particularly useful when one needs a pulsing brightness. <img src="./triangular_wave.png" alt="Depiction of the triangular wave." /></p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1"></a><span class="dt">uint8_t</span> triangularWave(<span class="dt">uint8_t</span> x) {</span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="cf">if</span> (x&gt;<span class="bn">0x7f</span>) {</span>
-<span id="cb13-3"><a href="#cb13-3"></a>    <span class="cf">return</span> (<span class="bn">0xff</span>-x)&lt;&lt;<span class="dv">1</span>;</span>
-<span id="cb13-4"><a href="#cb13-4"></a>  } <span class="cf">else</span> {</span>
-<span id="cb13-5"><a href="#cb13-5"></a>    <span class="cf">return</span> x&lt;&lt;<span class="dv">1</span>;</span>
-<span id="cb13-6"><a href="#cb13-6"></a>  }</span>
-<span id="cb13-7"><a href="#cb13-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="dt">uint8_t</span> triangularWave(<span class="dt">uint8_t</span> x) {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a>  <span class="cf">if</span> (x&gt;<span class="bn">0x7f</span>) {</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a>    <span class="cf">return</span> (<span class="bn">0xff</span>-x)&lt;&lt;<span class="dv">1</span>;</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>  } <span class="cf">else</span> {</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a>    <span class="cf">return</span> x&lt;&lt;<span class="dv">1</span>;</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a>  }</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <section id="parabolic-wave" class="side-text">
 <h4>Parabolic wave</h4>
 <p>Similarly to the triangular wave, this function is useful for periodically pulsating patterns. However, the profile of this function resembles a beating heart more closely and it can provide for more pleasing visuals. <img src="./parabola_wave.png" alt="Depiction of the parabolic wave." /></p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1"></a><span class="dt">uint8_t</span> parabolaWave(<span class="dt">uint8_t</span> x) {</span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="dt">uint8_t</span> xm = x;</span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="cf">if</span> (xm&gt;<span class="bn">0x7f</span>) {xm = <span class="bn">0xff</span>-xm;}</span>
-<span id="cb14-4"><a href="#cb14-4"></a>  <span class="cf">return</span> (xm*xm)&gt;&gt;<span class="dv">6</span>;</span>
-<span id="cb14-5"><a href="#cb14-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="dt">uint8_t</span> parabolaWave(<span class="dt">uint8_t</span> x) {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a>  <span class="dt">uint8_t</span> xm = x;</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a>  <span class="cf">if</span> (xm&gt;<span class="bn">0x7f</span>) {xm = <span class="bn">0xff</span>-xm;}</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a>  <span class="cf">return</span> (xm*xm)&gt;&gt;<span class="dv">6</span>;</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <section id="smoothing-functions" class="side-text">
 <h2>Smoothing functions</h2>
@@ -285,563 +285,563 @@ The code presented on this page can be <a href="./SpinWearables.h">downloaded</a
 <p>Using this function you can very rapidly respond to a new non-zero measurement, but then slowly decay back to zero if the signal ends.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1"></a><span class="dt">float</span> faston_slowoff(<span class="dt">float</span> filtered_intensity, <span class="dt">float</span> current_intensity, <span class="dt">float</span> decay) {</span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="cf">if</span> (current_intensity &gt; filtered_intensity) {</span>
-<span id="cb15-3"><a href="#cb15-3"></a>      <span class="cf">return</span> current_intensity;</span>
-<span id="cb15-4"><a href="#cb15-4"></a>  } <span class="cf">else</span> {</span>
-<span id="cb15-5"><a href="#cb15-5"></a>      <span class="cf">return</span> decay*current_intensity + (<span class="dv">1</span>-decay)*filtered_intensity;</span>
-<span id="cb15-6"><a href="#cb15-6"></a>  }</span>
-<span id="cb15-7"><a href="#cb15-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="dt">float</span> faston_slowoff(<span class="dt">float</span> filtered_intensity, <span class="dt">float</span> current_intensity, <span class="dt">float</span> decay) {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a>  <span class="cf">if</span> (current_intensity &gt; filtered_intensity) {</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a>      <span class="cf">return</span> current_intensity;</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a>  } <span class="cf">else</span> {</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a>      <span class="cf">return</span> decay*current_intensity + (<span class="dv">1</span>-decay)*filtered_intensity;</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true"></a>  }</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <section id="forward-declarations" class="side-text">
 <h2>Forward declarations</h2>
 <p>Occasionally we need to use a function in the definition of another function, before we have had a chance to properly implement the first function. We list these functions here, in what is called a “forward declaration”, in order to tell the computer to reserve space for them.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1"></a><span class="dt">void</span> cycleAnimationRoutine();</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="dt">void</span> cycleAnimationRoutine();</span></code></pre></div>
 </div>
 <section id="the-main-spinwheel-class." class="side-text">
 <h2>The main <code>SpinWheel</code> class.</h2>
 <p>In the following “class” we encapsulate all of the functionality that works directly with the SpinWheel hardware.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">class</span> SpinWheelClass {</span>
-<span id="cb17-2"><a href="#cb17-2"></a>  <span class="kw">public</span>:</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a><span class="kw">class</span> SpinWheelClass {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true"></a>  <span class="kw">public</span>:</span></code></pre></div>
 </div>
 <section id="the-constructor" class="side-text">
 <h3>The constructor</h3>
 <p>This is the “constructor” for our <code>SpinWheel</code> object. It ensure that any prerequisite objects are created before we initialize the main object.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb18"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1"></a>    SpinWheelClass() {</span>
-<span id="cb18-2"><a href="#cb18-2"></a>      largeLEDs = Adafruit_NeoPixel(<span class="dv">8</span>, <span class="dv">15</span>, NEO_GRB + NEO_KHZ800); <span class="co">// XXX HARDWARE DETAIL: 8 LEDs on pin d15.</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a>    };</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a>    SpinWheelClass() {</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a>      largeLEDs = Adafruit_NeoPixel(<span class="dv">8</span>, <span class="dv">15</span>, NEO_GRB + NEO_KHZ800); <span class="co">// XXX HARDWARE DETAIL: 8 LEDs on pin d15.</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true"></a>    };</span></code></pre></div>
 </div>
 <section id="the-hardware-initialization-function" class="side-text">
 <h3>The hardware initialization function</h3>
 <p>The <code>begin</code> function is called when we are ready to start talking to all of the SpinWheel hardware, usually in <code>setup()</code>.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1"></a>    <span class="dt">void</span> begin(<span class="dt">bool</span> button=<span class="kw">true</span>) {</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a>    <span class="dt">void</span> begin(<span class="dt">bool</span> button=<span class="kw">true</span>) {</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Initialize all of the pins we use to drive the grid of small LEDs.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb20"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1"></a>      PORTB &amp;= B00000011;</span>
-<span id="cb20-2"><a href="#cb20-2"></a>      PORTD |= B11111100;</span>
-<span id="cb20-3"><a href="#cb20-3"></a>      DDRB |= B11111100;</span>
-<span id="cb20-4"><a href="#cb20-4"></a>      DDRD |= B11111100;</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a>      PORTB &amp;= B00000011;</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a>      PORTD |= B11111100;</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a>      DDRB |= B11111100;</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true"></a>      DDRD |= B11111100;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Ensure that the large LEDs, controlled by the Adafruit NeoPixel library are also ready.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1"></a>      largeLEDs.begin(); </span>
-<span id="cb21-2"><a href="#cb21-2"></a>      largeLEDs.show();</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a>      largeLEDs.begin(); </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true"></a>      largeLEDs.show();</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Prepare the hardware necessary for talking to the motion sensor.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1"></a>      Wire.begin();</span>
-<span id="cb22-2"><a href="#cb22-2"></a>      Wire.setClock(<span class="dv">400000</span>);</span>
-<span id="cb22-3"><a href="#cb22-3"></a>      IMU.begin(Wire, <span class="dv">1</span>); <span class="co">// XXX HARDWARE DETAIL; AD0 is pulled.</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>      <span class="co">// </span><span class="al">TODO</span><span class="co"> check that the IMU works.</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a>      Wire.begin();</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true"></a>      Wire.setClock(<span class="dv">400000</span>);</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true"></a>      IMU.begin(Wire, <span class="dv">1</span>); <span class="co">// XXX HARDWARE DETAIL; AD0 is pulled.</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true"></a>      <span class="co">// </span><span class="al">TODO</span><span class="co"> check that the IMU works.</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>If instructed, ensure that the button press is set to run a small routine that changes the current animation.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb23"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1"></a>      <span class="cf">if</span> (button) {</span>
-<span id="cb23-2"><a href="#cb23-2"></a>        digitalWrite(<span class="dv">7</span>, INPUT_PULLUP); <span class="co">// XXX HARDWARE DETAIL: Pin D7 is connected to the button.</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a>        attachInterrupt(digitalPinToInterrupt(<span class="dv">7</span>), cycleAnimationRoutine, FALLING);</span>
-<span id="cb23-4"><a href="#cb23-4"></a>      }</span>
-<span id="cb23-5"><a href="#cb23-5"></a>      clearAllLEDs();</span>
-<span id="cb23-6"><a href="#cb23-6"></a>      setBrightness(<span class="dv">20</span>);</span>
-<span id="cb23-7"><a href="#cb23-7"></a>      drawFrame();</span>
-<span id="cb23-8"><a href="#cb23-8"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a>      <span class="cf">if</span> (button) {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true"></a>        digitalWrite(<span class="dv">7</span>, INPUT_PULLUP); <span class="co">// XXX HARDWARE DETAIL: Pin D7 is connected to the button.</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true"></a>        attachInterrupt(digitalPinToInterrupt(<span class="dv">7</span>), cycleAnimationRoutine, FALLING);</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true"></a>      }</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true"></a>      clearAllLEDs();</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true"></a>      setBrightness(<span class="dv">20</span>);</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true"></a>      drawFrame();</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true"></a>    }</span></code></pre></div>
 </div>
 <section id="we-store-the-current-state-of-the-leds-in-these-objects." class="side-text">
 <h3>We store the current state of the LEDs in these objects.</h3>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb24"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1"></a>    <span class="dt">uint8_t</span> smallLEDs[<span class="dv">36</span>];</span>
-<span id="cb24-2"><a href="#cb24-2"></a>    Adafruit_NeoPixel largeLEDs;</span>
-<span id="cb24-3"><a href="#cb24-3"></a>    </span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a>    <span class="dt">uint8_t</span> smallLEDs[<span class="dv">36</span>];</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true"></a>    Adafruit_NeoPixel largeLEDs;</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true"></a>    </span></code></pre></div>
 </div>
 <section id="we-store-various-motion-sensor-readings-in-these-variables." class="side-text">
 <h3>We store various motion sensor readings in these variables.</h3>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb25"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1"></a>    ICM_20948_I2C IMU;</span>
-<span id="cb25-2"><a href="#cb25-2"></a>    <span class="dt">float</span> ax, ay, az, gx, gy, gz, mx, my, mz;</span>
-<span id="cb25-3"><a href="#cb25-3"></a>    <span class="dt">int32_t</span> taxsmooth, taysmooth, tazsmooth, tgxsmooth, tgysmooth, tgzsmooth, tmxsmooth, tmysmooth, tmzsmooth;</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a>    ICM_20948_I2C IMU;</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true"></a>    <span class="dt">float</span> ax, ay, az, gx, gy, gz, mx, my, mz;</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true"></a>    <span class="dt">int32_t</span> taxsmooth, taysmooth, tazsmooth, tgxsmooth, tgysmooth, tgzsmooth, tmxsmooth, tmysmooth, tmzsmooth;</span></code></pre></div>
 </div>
 <section id="and-the-list-of-animations-and-the-currently-running-animation-is-stored-here." class="side-text">
 <h3>And the list of animations and the currently running animation is stored here.</h3>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb26"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1"></a>    <span class="dt">void</span> (*animationroutines[MAXROUTINES]) (<span class="dt">void</span>);</span>
-<span id="cb26-2"><a href="#cb26-2"></a>    <span class="dt">size_t</span> current_animation = <span class="dv">0</span>;</span>
-<span id="cb26-3"><a href="#cb26-3"></a>    <span class="dt">size_t</span> registered_animations = <span class="dv">0</span>;</span>
-<span id="cb26-4"><a href="#cb26-4"></a>    </span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a>    <span class="dt">void</span> (*animationroutines[MAXROUTINES]) (<span class="dt">void</span>);</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true"></a>    <span class="dt">size_t</span> current_animation = <span class="dv">0</span>;</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true"></a>    <span class="dt">size_t</span> registered_animations = <span class="dv">0</span>;</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true"></a>    </span></code></pre></div>
 </div>
 <section id="the-functions-pushing-the-current-frame-to-the-leds." class="side-text">
 <h3>The functions pushing the current frame to the LEDs.</h3>
 <p>It does so by running two subroutines, one for each set of LEDs.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb27"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1"></a>    <span class="dt">void</span> drawFrame() {</span>
-<span id="cb27-2"><a href="#cb27-2"></a>      drawSmallLEDFrame();</span>
-<span id="cb27-3"><a href="#cb27-3"></a>      drawLargeLEDFrame();</span>
-<span id="cb27-4"><a href="#cb27-4"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true"></a>    <span class="dt">void</span> drawFrame() {</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true"></a>      drawSmallLEDFrame();</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true"></a>      drawLargeLEDFrame();</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true"></a>    }</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>The same function can be called with a timeout, ensuring that the hardware repeatedly redraws the image, and does nothing else for the duration of the timeout.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb28"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1"></a>    <span class="dt">void</span> drawFrame(<span class="dt">unsigned</span> <span class="dt">long</span> timeout) {</span>
-<span id="cb28-2"><a href="#cb28-2"></a>      <span class="dt">unsigned</span> <span class="dt">long</span> t = millis();</span>
-<span id="cb28-3"><a href="#cb28-3"></a>      drawLargeLEDFrame();</span>
-<span id="cb28-4"><a href="#cb28-4"></a>      <span class="cf">while</span>(millis()-t&lt;timeout) {drawSmallLEDFrame();}</span>
-<span id="cb28-5"><a href="#cb28-5"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true"></a>    <span class="dt">void</span> drawFrame(<span class="dt">unsigned</span> <span class="dt">long</span> timeout) {</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true"></a>      <span class="dt">unsigned</span> <span class="dt">long</span> t = millis();</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true"></a>      drawLargeLEDFrame();</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true"></a>      <span class="cf">while</span>(millis()-t&lt;timeout) {drawSmallLEDFrame();}</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true"></a>    }</span></code></pre></div>
 </div>
 <section id="the-drawing-function-responsible-for-the-small-leds." class="side-text">
 <h4>The drawing function responsible for the small LEDs.</h4>
 <p>This function employs persistence of vision: only a few LEDs flash at the same time, but in a rapid succession we loop through all of them, ensuring that to the human eye all of them seem on. We modulate the intensity of each color by turning it on for different durations.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb29"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1"></a>    <span class="dt">void</span> drawSmallLEDFrame() { <span class="co">// XXX HARDWARE DETAIL: B2-B7 and D2-D7 make up the small LEDs grid.</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true"></a>    <span class="dt">void</span> drawSmallLEDFrame() { <span class="co">// XXX HARDWARE DETAIL: B2-B7 and D2-D7 make up the small LEDs grid.</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>This loop specifies how many time we cycle through each LED before we exit the functions. We want to do it more times in order to have more vivid colors, but not too many times as to have this function take too long.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb30"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb30-1"><a href="#cb30-1"></a>      <span class="cf">for</span>(<span class="dt">int</span> frame=<span class="dv">0</span>; frame&lt;<span class="dv">2</span>&lt;&lt;SMALLLEDTIMEDIV; frame++) { <span class="co">// XXX: 2 repetitions lead to drawSmallLEDFrame taking 0.021 seconds.</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true"></a>      <span class="cf">for</span>(<span class="dt">int</span> frame=<span class="dv">0</span>; frame&lt;<span class="dv">2</span>&lt;&lt;SMALLLEDTIMEDIV; frame++) { <span class="co">// XXX: 2 repetitions lead to drawSmallLEDFrame taking 0.021 seconds.</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>And the following two loops go through each row and column of the small LED grid in order to address them efficiently.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb31"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb31-1"><a href="#cb31-1"></a>        <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">6</span>; i++) {</span>
-<span id="cb31-2"><a href="#cb31-2"></a>          PORTB &amp;= B00000011;</span>
-<span id="cb31-3"><a href="#cb31-3"></a>          PORTB |= B00000100 &lt;&lt; i;</span>
-<span id="cb31-4"><a href="#cb31-4"></a>          <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">0</span>; j&lt;<span class="dv">6</span>; j++) {</span>
-<span id="cb31-5"><a href="#cb31-5"></a>            <span class="dt">uint8_t</span> d = smallLEDs[i*<span class="dv">6</span>+j];</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true"></a>        <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">6</span>; i++) {</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true"></a>          PORTB &amp;= B00000011;</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true"></a>          PORTB |= B00000100 &lt;&lt; i;</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true"></a>          <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">0</span>; j&lt;<span class="dv">6</span>; j++) {</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true"></a>            <span class="dt">uint8_t</span> d = smallLEDs[i*<span class="dv">6</span>+j];</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>On the delays in this inner loop depends how bright the color will be. A longer delay during for a turned-on LED implies a brighter color.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb32"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb32-1"><a href="#cb32-1"></a>            <span class="cf">if</span> (d) {</span>
-<span id="cb32-2"><a href="#cb32-2"></a>              PORTD ^= B00000100 &lt;&lt; j;</span>
-<span id="cb32-3"><a href="#cb32-3"></a>              delayMicroseconds(d&gt;&gt;SMALLLEDTIMEDIV);</span>
-<span id="cb32-4"><a href="#cb32-4"></a>              PORTD |= B11111100;</span>
-<span id="cb32-5"><a href="#cb32-5"></a>            }</span>
-<span id="cb32-6"><a href="#cb32-6"></a>            delayMicroseconds((<span class="dv">255</span>-d)&gt;&gt;SMALLLEDTIMEDIV);</span>
-<span id="cb32-7"><a href="#cb32-7"></a>          }</span>
-<span id="cb32-8"><a href="#cb32-8"></a>        }</span>
-<span id="cb32-9"><a href="#cb32-9"></a>      }</span>
-<span id="cb32-10"><a href="#cb32-10"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true"></a>            <span class="cf">if</span> (d) {</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true"></a>              PORTD ^= B00000100 &lt;&lt; j;</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true"></a>              delayMicroseconds(d&gt;&gt;SMALLLEDTIMEDIV);</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true"></a>              PORTD |= B11111100;</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true"></a>            }</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true"></a>            delayMicroseconds((<span class="dv">255</span>-d)&gt;&gt;SMALLLEDTIMEDIV);</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true"></a>          }</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true"></a>        }</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true"></a>      }</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true"></a>    }</span></code></pre></div>
 </div>
 <section id="the-drawing-function-for-the-large-leds" class="side-text">
 <h4>The drawing function for the large LEDs</h4>
 <p>It simply calls into the Adafruit NeoPixel library.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb33"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb33-1"><a href="#cb33-1"></a>    <span class="dt">void</span> drawLargeLEDFrame() {</span>
-<span id="cb33-2"><a href="#cb33-2"></a>      largeLEDs.show();  </span>
-<span id="cb33-3"><a href="#cb33-3"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true"></a>    <span class="dt">void</span> drawLargeLEDFrame() {</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true"></a>      largeLEDs.show();  </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true"></a>    }</span></code></pre></div>
 </div>
 <section id="talking-to-the-motion-sensor" class="side-text">
 <h3>Talking to the motion sensor</h3>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb34"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="#cb34-1"></a>    <span class="dt">void</span> readIMU() {</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true"></a>    <span class="dt">void</span> readIMU() {</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Check that the sensor is ready, and read the current acceleration (A), rotation (G for gyroscope), magnetism (M), and temperature (T) data.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb35"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb35-1"><a href="#cb35-1"></a>      <span class="cf">if</span>( IMU.dataReady() ){</span>
-<span id="cb35-2"><a href="#cb35-2"></a>        IMU.getAGMT();</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true"></a>      <span class="cf">if</span>( IMU.dataReady() ){</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true"></a>        IMU.getAGMT();</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>First smooth out the measurements using an exponential averaging filter. Each new value is used to slowly update the filtered value, through the formula <span class="math display">\[x_\text{filtered}=\alpha\times x_\text{newest reading} + (1-\alpha)\times
 x_\text{old value},\]</span> where <span class="math inline">\(\alpha\)</span> is between 0 and 1. If <span class="math inline">\(\alpha\)</span> is large we rapidly follow the sensor readings, but if it is small, only a smooth filtered signal is preserved.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb36"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb36-1"><a href="#cb36-1"></a>        taxsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.acc.axes.x)*FILTER_A + taxsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
-<span id="cb36-2"><a href="#cb36-2"></a>        taysmooth = (((<span class="dt">int32_t</span>)IMU.agmt.acc.axes.y)*FILTER_A + taysmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
-<span id="cb36-3"><a href="#cb36-3"></a>        tazsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.acc.axes.z)*FILTER_A + tazsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
-<span id="cb36-4"><a href="#cb36-4"></a>        tgxsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.gyr.axes.x)*FILTER_A + tgxsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
-<span id="cb36-5"><a href="#cb36-5"></a>        tgysmooth = (((<span class="dt">int32_t</span>)IMU.agmt.gyr.axes.y)*FILTER_A + tgysmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
-<span id="cb36-6"><a href="#cb36-6"></a>        tgzsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.gyr.axes.z)*FILTER_A + tgzsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
-<span id="cb36-7"><a href="#cb36-7"></a>        tmxsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.mag.axes.x)*FILTER_A + tmxsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
-<span id="cb36-8"><a href="#cb36-8"></a>        tmysmooth = (((<span class="dt">int32_t</span>)IMU.agmt.mag.axes.y)*FILTER_A + tmysmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
-<span id="cb36-9"><a href="#cb36-9"></a>        tmzsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.mag.axes.z)*FILTER_A + tmzsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
-<span id="cb36-10"><a href="#cb36-10"></a>        ax =  taxsmooth / <span class="fl">16384.</span>; <span class="co">// Units of 1g because the range is +/-2g at +/-2**15</span></span>
-<span id="cb36-11"><a href="#cb36-11"></a>        ay = -taysmooth / <span class="fl">16384.</span>;</span>
-<span id="cb36-12"><a href="#cb36-12"></a>        az = -tazsmooth / <span class="fl">16384.</span>;</span>
-<span id="cb36-13"><a href="#cb36-13"></a>        gx =  tgxsmooth / <span class="fl">131.07</span>; <span class="co">// Units of dps because the range is +/-250dps at +/-2**15</span></span>
-<span id="cb36-14"><a href="#cb36-14"></a>        gy = -tgysmooth / <span class="fl">131.07</span>; <span class="co">// 131.072 = 2**15/250</span></span>
-<span id="cb36-15"><a href="#cb36-15"></a>        gz = -tgzsmooth / <span class="fl">131.07</span>;</span>
-<span id="cb36-16"><a href="#cb36-16"></a>        mx =  tmxsmooth / <span class="fl">6.6873</span>; <span class="co">// Units of because the range is 4900uT at +/-2**15</span></span>
-<span id="cb36-17"><a href="#cb36-17"></a>        my =  tmysmooth / <span class="fl">6.6873</span>; <span class="co">// 6.68734 = 2**15/4900</span></span>
-<span id="cb36-18"><a href="#cb36-18"></a>        mz =  tmzsmooth / <span class="fl">6.6873</span>;</span>
-<span id="cb36-19"><a href="#cb36-19"></a>    </span>
-<span id="cb36-20"><a href="#cb36-20"></a>      }</span>
-<span id="cb36-21"><a href="#cb36-21"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true"></a>        taxsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.acc.axes.x)*FILTER_A + taxsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true"></a>        taysmooth = (((<span class="dt">int32_t</span>)IMU.agmt.acc.axes.y)*FILTER_A + taysmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true"></a>        tazsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.acc.axes.z)*FILTER_A + tazsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true"></a>        tgxsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.gyr.axes.x)*FILTER_A + tgxsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true"></a>        tgysmooth = (((<span class="dt">int32_t</span>)IMU.agmt.gyr.axes.y)*FILTER_A + tgysmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true"></a>        tgzsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.gyr.axes.z)*FILTER_A + tgzsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true"></a>        tmxsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.mag.axes.x)*FILTER_A + tmxsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true"></a>        tmysmooth = (((<span class="dt">int32_t</span>)IMU.agmt.mag.axes.y)*FILTER_A + tmysmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true"></a>        tmzsmooth = (((<span class="dt">int32_t</span>)IMU.agmt.mag.axes.z)*FILTER_A + tmzsmooth*FILTER_B)&gt;&gt;FILTER_DIV;</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true"></a>        ax =  taxsmooth / <span class="fl">16384.</span>; <span class="co">// Units of 1g because the range is +/-2g at +/-2**15</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true"></a>        ay = -taysmooth / <span class="fl">16384.</span>;</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true"></a>        az = -tazsmooth / <span class="fl">16384.</span>;</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true"></a>        gx =  tgxsmooth / <span class="fl">131.07</span>; <span class="co">// Units of dps because the range is +/-250dps at +/-2**15</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true"></a>        gy = -tgysmooth / <span class="fl">131.07</span>; <span class="co">// 131.072 = 2**15/250</span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true"></a>        gz = -tgzsmooth / <span class="fl">131.07</span>;</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true"></a>        mx =  tmxsmooth / <span class="fl">6.6873</span>; <span class="co">// Units of because the range is 4900uT at +/-2**15</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true"></a>        my =  tmysmooth / <span class="fl">6.6873</span>; <span class="co">// 6.68734 = 2**15/4900</span></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true"></a>        mz =  tmzsmooth / <span class="fl">6.6873</span>;</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true"></a>    </span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true"></a>      }</span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true"></a>    }</span></code></pre></div>
 </div>
 <section id="animation-routines" class="side-text">
 <h3>Animation routines</h3>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb37"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb37-1"><a href="#cb37-1"></a>    <span class="dt">void</span> runAnimationRoutine() {</span>
-<span id="cb37-2"><a href="#cb37-2"></a>      <span class="cf">if</span> (registered_animations &amp;&amp; current_animation &lt; registered_animations &amp;&amp; animationroutines[current_animation]!=<span class="dv">0</span>) {</span>
-<span id="cb37-3"><a href="#cb37-3"></a>        animationroutines[current_animation]();</span>
-<span id="cb37-4"><a href="#cb37-4"></a>      }</span>
-<span id="cb37-5"><a href="#cb37-5"></a>    }</span>
-<span id="cb37-6"><a href="#cb37-6"></a></span>
-<span id="cb37-7"><a href="#cb37-7"></a>    <span class="dt">void</span> addAnimationRoutine(<span class="dt">void</span> (*routine) (<span class="dt">void</span>)) {</span>
-<span id="cb37-8"><a href="#cb37-8"></a>      <span class="cf">if</span> (registered_animations&lt;MAXROUTINES) {</span>
-<span id="cb37-9"><a href="#cb37-9"></a>        animationroutines[registered_animations] = routine;</span>
-<span id="cb37-10"><a href="#cb37-10"></a>        registered_animations++;</span>
-<span id="cb37-11"><a href="#cb37-11"></a>      }</span>
-<span id="cb37-12"><a href="#cb37-12"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true"></a>    <span class="dt">void</span> runAnimationRoutine() {</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true"></a>      <span class="cf">if</span> (registered_animations &amp;&amp; current_animation &lt; registered_animations &amp;&amp; animationroutines[current_animation]!=<span class="dv">0</span>) {</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true"></a>        animationroutines[current_animation]();</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true"></a>      }</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true"></a>    }</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true"></a>    <span class="dt">void</span> addAnimationRoutine(<span class="dt">void</span> (*routine) (<span class="dt">void</span>)) {</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true"></a>      <span class="cf">if</span> (registered_animations&lt;MAXROUTINES) {</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true"></a>        animationroutines[registered_animations] = routine;</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true"></a>        registered_animations++;</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true"></a>      }</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true"></a>    }</span></code></pre></div>
 </div>
 <section id="all-of-the-functions-used-to-draw-to-the-upcoming-frame" class="side-text">
 <h3>All of the functions used to draw to the upcoming frame</h3>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb38"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb38-1"><a href="#cb38-1"></a>    <span class="dt">void</span> setBrightness(<span class="dt">uint8_t</span> b) {</span>
-<span id="cb38-2"><a href="#cb38-2"></a>      largeLEDs.setBrightness(b);</span>
-<span id="cb38-3"><a href="#cb38-3"></a>    }</span>
-<span id="cb38-4"><a href="#cb38-4"></a></span>
-<span id="cb38-5"><a href="#cb38-5"></a>    <span class="dt">void</span> setSmallLEDsRainbow(<span class="dt">uint8_t</span> angle) {</span>
-<span id="cb38-6"><a href="#cb38-6"></a>      <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {</span>
-<span id="cb38-7"><a href="#cb38-7"></a>        setSmallLED(i, colorWheel(angle+i*ONETWELFTH));</span>
-<span id="cb38-8"><a href="#cb38-8"></a>      }</span>
-<span id="cb38-9"><a href="#cb38-9"></a>    }</span>
-<span id="cb38-10"><a href="#cb38-10"></a>    </span>
-<span id="cb38-11"><a href="#cb38-11"></a>    <span class="dt">void</span> setSmallLED(<span class="dt">int</span> i, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
-<span id="cb38-12"><a href="#cb38-12"></a>      <span class="cf">if</span> (i&lt;<span class="dv">0</span> || i&gt;<span class="dv">11</span>) <span class="cf">return</span>;</span>
-<span id="cb38-13"><a href="#cb38-13"></a>      smallLEDs[i*<span class="dv">3</span>] = r;</span>
-<span id="cb38-14"><a href="#cb38-14"></a>      smallLEDs[i*<span class="dv">3</span>+<span class="dv">1</span>] = g;</span>
-<span id="cb38-15"><a href="#cb38-15"></a>      smallLEDs[i*<span class="dv">3</span>+<span class="dv">2</span>] = b;  </span>
-<span id="cb38-16"><a href="#cb38-16"></a>    }</span>
-<span id="cb38-17"><a href="#cb38-17"></a>    </span>
-<span id="cb38-18"><a href="#cb38-18"></a>    <span class="dt">void</span> setSmallLED(<span class="dt">int</span> i, <span class="dt">uint32_t</span> rgb) {</span>
-<span id="cb38-19"><a href="#cb38-19"></a>      <span class="cf">if</span> (i&lt;<span class="dv">0</span> || i&gt;<span class="dv">11</span>) <span class="cf">return</span>;</span>
-<span id="cb38-20"><a href="#cb38-20"></a>      smallLEDs[i*<span class="dv">3</span>] = rgb&gt;&gt;<span class="dv">16</span>;</span>
-<span id="cb38-21"><a href="#cb38-21"></a>      smallLEDs[i*<span class="dv">3</span>+<span class="dv">1</span>] = rgb&gt;&gt;<span class="dv">8</span>;</span>
-<span id="cb38-22"><a href="#cb38-22"></a>      smallLEDs[i*<span class="dv">3</span>+<span class="dv">2</span>] = rgb;  </span>
-<span id="cb38-23"><a href="#cb38-23"></a>    }</span>
-<span id="cb38-24"><a href="#cb38-24"></a></span>
-<span id="cb38-25"><a href="#cb38-25"></a>    <span class="dt">void</span> setSmallLEDs(<span class="dt">int</span> i, <span class="dt">int</span> j, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
-<span id="cb38-26"><a href="#cb38-26"></a>      <span class="cf">for</span> (<span class="dt">int</span> ii=max(<span class="dv">0</span>,i); ii&lt;min(<span class="dv">12</span>,j); ii++) setSmallLED(ii,r,g,b);</span>
-<span id="cb38-27"><a href="#cb38-27"></a>    }</span>
-<span id="cb38-28"><a href="#cb38-28"></a></span>
-<span id="cb38-29"><a href="#cb38-29"></a>    <span class="dt">void</span> setSmallLEDs(<span class="dt">int</span> i, <span class="dt">int</span> j, <span class="dt">uint32_t</span> rgb) {</span>
-<span id="cb38-30"><a href="#cb38-30"></a>      <span class="cf">for</span> (<span class="dt">int</span> ii=max(<span class="dv">0</span>,i); ii&lt;min(<span class="dv">12</span>,j); ii++) setSmallLED(ii,rgb);</span>
-<span id="cb38-31"><a href="#cb38-31"></a>    }</span>
-<span id="cb38-32"><a href="#cb38-32"></a>    </span>
-<span id="cb38-33"><a href="#cb38-33"></a>    <span class="dt">void</span> setSmallLEDsUniform(<span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
-<span id="cb38-34"><a href="#cb38-34"></a>      <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {</span>
-<span id="cb38-35"><a href="#cb38-35"></a>        smallLEDs[i*<span class="dv">3</span>] = r;</span>
-<span id="cb38-36"><a href="#cb38-36"></a>        smallLEDs[i*<span class="dv">3</span>+<span class="dv">1</span>] = g;</span>
-<span id="cb38-37"><a href="#cb38-37"></a>        smallLEDs[i*<span class="dv">3</span>+<span class="dv">2</span>] = b;  </span>
-<span id="cb38-38"><a href="#cb38-38"></a>      }</span>
-<span id="cb38-39"><a href="#cb38-39"></a>    }</span>
-<span id="cb38-40"><a href="#cb38-40"></a>    </span>
-<span id="cb38-41"><a href="#cb38-41"></a>    <span class="dt">void</span> setSmallLEDsUniform(<span class="dt">uint32_t</span> rgb) {</span>
-<span id="cb38-42"><a href="#cb38-42"></a>      <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {</span>
-<span id="cb38-43"><a href="#cb38-43"></a>        smallLEDs[i*<span class="dv">3</span>] = rgb&gt;&gt;<span class="dv">16</span>;</span>
-<span id="cb38-44"><a href="#cb38-44"></a>        smallLEDs[i*<span class="dv">3</span>+<span class="dv">1</span>] = rgb&gt;&gt;<span class="dv">8</span>;</span>
-<span id="cb38-45"><a href="#cb38-45"></a>        smallLEDs[i*<span class="dv">3</span>+<span class="dv">2</span>] = rgb;</span>
-<span id="cb38-46"><a href="#cb38-46"></a>      }</span>
-<span id="cb38-47"><a href="#cb38-47"></a>    }</span>
-<span id="cb38-48"><a href="#cb38-48"></a></span>
-<span id="cb38-49"><a href="#cb38-49"></a>    <span class="dt">void</span> setLargeLED(<span class="dt">int</span> i, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
-<span id="cb38-50"><a href="#cb38-50"></a>      <span class="cf">if</span> (i&gt;=<span class="dv">0</span> <span class="kw">and</span> i&lt;<span class="dv">8</span>) largeLEDs.setPixelColor(i,r,g,b);</span>
-<span id="cb38-51"><a href="#cb38-51"></a>    }</span>
-<span id="cb38-52"><a href="#cb38-52"></a>    </span>
-<span id="cb38-53"><a href="#cb38-53"></a>    <span class="dt">void</span> setLargeLED(<span class="dt">int</span> i, <span class="dt">uint32_t</span> rgb) {</span>
-<span id="cb38-54"><a href="#cb38-54"></a>      <span class="cf">if</span> (i&gt;=<span class="dv">0</span> <span class="kw">and</span> i&lt;<span class="dv">8</span>) largeLEDs.setPixelColor(i,rgb);</span>
-<span id="cb38-55"><a href="#cb38-55"></a>    }</span>
-<span id="cb38-56"><a href="#cb38-56"></a></span>
-<span id="cb38-57"><a href="#cb38-57"></a>    <span class="dt">void</span> setLargeLEDs(<span class="dt">int</span> i, <span class="dt">int</span> j, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
-<span id="cb38-58"><a href="#cb38-58"></a>      <span class="cf">for</span> (<span class="dt">int</span> ii=max(<span class="dv">0</span>,i); ii&lt;min(<span class="dv">8</span>,j); ii++) setLargeLED(ii,r,g,b);</span>
-<span id="cb38-59"><a href="#cb38-59"></a>    }</span>
-<span id="cb38-60"><a href="#cb38-60"></a>    </span>
-<span id="cb38-61"><a href="#cb38-61"></a>    <span class="dt">void</span> setLargeLEDs(<span class="dt">int</span> i, <span class="dt">int</span> j, <span class="dt">uint32_t</span> rgb) {</span>
-<span id="cb38-62"><a href="#cb38-62"></a>      <span class="cf">for</span> (<span class="dt">int</span> ii=max(<span class="dv">0</span>,i); ii&lt;min(<span class="dv">8</span>,j); ii++) setLargeLED(ii,rgb);</span>
-<span id="cb38-63"><a href="#cb38-63"></a>    }</span>
-<span id="cb38-64"><a href="#cb38-64"></a>    </span>
-<span id="cb38-65"><a href="#cb38-65"></a>    <span class="dt">void</span> setLargeLEDsUniform(<span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
-<span id="cb38-66"><a href="#cb38-66"></a>      largeLEDs.fill(color(r,g,b), <span class="dv">0</span>, <span class="dv">8</span>);</span>
-<span id="cb38-67"><a href="#cb38-67"></a>    }</span>
-<span id="cb38-68"><a href="#cb38-68"></a>    </span>
-<span id="cb38-69"><a href="#cb38-69"></a>    <span class="dt">void</span> setLargeLEDsUniform(<span class="dt">uint32_t</span> rgb) {</span>
-<span id="cb38-70"><a href="#cb38-70"></a>      largeLEDs.fill(rgb, <span class="dv">0</span>, <span class="dv">8</span>);</span>
-<span id="cb38-71"><a href="#cb38-71"></a>    }</span>
-<span id="cb38-72"><a href="#cb38-72"></a></span>
-<span id="cb38-73"><a href="#cb38-73"></a>    <span class="dt">void</span> clearSmallLEDs() {</span>
-<span id="cb38-74"><a href="#cb38-74"></a>      setSmallLEDsUniform(<span class="dv">0</span>);  </span>
-<span id="cb38-75"><a href="#cb38-75"></a>    }</span>
-<span id="cb38-76"><a href="#cb38-76"></a></span>
-<span id="cb38-77"><a href="#cb38-77"></a>    <span class="dt">void</span> clearLargeLEDs() {</span>
-<span id="cb38-78"><a href="#cb38-78"></a>      largeLEDs.fill(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">8</span>);</span>
-<span id="cb38-79"><a href="#cb38-79"></a>    }</span>
-<span id="cb38-80"><a href="#cb38-80"></a></span>
-<span id="cb38-81"><a href="#cb38-81"></a>    <span class="dt">void</span> clearAllLEDs() {</span>
-<span id="cb38-82"><a href="#cb38-82"></a>      setSmallLEDsUniform(<span class="dv">0</span>);  </span>
-<span id="cb38-83"><a href="#cb38-83"></a>      setLargeLEDsUniform(<span class="dv">0</span>);      </span>
-<span id="cb38-84"><a href="#cb38-84"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true"></a>    <span class="dt">void</span> setBrightness(<span class="dt">uint8_t</span> b) {</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true"></a>      largeLEDs.setBrightness(b);</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true"></a>    }</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true"></a>    <span class="dt">void</span> setSmallLEDsRainbow(<span class="dt">uint8_t</span> angle) {</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true"></a>      <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true"></a>        setSmallLED(i, colorWheel(angle+i*ONETWELFTH));</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true"></a>      }</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true"></a>    }</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true"></a>    </span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true"></a>    <span class="dt">void</span> setSmallLED(<span class="dt">int</span> i, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true"></a>      <span class="cf">if</span> (i&lt;<span class="dv">0</span> || i&gt;<span class="dv">11</span>) <span class="cf">return</span>;</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true"></a>      smallLEDs[i*<span class="dv">3</span>] = r;</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true"></a>      smallLEDs[i*<span class="dv">3</span>+<span class="dv">1</span>] = g;</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true"></a>      smallLEDs[i*<span class="dv">3</span>+<span class="dv">2</span>] = b;  </span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true"></a>    }</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true"></a>    </span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true"></a>    <span class="dt">void</span> setSmallLED(<span class="dt">int</span> i, <span class="dt">uint32_t</span> rgb) {</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true"></a>      <span class="cf">if</span> (i&lt;<span class="dv">0</span> || i&gt;<span class="dv">11</span>) <span class="cf">return</span>;</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true"></a>      smallLEDs[i*<span class="dv">3</span>] = rgb&gt;&gt;<span class="dv">16</span>;</span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true"></a>      smallLEDs[i*<span class="dv">3</span>+<span class="dv">1</span>] = rgb&gt;&gt;<span class="dv">8</span>;</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true"></a>      smallLEDs[i*<span class="dv">3</span>+<span class="dv">2</span>] = rgb;  </span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true"></a>    }</span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true"></a></span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true"></a>    <span class="dt">void</span> setSmallLEDs(<span class="dt">int</span> i, <span class="dt">int</span> j, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true"></a>      <span class="cf">for</span> (<span class="dt">int</span> ii=max(<span class="dv">0</span>,i); ii&lt;min(<span class="dv">12</span>,j); ii++) setSmallLED(ii,r,g,b);</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true"></a>    }</span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true"></a></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true"></a>    <span class="dt">void</span> setSmallLEDs(<span class="dt">int</span> i, <span class="dt">int</span> j, <span class="dt">uint32_t</span> rgb) {</span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true"></a>      <span class="cf">for</span> (<span class="dt">int</span> ii=max(<span class="dv">0</span>,i); ii&lt;min(<span class="dv">12</span>,j); ii++) setSmallLED(ii,rgb);</span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true"></a>    }</span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true"></a>    </span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true"></a>    <span class="dt">void</span> setSmallLEDsUniform(<span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true"></a>      <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {</span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true"></a>        smallLEDs[i*<span class="dv">3</span>] = r;</span>
+<span id="cb38-36"><a href="#cb38-36" aria-hidden="true"></a>        smallLEDs[i*<span class="dv">3</span>+<span class="dv">1</span>] = g;</span>
+<span id="cb38-37"><a href="#cb38-37" aria-hidden="true"></a>        smallLEDs[i*<span class="dv">3</span>+<span class="dv">2</span>] = b;  </span>
+<span id="cb38-38"><a href="#cb38-38" aria-hidden="true"></a>      }</span>
+<span id="cb38-39"><a href="#cb38-39" aria-hidden="true"></a>    }</span>
+<span id="cb38-40"><a href="#cb38-40" aria-hidden="true"></a>    </span>
+<span id="cb38-41"><a href="#cb38-41" aria-hidden="true"></a>    <span class="dt">void</span> setSmallLEDsUniform(<span class="dt">uint32_t</span> rgb) {</span>
+<span id="cb38-42"><a href="#cb38-42" aria-hidden="true"></a>      <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {</span>
+<span id="cb38-43"><a href="#cb38-43" aria-hidden="true"></a>        smallLEDs[i*<span class="dv">3</span>] = rgb&gt;&gt;<span class="dv">16</span>;</span>
+<span id="cb38-44"><a href="#cb38-44" aria-hidden="true"></a>        smallLEDs[i*<span class="dv">3</span>+<span class="dv">1</span>] = rgb&gt;&gt;<span class="dv">8</span>;</span>
+<span id="cb38-45"><a href="#cb38-45" aria-hidden="true"></a>        smallLEDs[i*<span class="dv">3</span>+<span class="dv">2</span>] = rgb;</span>
+<span id="cb38-46"><a href="#cb38-46" aria-hidden="true"></a>      }</span>
+<span id="cb38-47"><a href="#cb38-47" aria-hidden="true"></a>    }</span>
+<span id="cb38-48"><a href="#cb38-48" aria-hidden="true"></a></span>
+<span id="cb38-49"><a href="#cb38-49" aria-hidden="true"></a>    <span class="dt">void</span> setLargeLED(<span class="dt">int</span> i, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
+<span id="cb38-50"><a href="#cb38-50" aria-hidden="true"></a>      <span class="cf">if</span> (i&gt;=<span class="dv">0</span> <span class="kw">and</span> i&lt;<span class="dv">8</span>) largeLEDs.setPixelColor(i,r,g,b);</span>
+<span id="cb38-51"><a href="#cb38-51" aria-hidden="true"></a>    }</span>
+<span id="cb38-52"><a href="#cb38-52" aria-hidden="true"></a>    </span>
+<span id="cb38-53"><a href="#cb38-53" aria-hidden="true"></a>    <span class="dt">void</span> setLargeLED(<span class="dt">int</span> i, <span class="dt">uint32_t</span> rgb) {</span>
+<span id="cb38-54"><a href="#cb38-54" aria-hidden="true"></a>      <span class="cf">if</span> (i&gt;=<span class="dv">0</span> <span class="kw">and</span> i&lt;<span class="dv">8</span>) largeLEDs.setPixelColor(i,rgb);</span>
+<span id="cb38-55"><a href="#cb38-55" aria-hidden="true"></a>    }</span>
+<span id="cb38-56"><a href="#cb38-56" aria-hidden="true"></a></span>
+<span id="cb38-57"><a href="#cb38-57" aria-hidden="true"></a>    <span class="dt">void</span> setLargeLEDs(<span class="dt">int</span> i, <span class="dt">int</span> j, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
+<span id="cb38-58"><a href="#cb38-58" aria-hidden="true"></a>      <span class="cf">for</span> (<span class="dt">int</span> ii=max(<span class="dv">0</span>,i); ii&lt;min(<span class="dv">8</span>,j); ii++) setLargeLED(ii,r,g,b);</span>
+<span id="cb38-59"><a href="#cb38-59" aria-hidden="true"></a>    }</span>
+<span id="cb38-60"><a href="#cb38-60" aria-hidden="true"></a>    </span>
+<span id="cb38-61"><a href="#cb38-61" aria-hidden="true"></a>    <span class="dt">void</span> setLargeLEDs(<span class="dt">int</span> i, <span class="dt">int</span> j, <span class="dt">uint32_t</span> rgb) {</span>
+<span id="cb38-62"><a href="#cb38-62" aria-hidden="true"></a>      <span class="cf">for</span> (<span class="dt">int</span> ii=max(<span class="dv">0</span>,i); ii&lt;min(<span class="dv">8</span>,j); ii++) setLargeLED(ii,rgb);</span>
+<span id="cb38-63"><a href="#cb38-63" aria-hidden="true"></a>    }</span>
+<span id="cb38-64"><a href="#cb38-64" aria-hidden="true"></a>    </span>
+<span id="cb38-65"><a href="#cb38-65" aria-hidden="true"></a>    <span class="dt">void</span> setLargeLEDsUniform(<span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
+<span id="cb38-66"><a href="#cb38-66" aria-hidden="true"></a>      largeLEDs.fill(color(r,g,b), <span class="dv">0</span>, <span class="dv">8</span>);</span>
+<span id="cb38-67"><a href="#cb38-67" aria-hidden="true"></a>    }</span>
+<span id="cb38-68"><a href="#cb38-68" aria-hidden="true"></a>    </span>
+<span id="cb38-69"><a href="#cb38-69" aria-hidden="true"></a>    <span class="dt">void</span> setLargeLEDsUniform(<span class="dt">uint32_t</span> rgb) {</span>
+<span id="cb38-70"><a href="#cb38-70" aria-hidden="true"></a>      largeLEDs.fill(rgb, <span class="dv">0</span>, <span class="dv">8</span>);</span>
+<span id="cb38-71"><a href="#cb38-71" aria-hidden="true"></a>    }</span>
+<span id="cb38-72"><a href="#cb38-72" aria-hidden="true"></a></span>
+<span id="cb38-73"><a href="#cb38-73" aria-hidden="true"></a>    <span class="dt">void</span> clearSmallLEDs() {</span>
+<span id="cb38-74"><a href="#cb38-74" aria-hidden="true"></a>      setSmallLEDsUniform(<span class="dv">0</span>);  </span>
+<span id="cb38-75"><a href="#cb38-75" aria-hidden="true"></a>    }</span>
+<span id="cb38-76"><a href="#cb38-76" aria-hidden="true"></a></span>
+<span id="cb38-77"><a href="#cb38-77" aria-hidden="true"></a>    <span class="dt">void</span> clearLargeLEDs() {</span>
+<span id="cb38-78"><a href="#cb38-78" aria-hidden="true"></a>      largeLEDs.fill(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">8</span>);</span>
+<span id="cb38-79"><a href="#cb38-79" aria-hidden="true"></a>    }</span>
+<span id="cb38-80"><a href="#cb38-80" aria-hidden="true"></a></span>
+<span id="cb38-81"><a href="#cb38-81" aria-hidden="true"></a>    <span class="dt">void</span> clearAllLEDs() {</span>
+<span id="cb38-82"><a href="#cb38-82" aria-hidden="true"></a>      setSmallLEDsUniform(<span class="dv">0</span>);  </span>
+<span id="cb38-83"><a href="#cb38-83" aria-hidden="true"></a>      setLargeLEDsUniform(<span class="dv">0</span>);      </span>
+<span id="cb38-84"><a href="#cb38-84" aria-hidden="true"></a>    }</span></code></pre></div>
 </div>
 <section id="some-slightly-more-advanced-drawing-functions" class="side-text">
 <h3>Some slightly more advanced drawing functions</h3>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb39"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb39-1"><a href="#cb39-1"></a>    <span class="dt">void</span> setSmallLEDsPointer(<span class="dt">uint8_t</span> angle, <span class="dt">int64_t</span> decay, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
-<span id="cb39-2"><a href="#cb39-2"></a>      <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {</span>
-<span id="cb39-3"><a href="#cb39-3"></a>        <span class="dt">uint8_t</span> rel = angle-i*ONETWELFTH;</span>
-<span id="cb39-4"><a href="#cb39-4"></a>        <span class="cf">if</span> (rel&gt;=<span class="dv">128</span>) rel = <span class="dv">255</span>-rel;</span>
-<span id="cb39-5"><a href="#cb39-5"></a>        <span class="dt">uint32_t</span> arel = max(<span class="dv">255</span>-rel*decay*<span class="dv">2</span><span class="bu">l</span>/<span class="dv">255</span>,<span class="dv">0</span>);</span>
-<span id="cb39-6"><a href="#cb39-6"></a>        <span class="dt">uint8_t</span> <span class="fu">tr</span> = r*arel/<span class="dv">255</span>;</span>
-<span id="cb39-7"><a href="#cb39-7"></a>        <span class="dt">uint8_t</span> tg = g*arel/<span class="dv">255</span>;</span>
-<span id="cb39-8"><a href="#cb39-8"></a>        <span class="dt">uint8_t</span> tb = b*arel/<span class="dv">255</span>;</span>
-<span id="cb39-9"><a href="#cb39-9"></a>        setSmallLED(i,<span class="fu">tr</span>,tg,tb);</span>
-<span id="cb39-10"><a href="#cb39-10"></a>      }</span>
-<span id="cb39-11"><a href="#cb39-11"></a>    }</span>
-<span id="cb39-12"><a href="#cb39-12"></a>    </span>
-<span id="cb39-13"><a href="#cb39-13"></a>    <span class="dt">void</span> setSmallLEDsPointer(<span class="dt">uint8_t</span> angle, <span class="dt">int64_t</span> decay, <span class="dt">uint32_t</span> rgb) {</span>
-<span id="cb39-14"><a href="#cb39-14"></a>      setSmallLEDsPointer(angle, decay, rgb&gt;&gt;<span class="dv">16</span>, rgb&gt;&gt;<span class="dv">8</span>, rgb);</span>
-<span id="cb39-15"><a href="#cb39-15"></a>    }</span>
-<span id="cb39-16"><a href="#cb39-16"></a></span>
-<span id="cb39-17"><a href="#cb39-17"></a>    <span class="dt">void</span> setSmallLEDsPointer(<span class="dt">uint8_t</span> angle, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
-<span id="cb39-18"><a href="#cb39-18"></a>      setSmallLEDsPointer(angle, <span class="dv">500</span>, r, g, b);</span>
-<span id="cb39-19"><a href="#cb39-19"></a>    }</span>
-<span id="cb39-20"><a href="#cb39-20"></a></span>
-<span id="cb39-21"><a href="#cb39-21"></a>    <span class="dt">void</span> setSmallLEDsPointer(<span class="dt">uint8_t</span> angle, <span class="dt">uint32_t</span> rgb) {</span>
-<span id="cb39-22"><a href="#cb39-22"></a>      setSmallLEDsPointer(angle, <span class="dv">500</span>, rgb&gt;&gt;<span class="dv">16</span>, rgb&gt;&gt;<span class="dv">8</span>, rgb);</span>
-<span id="cb39-23"><a href="#cb39-23"></a>    }</span>
-<span id="cb39-24"><a href="#cb39-24"></a>    </span>
-<span id="cb39-25"><a href="#cb39-25"></a>    <span class="dt">void</span> setSmallLEDsProgress(<span class="dt">uint8_t</span> angle, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
-<span id="cb39-26"><a href="#cb39-26"></a>      <span class="dt">int</span> i;</span>
-<span id="cb39-27"><a href="#cb39-27"></a>      <span class="cf">for</span> (i=<span class="dv">0</span>; i&lt;angle/ONETWELFTH; i++) {</span>
-<span id="cb39-28"><a href="#cb39-28"></a>        setSmallLED(i, r, g, b);</span>
-<span id="cb39-29"><a href="#cb39-29"></a>      }</span>
-<span id="cb39-30"><a href="#cb39-30"></a>      <span class="cf">if</span> (i==<span class="dv">12</span>) <span class="cf">return</span>;</span>
-<span id="cb39-31"><a href="#cb39-31"></a>      <span class="dt">uint32_t</span> br = angle%ONETWELFTH;</span>
-<span id="cb39-32"><a href="#cb39-32"></a>      setSmallLED(i, br*r/ONETWELFTH, br*g/ONETWELFTH, br*b/ONETWELFTH);</span>
-<span id="cb39-33"><a href="#cb39-33"></a>    }</span>
-<span id="cb39-34"><a href="#cb39-34"></a></span>
-<span id="cb39-35"><a href="#cb39-35"></a>    <span class="dt">void</span> setSmallLEDsProgress(<span class="dt">uint8_t</span> angle, <span class="dt">uint32_t</span> rgb) {</span>
-<span id="cb39-36"><a href="#cb39-36"></a>      setSmallLEDsProgress(angle, rgb&gt;&gt;<span class="dv">16</span>, rgb&gt;&gt;<span class="dv">8</span>, rgb);</span>
-<span id="cb39-37"><a href="#cb39-37"></a>    }</span>
-<span id="cb39-38"><a href="#cb39-38"></a>};</span>
-<span id="cb39-39"><a href="#cb39-39"></a></span>
-<span id="cb39-40"><a href="#cb39-40"></a>SpinWheelClass SpinWheel;</span>
-<span id="cb39-41"><a href="#cb39-41"></a></span>
-<span id="cb39-42"><a href="#cb39-42"></a><span class="dt">void</span> cycleAnimationRoutine() { <span class="co">// called from interrupt</span></span>
-<span id="cb39-43"><a href="#cb39-43"></a>  <span class="at">static</span> <span class="dt">unsigned</span> <span class="dt">long</span> last_interrupt_time = <span class="dv">0</span>;</span>
-<span id="cb39-44"><a href="#cb39-44"></a>  <span class="dt">unsigned</span> <span class="dt">long</span> interrupt_time = millis();</span>
-<span id="cb39-45"><a href="#cb39-45"></a>  <span class="cf">if</span> (interrupt_time - last_interrupt_time &gt; <span class="dv">200</span>){</span>
-<span id="cb39-46"><a href="#cb39-46"></a>    SpinWheel.clearAllLEDs();</span>
-<span id="cb39-47"><a href="#cb39-47"></a>    SpinWheel.current_animation++;</span>
-<span id="cb39-48"><a href="#cb39-48"></a>    SpinWheel.current_animation %= SpinWheel.registered_animations;</span>
-<span id="cb39-49"><a href="#cb39-49"></a>  }</span>
-<span id="cb39-50"><a href="#cb39-50"></a>  last_interrupt_time = interrupt_time;</span>
-<span id="cb39-51"><a href="#cb39-51"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true"></a>    <span class="dt">void</span> setSmallLEDsPointer(<span class="dt">uint8_t</span> angle, <span class="dt">int64_t</span> decay, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true"></a>      <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true"></a>        <span class="dt">uint8_t</span> rel = angle-i*ONETWELFTH;</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true"></a>        <span class="cf">if</span> (rel&gt;=<span class="dv">128</span>) rel = <span class="dv">255</span>-rel;</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true"></a>        <span class="dt">uint32_t</span> arel = max(<span class="dv">255</span>-rel*decay*<span class="dv">2</span><span class="bu">l</span>/<span class="dv">255</span>,<span class="dv">0</span>);</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true"></a>        <span class="dt">uint8_t</span> <span class="fu">tr</span> = r*arel/<span class="dv">255</span>;</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true"></a>        <span class="dt">uint8_t</span> tg = g*arel/<span class="dv">255</span>;</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true"></a>        <span class="dt">uint8_t</span> tb = b*arel/<span class="dv">255</span>;</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true"></a>        setSmallLED(i,<span class="fu">tr</span>,tg,tb);</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true"></a>      }</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true"></a>    }</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true"></a>    </span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true"></a>    <span class="dt">void</span> setSmallLEDsPointer(<span class="dt">uint8_t</span> angle, <span class="dt">int64_t</span> decay, <span class="dt">uint32_t</span> rgb) {</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true"></a>      setSmallLEDsPointer(angle, decay, rgb&gt;&gt;<span class="dv">16</span>, rgb&gt;&gt;<span class="dv">8</span>, rgb);</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true"></a>    }</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true"></a></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true"></a>    <span class="dt">void</span> setSmallLEDsPointer(<span class="dt">uint8_t</span> angle, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true"></a>      setSmallLEDsPointer(angle, <span class="dv">500</span>, r, g, b);</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true"></a>    }</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true"></a></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true"></a>    <span class="dt">void</span> setSmallLEDsPointer(<span class="dt">uint8_t</span> angle, <span class="dt">uint32_t</span> rgb) {</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true"></a>      setSmallLEDsPointer(angle, <span class="dv">500</span>, rgb&gt;&gt;<span class="dv">16</span>, rgb&gt;&gt;<span class="dv">8</span>, rgb);</span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true"></a>    }</span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true"></a>    </span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true"></a>    <span class="dt">void</span> setSmallLEDsProgress(<span class="dt">uint8_t</span> angle, <span class="dt">uint8_t</span> r, <span class="dt">uint8_t</span> g, <span class="dt">uint8_t</span> b) {</span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true"></a>      <span class="dt">int</span> i;</span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true"></a>      <span class="cf">for</span> (i=<span class="dv">0</span>; i&lt;angle/ONETWELFTH; i++) {</span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true"></a>        setSmallLED(i, r, g, b);</span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true"></a>      }</span>
+<span id="cb39-30"><a href="#cb39-30" aria-hidden="true"></a>      <span class="cf">if</span> (i==<span class="dv">12</span>) <span class="cf">return</span>;</span>
+<span id="cb39-31"><a href="#cb39-31" aria-hidden="true"></a>      <span class="dt">uint32_t</span> br = angle%ONETWELFTH;</span>
+<span id="cb39-32"><a href="#cb39-32" aria-hidden="true"></a>      setSmallLED(i, br*r/ONETWELFTH, br*g/ONETWELFTH, br*b/ONETWELFTH);</span>
+<span id="cb39-33"><a href="#cb39-33" aria-hidden="true"></a>    }</span>
+<span id="cb39-34"><a href="#cb39-34" aria-hidden="true"></a></span>
+<span id="cb39-35"><a href="#cb39-35" aria-hidden="true"></a>    <span class="dt">void</span> setSmallLEDsProgress(<span class="dt">uint8_t</span> angle, <span class="dt">uint32_t</span> rgb) {</span>
+<span id="cb39-36"><a href="#cb39-36" aria-hidden="true"></a>      setSmallLEDsProgress(angle, rgb&gt;&gt;<span class="dv">16</span>, rgb&gt;&gt;<span class="dv">8</span>, rgb);</span>
+<span id="cb39-37"><a href="#cb39-37" aria-hidden="true"></a>    }</span>
+<span id="cb39-38"><a href="#cb39-38" aria-hidden="true"></a>};</span>
+<span id="cb39-39"><a href="#cb39-39" aria-hidden="true"></a></span>
+<span id="cb39-40"><a href="#cb39-40" aria-hidden="true"></a>SpinWheelClass SpinWheel;</span>
+<span id="cb39-41"><a href="#cb39-41" aria-hidden="true"></a></span>
+<span id="cb39-42"><a href="#cb39-42" aria-hidden="true"></a><span class="dt">void</span> cycleAnimationRoutine() { <span class="co">// called from interrupt</span></span>
+<span id="cb39-43"><a href="#cb39-43" aria-hidden="true"></a>  <span class="at">static</span> <span class="dt">unsigned</span> <span class="dt">long</span> last_interrupt_time = <span class="dv">0</span>;</span>
+<span id="cb39-44"><a href="#cb39-44" aria-hidden="true"></a>  <span class="dt">unsigned</span> <span class="dt">long</span> interrupt_time = millis();</span>
+<span id="cb39-45"><a href="#cb39-45" aria-hidden="true"></a>  <span class="cf">if</span> (interrupt_time - last_interrupt_time &gt; <span class="dv">200</span>){</span>
+<span id="cb39-46"><a href="#cb39-46" aria-hidden="true"></a>    SpinWheel.clearAllLEDs();</span>
+<span id="cb39-47"><a href="#cb39-47" aria-hidden="true"></a>    SpinWheel.current_animation++;</span>
+<span id="cb39-48"><a href="#cb39-48" aria-hidden="true"></a>    SpinWheel.current_animation %= SpinWheel.registered_animations;</span>
+<span id="cb39-49"><a href="#cb39-49" aria-hidden="true"></a>  }</span>
+<span id="cb39-50"><a href="#cb39-50" aria-hidden="true"></a>  last_interrupt_time = interrupt_time;</span>
+<span id="cb39-51"><a href="#cb39-51" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <section id="preloaded-animations" class="side-text">
 <h2>Preloaded animations</h2>
 <p>The SpinWheel comes with a number of preloaded animation routines.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb40"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb40-1"><a href="#cb40-1"></a></span>
-<span id="cb40-2"><a href="#cb40-2"></a><span class="dt">void</span> bootAnimation() {</span>
-<span id="cb40-3"><a href="#cb40-3"></a>  <span class="cf">for</span> (<span class="dt">uint8_t</span> i=<span class="dv">0</span>; i&lt;<span class="dv">252</span>; i+=<span class="dv">4</span>) {</span>
-<span id="cb40-4"><a href="#cb40-4"></a>    SpinWheel.setSmallLEDsUniform(i,i,i);</span>
-<span id="cb40-5"><a href="#cb40-5"></a>    SpinWheel.drawFrame();</span>
-<span id="cb40-6"><a href="#cb40-6"></a>  }</span>
-<span id="cb40-7"><a href="#cb40-7"></a>  <span class="cf">for</span> (<span class="dt">uint8_t</span> i=<span class="dv">252</span>; i&gt;<span class="dv">0</span>; i-=<span class="dv">4</span>) {</span>
-<span id="cb40-8"><a href="#cb40-8"></a>    SpinWheel.setSmallLEDsUniform(i,i,i);</span>
-<span id="cb40-9"><a href="#cb40-9"></a>    SpinWheel.drawFrame();</span>
-<span id="cb40-10"><a href="#cb40-10"></a>  }</span>
-<span id="cb40-11"><a href="#cb40-11"></a>  SpinWheel.clearSmallLEDs();</span>
-<span id="cb40-12"><a href="#cb40-12"></a>  <span class="cf">for</span> (<span class="dt">uint8_t</span> i=<span class="dv">0</span>; i&lt;<span class="dv">32</span>; i++) {</span>
-<span id="cb40-13"><a href="#cb40-13"></a>    SpinWheel.setLargeLEDsUniform(i,i,i);</span>
-<span id="cb40-14"><a href="#cb40-14"></a>    SpinWheel.drawFrame();</span>
-<span id="cb40-15"><a href="#cb40-15"></a>  }</span>
-<span id="cb40-16"><a href="#cb40-16"></a>  <span class="cf">for</span> (<span class="dt">uint8_t</span> i=<span class="dv">32</span>; i&gt;<span class="dv">0</span>; i--) {</span>
-<span id="cb40-17"><a href="#cb40-17"></a>    SpinWheel.setLargeLEDsUniform(i,i,i);</span>
-<span id="cb40-18"><a href="#cb40-18"></a>    SpinWheel.drawFrame();</span>
-<span id="cb40-19"><a href="#cb40-19"></a>  }</span>
-<span id="cb40-20"><a href="#cb40-20"></a>  SpinWheel.clearLargeLEDs();  </span>
-<span id="cb40-21"><a href="#cb40-21"></a>  SpinWheel.drawFrame();</span>
-<span id="cb40-22"><a href="#cb40-22"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true"></a></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true"></a><span class="dt">void</span> bootAnimation() {</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true"></a>  <span class="cf">for</span> (<span class="dt">uint8_t</span> i=<span class="dv">0</span>; i&lt;<span class="dv">252</span>; i+=<span class="dv">4</span>) {</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true"></a>    SpinWheel.setSmallLEDsUniform(i,i,i);</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true"></a>    SpinWheel.drawFrame();</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true"></a>  }</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true"></a>  <span class="cf">for</span> (<span class="dt">uint8_t</span> i=<span class="dv">252</span>; i&gt;<span class="dv">0</span>; i-=<span class="dv">4</span>) {</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true"></a>    SpinWheel.setSmallLEDsUniform(i,i,i);</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true"></a>    SpinWheel.drawFrame();</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true"></a>  }</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true"></a>  SpinWheel.clearSmallLEDs();</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true"></a>  <span class="cf">for</span> (<span class="dt">uint8_t</span> i=<span class="dv">0</span>; i&lt;<span class="dv">32</span>; i++) {</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true"></a>    SpinWheel.setLargeLEDsUniform(i,i,i);</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true"></a>    SpinWheel.drawFrame();</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true"></a>  }</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true"></a>  <span class="cf">for</span> (<span class="dt">uint8_t</span> i=<span class="dv">32</span>; i&gt;<span class="dv">0</span>; i--) {</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true"></a>    SpinWheel.setLargeLEDsUniform(i,i,i);</span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true"></a>    SpinWheel.drawFrame();</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true"></a>  }</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true"></a>  SpinWheel.clearLargeLEDs();  </span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true"></a>  SpinWheel.drawFrame();</span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <section id="rotating" class="side-text">
 <h4>Rotating</h4>
 <p>A rotating pattern on the small LEDs. <video src="./preloaded_rotating.mp4" muted="" autoplay="" playsinline="" loop=""></video></p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb41"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb41-1"><a href="#cb41-1"></a><span class="dt">void</span> smallWhiteRotating() {</span>
-<span id="cb41-2"><a href="#cb41-2"></a>  <span class="dt">uint8_t</span> angle = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;</span>
-<span id="cb41-3"><a href="#cb41-3"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
-<span id="cb41-4"><a href="#cb41-4"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true"></a><span class="dt">void</span> smallWhiteRotating() {</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true"></a>  <span class="dt">uint8_t</span> angle = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <section id="breathing" class="side-text">
 <h4>Breathing</h4>
 <p>A pulsing pattern on all of the LEDs.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb42"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb42-1"><a href="#cb42-1"></a><span class="dt">void</span> allBreathing() {</span>
-<span id="cb42-2"><a href="#cb42-2"></a>  <span class="dt">uint8_t</span> t = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;</span>
-<span id="cb42-3"><a href="#cb42-3"></a>  <span class="dt">uint8_t</span> b1 = parabolaWave(t);</span>
-<span id="cb42-4"><a href="#cb42-4"></a>  <span class="dt">uint8_t</span> b2 = parabolaWave(t+<span class="dv">20</span>);</span>
-<span id="cb42-5"><a href="#cb42-5"></a>  <span class="dt">uint8_t</span> b3 = parabolaWave(t+<span class="dv">70</span>);</span>
-<span id="cb42-6"><a href="#cb42-6"></a>  <span class="dt">uint8_t</span> b4 = parabolaWave(t+<span class="dv">90</span>);</span>
-<span id="cb42-7"><a href="#cb42-7"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {</span>
-<span id="cb42-8"><a href="#cb42-8"></a>    SpinWheel.largeLEDs.setPixelColor(i,b1,<span class="dv">0</span>,b1);</span>
-<span id="cb42-9"><a href="#cb42-9"></a>  }</span>
-<span id="cb42-10"><a href="#cb42-10"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">4</span>; i&lt;<span class="dv">8</span>; i++) {</span>
-<span id="cb42-11"><a href="#cb42-11"></a>    SpinWheel.largeLEDs.setPixelColor(i,b2,<span class="dv">0</span>,b2);</span>
-<span id="cb42-12"><a href="#cb42-12"></a>  }</span>
-<span id="cb42-13"><a href="#cb42-13"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {</span>
-<span id="cb42-14"><a href="#cb42-14"></a>    <span class="cf">if</span> (i%<span class="dv">2</span>==<span class="dv">1</span>) {</span>
-<span id="cb42-15"><a href="#cb42-15"></a>      SpinWheel.setSmallLED(i,b3,<span class="dv">0</span>,b3);</span>
-<span id="cb42-16"><a href="#cb42-16"></a>    } <span class="cf">else</span> {</span>
-<span id="cb42-17"><a href="#cb42-17"></a>      SpinWheel.setSmallLED(i,b4,<span class="dv">0</span>,b4);</span>
-<span id="cb42-18"><a href="#cb42-18"></a>    }</span>
-<span id="cb42-19"><a href="#cb42-19"></a>  }</span>
-<span id="cb42-20"><a href="#cb42-20"></a>}</span>
-<span id="cb42-21"><a href="#cb42-21"></a></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true"></a><span class="dt">void</span> allBreathing() {</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true"></a>  <span class="dt">uint8_t</span> t = (millis()&gt;&gt;<span class="dv">4</span>)&amp;<span class="bn">0xff</span>;</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true"></a>  <span class="dt">uint8_t</span> b1 = parabolaWave(t);</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true"></a>  <span class="dt">uint8_t</span> b2 = parabolaWave(t+<span class="dv">20</span>);</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true"></a>  <span class="dt">uint8_t</span> b3 = parabolaWave(t+<span class="dv">70</span>);</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true"></a>  <span class="dt">uint8_t</span> b4 = parabolaWave(t+<span class="dv">90</span>);</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true"></a>    SpinWheel.largeLEDs.setPixelColor(i,b1,<span class="dv">0</span>,b1);</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true"></a>  }</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">4</span>; i&lt;<span class="dv">8</span>; i++) {</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true"></a>    SpinWheel.largeLEDs.setPixelColor(i,b2,<span class="dv">0</span>,b2);</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true"></a>  }</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">12</span>; i++) {</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true"></a>    <span class="cf">if</span> (i%<span class="dv">2</span>==<span class="dv">1</span>) {</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true"></a>      SpinWheel.setSmallLED(i,b3,<span class="dv">0</span>,b3);</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true"></a>    } <span class="cf">else</span> {</span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true"></a>      SpinWheel.setSmallLED(i,b4,<span class="dv">0</span>,b4);</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true"></a>    }</span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true"></a>  }</span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true"></a>}</span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true"></a></span></code></pre></div>
 </div>
 <section id="tilt-sensor-1" class="side-text">
 <h4>Tilt sensor 1</h4>
 <p>The large LEDs are used as a tilt sensor. <video src="./preloaded_tilt.mp4" muted="" autoplay="" playsinline="" loop=""></video></p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb43"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb43-1"><a href="#cb43-1"></a><span class="dt">void</span> tiltSensor() {</span>
-<span id="cb43-2"><a href="#cb43-2"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
-<span id="cb43-3"><a href="#cb43-3"></a>  <span class="dt">int</span> y = SpinWheel.ay*<span class="dv">255</span>;</span>
-<span id="cb43-4"><a href="#cb43-4"></a>  SpinWheel.clearLargeLEDs();</span>
-<span id="cb43-5"><a href="#cb43-5"></a>  <span class="cf">if</span> (x&gt;<span class="dv">0</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x,<span class="dv">0</span>,x);</span>
-<span id="cb43-6"><a href="#cb43-6"></a>  <span class="cf">else</span> SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x,<span class="dv">0</span>,-x);</span>
-<span id="cb43-7"><a href="#cb43-7"></a>  <span class="cf">if</span> (y&gt;<span class="dv">0</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,y,<span class="dv">0</span>,y);</span>
-<span id="cb43-8"><a href="#cb43-8"></a>  <span class="cf">else</span> SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,-y,<span class="dv">0</span>,-y);</span>
-<span id="cb43-9"><a href="#cb43-9"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true"></a><span class="dt">void</span> tiltSensor() {</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true"></a>  <span class="dt">int</span> y = SpinWheel.ay*<span class="dv">255</span>;</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true"></a>  SpinWheel.clearLargeLEDs();</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true"></a>  <span class="cf">if</span> (x&gt;<span class="dv">0</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x,<span class="dv">0</span>,x);</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true"></a>  <span class="cf">else</span> SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x,<span class="dv">0</span>,-x);</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true"></a>  <span class="cf">if</span> (y&gt;<span class="dv">0</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,y,<span class="dv">0</span>,y);</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true"></a>  <span class="cf">else</span> SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,-y,<span class="dv">0</span>,-y);</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <section id="compass" class="side-text">
 <h4>Compass</h4>
 <p>A compass on the small LEDs, while the large LEDs are used as a tilt sensor.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb44"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb44-1"><a href="#cb44-1"></a><span class="dt">void</span> compass() {</span>
-<span id="cb44-2"><a href="#cb44-2"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
-<span id="cb44-3"><a href="#cb44-3"></a>  <span class="dt">int</span> y = SpinWheel.ay*<span class="dv">255</span>;</span>
-<span id="cb44-4"><a href="#cb44-4"></a>  SpinWheel.clearLargeLEDs();</span>
-<span id="cb44-5"><a href="#cb44-5"></a>  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
-<span id="cb44-6"><a href="#cb44-6"></a>  <span class="cf">else</span> <span class="cf">if</span> (x&lt;-<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
-<span id="cb44-7"><a href="#cb44-7"></a>  <span class="cf">else</span> {</span>
-<span id="cb44-8"><a href="#cb44-8"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(x));</span>
-<span id="cb44-9"><a href="#cb44-9"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(x));</span>
-<span id="cb44-10"><a href="#cb44-10"></a>  }</span>
-<span id="cb44-11"><a href="#cb44-11"></a>  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
-<span id="cb44-12"><a href="#cb44-12"></a>  <span class="cf">else</span> <span class="cf">if</span> (y&lt;-<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
-<span id="cb44-13"><a href="#cb44-13"></a>  <span class="cf">else</span> {</span>
-<span id="cb44-14"><a href="#cb44-14"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(y));</span>
-<span id="cb44-15"><a href="#cb44-15"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(y));</span>
-<span id="cb44-16"><a href="#cb44-16"></a>  }</span>
-<span id="cb44-17"><a href="#cb44-17"></a>  <span class="dt">uint8_t</span> angle = (-atan2(SpinWheel.my, SpinWheel.mx)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
-<span id="cb44-18"><a href="#cb44-18"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
-<span id="cb44-19"><a href="#cb44-19"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true"></a><span class="dt">void</span> compass() {</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true"></a>  <span class="dt">int</span> y = SpinWheel.ay*<span class="dv">255</span>;</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true"></a>  SpinWheel.clearLargeLEDs();</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true"></a>  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true"></a>  <span class="cf">else</span> <span class="cf">if</span> (x&lt;-<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true"></a>  <span class="cf">else</span> {</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(x));</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(x));</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true"></a>  }</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true"></a>  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true"></a>  <span class="cf">else</span> <span class="cf">if</span> (y&lt;-<span class="dv">10</span>) SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true"></a>  <span class="cf">else</span> {</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(y));</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">32</span>-<span class="dv">3</span>*abs(y));</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true"></a>  }</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true"></a>  <span class="dt">uint8_t</span> angle = (-atan2(SpinWheel.my, SpinWheel.mx)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <section id="tilt-sensor-2" class="side-text">
 <h4>Tilt sensor 2</h4>
 <p>The small LEDs are used as a tilt sensor.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb45"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb45-1"><a href="#cb45-1"></a><span class="dt">void</span> tiltSensor2() {</span>
-<span id="cb45-2"><a href="#cb45-2"></a>  <span class="dt">uint8_t</span> angle = (-atan2(SpinWheel.ay, SpinWheel.ax)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
-<span id="cb45-3"><a href="#cb45-3"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
-<span id="cb45-4"><a href="#cb45-4"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true"></a><span class="dt">void</span> tiltSensor2() {</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true"></a>  <span class="dt">uint8_t</span> angle = (-atan2(SpinWheel.ay, SpinWheel.ax)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <section id="tilt-sensor-3" class="side-text">
 <h4>Tilt sensor 3</h4>
 <p>Both the large and the small LEDs are used as a tilt sensor. <video src="./preloaded_tilt3.mp4" muted="" autoplay="" playsinline="" loop=""></video></p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb46"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb46-1"><a href="#cb46-1"></a><span class="dt">void</span> tiltSensor3() {</span>
-<span id="cb46-2"><a href="#cb46-2"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
-<span id="cb46-3"><a href="#cb46-3"></a>  <span class="dt">int</span> y = SpinWheel.ay*<span class="dv">255</span>;</span>
-<span id="cb46-4"><a href="#cb46-4"></a>  SpinWheel.setLargeLEDsUniform(<span class="bn">0xffffff</span>);</span>
-<span id="cb46-5"><a href="#cb46-5"></a>  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) {</span>
-<span id="cb46-6"><a href="#cb46-6"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,x-<span class="dv">8</span>);</span>
-<span id="cb46-7"><a href="#cb46-7"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">3</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,x-<span class="dv">8</span>);</span>
-<span id="cb46-8"><a href="#cb46-8"></a>  }</span>
-<span id="cb46-9"><a href="#cb46-9"></a>  <span class="cf">else</span> <span class="cf">if</span> (x&lt;-<span class="dv">10</span>) {</span>
-<span id="cb46-10"><a href="#cb46-10"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,-x+<span class="dv">8</span>);</span>
-<span id="cb46-11"><a href="#cb46-11"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">1</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,-x+<span class="dv">8</span>);</span>
-<span id="cb46-12"><a href="#cb46-12"></a>  }</span>
-<span id="cb46-13"><a href="#cb46-13"></a>  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) {</span>
-<span id="cb46-14"><a href="#cb46-14"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
-<span id="cb46-15"><a href="#cb46-15"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">2</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
-<span id="cb46-16"><a href="#cb46-16"></a>  }</span>
-<span id="cb46-17"><a href="#cb46-17"></a>  <span class="cf">else</span> <span class="cf">if</span> (y&lt;-<span class="dv">10</span>) {</span>
-<span id="cb46-18"><a href="#cb46-18"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
-<span id="cb46-19"><a href="#cb46-19"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">0</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
-<span id="cb46-20"><a href="#cb46-20"></a>  }</span>
-<span id="cb46-21"><a href="#cb46-21"></a>  <span class="dt">uint8_t</span> angle = (-atan2(SpinWheel.ay, SpinWheel.ax)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
-<span id="cb46-22"><a href="#cb46-22"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
-<span id="cb46-23"><a href="#cb46-23"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true"></a><span class="dt">void</span> tiltSensor3() {</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true"></a>  <span class="dt">int</span> y = SpinWheel.ay*<span class="dv">255</span>;</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true"></a>  SpinWheel.setLargeLEDsUniform(<span class="bn">0xffffff</span>);</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true"></a>  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) {</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">7</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,x-<span class="dv">8</span>);</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">3</span>,x-<span class="dv">8</span>,<span class="dv">0</span>,x-<span class="dv">8</span>);</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true"></a>  }</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true"></a>  <span class="cf">else</span> <span class="cf">if</span> (x&lt;-<span class="dv">10</span>) {</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">5</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,-x+<span class="dv">8</span>);</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">1</span>,-x+<span class="dv">8</span>,<span class="dv">0</span>,-x+<span class="dv">8</span>);</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true"></a>  }</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true"></a>  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) {</span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">6</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">2</span>,y-<span class="dv">8</span>,<span class="dv">0</span>,y-<span class="dv">8</span>);</span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true"></a>  }</span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true"></a>  <span class="cf">else</span> <span class="cf">if</span> (y&lt;-<span class="dv">10</span>) {</span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">4</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
+<span id="cb46-19"><a href="#cb46-19" aria-hidden="true"></a>    SpinWheel.largeLEDs.setPixelColor(<span class="dv">0</span>,-y+<span class="dv">8</span>,<span class="dv">0</span>,-y+<span class="dv">8</span>);</span>
+<span id="cb46-20"><a href="#cb46-20" aria-hidden="true"></a>  }</span>
+<span id="cb46-21"><a href="#cb46-21" aria-hidden="true"></a>  <span class="dt">uint8_t</span> angle = (-atan2(SpinWheel.ay, SpinWheel.ax)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
+<span id="cb46-22"><a href="#cb46-22" aria-hidden="true"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">500</span>, <span class="bn">0xffffff</span>);</span>
+<span id="cb46-23"><a href="#cb46-23" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <section id="flashlight" class="side-text">
 <h4>Flashlight</h4>
 <p>As the name suggests, this function turns all LEDs on to full brightness.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb47"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb47-1"><a href="#cb47-1"></a><span class="dt">void</span> flashlight() {</span>
-<span id="cb47-2"><a href="#cb47-2"></a>  SpinWheel.setSmallLEDsUniform(<span class="bn">0xffffff</span>);  </span>
-<span id="cb47-3"><a href="#cb47-3"></a>  SpinWheel.setLargeLEDsUniform(<span class="bn">0xffffff</span>);</span>
-<span id="cb47-4"><a href="#cb47-4"></a>}</span>
-<span id="cb47-5"><a href="#cb47-5"></a></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true"></a><span class="dt">void</span> flashlight() {</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true"></a>  SpinWheel.setSmallLEDsUniform(<span class="bn">0xffffff</span>);  </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true"></a>  SpinWheel.setLargeLEDsUniform(<span class="bn">0xffffff</span>);</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true"></a>}</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true"></a></span></code></pre></div>
 </div>
 <section id="teal-light" class="side-text">
 <h4>Teal Light</h4>
 <p>As the name suggests, this function turns all LEDs on to full brightness.</p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb48"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb48-1"><a href="#cb48-1"></a><span class="dt">void</span> tealLight() {</span>
-<span id="cb48-2"><a href="#cb48-2"></a>  SpinWheel.setSmallLEDsUniform(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">170</span>);  </span>
-<span id="cb48-3"><a href="#cb48-3"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">216</span>);</span>
-<span id="cb48-4"><a href="#cb48-4"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true"></a><span class="dt">void</span> tealLight() {</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true"></a>  SpinWheel.setSmallLEDsUniform(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">170</span>);  </span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">216</span>);</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <section id="large-rainbow" class="side-text">
 <h4>Large Rainbow</h4>
 <p>Draw a rainbow on the larger LEDs and while the smaller ones are all white. <video src="./preloaded_rainbow.mp4" muted="" autoplay="" playsinline="" loop=""></video></p>
 </section>
 <div class="code">
-<div class="sourceCode" id="cb49"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb49-1"><a href="#cb49-1"></a><span class="dt">void</span> largeRainbow() {</span>
-<span id="cb49-2"><a href="#cb49-2"></a>  <span class="dt">long</span> <span class="dt">int</span> angle = millis()/<span class="dv">20</span>;</span>
-<span id="cb49-3"><a href="#cb49-3"></a>  SpinWheel.setSmallLEDsUniform(<span class="bn">0xffffff</span>);</span>
-<span id="cb49-4"><a href="#cb49-4"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {</span>
-<span id="cb49-5"><a href="#cb49-5"></a>    SpinWheel.setLargeLED(i, colorWheel(angle+i*<span class="dv">255</span>/<span class="dv">4</span>));</span>
-<span id="cb49-6"><a href="#cb49-6"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>-i, colorWheel(angle+i*<span class="dv">255</span>/<span class="dv">4</span>));</span>
-<span id="cb49-7"><a href="#cb49-7"></a>  }</span>
-<span id="cb49-8"><a href="#cb49-8"></a></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true"></a><span class="dt">void</span> largeRainbow() {</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true"></a>  <span class="dt">long</span> <span class="dt">int</span> angle = millis()/<span class="dv">20</span>;</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true"></a>  SpinWheel.setSmallLEDsUniform(<span class="bn">0xffffff</span>);</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true"></a>  <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i++) {</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true"></a>    SpinWheel.setLargeLED(i, colorWheel(angle+i*<span class="dv">255</span>/<span class="dv">4</span>));</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>-i, colorWheel(angle+i*<span class="dv">255</span>/<span class="dv">4</span>));</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true"></a>  }</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true"></a></span></code></pre></div>
 </div>
 <div class="side-text">
 
 </div>
 <div class="code">
-<div class="sourceCode" id="cb50"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb50-1"><a href="#cb50-1"></a>}</span>
-<span id="cb50-2"><a href="#cb50-2"></a></span>
-<span id="cb50-3"><a href="#cb50-3"></a>} <span class="co">// end namespace SpinWearables</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true"></a>}</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true"></a>} <span class="co">// end namespace SpinWearables</span></span></code></pre></div>
 </div>
 </div>
 </body>

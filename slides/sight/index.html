@@ -381,8 +381,7 @@ void loop() {
 }
 </pre>
 </div>
-</section>
-</section>
+</section></section>
 <section>
 <section id="light-is-an-electromagnetic-wave" class="title-slide slide level1">
 <h1>Light is an Electromagnetic Wave</h1>
@@ -555,8 +554,7 @@ waveUpdate();
 <iframe src="https://theoatmeal.com/comics/mantis_shrimp" style="width:80%;height:50vh;">
 </iframe>
 <p>The Oatmeal comics has a story about the mantis shrimp: an animal that can distinguish 12 different base colors.</p>
-</section>
-</section>
+</section></section>
 <section>
 <section id="other-limitations-of-our-eyes" class="title-slide slide level1">
 <h1>Other limitations of our Eyes</h1>
@@ -642,31 +640,31 @@ getT();
 <section class="slide level2">
 
 <h3 id="implemented-on-the-spinwheel">Implemented on the SpinWheel</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">// BE CAREFUL IF YOU HAVE EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>  SpinWheel.begin();</span>
-<span id="cb1-8"><a href="#cb1-8"></a>}</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co">// BE CAREFUL IF YOU HAVE EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co">// Change this value! Experiment!</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="dt">int</span> delay_time_in_milliseconds = <span class="dv">500</span>;</span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-15"><a href="#cb1-15"></a>  <span class="co">// Show red...</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
-<span id="cb1-17"><a href="#cb1-17"></a>  SpinWheel.drawFrame();</span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="co">// Wait...</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a>  delay(delay_time_in_milliseconds);</span>
-<span id="cb1-20"><a href="#cb1-20"></a>  <span class="co">// Show blue...</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>);</span>
-<span id="cb1-22"><a href="#cb1-22"></a>  SpinWheel.drawFrame();</span>
-<span id="cb1-23"><a href="#cb1-23"></a>  <span class="co">// Wait...</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>  delay(delay_time_in_milliseconds);  </span>
-<span id="cb1-25"><a href="#cb1-25"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="co">// BE CAREFUL IF YOU HAVE EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>  SpinWheel.begin();</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>}</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="co">// BE CAREFUL IF YOU HAVE EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="co">// Change this value! Experiment!</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="dt">int</span> delay_time_in_milliseconds = <span class="dv">500</span>;</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>  <span class="co">// Show red...</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>  SpinWheel.drawFrame();</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a>  <span class="co">// Wait...</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a>  delay(delay_time_in_milliseconds);</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a>  <span class="co">// Show blue...</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>);</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a>  SpinWheel.drawFrame();</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a>  <span class="co">// Wait...</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a>  delay(delay_time_in_milliseconds);  </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a>}</span></code></pre></div>
 </section>
 <section class="slide level2">
 
@@ -680,8 +678,7 @@ getT();
 <img data-src="/images/bookpics/disco_lights.jpg" alt="" /><figcaption>Understanding the interplay between color and light enables<br />
 the creation of wondrous technology and art. <a class="imagecredit" href="https://www.pikrepo.com/fqyvu/multicolored-strobe-lights">image credit Pikrepo</a></figcaption>
 </figure>
-</section>
-</section>
+</section></section>
 <section>
 <section id="suggested-lessons-and-activities" class="title-slide slide level1">
 <h1>Suggested lessons and activities</h1>
@@ -690,8 +687,7 @@ the creation of wondrous technology and art. <a class="imagecredit" href="https:
 <section class="slide level2">
 
 <p>TODO</p>
-</section>
-</section>
+</section></section>
     </div>
   </div>
 

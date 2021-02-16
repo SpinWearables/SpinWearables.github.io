@@ -130,47 +130,47 @@ The code presented on this page can be <a href="./Rainbow_Chase.ino">downloaded<
 
 </div>
 <div class="code">
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  SpinWheel.begin();</span>
-<span id="cb1-7"><a href="#cb1-7"></a>}</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="dt">int</span> t = millis();</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>  SpinWheel.begin();</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>}</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>  <span class="dt">int</span> t = millis();</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>We will have some fixed “delay” between the numbers controlling each LED’s color. Change this number! What happens?</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a>  <span class="dt">int</span> t_delay = <span class="dv">200</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>  <span class="dt">int</span> t_delay = <span class="dv">200</span>;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>We will turn 4 of the LEDs on, but the color of each one of them will be governed by a slightly modified number.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a>  <span class="dt">int</span> t0 = (t % <span class="dv">2500</span>) / <span class="dv">10</span>;</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="dt">int</span> t1 = ((t+t_delay) % <span class="dv">2500</span>) / <span class="dv">10</span>;</span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="dt">int</span> t2 = ((t+<span class="dv">2</span>*t_delay) % <span class="dv">2500</span>) / <span class="dv">10</span>;</span>
-<span id="cb3-4"><a href="#cb3-4"></a>  <span class="dt">int</span> t3 = ((t+<span class="dv">3</span>*t_delay) % <span class="dv">2500</span>) / <span class="dv">10</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>  <span class="dt">int</span> t0 = (t % <span class="dv">2500</span>) / <span class="dv">10</span>;</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>  <span class="dt">int</span> t1 = ((t+t_delay) % <span class="dv">2500</span>) / <span class="dv">10</span>;</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>  <span class="dt">int</span> t2 = ((t+<span class="dv">2</span>*t_delay) % <span class="dv">2500</span>) / <span class="dv">10</span>;</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>  <span class="dt">int</span> t3 = ((t+<span class="dv">3</span>*t_delay) % <span class="dv">2500</span>) / <span class="dv">10</span>;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Here we finally set those colors.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a>  SpinWheel.setLargeLED(<span class="dv">0</span>, colorWheel(t0));</span>
-<span id="cb4-2"><a href="#cb4-2"></a>  SpinWheel.setLargeLED(<span class="dv">1</span>, colorWheel(t1));</span>
-<span id="cb4-3"><a href="#cb4-3"></a>  SpinWheel.setLargeLED(<span class="dv">2</span>, colorWheel(t2));</span>
-<span id="cb4-4"><a href="#cb4-4"></a>  SpinWheel.setLargeLED(<span class="dv">3</span>, colorWheel(t3));</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>  SpinWheel.setLargeLED(<span class="dv">0</span>, colorWheel(t0));</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>  SpinWheel.setLargeLED(<span class="dv">1</span>, colorWheel(t1));</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>  SpinWheel.setLargeLED(<span class="dv">2</span>, colorWheel(t2));</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>  SpinWheel.setLargeLED(<span class="dv">3</span>, colorWheel(t3));</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Draw the image that was prepared in the previous lines.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a>  SpinWheel.drawFrame();</span>
-<span id="cb5-2"><a href="#cb5-2"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>  SpinWheel.drawFrame();</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 </div>
 </body>

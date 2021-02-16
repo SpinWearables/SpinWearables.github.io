@@ -122,119 +122,119 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In programming, a control statment is any statement (or line of code) which determines whether or not other statments or other lines of code will be executed. There are a few different types of control statements. We will cover two different types in this lesson: <em>if statments</em> and <em>loops</em>. These more advanced structures are essential tools that enable a programmer (like yourself) to write more complicated instructions.</p>
 <h3 id="if-statements">If Statements</h3>
 <p>You might have already seen an if statment in the <a href="/dancing">Dancing with Color adventure</a>. If statements generally contain a line or lines of code in a block that is only executed <code>if</code> a given statement is true. The general layout of an if statement is shown below</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(condition){</span>
-<span id="cb1-2"><a href="#cb1-2"></a>  <span class="co">// some code which will be run if the condition is true. </span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="cf">if</span>(condition){</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  <span class="co">// some code which will be run if the condition is true. </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>}</span></code></pre></div>
 <p>Now let’s come up with a way to use an if statement on the SpinWheel. We will do this by modifying an example in the <a href="/basic">Basic Structure of a Program Lesson</a>. In this example, we only light up the corresponding LED <code>if</code> the condition is true. In this case the condition is <code>which_LED % 2 == 0</code> which is a line of code that checks whether or not the variable <code>which_LED</code> is an even number. If it is an even number, then the corresponding LED will light up. If <code>which_LED</code> is not an even number, we will skip the block of code and no light up the corresponding LED.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">void</span> setup() {</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  SpinWheel.begin();</span>
-<span id="cb2-6"><a href="#cb2-6"></a>}</span>
-<span id="cb2-7"><a href="#cb2-7"></a></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">// Variable to specify which LED to light up.</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="dt">int</span> which_LED = <span class="dv">0</span>; </span>
-<span id="cb2-10"><a href="#cb2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="dt">void</span> loop() {</span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a>  <span class="co">// check if which_LED is even</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>  <span class="cf">if</span>(which_LED % <span class="dv">2</span> == <span class="dv">0</span> ){</span>
-<span id="cb2-15"><a href="#cb2-15"></a>    <span class="co">// clear all the LEDs </span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>    SpinWheel.clearAllLEDs();</span>
-<span id="cb2-17"><a href="#cb2-17"></a>    </span>
-<span id="cb2-18"><a href="#cb2-18"></a>    <span class="co">// Light up the specified LED.</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>    SpinWheel.setLargeLED(which_LED, <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>); </span>
-<span id="cb2-20"><a href="#cb2-20"></a>    SpinWheel.drawFrame();</span>
-<span id="cb2-21"><a href="#cb2-21"></a>  }</span>
-<span id="cb2-22"><a href="#cb2-22"></a>  </span>
-<span id="cb2-23"><a href="#cb2-23"></a>  <span class="co">// Add in a delay to make the LEDs change at a reasonable speed.</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a>  delay(<span class="dv">500</span>);</span>
-<span id="cb2-25"><a href="#cb2-25"></a>  <span class="co">// Increase the value of which_LED by 1.</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a>  which_LED = which_LED + <span class="dv">1</span>; </span>
-<span id="cb2-27"><a href="#cb2-27"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>  SpinWheel.begin();</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>}</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="co">// Variable to specify which LED to light up.</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="dt">int</span> which_LED = <span class="dv">0</span>; </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="dt">void</span> loop() {</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>  <span class="co">// check if which_LED is even</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>  <span class="cf">if</span>(which_LED % <span class="dv">2</span> == <span class="dv">0</span> ){</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a>    <span class="co">// clear all the LEDs </span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a>    SpinWheel.clearAllLEDs();</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>    </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>    <span class="co">// Light up the specified LED.</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a>    SpinWheel.setLargeLED(which_LED, <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>); </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a>    SpinWheel.drawFrame();</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a>  }</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true"></a>  </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true"></a>  <span class="co">// Add in a delay to make the LEDs change at a reasonable speed.</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true"></a>  delay(<span class="dv">500</span>);</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true"></a>  <span class="co">// Increase the value of which_LED by 1.</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true"></a>  which_LED = which_LED + <span class="dv">1</span>; </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true"></a>}</span></code></pre></div>
 <p>If statements are also often called <code>if/else</code> statements. This is because we can include an <code>else</code> statement in addition to an <code>if</code> statement to specify a block of code which will be executed if the condition of the <code>if</code> statement is false. The general layout of an if/else statement is shown below.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="cf">if</span>(condition){</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="co">// some code which will be run if the condition is true.</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>}</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="cf">else</span>{</span>
-<span id="cb3-5"><a href="#cb3-5"></a> <span class="co">// some code which will be run if the condition is false</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="cf">if</span>(condition){</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>  <span class="co">// some code which will be run if the condition is true.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>}</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="cf">else</span>{</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a> <span class="co">// some code which will be run if the condition is false</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>}</span></code></pre></div>
 <p>If we want to further extend this structure we can also add an <code>else if</code> statement to allow us to check multiple conditions at once. The general layout of a program using these three types of statements is shown below.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="cf">if</span>(conditionA){</span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="co">// some code which will be run if conditionA is true.</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>}</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="cf">else</span> <span class="cf">if</span>(conditionB){</span>
-<span id="cb4-5"><a href="#cb4-5"></a> <span class="co">// some code which will be run if conditionA is false and conditionB is true.</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>}</span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="cf">else</span>{</span>
-<span id="cb4-8"><a href="#cb4-8"></a> <span class="co">// some code which will be run if the conditionA is false and conditionB is false.</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="cf">if</span>(conditionA){</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>  <span class="co">// some code which will be run if conditionA is true.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>}</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="cf">else</span> <span class="cf">if</span>(conditionB){</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a> <span class="co">// some code which will be run if conditionA is false and conditionB is true.</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>}</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="cf">else</span>{</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a> <span class="co">// some code which will be run if the conditionA is false and conditionB is false.</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a>}</span></code></pre></div>
 <p>Now let’s return to our original example and add in some if/else statements. Here we use these statements to change the color of the LED that lights up depending on the value of <code>which_LED</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="dt">void</span> setup() {</span>
-<span id="cb5-5"><a href="#cb5-5"></a>  SpinWheel.begin();</span>
-<span id="cb5-6"><a href="#cb5-6"></a>}</span>
-<span id="cb5-7"><a href="#cb5-7"></a></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">// Variable to specify which LED to light up.</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="dt">int</span> which_LED = <span class="dv">0</span>; </span>
-<span id="cb5-10"><a href="#cb5-10"></a></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="dt">void</span> loop() {</span>
-<span id="cb5-12"><a href="#cb5-12"></a>  <span class="co">// clear all the LEDs </span></span>
-<span id="cb5-13"><a href="#cb5-13"></a>  SpinWheel.clearAllLEDs();</span>
-<span id="cb5-14"><a href="#cb5-14"></a>  </span>
-<span id="cb5-15"><a href="#cb5-15"></a>  <span class="co">// if which_LED is less than 3</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a>  <span class="co">// make the LED red</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a>  <span class="cf">if</span>(which_LED &lt; <span class="dv">3</span>){  </span>
-<span id="cb5-18"><a href="#cb5-18"></a>    <span class="co">// Light up the specified LED.</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a>    SpinWheel.setLargeLED(which_LED, <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>); </span>
-<span id="cb5-20"><a href="#cb5-20"></a>  }</span>
-<span id="cb5-21"><a href="#cb5-21"></a>  <span class="co">// if which_LED is less than 6</span></span>
-<span id="cb5-22"><a href="#cb5-22"></a>  <span class="co">// make the LED blue</span></span>
-<span id="cb5-23"><a href="#cb5-23"></a>  <span class="cf">else</span> <span class="cf">if</span>(which_LED &lt; <span class="dv">6</span>){</span>
-<span id="cb5-24"><a href="#cb5-24"></a>    <span class="co">// Light up the specified LED.</span></span>
-<span id="cb5-25"><a href="#cb5-25"></a>    SpinWheel.setLargeLED(which_LED, <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>); </span>
-<span id="cb5-26"><a href="#cb5-26"></a>  }</span>
-<span id="cb5-27"><a href="#cb5-27"></a>  <span class="co">// if which_LED is greater than 6</span></span>
-<span id="cb5-28"><a href="#cb5-28"></a>  <span class="co">// make the LED green</span></span>
-<span id="cb5-29"><a href="#cb5-29"></a>  <span class="cf">else</span>{</span>
-<span id="cb5-30"><a href="#cb5-30"></a>   SpinWheel.setLargeLED(which_LED, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>);  </span>
-<span id="cb5-31"><a href="#cb5-31"></a>  }</span>
-<span id="cb5-32"><a href="#cb5-32"></a></span>
-<span id="cb5-33"><a href="#cb5-33"></a>  <span class="co">// light up the corresponding LED</span></span>
-<span id="cb5-34"><a href="#cb5-34"></a>  SpinWheel.drawFrame();</span>
-<span id="cb5-35"><a href="#cb5-35"></a>  </span>
-<span id="cb5-36"><a href="#cb5-36"></a>  <span class="co">// Add in a delay to make the LEDs change at a reasonable speed.</span></span>
-<span id="cb5-37"><a href="#cb5-37"></a>  delay(<span class="dv">500</span>);</span>
-<span id="cb5-38"><a href="#cb5-38"></a>  <span class="co">// Increase the value of which_LED by 1.</span></span>
-<span id="cb5-39"><a href="#cb5-39"></a>  which_LED = which_LED + <span class="dv">1</span>; </span>
-<span id="cb5-40"><a href="#cb5-40"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>  SpinWheel.begin();</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>}</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a><span class="co">// Variable to specify which LED to light up.</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a><span class="dt">int</span> which_LED = <span class="dv">0</span>; </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a><span class="dt">void</span> loop() {</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a>  <span class="co">// clear all the LEDs </span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true"></a>  SpinWheel.clearAllLEDs();</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true"></a>  </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true"></a>  <span class="co">// if which_LED is less than 3</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true"></a>  <span class="co">// make the LED red</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true"></a>  <span class="cf">if</span>(which_LED &lt; <span class="dv">3</span>){  </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true"></a>    <span class="co">// Light up the specified LED.</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true"></a>    SpinWheel.setLargeLED(which_LED, <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>); </span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true"></a>  }</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true"></a>  <span class="co">// if which_LED is less than 6</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true"></a>  <span class="co">// make the LED blue</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true"></a>  <span class="cf">else</span> <span class="cf">if</span>(which_LED &lt; <span class="dv">6</span>){</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true"></a>    <span class="co">// Light up the specified LED.</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true"></a>    SpinWheel.setLargeLED(which_LED, <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>); </span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true"></a>  }</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true"></a>  <span class="co">// if which_LED is greater than 6</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true"></a>  <span class="co">// make the LED green</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true"></a>  <span class="cf">else</span>{</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true"></a>   SpinWheel.setLargeLED(which_LED, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>);  </span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true"></a>  }</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true"></a>  <span class="co">// light up the corresponding LED</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true"></a>  SpinWheel.drawFrame();</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true"></a>  </span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true"></a>  <span class="co">// Add in a delay to make the LEDs change at a reasonable speed.</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true"></a>  delay(<span class="dv">500</span>);</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true"></a>  <span class="co">// Increase the value of which_LED by 1.</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true"></a>  which_LED = which_LED + <span class="dv">1</span>; </span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true"></a>}</span></code></pre></div>
 <p>If you’re curious about other ways to integrate <code>if/else</code> statements into your SpinWheel code, refer to the advanced adventures such as the <a href="/dancing">Dancing with Color adventure</a>.</p>
 <h3 id="loops">Loops</h3>
 <p>Loops are another type of control statement which determine the number of times a set of instructions are exectued. In this lesson, we will discuss two different types of loops: <em>for loops</em> and <em>while loops</em>.</p>
 <p>A for loop is typically used to execute a set of instructions a specified number of times. The general layout of a for loop is shown below. As we can see in this example, there are a few different parts of a for loop. One part is the initializer, which is a statement to be executed one time before the execution of the code block. Typically this is used to initialize a <em>looping variable</em> which keeps track of what loop the program is on. Another part of a for loop is the condition. This condition will be checked at the start of each time through the loop. If the condition is not true, the code block inside the for loop will not be executed. The final part of a for loop is the statement. The statement is a line of code which will be executed every time after the code block has been executed.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a><span class="cf">for</span> ( initializer; condition; statement ){</span>
-<span id="cb6-2"><a href="#cb6-2"></a>    <span class="co">// code block to be executed</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="cf">for</span> ( initializer; condition; statement ){</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>    <span class="co">// code block to be executed</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>}</span></code></pre></div>
 <p>To better understand this, we will step through an example (shown below). When the computer begins to execute this for loop, it first executes the initializer. In this case, the initializer sets the value of our looping variable to 0. Then the condition is checked. In this case <code>i = 0</code> which of course is less than 2. Therefore, the code block will be executed and the value of i (which is now 0) will be printed. Now, we will execute the statement, <code>i++</code>. This increases the value of i to be 1. Now, we start this process again. As the initializer is only executed once, this time through the loop we begin by checking the condition. The value of i is still less than 2, so we still execute the code block and print the value of i (which is now 1). We will then execute the statement and the value of i is now 2. This time through the loop, when we check the condition, the value of i is no longer less than 2. Therefore, the code block would no longer be executed and the computer would move to the next instruction.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">2</span>; i++ ){</span>
-<span id="cb7-2"><a href="#cb7-2"></a>    <span class="co">// code block to be executed</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>    Serial.print(i); </span>
-<span id="cb7-4"><a href="#cb7-4"></a>    Serial.println(); </span>
-<span id="cb7-5"><a href="#cb7-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">2</span>; i++ ){</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>    <span class="co">// code block to be executed</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>    Serial.print(i); </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>    Serial.println(); </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>}</span></code></pre></div>
 <p>Another type of loop is a <em>while loop</em>. A while loop executes its code block only <em>while</em> a given condition is true. The general structure of a while loop is shown below.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a><span class="cf">while</span>(conditon){</span>
-<span id="cb8-2"><a href="#cb8-2"></a>    <span class="co">// code block to be executed while the condition is true</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="cf">while</span>(conditon){</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>    <span class="co">// code block to be executed while the condition is true</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>}</span></code></pre></div>
 <p>We can additionally adapt our example from before to have the same output, but to use a while loop. This will perform the same task as the for loop above and will print the value of i as long as it is less than 2.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a><span class="dt">int</span> i = <span class="dv">0</span>; </span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="cf">while</span>(i &lt; <span class="dv">2</span>){</span>
-<span id="cb9-3"><a href="#cb9-3"></a>    Serial.print(i);</span>
-<span id="cb9-4"><a href="#cb9-4"></a>    Serial.println();</span>
-<span id="cb9-5"><a href="#cb9-5"></a>    i++;</span>
-<span id="cb9-6"><a href="#cb9-6"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="dt">int</span> i = <span class="dv">0</span>; </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="cf">while</span>(i &lt; <span class="dv">2</span>){</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>    Serial.print(i);</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a>    Serial.println();</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a>    i++;</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a>}</span></code></pre></div>
 <div class="warning">
 <p>If you put a condition in a while loop which will always be true, the loop will run forever creating what is called an <em>infinite loop</em>. You can always manually stop the execution of code if you suspect an infinite loop, but it is always a good idea to double check for this type of error before running.</p>
 </div>
@@ -256,7 +256,7 @@ document.querySelector("#isso-thread").addEventListener(
 </main>
 <div id="license">
 <!--<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc-by-sa.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.-->
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc-by-nc-sa.png" /></a></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. © SpinWearables LLC (<a href="/license">license and trademark details</a>)
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc-by-sa.png" /></a></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. © SpinWearables LLC (<a href="/license">license and trademark details</a>)
 </div>
 </body>
 </html>

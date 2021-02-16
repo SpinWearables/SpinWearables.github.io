@@ -136,74 +136,74 @@ The code presented on this page can be <a href="./1D_Rotation_Light_Up_Advanced.
 <p>These include statements should look familiar! As a reminder, they allow the program to access coding tools for the SpinWheel.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>The setup function should also seem familiar. As a reminder, the <code>setup</code> function is run once when the SpinWheel turns on. Also, <code>SpinWheel.begin()</code> prepares the LED to accept new colors.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">void</span> setup() {</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>  SpinWheel.begin();</span>
-<span id="cb3-4"><a href="#cb3-4"></a>}</span>
-<span id="cb3-5"><a href="#cb3-5"></a></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>  SpinWheel.begin();</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>}</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Here, we initialize two variables, one to tell the SpinWheel what color to display when the device is spun in the positive direction and the other for the negative direction.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">int</span> pos_spin = <span class="dv">0</span>;</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="dt">int</span> neg_spin = <span class="dv">0</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="dt">int</span> pos_spin = <span class="dv">0</span>;</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="dt">int</span> neg_spin = <span class="dv">0</span>;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Instructions in a loop function are repeated over and over again, in other words, “in a loop”.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="dt">void</span> loop() {</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="dt">void</span> loop() {</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>The <code>readIMU</code> function checks if the sensor is ready and takes its current rotation data.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a>  SpinWheel.readIMU();</span>
-<span id="cb6-2"><a href="#cb6-2"></a>  </span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>  SpinWheel.readIMU();</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>  </span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Here, we will also utilize <code>else if</code> and <code>else</code> commands. These commands are used in programming along with an <strong>if statement</strong> to tell the program what to do when the if condition is not met. In this example, our <strong>if condition</strong> checks whether or not the rotation is big enough in the <strong>positive direction</strong>. If this condition is true we will light up the LEDs according to the given instruction. Feel free to play around with this number.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">if</span> (SpinWheel.gx &gt; <span class="dv">100</span>) {</span>
-<span id="cb7-2"><a href="#cb7-2"></a>    pos_spin = <span class="dv">255</span>;</span>
-<span id="cb7-3"><a href="#cb7-3"></a>    neg_spin = <span class="dv">0</span>;</span>
-<span id="cb7-4"><a href="#cb7-4"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>  <span class="cf">if</span> (SpinWheel.gx &gt; <span class="dv">100</span>) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>    pos_spin = <span class="dv">255</span>;</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>    neg_spin = <span class="dv">0</span>;</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>  }</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>If the rotation is not big enough in the positive direction, we will use an <code>else if</code> command to see if the spin is large enough in the <strong>negative direction</strong>. If it is, then we will follow the given instruction.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a>  <span class="cf">else</span> <span class="cf">if</span> (SpinWheel.gx &lt; -<span class="dv">100</span>) {</span>
-<span id="cb8-2"><a href="#cb8-2"></a>    neg_spin = <span class="dv">255</span>;</span>
-<span id="cb8-3"><a href="#cb8-3"></a>    pos_spin = <span class="dv">0</span>;</span>
-<span id="cb8-4"><a href="#cb8-4"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>  <span class="cf">else</span> <span class="cf">if</span> (SpinWheel.gx &lt; -<span class="dv">100</span>) {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>    neg_spin = <span class="dv">255</span>;</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>    pos_spin = <span class="dv">0</span>;</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a>  }</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>If all previous conditions are not true, then we will use an <code>else</code> command. In this case, if the rotation is not large enough in either direction, the SpinWheel will not light up.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a>  <span class="cf">else</span> {</span>
-<span id="cb9-2"><a href="#cb9-2"></a>    pos_spin = <span class="dv">0</span>;</span>
-<span id="cb9-3"><a href="#cb9-3"></a>    neg_spin = <span class="dv">0</span>;</span>
-<span id="cb9-4"><a href="#cb9-4"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a>  <span class="cf">else</span> {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>    pos_spin = <span class="dv">0</span>;</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>    neg_spin = <span class="dv">0</span>;</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a>  }</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>As before, the <code>setLargeLEDsUniform</code> function tells the SpinWheel to show the color we would like it to show. Based on the previous if statements, if the device is spinning in the positive direction, the LEDs will light up green. If the device is spinning in the negative direction the LEDs will light up blue.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, pos_spin, neg_spin);</span>
-<span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  SpinWheel.drawFrame();</span>
-<span id="cb10-4"><a href="#cb10-4"></a> }</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, pos_spin, neg_spin);</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a>  SpinWheel.drawFrame();</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a> }</span></code></pre></div>
 </div>
 </div>
 </body>

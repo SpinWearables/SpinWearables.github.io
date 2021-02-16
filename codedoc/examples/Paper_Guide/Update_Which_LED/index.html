@@ -123,32 +123,32 @@ The code presented on this page can be <a href="./Update_Which_LED.ino">download
 </p>
 <div class="flex-container">
 <div class="code">
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  SpinWheel.begin();</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  Serial.begin(<span class="dv">9600</span>);</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>  SpinWheel.begin();</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>  Serial.begin(<span class="dv">9600</span>);</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Variable to specify which LED to light up.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">int</span> which_LED = <span class="dv">0</span>; </span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="dt">void</span> loop() {</span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="co">// Light up the specified LED.</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>  SpinWheel.setLargeLED(which_LED, <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>); </span>
-<span id="cb2-6"><a href="#cb2-6"></a>  SpinWheel.drawFrame();</span>
-<span id="cb2-7"><a href="#cb2-7"></a>  <span class="co">// Use serial to monitor the value of which_LED.</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>  Serial.println(which_LED);</span>
-<span id="cb2-9"><a href="#cb2-9"></a>  <span class="co">// Add in a delay to make the LEDs change at a reasonable speed.</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>  delay(<span class="dv">500</span>);</span>
-<span id="cb2-11"><a href="#cb2-11"></a>  <span class="co">// Increase the value of which_LED by 1.</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>  which_LED = which_LED + <span class="dv">1</span>; </span>
-<span id="cb2-13"><a href="#cb2-13"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="dt">int</span> which_LED = <span class="dv">0</span>; </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="dt">void</span> loop() {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>  <span class="co">// Light up the specified LED.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>  SpinWheel.setLargeLED(which_LED, <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>); </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>  SpinWheel.drawFrame();</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>  <span class="co">// Use serial to monitor the value of which_LED.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>  Serial.println(which_LED);</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>  <span class="co">// Add in a delay to make the LEDs change at a reasonable speed.</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>  delay(<span class="dv">500</span>);</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>  <span class="co">// Increase the value of which_LED by 1.</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>  which_LED = which_LED + <span class="dv">1</span>; </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 </div>
 </body>
