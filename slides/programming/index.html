@@ -119,13 +119,13 @@
 </section>
 <section id="the-skeleton-of-an-arduino-program" class="slide level2">
 <h2>The Skeleton of an Arduino Program</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>}</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">void</span> setup() {</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>}</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>}</span></code></pre></div>
 <p>This program does absolutely nothing.</p>
 </section>
 <section class="slide level2">
@@ -140,39 +140,39 @@ When you turn on the SpinWheel, <code>setup()</code> is run once and then the <c
 </section>
 <section id="extra-elements-of-a-spinwheel-program" class="slide level2">
 <h2>Extra Elements of a SpinWheel Program</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="co">// Include extra resources and commands</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="co">// specific to the SpinWheel.</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>  <span class="co">// Instruct the specific SpinWheel hardware</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>  <span class="co">// to be ready to receive instructions.</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>  SpinWheel.begin();</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>}</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="dt">void</span> loop() {</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">// Include extra resources and commands</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co">// specific to the SpinWheel.</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="dt">void</span> setup() {</span>
+<span id="cb2-7"><a href="#cb2-7"></a>  <span class="co">// Instruct the specific SpinWheel hardware</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>  <span class="co">// to be ready to receive instructions.</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>  SpinWheel.begin();</span>
+<span id="cb2-10"><a href="#cb2-10"></a>}</span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="dt">void</span> loop() {</span>
+<span id="cb2-13"><a href="#cb2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14"></a>}</span></code></pre></div>
 </section>
 <section class="slide level2">
 
 <p>Make it light up:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>  SpinWheel.begin();</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>}</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a><span class="dt">void</span> loop() {</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a>  <span class="co">// Set the large LED number 0 to</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a>  <span class="co">// have red=255, green=0, and blue=0 color.</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a>  SpinWheel.setLargeLED(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>  <span class="co">// Update the currently shining LEDs</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a>  <span class="co">// based on the instructions provided up to here.</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a>  SpinWheel.drawFrame();</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  SpinWheel.begin();</span>
+<span id="cb3-6"><a href="#cb3-6"></a>}</span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="dt">void</span> loop() {</span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="co">// Set the large LED number 0 to</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>  <span class="co">// have red=255, green=0, and blue=0 color.</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>  SpinWheel.setLargeLED(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
+<span id="cb3-12"><a href="#cb3-12"></a>  <span class="co">// Update the currently shining LEDs</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>  <span class="co">// based on the instructions provided up to here.</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>  SpinWheel.drawFrame();</span>
+<span id="cb3-15"><a href="#cb3-15"></a>}</span></code></pre></div>
 </section>
 <section class="slide level2">
 
@@ -202,51 +202,51 @@ void loop() {
 <h2>Creating changing patterns</h2>
 <p>To begin writing more complex code, we need to introduce the idea of <em>variables</em>. Variables allow us to store information in the program and change that information as needed.</p>
 <p>To <strong>define</strong> a new variable we can add the following line to the loop block:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="dt">int</span> which_LED = <span class="dv">1</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">int</span> which_LED = <span class="dv">1</span>;</span></code></pre></div>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>  SpinWheel.begin();</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>}</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a><span class="dt">void</span> loop() {</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a>  <span class="dt">int</span> which_LED = <span class="dv">1</span>;</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a>  SpinWheel.setLargeLED(which_LED, <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>  SpinWheel.drawFrame();</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  SpinWheel.begin();</span>
+<span id="cb5-6"><a href="#cb5-6"></a>}</span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="dt">void</span> loop() {</span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="dt">int</span> which_LED = <span class="dv">1</span>;</span>
+<span id="cb5-10"><a href="#cb5-10"></a>  SpinWheel.setLargeLED(which_LED, <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
+<span id="cb5-11"><a href="#cb5-11"></a>  SpinWheel.drawFrame();</span>
+<span id="cb5-12"><a href="#cb5-12"></a>}</span></code></pre></div>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>  SpinWheel.begin();</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>}</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a><span class="co">// We have to declare which_LED outside of the loop to change it every loop</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a><span class="dt">int</span> which_LED = <span class="dv">0</span>; </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true"></a><span class="dt">void</span> loop() {</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true"></a>  <span class="co">// clear all LEDs</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true"></a>  SpinWheel.clearAllLEDs();</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true"></a>  </span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true"></a>  <span class="co">// Turn on 1 LED</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true"></a>  SpinWheel.setLargeLED(which_LED, <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true"></a>  SpinWheel.drawFrame();</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true"></a>  </span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true"></a>  <span class="co">// change the LED to use</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true"></a>  which_LED = which_LED + <span class="dv">1</span>;</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true"></a>  </span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true"></a>  <span class="co">// pause the code to delay running the next loop</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true"></a>  delay(<span class="dv">500</span>);</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true"></a>  </span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb6-5"><a href="#cb6-5"></a>  SpinWheel.begin();</span>
+<span id="cb6-6"><a href="#cb6-6"></a>}</span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">// We have to declare which_LED outside of the loop to change it every loop</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="dt">int</span> which_LED = <span class="dv">0</span>; </span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="dt">void</span> loop() {</span>
+<span id="cb6-12"><a href="#cb6-12"></a></span>
+<span id="cb6-13"><a href="#cb6-13"></a>  <span class="co">// clear all LEDs</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>  SpinWheel.clearAllLEDs();</span>
+<span id="cb6-15"><a href="#cb6-15"></a>  </span>
+<span id="cb6-16"><a href="#cb6-16"></a>  <span class="co">// Turn on 1 LED</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>  SpinWheel.setLargeLED(which_LED, <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
+<span id="cb6-18"><a href="#cb6-18"></a>  SpinWheel.drawFrame();</span>
+<span id="cb6-19"><a href="#cb6-19"></a>  </span>
+<span id="cb6-20"><a href="#cb6-20"></a>  <span class="co">// change the LED to use</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a>  which_LED = which_LED + <span class="dv">1</span>;</span>
+<span id="cb6-22"><a href="#cb6-22"></a>  </span>
+<span id="cb6-23"><a href="#cb6-23"></a>  <span class="co">// pause the code to delay running the next loop</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a>  delay(<span class="dv">500</span>);</span>
+<span id="cb6-25"><a href="#cb6-25"></a>  </span>
+<span id="cb6-26"><a href="#cb6-26"></a>}</span></code></pre></div>
 </section>
 <section class="slide level2">
 
@@ -262,7 +262,8 @@ void loop() {
 <li>Commands tend to be some name followed by parentheses <code>()</code>.</li>
 <li>Inside these parentheses we put some extra information: this information can control how a command performs.</li>
 </ul>
-</section></section>
+</section>
+</section>
 <section>
 <section id="building-blocks-for-your-program" class="title-slide slide level1">
 <h1>Building Blocks for your Program</h1>
@@ -282,12 +283,12 @@ void loop() {
 
 <p>We will only discuss two types of variables: integers and decimals. Other types do exist, but we won’t cover them here.</p>
 <p>To <strong>define</strong> a new integer variable you need the following line in your code:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="dt">int</span> my_special_integer = <span class="dv">6</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a><span class="dt">int</span> my_special_integer = <span class="dv">6</span>;</span></code></pre></div>
 </section>
 <section class="slide level2">
 
 <p>If we want to work with decimals, we use the variable type <code>float</code> instead of <code>int</code>. The name comes from the early history of computers and is unimportant for our purposes (how the decimal point can “float” between the digits).</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="dt">float</span> pi = <span class="fl">3.1415</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a><span class="dt">float</span> pi = <span class="fl">3.1415</span>;</span></code></pre></div>
 </section>
 <section id="functions" class="slide level2">
 <h2>Functions</h2>
@@ -296,15 +297,15 @@ void loop() {
 <section class="slide level2">
 
 <p>Here is some code that uses an example function called <code>max</code> that takes two numbers as input and returns the larger number. The input values are also called the <strong>arguments</strong> of the function.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="dt">int</span> number_a = <span class="dv">5</span>;</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="dt">int</span> number_b = <span class="dv">7</span>;</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a><span class="dt">int</span> resulting_number = max(number_a, number_b);</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a><span class="dt">int</span> number_a = <span class="dv">5</span>;</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="dt">int</span> number_b = <span class="dv">7</span>;</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="dt">int</span> resulting_number = max(number_a, number_b);</span></code></pre></div>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="dt">int</span> number_a = <span class="dv">5</span>;</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="dt">int</span> number_b = <span class="dv">7</span>;</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a><span class="dt">int</span> resulting_number = max(number_a, number_b);</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1"></a><span class="dt">int</span> number_a = <span class="dv">5</span>;</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="dt">int</span> number_b = <span class="dv">7</span>;</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="dt">int</span> resulting_number = max(number_a, number_b);</span></code></pre></div>
 <p>The value stored in <code>resulting_number</code> in this case would be <code>7</code>.</p>
 </section>
 <section class="slide level2">
@@ -315,9 +316,9 @@ void loop() {
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="dt">int</span> number_a = <span class="dv">5</span>;</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a><span class="dt">int</span> number_b = <span class="dv">7</span>;</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a><span class="dt">int</span> result = max(sqrt(number_a-<span class="dv">1</span>) * <span class="dv">2</span>, min(number_b, <span class="dv">2</span>));</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1"></a><span class="dt">int</span> number_a = <span class="dv">5</span>;</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="dt">int</span> number_b = <span class="dv">7</span>;</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="dt">int</span> result = max(sqrt(number_a-<span class="dv">1</span>) * <span class="dv">2</span>, min(number_b, <span class="dv">2</span>));</span></code></pre></div>
 <figure>
 <video src="/images/bookpics/calc_tree.mp4" muted playsinline loop>
 </video>
@@ -336,31 +337,32 @@ void loop() {
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="dt">float</span> x = <span class="fl">3.5</span>;</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a><span class="dt">float</span> y = <span class="fl">2.5</span>;</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a><span class="dt">float</span> resulting_number = avg(x, y);</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1"></a><span class="dt">float</span> x = <span class="fl">3.5</span>;</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="dt">float</span> y = <span class="fl">2.5</span>;</span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="dt">float</span> resulting_number = avg(x, y);</span></code></pre></div>
 <p>In this code example, <code>resulting_number</code> will have the value of <code>3.0</code>.</p>
 </section>
 <section class="slide level2">
 
 <p>To define this new function, we need to write down its name, together with the type of data it will be producing, followed by a set of computational instructions:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="dt">float</span> avg(<span class="dt">float</span> first_argument, <span class="dt">float</span> second_argument) {</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a>  <span class="cf">return</span> <span class="fl">0.5</span>*(first_argument+second_argument);</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1"></a><span class="dt">float</span> avg(<span class="dt">float</span> first_argument, <span class="dt">float</span> second_argument) {</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="cf">return</span> <span class="fl">0.5</span>*(first_argument+second_argument);</span>
+<span id="cb13-3"><a href="#cb13-3"></a>}</span></code></pre></div>
 </section>
 <section id="functions-that-do-not-return-values" class="slide level2">
 <h2>Functions that do not return values</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a>a = calculation1();</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a>delay(<span class="dv">1000</span>);</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a>b = calculation2();</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1"></a>a = calculation1();</span>
+<span id="cb14-2"><a href="#cb14-2"></a>delay(<span class="dv">1000</span>);</span>
+<span id="cb14-3"><a href="#cb14-3"></a>b = calculation2();</span></code></pre></div>
 </section>
 <section id="comments" class="slide level2">
 <h2>Comments</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="co">// I am writing this comment to remind me</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="co">// that the next line stores the number 5</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a><span class="co">// in the variable named my_test_variable.</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a><span class="dt">int</span> my_test_variable = <span class="dv">5</span>;</span></code></pre></div>
-</section></section>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">// I am writing this comment to remind me</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co">// that the next line stores the number 5</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="co">// in the variable named my_test_variable.</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="dt">int</span> my_test_variable = <span class="dv">5</span>;</span></code></pre></div>
+</section>
+</section>
     </div>
   </div>
 

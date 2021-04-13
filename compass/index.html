@@ -473,33 +473,33 @@ bclearsphere.addEventListener('click', function (){
 <div class="further-reading">
 <p>If you want to refresh your memory about accessing <code>Serial Plotter</code>, then check out the <a href="/arduino101">Arduino 101</a> lesson. Reminder: you will see a single small LED light up in red when you use <code>Serial Plotter</code> or <code>Serial Monitor</code>.</p>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>  SpinWheel.begin();</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="co">// Set up communication with the host computer.</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>  Serial.begin(<span class="dv">9600</span>);</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>}</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="co">// Read all sensor data.</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a>  SpinWheel.readIMU();</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a><span class="co">// Measure the magnetic field along the three axes of the sensor.</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>  <span class="dt">float</span> x = SpinWheel.mx;</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>  <span class="dt">float</span> y = SpinWheel.my;</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a>  <span class="dt">float</span> z = SpinWheel.mz;</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="co">// Report it back to the host computer.</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a>  Serial.print(x);</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a>  Serial.print(<span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>); <span class="co">// Print a tab separator.</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a>  Serial.print(y);</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a>  Serial.print(<span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>); <span class="co">// Print a tab separator.</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a>  Serial.print(z);</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a>  Serial.print(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="co">// Print a new line.</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  SpinWheel.begin();</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">// Set up communication with the host computer.</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  Serial.begin(<span class="dv">9600</span>);</span>
+<span id="cb1-9"><a href="#cb1-9"></a>}</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">// Read all sensor data.</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  SpinWheel.readIMU();</span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co">// Measure the magnetic field along the three axes of the sensor.</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  <span class="dt">float</span> x = SpinWheel.mx;</span>
+<span id="cb1-17"><a href="#cb1-17"></a>  <span class="dt">float</span> y = SpinWheel.my;</span>
+<span id="cb1-18"><a href="#cb1-18"></a>  <span class="dt">float</span> z = SpinWheel.mz;</span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="co">// Report it back to the host computer.</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>  Serial.print(x);</span>
+<span id="cb1-22"><a href="#cb1-22"></a>  Serial.print(<span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>); <span class="co">// Print a tab separator.</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a>  Serial.print(y);</span>
+<span id="cb1-24"><a href="#cb1-24"></a>  Serial.print(<span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>); <span class="co">// Print a tab separator.</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a>  Serial.print(z);</span>
+<span id="cb1-26"><a href="#cb1-26"></a>  Serial.print(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="co">// Print a new line.</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>}</span></code></pre></div>
 <p>To visualize the cloud of points that this creates, you can also copy the data from your <code>Serial Monitor</code> into the text box below. Uncheck <code>Autoscroll</code> and <code>Show timestamp</code> to more easily copy and paste. The webpage will then regenerate the image based on the numbers that you provided. Currently, the text you see in the textbox contains real data we measured with one of the first SpinWheels we ever manufactured. If you rotate the plot (by dragging it), you can clearly see that the sphere of measurements is not at the center of the sphere of points. Instead, like you could see in the animation above, there is an offset that we have to correct for.</p>
 <div id="pointclouddiv" class="threediv">
 <div id="pointcloudanim" class="threejsanim">
@@ -619,50 +619,50 @@ document.getElementById("pointcloudtext").addEventListener('input', processData)
 <h2 id="compass-with-automatic-calibration">Compass with automatic calibration</h2>
 <p>Now, instead of recording all of this data and processing it in order to correct our <strong>magnetic field measurements</strong>, we can instruct the SpinWheel to continuously correct itself. Initially, such an automatic correction will be significantly off, but after a few minutes of playing with the device, it will have measured enough data in order to perform accurate corrections. This correction procedure is known as calibration.</p>
 <p>The code below works by first storing the biggest and smallest measurements for each axis of the magnetic sensor. Then we use these maxima and minima to find the offset of the sphere along each axis and correct for it. You should see some of the small LEDs on your SpinWheel light up and point north. You can also find this code in <a href="/codedoc/examples/Compass/Calibrated_Compass/Calibrated_Compass.ino.html"><code>Examples → SpinWearables → Compass →  Calibrated_Compass</code></a>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>  SpinWheel.begin();</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="co">// Set up communication with the host computer.</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>  Serial.begin(<span class="dv">9600</span>);</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>}</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="dt">float</span> minx, miny, minz, maxx, maxy, maxz;</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a><span class="dt">void</span> loop() {</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>  <span class="co">// Read all sensor data.</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a>  SpinWheel.readIMU();</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>  <span class="co">// Measure the magnetic field along the three axes of the sensor.</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>  <span class="dt">float</span> x = SpinWheel.mx;</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a>  <span class="dt">float</span> y = SpinWheel.my;</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a>  <span class="dt">float</span> z = SpinWheel.mz;</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true"></a>  <span class="cf">if</span> (x &gt; maxx) maxx=x;</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true"></a>  <span class="cf">if</span> (y &gt; maxy) maxy=y;</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true"></a>  <span class="cf">if</span> (z &gt; maxz) maxz=z;</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true"></a>  <span class="cf">if</span> (x &lt; minx) minx=x;</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true"></a>  <span class="cf">if</span> (y &lt; miny) miny=y;</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true"></a>  <span class="cf">if</span> (z &lt; minz) minz=z;</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true"></a>  <span class="dt">float</span> truex = x - (maxx+minx)/<span class="dv">2</span>;</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true"></a>  <span class="dt">float</span> truey = y - (maxy+miny)/<span class="dv">2</span>;</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true"></a>  <span class="dt">float</span> truez = z - (maxz+minz)/<span class="dv">2</span>;</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true"></a>  <span class="co">// Use this line if you want to skip the correction.</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true"></a>  <span class="co">//uint8_t angle = (-atan2(y, x)+3.1415/2)/2/3.1415*255;</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true"></a>  <span class="dt">uint8_t</span> angle = (-atan2(truey, truex)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">800</span>, <span class="bn">0xffffff</span>);</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true"></a></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true"></a>  SpinWheel.drawFrame();</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>  SpinWheel.begin();</span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">// Set up communication with the host computer.</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>  Serial.begin(<span class="dv">9600</span>);</span>
+<span id="cb2-9"><a href="#cb2-9"></a>}</span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="dt">float</span> minx, miny, minz, maxx, maxy, maxz;</span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="dt">void</span> loop() {</span>
+<span id="cb2-14"><a href="#cb2-14"></a>  <span class="co">// Read all sensor data.</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>  SpinWheel.readIMU();</span>
+<span id="cb2-16"><a href="#cb2-16"></a></span>
+<span id="cb2-17"><a href="#cb2-17"></a>  <span class="co">// Measure the magnetic field along the three axes of the sensor.</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>  <span class="dt">float</span> x = SpinWheel.mx;</span>
+<span id="cb2-19"><a href="#cb2-19"></a>  <span class="dt">float</span> y = SpinWheel.my;</span>
+<span id="cb2-20"><a href="#cb2-20"></a>  <span class="dt">float</span> z = SpinWheel.mz;</span>
+<span id="cb2-21"><a href="#cb2-21"></a></span>
+<span id="cb2-22"><a href="#cb2-22"></a>  <span class="cf">if</span> (x &gt; maxx) maxx=x;</span>
+<span id="cb2-23"><a href="#cb2-23"></a>  <span class="cf">if</span> (y &gt; maxy) maxy=y;</span>
+<span id="cb2-24"><a href="#cb2-24"></a>  <span class="cf">if</span> (z &gt; maxz) maxz=z;</span>
+<span id="cb2-25"><a href="#cb2-25"></a>  <span class="cf">if</span> (x &lt; minx) minx=x;</span>
+<span id="cb2-26"><a href="#cb2-26"></a>  <span class="cf">if</span> (y &lt; miny) miny=y;</span>
+<span id="cb2-27"><a href="#cb2-27"></a>  <span class="cf">if</span> (z &lt; minz) minz=z;</span>
+<span id="cb2-28"><a href="#cb2-28"></a></span>
+<span id="cb2-29"><a href="#cb2-29"></a>  <span class="dt">float</span> truex = x - (maxx+minx)/<span class="dv">2</span>;</span>
+<span id="cb2-30"><a href="#cb2-30"></a>  <span class="dt">float</span> truey = y - (maxy+miny)/<span class="dv">2</span>;</span>
+<span id="cb2-31"><a href="#cb2-31"></a>  <span class="dt">float</span> truez = z - (maxz+minz)/<span class="dv">2</span>;</span>
+<span id="cb2-32"><a href="#cb2-32"></a></span>
+<span id="cb2-33"><a href="#cb2-33"></a>  <span class="co">// Use this line if you want to skip the correction.</span></span>
+<span id="cb2-34"><a href="#cb2-34"></a>  <span class="co">//uint8_t angle = (-atan2(y, x)+3.1415/2)/2/3.1415*255;</span></span>
+<span id="cb2-35"><a href="#cb2-35"></a>  <span class="dt">uint8_t</span> angle = (-atan2(truey, truex)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
+<span id="cb2-36"><a href="#cb2-36"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="dv">800</span>, <span class="bn">0xffffff</span>);</span>
+<span id="cb2-37"><a href="#cb2-37"></a></span>
+<span id="cb2-38"><a href="#cb2-38"></a>  SpinWheel.drawFrame();</span>
+<span id="cb2-39"><a href="#cb2-39"></a>}</span></code></pre></div>
 <p>The main difference between the compass and <a href="/tilt">tilt sensor</a> are the lines in this style:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>  <span class="cf">if</span> (x &gt; maxx) maxx=x;</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>  <span class="cf">if</span> (y &gt; maxy) maxy=y;</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>  <span class="dt">float</span> truex = x - (maxx+minx)/<span class="dv">2</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a>  <span class="cf">if</span> (x &gt; maxx) maxx=x;</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="cf">if</span> (y &gt; maxy) maxy=y;</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="dt">float</span> truex = x - (maxx+minx)/<span class="dv">2</span>;</span></code></pre></div>
 <p>Here we continuously update the maximal and minimal values ever measured, and then use them to correct the current measurement result.</p>
 <p>As an extension, you can combine both the tilt and magnetic sensors. It is useful for a compass to have a tilt sensor, so that you can be sure that you are only measuring the horizontal component of Earth’s magnetic field. When you are using the SpinWheel as a compass, make sure to keep it level for best results!</p>
 <p><a class="imagecredit" href="https://johnhegarty8.wixsite.com/johnhegarty">Header image credit: Jack Hegarty</a></p>

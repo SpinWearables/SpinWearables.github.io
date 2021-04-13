@@ -136,98 +136,98 @@ The code presented on this page can be <a href="./Grand_Finale.ino">downloaded</
 <p>These include statements should look familiar! As a reminder, they allow the program to access coding tools for the SpinWheel.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>The setup function should also seem familiar. As a reminder, the <code>setup</code> function is run once when the SpinWheel turns on. Also, <code>SpinWheel.begin()</code> prepares the LED to accept new colors.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>  SpinWheel.begin();</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">void</span> setup() {</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  SpinWheel.begin();</span>
+<span id="cb3-3"><a href="#cb3-3"></a>}</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Here, we initialize some variables that we will make use of later.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="dt">int</span> offset = <span class="dv">0</span>;</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="dt">int</span> colorChange;</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="dt">uint8_t</span> angle = <span class="dv">0</span>; </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="dt">int</span> a_cum = <span class="dv">0</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">int</span> offset = <span class="dv">0</span>;</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="dt">int</span> colorChange;</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="dt">uint8_t</span> angle = <span class="dv">0</span>; </span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="dt">int</span> a_cum = <span class="dv">0</span>;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Instructions in a loop function are repeated over and over again, in other words, “in a loop”.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="dt">void</span> loop() {</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="dt">void</span> loop() {</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>The <code>readIMU</code> function checks if the sensor is ready and takes its current rotation data.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>  SpinWheel.readIMU();</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a>  SpinWheel.readIMU();</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>First, we can add a “motion_snake” like in the previous sketch.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>  <span class="cf">if</span> (abs(SpinWheel.gy) &gt; <span class="dv">50</span>) {</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>     <span class="co">// add 10 to make it spin at a reasonable speed</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>     angle = angle+<span class="dv">10</span>;</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>     SpinWheel.setSmallLEDsPointer(angle, <span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span>);</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">if</span> (abs(SpinWheel.gy) &gt; <span class="dv">50</span>) {</span>
+<span id="cb7-2"><a href="#cb7-2"></a>     <span class="co">// add 10 to make it spin at a reasonable speed</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>     angle = angle+<span class="dv">10</span>;</span>
+<span id="cb7-4"><a href="#cb7-4"></a>     SpinWheel.setSmallLEDsPointer(angle, <span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span>);</span>
+<span id="cb7-5"><a href="#cb7-5"></a>  }</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Rather than having the color of the large LEDs change based on the SpinWheel’s angular velocity, instead we can have the color change when the acceleration of the SpinWheel is sufficient.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>  <span class="dt">int</span> a = abs(SpinWheel.ax);</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a>  <span class="dt">int</span> a = abs(SpinWheel.ax);</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Like r_cum in the Rainbow_Chase_Advanced sketch, a_cum is the sum of the SpinWheel’s acceleration in the x direction. We multiply the acceleration by 10 to have the color change be noticeable. We did a similar thing in the snake example.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a>  a_cum = a*<span class="dv">10</span> + a_cum;</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a>  a_cum = a*<span class="dv">10</span> + a_cum;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>We will have some fixed “delay” between the numbers controlling each LED’s color. Change this number! What happens?</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a>  <span class="dt">int</span> a_delay = <span class="dv">15</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1"></a>  <span class="dt">int</span> a_delay = <span class="dv">15</span>;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>We will have the inner and outer large LEDs light up the same color. The color of each pair will be governed by a slightly modified number.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a>  <span class="dt">int</span> a0 = a_cum % <span class="dv">255</span>;</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a>  <span class="dt">int</span> a1 = (a_cum+a_delay) % <span class="dv">255</span>;</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a>  <span class="dt">int</span> a2 = (a_cum+<span class="dv">2</span>*a_delay) % <span class="dv">255</span>;</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a>  <span class="dt">int</span> a3 = (a_cum+<span class="dv">3</span>*a_delay) % <span class="dv">255</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1"></a>  <span class="dt">int</span> a0 = a_cum % <span class="dv">255</span>;</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="dt">int</span> a1 = (a_cum+a_delay) % <span class="dv">255</span>;</span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="dt">int</span> a2 = (a_cum+<span class="dv">2</span>*a_delay) % <span class="dv">255</span>;</span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="dt">int</span> a3 = (a_cum+<span class="dv">3</span>*a_delay) % <span class="dv">255</span>;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Here we finally set those colors.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a>  SpinWheel.setLargeLED(<span class="dv">0</span>, colorWheel(a0));</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>  SpinWheel.setLargeLED(<span class="dv">1</span>, colorWheel(a1));</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a>  SpinWheel.setLargeLED(<span class="dv">2</span>, colorWheel(a2));</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a>  SpinWheel.setLargeLED(<span class="dv">3</span>, colorWheel(a3));</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a>  SpinWheel.setLargeLED(<span class="dv">4</span>, colorWheel(a0));</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a>  SpinWheel.setLargeLED(<span class="dv">5</span>, colorWheel(a1));</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a>  SpinWheel.setLargeLED(<span class="dv">6</span>, colorWheel(a2));</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a>  SpinWheel.setLargeLED(<span class="dv">7</span>, colorWheel(a3));</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true"></a>  </span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1"></a>  SpinWheel.setLargeLED(<span class="dv">0</span>, colorWheel(a0));</span>
+<span id="cb12-2"><a href="#cb12-2"></a>  SpinWheel.setLargeLED(<span class="dv">1</span>, colorWheel(a1));</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  SpinWheel.setLargeLED(<span class="dv">2</span>, colorWheel(a2));</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  SpinWheel.setLargeLED(<span class="dv">3</span>, colorWheel(a3));</span>
+<span id="cb12-5"><a href="#cb12-5"></a>  SpinWheel.setLargeLED(<span class="dv">4</span>, colorWheel(a0));</span>
+<span id="cb12-6"><a href="#cb12-6"></a>  SpinWheel.setLargeLED(<span class="dv">5</span>, colorWheel(a1));</span>
+<span id="cb12-7"><a href="#cb12-7"></a>  SpinWheel.setLargeLED(<span class="dv">6</span>, colorWheel(a2));</span>
+<span id="cb12-8"><a href="#cb12-8"></a>  SpinWheel.setLargeLED(<span class="dv">7</span>, colorWheel(a3));</span>
+<span id="cb12-9"><a href="#cb12-9"></a></span>
+<span id="cb12-10"><a href="#cb12-10"></a></span>
+<span id="cb12-11"><a href="#cb12-11"></a>  </span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Have the SpinWheel display the desired pattern.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a>  SpinWheel.drawFrame();</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1"></a>  SpinWheel.drawFrame();</span>
+<span id="cb13-2"><a href="#cb13-2"></a>}</span></code></pre></div>
 </div>
 </div>
 </body>

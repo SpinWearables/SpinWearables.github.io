@@ -534,79 +534,79 @@ animate();
 <div class="further-reading">
 <p>You can consult our <a href="/basics">SpinWheel basic commands page</a> to remind yourself how to read the computer code shown below. For more details about coding itself, check out the <a href="/progpatterns">Coding Building Blocks page</a>.</p>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>  <span class="co">// Connect to the computer, so we can read status messages.</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>  Serial.begin(<span class="dv">115200</span>);</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>  <span class="co">// Ensure the special SpinWheel hardware is working.</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>  SpinWheel.begin();  </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>}</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a>  <span class="co">// Send a confirmation message over and over.</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a>  Serial.println(<span class="st">&quot;I am working!&quot;</span>); </span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="co">// Connect to the computer, so we can read status messages.</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  Serial.begin(<span class="dv">115200</span>);</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="co">// Ensure the special SpinWheel hardware is working.</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  SpinWheel.begin();  </span>
+<span id="cb1-9"><a href="#cb1-9"></a>}</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="dt">void</span> loop() {</span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="co">// Send a confirmation message over and over.</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  Serial.println(<span class="st">&quot;I am working!&quot;</span>); </span>
+<span id="cb1-14"><a href="#cb1-14"></a>}</span></code></pre></div>
 <p>If you upload this sketch to the SpinWheel, you won’t be able to see anything happen. It doesn’t turn on the LEDs, instead the sketch simply set ups the SpinWheel and sends a confirmation message (“I am working!”) repeatedly using <code>Serial.println()</code>. If you want to see this message, navigate to <code>Tools -&gt; Serial Monitor</code> in the Arduino software.</p>
 <h3 id="measuring-tilt">Measuring Tilt</h3>
 <p>Now we can start working with measurements of tilt (direction of gravity) on the SpinWheel. We do this by calling the <code>SpinWheel.readIMU()</code> function to measure the three components of the gravitational vector (shown in grey in the visualization above). IMU stands for Inertial Measurement Unit: a fancy name for something that senses motion. This function will record 3 values, one for each direction of motion. Refer back to the image above to see how the <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> axes are defined. To begin with, we will only use the <span class="math inline">\(x\)</span> components of the measurement.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>  <span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>  SpinWheel.begin();</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>}</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="dt">void</span> loop() {</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>  <span class="co">// Read all sensor data.</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>  SpinWheel.readIMU();</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>  <span class="co">// Save the x-axis measurement in a variable.</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>  SpinWheel.begin();</span>
+<span id="cb2-7"><a href="#cb2-7"></a>}</span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="dt">void</span> loop() {</span>
+<span id="cb2-10"><a href="#cb2-10"></a>  <span class="co">// Read all sensor data.</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>  SpinWheel.readIMU();</span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a>  <span class="co">// Save the x-axis measurement in a variable.</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
+<span id="cb2-15"><a href="#cb2-15"></a>}</span></code></pre></div>
 <p>In the sketch above, the measurement of gravity and acceleration along the <span class="math inline">\(x\)</span> axis is contained in the <code>SpinWheel.ax</code> variable. We aren’t using this measurement to do anything yet, however. In the next section, we’ll begin changing the LEDs based on this information.</p>
 <h3 id="responding-to-tilt-along-the-x-axis">Responding to Tilt Along the X-axis</h3>
 <p>To make a useful level, we need the LEDs to change in response to how the SpinWheel is tilted. The code below lights up either large LED 5 or 7 depending on which LED is pointing down. Upload the below code onto your SpinWheel and experiment some to see how it works.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>  <span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>  SpinWheel.begin();</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>}</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a><span class="dt">void</span> loop() {</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a>  <span class="co">// Read all sensor data.</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a>  SpinWheel.readIMU();</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a>  <span class="co">// Save the x-axis measurement in a variable.</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true"></a>  <span class="co">// Turn off all LEDs.</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true"></a>  SpinWheel.clearAllLEDs();</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true"></a>  <span class="co">// If the tilt is in a given direction,</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true"></a>  <span class="co">// turn on the corresponding LED.</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true"></a>  <span class="co">// We only want the SpinWheel to register</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true"></a>  <span class="co">// if the tilt is sufficiently large.</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true"></a>  <span class="cf">if</span> (x &gt; <span class="dv">10</span>) {</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true"></a>    SpinWheel.setLargeLED(<span class="dv">5</span>,-x, -x,-x);</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true"></a>  }</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true"></a>  <span class="cf">else</span> <span class="cf">if</span> (x &lt; -<span class="dv">10</span>) {</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>, x, x, x);</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true"></a>  }</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true"></a></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true"></a>  SpinWheel.drawFrame();</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="dt">void</span> setup() {</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  SpinWheel.begin();</span>
+<span id="cb3-7"><a href="#cb3-7"></a>}</span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="dt">void</span> loop() {</span>
+<span id="cb3-10"><a href="#cb3-10"></a>  <span class="co">// Read all sensor data.</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>  SpinWheel.readIMU();</span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a>  <span class="co">// Save the x-axis measurement in a variable.</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
+<span id="cb3-15"><a href="#cb3-15"></a></span>
+<span id="cb3-16"><a href="#cb3-16"></a>  <span class="co">// Turn off all LEDs.</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>  SpinWheel.clearAllLEDs();</span>
+<span id="cb3-18"><a href="#cb3-18"></a></span>
+<span id="cb3-19"><a href="#cb3-19"></a>  <span class="co">// If the tilt is in a given direction,</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a>  <span class="co">// turn on the corresponding LED.</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a>  <span class="co">// We only want the SpinWheel to register</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a>  <span class="co">// if the tilt is sufficiently large.</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a>  <span class="cf">if</span> (x &gt; <span class="dv">10</span>) {</span>
+<span id="cb3-24"><a href="#cb3-24"></a>    SpinWheel.setLargeLED(<span class="dv">5</span>,-x, -x,-x);</span>
+<span id="cb3-25"><a href="#cb3-25"></a>  }</span>
+<span id="cb3-26"><a href="#cb3-26"></a>  <span class="cf">else</span> <span class="cf">if</span> (x &lt; -<span class="dv">10</span>) {</span>
+<span id="cb3-27"><a href="#cb3-27"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>, x, x, x);</span>
+<span id="cb3-28"><a href="#cb3-28"></a>  }</span>
+<span id="cb3-29"><a href="#cb3-29"></a></span>
+<span id="cb3-30"><a href="#cb3-30"></a>  SpinWheel.drawFrame();</span>
+<span id="cb3-31"><a href="#cb3-31"></a>}</span></code></pre></div>
 <p>Because the SpinWheel’s motion sensors are very sensitive, we only want the LEDs to light up if the SpinWheel tilts enough. We have decided that if <code>SpinWheel.ax</code>, or <code>x</code> in the code above, is <span class="footnote">bigger than 10<span>We picked 10 arbitrarily and you can set it to a different value.</span></span>, then we want the LED to light up. You could decide to make your tilt sensor more or less sensitive by adjusting the value in the lines: <code>if (x &gt; 10)</code> and <code>else if (x &lt; -10)</code>. You could instead have the LED on the side that is higher light up by swapping which LED is called (replacing <code>5</code> with <code>7</code> in the first instance of <code>setLargeLED</code> and <code>7</code> with <code>5</code> in the second instance, so your code looks like the following:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>  <span class="cf">if</span> (x &gt; <span class="dv">10</span>) {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>,-x, -x,-x);</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>  }</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>  <span class="cf">else</span> <span class="cf">if</span> (x &lt; -<span class="dv">10</span>) {</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>    SpinWheel.setLargeLED(<span class="dv">5</span>, x, x, x);</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a>  <span class="cf">if</span> (x &gt; <span class="dv">10</span>) {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>,-x, -x,-x);</span>
+<span id="cb4-3"><a href="#cb4-3"></a>  }</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="cf">else</span> <span class="cf">if</span> (x &lt; -<span class="dv">10</span>) {</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    SpinWheel.setLargeLED(<span class="dv">5</span>, x, x, x);</span>
+<span id="cb4-6"><a href="#cb4-6"></a>  }</span></code></pre></div>
 <p>You can experiment with the code in other ways as well. For instance, you could change the color that LED 5 and 7 light up or have more LEDs also light up.</p>
 <h3 id="improving-the-tilt-sensor">Improving the Tilt Sensor</h3>
 <p>If you want your tilt sensor to behave more like the second level in the pictures above, then you can upload a slightly more detailed version of the above code that senses both along the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> axes. Go to the Examples menu in the Arduino software, and open the file here: <a href="/codedoc/examples/Tilt_Sensor/Simple/Simple.ino.html"><code>Examples → SpinWearables → Tilt_Sensor →  Simple</code></a>. After looking at this version, feel free to modify the code further, creating more elaborate visualizations. A version similar to the one shown below can be found in <a href="/codedoc/examples/Tilt_Sensor/Fancy/Fancy.ino.html"><code>Examples → SpinWearables → Tilt_Sensor →  Fancy</code></a>.</p>

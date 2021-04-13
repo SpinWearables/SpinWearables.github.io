@@ -130,60 +130,60 @@ The code presented on this page can be <a href="./Stroboscope.ino">downloaded</a
 
 </div>
 <div class="code">
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>First we would like to ensure the brightness is set to maximum, as we are not going to use the LEDs for aesthetics, but rather as a source of illumination.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="dt">void</span> setup() {</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>  SpinWheel.begin();</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>  SpinWheel.setBrightness(<span class="dv">255</span>);</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">void</span> setup() {</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  SpinWheel.begin();</span>
+<span id="cb2-3"><a href="#cb2-3"></a>  SpinWheel.setBrightness(<span class="dv">255</span>);</span>
+<span id="cb2-4"><a href="#cb2-4"></a>}</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>We will set the default period to 10 milliseconds and let it vary from 8 milliseconds to 12 milliseconds.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="dt">long</span> default_delay_time = <span class="dv">10000</span>;</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="dt">long</span> max_correction = <span class="dv">2000</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">long</span> default_delay_time = <span class="dv">10000</span>;</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="dt">long</span> max_correction = <span class="dv">2000</span>;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>And now we have the main body of the program, which will turn the light on and then off rapidly.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="dt">void</span> loop() {</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">void</span> loop() {</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>We first read the tilt of the device and use it to modify the default period.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>  SpinWheel.readIMU();</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>  <span class="dt">long</span> delaytime = default_delay_time + SpinWheel.ax * max_correction;</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a>  SpinWheel.readIMU();</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="dt">long</span> delaytime = default_delay_time + SpinWheel.ax * max_correction;</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Set the lights on.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span>);</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>  SpinWheel.drawLargeLEDFrame();</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span>);</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  SpinWheel.drawLargeLEDFrame();</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Wait only a small fraction of the total period (3% in this case).</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>  delayMicroseconds(<span class="fl">0.03</span>*delaytime);</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  delayMicroseconds(<span class="fl">0.03</span>*delaytime);</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Then turn the lights off and wait for the rest of the time.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>  SpinWheel.drawLargeLEDFrame();</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>  delayMicroseconds(<span class="fl">0.97</span>*delaytime);</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  SpinWheel.drawLargeLEDFrame();</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  delayMicroseconds(<span class="fl">0.97</span>*delaytime);</span>
+<span id="cb8-4"><a href="#cb8-4"></a>}</span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Notice we used <code>drawLargeLEDFrame()</code> instead of <code>drawFrame()</code>. We did so because <code>drawFrame</code> also sets the small LEDs, which used a much slower persistence-of-vision pattern and can not work at more than 50 frames per second.</p>
