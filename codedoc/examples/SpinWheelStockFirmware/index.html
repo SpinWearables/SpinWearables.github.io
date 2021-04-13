@@ -10,6 +10,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -130,26 +131,26 @@ The code presented on this page can be <a href="./SpinWheelStockFirmware.ino">do
 
 </div>
 <div class="code">
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  SpinWheel.begin();</span>
-<span id="cb1-7"><a href="#cb1-7"></a>  SpinWheel.largeLEDs.setBrightness(<span class="dv">20</span>);</span>
-<span id="cb1-8"><a href="#cb1-8"></a>  bootAnimation();</span>
-<span id="cb1-9"><a href="#cb1-9"></a>  SpinWheel.addAnimationRoutine(largeRainbow);</span>
-<span id="cb1-10"><a href="#cb1-10"></a>  SpinWheel.addAnimationRoutine(smallWhiteRotating);</span>
-<span id="cb1-11"><a href="#cb1-11"></a>  SpinWheel.addAnimationRoutine(allBreathing);</span>
-<span id="cb1-12"><a href="#cb1-12"></a>  SpinWheel.addAnimationRoutine(tiltSensor3);</span>
-<span id="cb1-13"><a href="#cb1-13"></a>  SpinWheel.addAnimationRoutine(tealLight);</span>
-<span id="cb1-14"><a href="#cb1-14"></a>}</span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-17"><a href="#cb1-17"></a>  SpinWheel.readIMU();</span>
-<span id="cb1-18"><a href="#cb1-18"></a>  SpinWheel.runAnimationRoutine();</span>
-<span id="cb1-19"><a href="#cb1-19"></a>  SpinWheel.drawFrame();</span>
-<span id="cb1-20"><a href="#cb1-20"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>largeLEDs<span class="op">.</span>setBrightness<span class="op">(</span><span class="dv">20</span><span class="op">);</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  bootAnimation<span class="op">();</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>addAnimationRoutine<span class="op">(</span>largeRainbow<span class="op">);</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>addAnimationRoutine<span class="op">(</span>smallWhiteRotating<span class="op">);</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>addAnimationRoutine<span class="op">(</span>allBreathing<span class="op">);</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>addAnimationRoutine<span class="op">(</span>tiltSensor3<span class="op">);</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>addAnimationRoutine<span class="op">(</span>tealLight<span class="op">);</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>readIMU<span class="op">();</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>runAnimationRoutine<span class="op">();</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>drawFrame<span class="op">();</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 </div>
 </body>

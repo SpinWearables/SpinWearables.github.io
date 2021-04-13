@@ -10,6 +10,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -136,43 +137,43 @@ The code presented on this page can be <a href="./BlinkingFirmware.ino">download
 <p>These few lines instruct the software to preload all the extra tools we have created specifically for the SpinWheel.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables<span class="op">;</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>The <code>setup</code> function is executed only once, when the SpinWheel turns on. As the name suggests, it serves as a place where any initial functionality can be set up. We simply instruct the SpinWheel to begin accepting commands.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">void</span> setup() {</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  SpinWheel.begin();</span>
-<span id="cb3-3"><a href="#cb3-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>The <code>loop</code> function is executed repeatedly, as fast as possible, in a loop. It serves as the main “logic” that drives the behavior of the SpinWheel.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">void</span> loop() {</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Typically, the loop function will first measure the current time and motion readings, and then create colorful pattern depending on the measurement values.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a>  <span class="dt">int</span> t = millis();</span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="dt">int</span> t_repeating = t % <span class="dv">2500</span>;</span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="dt">int</span> b = triangularWave(t_repeating / <span class="dv">10</span>);</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> t <span class="op">=</span> millis<span class="op">();</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> t_repeating <span class="op">=</span> t <span class="op">%</span> <span class="dv">2500</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> b <span class="op">=</span> triangularWave<span class="op">(</span>t_repeating <span class="op">/</span> <span class="dv">10</span><span class="op">);</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>The colors of the LEDs are set with commands like this one.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a>  SpinWheel.setLargeLEDsUniform(b, <span class="dv">0</span>, b);</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>setLargeLEDsUniform<span class="op">(</span>b<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> b<span class="op">);</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>And typically the <code>loop</code> function ends with a call to the <code>drawFrame</code> function, which ensures that all LEDs are on with the previously set color.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  SpinWheel.drawFrame();</span>
-<span id="cb7-2"><a href="#cb7-2"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>drawFrame<span class="op">();</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 </div>
 </body>

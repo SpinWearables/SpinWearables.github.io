@@ -10,6 +10,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -126,43 +127,43 @@ The code presented on this page can be <a href="./Counter.ino">downloaded</a> or
 <p>Here we define a convenient pausing function that waits a given number of seconds.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">void</span> delay_seconds(<span class="dt">int</span> number_of_seconds) {</span>
-<span id="cb1-2"><a href="#cb1-2"></a>  <span class="dt">int</span> number_of_milliseconds = <span class="dv">1000</span> * number_of_seconds;</span>
-<span id="cb1-3"><a href="#cb1-3"></a>  delay(number_of_milliseconds);</span>
-<span id="cb1-4"><a href="#cb1-4"></a>}</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> delay_seconds<span class="op">(</span><span class="dt">int</span> number_of_seconds<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> number_of_milliseconds <span class="op">=</span> <span class="dv">1000</span> <span class="op">*</span> number_of_seconds<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span>number_of_milliseconds<span class="op">);</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>This is the setup function that will automatically run first when the device starts.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">void</span> setup() {</span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="co">// The next line ensures that the communication hardware</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="co">// on our device is ready to send messages.</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="co">// The name &quot;Serial&quot; is such for historical reasons</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="co">// (it is the name for this type of communication).</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>  Serial.begin(<span class="dv">9600</span>); <span class="co">// The 9600 is the speed of the conection.</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// The next line ensures that the communication hardware</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// on our device is ready to send messages.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// The name &quot;Serial&quot; is such for historical reasons</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// (it is the name for this type of communication).</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">9600</span><span class="op">);</span> <span class="co">// The 9600 is the speed of the conection.</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Define a variable in which we will store a counter that goes up by one on each step.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">int</span> counter = <span class="dv">1</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> counter <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>This function runs repeatedly after the setup function finishes.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">void</span> loop() {</span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="co">// Send a message to the connected computer.</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="co">// The message will just be the value of the counter.</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>  Serial.println(counter);</span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="co">// Increment the value of the counter.</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>  counter = counter + <span class="dv">1</span>;</span>
-<span id="cb4-7"><a href="#cb4-7"></a>  <span class="co">// Wait for a second before you start the loop function again.</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a>  delay_seconds(<span class="dv">1</span>);</span>
-<span id="cb4-9"><a href="#cb4-9"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Send a message to the connected computer.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// The message will just be the value of the counter.</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span>counter<span class="op">);</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Increment the value of the counter.</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  counter <span class="op">=</span> counter <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Wait for a second before you start the loop function again.</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  delay_seconds<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 </div>
 </body>

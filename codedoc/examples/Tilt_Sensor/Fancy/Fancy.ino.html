@@ -10,6 +10,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -129,79 +130,79 @@ The code presented on this page can be <a href="./Fancy.ino">downloaded</a> or f
 
 </div>
 <div class="code">
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="dt">void</span> setup() {</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables<span class="op">;</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Ensure all of the SpinWheel hardware is on.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a>  SpinWheel.begin();</span>
-<span id="cb2-2"><a href="#cb2-2"></a>}</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">void</span> loop() {</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Read all sensor data.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a>  SpinWheel.readIMU();</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>readIMU<span class="op">();</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Scale the x and y measurement to a -255..255 range.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="dt">int</span> y = SpinWheel.ay*<span class="dv">255</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> x <span class="op">=</span> SpinWheel<span class="op">.</span>ax<span class="op">*</span><span class="dv">255</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> y <span class="op">=</span> SpinWheel<span class="op">.</span>ay<span class="op">*</span><span class="dv">255</span><span class="op">;</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Turn all large LEDs white.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a>  SpinWheel.setLargeLEDsUniform(<span class="bn">0xffffff</span>);</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>setLargeLEDsUniform<span class="op">(</span><span class="bn">0xffffff</span><span class="op">);</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>If the tilt is in a given direction, turn on the corresponding LED purple.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a>  <span class="cf">if</span> (x&gt;<span class="dv">10</span>) {</span>
-<span id="cb6-2"><a href="#cb6-2"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>, x, <span class="dv">0</span>, x);</span>
-<span id="cb6-3"><a href="#cb6-3"></a>    SpinWheel.setLargeLED(<span class="dv">3</span>, x, <span class="dv">0</span>, x);</span>
-<span id="cb6-4"><a href="#cb6-4"></a>  }</span>
-<span id="cb6-5"><a href="#cb6-5"></a>  <span class="cf">else</span> <span class="cf">if</span> (x&lt;-<span class="dv">10</span>) {</span>
-<span id="cb6-6"><a href="#cb6-6"></a>    SpinWheel.setLargeLED(<span class="dv">5</span>, -x, <span class="dv">0</span>, -x);</span>
-<span id="cb6-7"><a href="#cb6-7"></a>    SpinWheel.setLargeLED(<span class="dv">1</span>, -x, <span class="dv">0</span>, -x);</span>
-<span id="cb6-8"><a href="#cb6-8"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>x<span class="op">&gt;</span><span class="dv">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    SpinWheel<span class="op">.</span>setLargeLED<span class="op">(</span><span class="dv">7</span><span class="op">,</span> x<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    SpinWheel<span class="op">.</span>setLargeLED<span class="op">(</span><span class="dv">3</span><span class="op">,</span> x<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>x<span class="op">&lt;-</span><span class="dv">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    SpinWheel<span class="op">.</span>setLargeLED<span class="op">(</span><span class="dv">5</span><span class="op">,</span> <span class="op">-</span>x<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="op">-</span>x<span class="op">);</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    SpinWheel<span class="op">.</span>setLargeLED<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="op">-</span>x<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="op">-</span>x<span class="op">);</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Do the same for the Y orientation</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="cf">if</span> (y&gt;<span class="dv">10</span>) {</span>
-<span id="cb7-2"><a href="#cb7-2"></a>    SpinWheel.setLargeLED(<span class="dv">6</span>, x, <span class="dv">0</span>, x);</span>
-<span id="cb7-3"><a href="#cb7-3"></a>    SpinWheel.setLargeLED(<span class="dv">2</span>, x, <span class="dv">0</span>, x);</span>
-<span id="cb7-4"><a href="#cb7-4"></a>  }</span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="cf">else</span> <span class="cf">if</span> (y&lt;-<span class="dv">10</span>) {</span>
-<span id="cb7-6"><a href="#cb7-6"></a>    SpinWheel.setLargeLED(<span class="dv">4</span>, -x, <span class="dv">0</span>, -x);</span>
-<span id="cb7-7"><a href="#cb7-7"></a>    SpinWheel.setLargeLED(<span class="dv">0</span>, -x, <span class="dv">0</span>, -x);</span>
-<span id="cb7-8"><a href="#cb7-8"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>y<span class="op">&gt;</span><span class="dv">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    SpinWheel<span class="op">.</span>setLargeLED<span class="op">(</span><span class="dv">6</span><span class="op">,</span> x<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    SpinWheel<span class="op">.</span>setLargeLED<span class="op">(</span><span class="dv">2</span><span class="op">,</span> x<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>y<span class="op">&lt;-</span><span class="dv">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    SpinWheel<span class="op">.</span>setLargeLED<span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="op">-</span>x<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="op">-</span>x<span class="op">);</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    SpinWheel<span class="op">.</span>setLargeLED<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="op">-</span>x<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="op">-</span>x<span class="op">);</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Use the <code>setSmallLEDsPointer</code> to turn on only the small LEDs which are at the top. This requires some tricky inverse trigonometry, where we use the arctan function to turn the <code>ay</code> and <code>ax</code> measurements into an angle. Then we rescale that angle to fit the 0..255 range used by <code>setSmallLEDsPointer</code>.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a>  <span class="dt">uint8_t</span> angle = (-atan2(SpinWheel.ay, SpinWheel.ax)+<span class="fl">3.1415</span>/<span class="dv">2</span>)/<span class="dv">2</span>/<span class="fl">3.1415</span>*<span class="dv">255</span>;</span>
-<span id="cb8-2"><a href="#cb8-2"></a>  SpinWheel.setSmallLEDsPointer(angle, <span class="bn">0xffffff</span>);</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>  <span class="dt">uint8_t</span> angle <span class="op">=</span> <span class="op">(-</span>atan2<span class="op">(</span>SpinWheel<span class="op">.</span>ay<span class="op">,</span> SpinWheel<span class="op">.</span>ax<span class="op">)+</span><span class="fl">3.1415</span><span class="op">/</span><span class="dv">2</span><span class="op">)/</span><span class="dv">2</span><span class="op">/</span><span class="fl">3.1415</span><span class="op">*</span><span class="dv">255</span><span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>setSmallLEDsPointer<span class="op">(</span>angle<span class="op">,</span> <span class="bn">0xffffff</span><span class="op">);</span></span></code></pre></div>
 </div>
 <div class="side-text">
 <p>Turn on the LEDs as commanded above.</p>
 </div>
 <div class="code">
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a>  SpinWheel.drawFrame();</span>
-<span id="cb9-2"><a href="#cb9-2"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>drawFrame<span class="op">();</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 </div>
 </body>
