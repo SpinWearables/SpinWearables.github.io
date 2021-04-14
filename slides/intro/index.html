@@ -8,8 +8,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="/reveal.js/css/reset.css">
-  <link rel="stylesheet" href="/reveal.js/css/reveal.css">
+  <link rel="stylesheet" href="/reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="/reveal.js/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -17,20 +17,10 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
-  <link rel="stylesheet" href="/reveal.js/css/theme/black.css" id="theme">
+  <link rel="stylesheet" href="/reveal.js/dist/theme/black.css" id="theme">
   <link rel="stylesheet" href="/custom_slides.css"/>
-  <!-- Printing and PDF exports -->
-  <script>
-    var link = document.createElement( 'link' );
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = window.location.search.match( /print-pdf/gi ) ? '/reveal.js/css/print/pdf.css' : '/reveal.js/css/print/paper.css';
-    document.getElementsByTagName( 'head' )[0].appendChild( link );
-  </script>
-  <!--[if lt IE 9]>
-  <script src="/reveal.js/lib/js/html5shiv.js"></script>
-  <![endif]-->
 </head>
 <body>
   <div class="reveal">
@@ -58,7 +48,7 @@
 <section class="slide level2">
 
 <figure>
-<img data-src="/images/quickstart/unboxing.small.png" title="Unboxing the device." alt="" /><figcaption>The SpinWheel has four main components: a power source (the battery), a sensor (for motion and magnetic fields), a set of lights (the light emitting diodes, or LEDs), and a micro computer (the brain of the device). <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
+<img data-src="/images/quickstart/unboxing.small.png" title="Unboxing the device." alt="The SpinWheel has four main components: a power source (the battery), a sensor (for motion and magnetic fields), a set of lights (the light emitting diodes, or LEDs), and a micro computer (the brain of the device). image credit Mariya Krastanova" /><figcaption aria-hidden="true">The SpinWheel has four main components: a power source (the battery), a sensor (for motion and magnetic fields), a set of lights (the light emitting diodes, or LEDs), and a micro computer (the brain of the device). <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
 </figure>
 </section>
 <section class="slide level2">
@@ -123,7 +113,7 @@
 <section class="slide level2">
 
 <figure>
-<img data-src="/images/quickstart/port_and_board_screenshot.png" title="Use `Tools→ Port` and `Tools→ Board` to change the settings on the Arduino software." alt="" /><figcaption>4. Go back to the Tools menu and select <code>Tools → Board</code>. Select Arduino Leonardo as the board (a.k.a. processor), so that the software knows which “dialect” to use to talk to the SpinWheel. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
+<img data-src="/images/quickstart/port_and_board_screenshot.png" title="Use `Tools→ Port` and `Tools→ Board` to change the settings on the Arduino software." alt="4. Go back to the Tools menu and select Tools → Board. Select Arduino Leonardo as the board (a.k.a. processor), so that the software knows which “dialect” to use to talk to the SpinWheel. image credit Mariya Krastanova" /><figcaption aria-hidden="true">4. Go back to the Tools menu and select <code>Tools → Board</code>. Select Arduino Leonardo as the board (a.k.a. processor), so that the software knows which “dialect” to use to talk to the SpinWheel. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
 </figure>
 </section>
 <section class="slide level2">
@@ -139,7 +129,7 @@
 <section class="slide level2">
 
 <figure>
-<img data-src="/images/quickstart/adding_libraries_screenshot.png" title="Installing Arduino libraries." style="max-width:90%" alt="" /><figcaption>2. In the search bar of the Library Manager, search for <code>SpinWearables</code> and then click <code>Install</code>. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
+<img data-src="/images/quickstart/adding_libraries_screenshot.png" title="Installing Arduino libraries." style="max-width:90%" alt="2. In the search bar of the Library Manager, search for SpinWearables and then click Install. image credit Mariya Krastanova" /><figcaption aria-hidden="true">2. In the search bar of the Library Manager, search for <code>SpinWearables</code> and then click <code>Install</code>. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
 </figure>
 </section>
 <section id="running-a-program-on-the-spinwheel" class="slide level2">
@@ -155,14 +145,13 @@
 <section class="slide level2">
 
 <figure>
-<img data-src="/images/quickstart/upload_button_screenshot.png" title="Upload programs to your SpinWheel using the `Upload` button (highlighted in white)." style="width:100%" alt="" /><figcaption>2. Upload the code to your SpinWheel by pressing the upload button (the arrow at the top).</figcaption>
+<img data-src="/images/quickstart/upload_button_screenshot.png" title="Upload programs to your SpinWheel using the `Upload` button (highlighted in white)." style="width:100%" alt="2. Upload the code to your SpinWheel by pressing the upload button (the arrow at the top)." /><figcaption aria-hidden="true">2. Upload the code to your SpinWheel by pressing the upload button (the arrow at the top).</figcaption>
 </figure>
 </section>
 <section class="slide level2">
 
 <p>Now your SpinWheel will have the new colorful blinking pattern (from <code>BlinkingFirmware</code>) you just uploaded. If you get an error here, then check out our <a href="/troubleshoot">Troubleshooting Guide</a> for help on some common problems.</p>
-</section>
-</section>
+</section></section>
 <section>
 <section id="what-does-it-mean-to-program-an-artistic-piece-of-electronics" class="title-slide slide level1">
 <h1>What does it mean to program an artistic piece of electronics?</h1>
@@ -456,7 +445,7 @@ void loop() {
 <section class="slide level2">
 
 <figure>
-<img data-src="/images/spinwheel_with_numbers.png" title="SpinWheel LED numbering" alt="" /><figcaption>SpinWheel LED numbering.</figcaption>
+<img data-src="/images/spinwheel_with_numbers.png" title="SpinWheel LED numbering" alt="SpinWheel LED numbering." /><figcaption aria-hidden="true">SpinWheel LED numbering.</figcaption>
 </figure>
 </section>
 <section class="slide level2">
@@ -513,26 +502,31 @@ void loop() {
 <li><a href="/troubleshoot">SpinWheel Troubleshooting Guide at <code>/troubleshoot</code></a></li>
 <li><a href="/arduino101">Arduino 101 at <code>/arduino101</code></a></li>
 </ul>
-</section>
-</section>
+</section></section>
     </div>
   </div>
 
-  <script src="/reveal.js/js/reveal.js"></script>
+  <script src="/reveal.js/dist/reveal.js"></script>
+
+  // reveal.js plugins
+  <script src="/reveal.js/plugin/notes/notes.js"></script>
+  <script src="/reveal.js/plugin/search/search.js"></script>
+  <script src="/reveal.js/plugin/zoom/zoom.js"></script>
 
   <script>
 
       // Full list of configuration options available at:
-      // https://github.com/hakimel/reveal.js#configuration
+      // https://revealjs.com/config/
       Reveal.initialize({
+      
         // Push each slide change to the browser history
         history: true,
 
-        // Optional reveal.js plugins
-        dependencies: [
-          { src: '/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-          { src: '/reveal.js/plugin/zoom-js/zoom.js', async: true },
-          { src: '/reveal.js/plugin/notes/notes.js', async: true }
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
         ]
       });
     </script>

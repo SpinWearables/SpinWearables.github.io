@@ -19,6 +19,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -191,13 +192,13 @@ Bridget checking connections on a newly hand-soldered SpinWheel.
 <div class="column" style="text-align: left;
 overflow: hidden;
 padding: 1em;">
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-2"><a href="#cb1-2"></a> <span class="co">// Calculate an angle at which to</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a> <span class="co">// shine, based on current time:</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="dt">int</span> angle = millis()/<span class="dv">400</span>;</span>
-<span id="cb1-5"><a href="#cb1-5"></a> <span class="co">// Update the state of the LEDs:</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>  SpinWheel.setSmallLEDsArc(angle);</span>
-<span id="cb1-7"><a href="#cb1-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="co">// Calculate an angle at which to</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="co">// shine, based on current time:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> angle <span class="op">=</span> millis<span class="op">()/</span><span class="dv">400</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="co">// Update the state of the LEDs:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>setSmallLEDsArc<span class="op">(</span>angle<span class="op">);</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="column">
 <video src="/images/behindthescenes/circling.mp4" muted autoplay playsinline loop>

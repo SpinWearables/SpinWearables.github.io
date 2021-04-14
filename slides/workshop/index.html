@@ -105,7 +105,7 @@
 </style>
 <aside class="notes">
 <h3>
-To be done in Session 1 (10ish minutes)
+To be done in Session 1 (10ish minutes of mostly instructing students)
 </h1>
 <p>This section aims to introduce a couple of curious facts about color, light, and sight. Of particular importance is to introduce the idea that mixing the primary red, green, and blue color light enables tricking our eyes into perceiving any other color. <strong>However, the main goal is to excite the kids with a non-technical topic before we talk about code</strong>.</p>
 <p><em>For this first lesson, we will learn how to trick our eyes into perceiving a rainbow of colors using only red, green, and blue LEDs.</em></p>
@@ -257,6 +257,9 @@ Play a bit with the sliders, ask about favorite colors, make them guess how to m
 <section id="programming-an-artistic-piece-of-electronics" class="title-slide slide level1">
 <h1>Programming an artistic piece of electronics</h1>
 <aside class="notes">
+<h3>
+To be done in Session 1 (30ish minutes with a lot of interaction from students)
+</h3>
 <p>We will finally start modifying code and uploading it to the SpinWheel. In the next few slides we will <strong>not</strong> explain in detail what “variables” or “functions” are. Using the word “command” instead of “function” might help. We will just hack around to get a sense of it.</p>
 <p>Moreover, each “code” slide would have an interactive “sliders based” slide before it, where we can observe what the device can in principle do before trying to express it in code. Try to stress that idea to the students: <em>do not start thinking in code, rather start by thinking what you want to happen, and only then express it in code</em>.</p>
 Try to gauge the engagement of the students here: this would be a crucial spot to learn whether you are going too slow or too fast for them.
@@ -644,7 +647,14 @@ If you ended early, do the “General Programming Principles”, but do not worr
 <section>
 <section id="more-general-programming-principles" class="title-slide slide level1">
 <h1>More general programming principles</h1>
-
+<aside class="notes">
+<h3>
+To be done in Session 2, but might start in Session 1 (15ish minutes of mostly instructing students)
+</h3>
+<p>Now that the students have basic understanding of color mixing and have seen some simple examples of what the device can do (and made simplistic programs themselves), we can talk about what a program actually looks like. Remember, up to now they have just been “hacking” some code, based on what the names of commands sound like and changed some numbers, they have not learnt why commands are ordered in a certain way. We will learn this here.</p>
+<p>For a lot of this section you probably want to use the word “command”, not the word “function”, to avoid confusion among students that might know what a mathematical function is.</p>
+Based on the <a href="/basics">Basic Structure of a Program</a> and <a href="/progpatterns">Coding Building Blocks</a> pages. Check out the <a href="/slides/programming">Programming slide deck</a> which includes more details.
+</aside>
 </section>
 <section id="the-skeleton-of-an-arduino-program" class="slide level2">
 <h2>The Skeleton of an Arduino Program</h2>
@@ -656,6 +666,11 @@ If you ended early, do the “General Programming Principles”, but do not worr
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>This program does absolutely nothing.</p>
+<aside class="notes">
+<p>The video on the next page might be when you actually want to talk a lot as it explains this slide well visually. But here is what the code of an “empty” program looks like.</p>
+<p><em>Most programs for any computer are split in a section that prepares various prerequisites and turns on various hardware, followed by a section that actually runs the interesting features of the program. Arduino makes this separation very obvious: We have a block called <code>setup</code> that performs the setup, and a block of commands called <code>loop</code> that is executed repeatedly (in a “loop”). That block usually looks for any detected events (e.g. keystrokes on a computer or shaking of a phone) and responds with something useful (e.g. shows a character or turns on a light). Frequently this type of loop is called “the event loop”.</em></p>
+<em>This program does nothing, as we have not put any commands in either of the two blocks.</em>
+</aside>
 </section>
 <section class="slide level2">
 
@@ -666,6 +681,9 @@ If you ended early, do the “General Programming Principles”, but do not worr
 When you turn on the SpinWheel, <code>setup()</code> is run once and then the <code>loop()</code> block is run repeatedly until the SpinWheel is turned off.
 </figcaption>
 </figure>
+<aside class="notes">
+Right click on the image to play the video, and reprise the explanation from the previous slide, showing how at first only <code>setup</code> is executed and then the commands from <code>loop</code> are executed repeatedly.
+</aside>
 </section>
 <section id="extra-elements-of-a-spinwheel-program" class="slide level2">
 <h2>Extra Elements of a SpinWheel Program</h2>
@@ -683,6 +701,9 @@ When you turn on the SpinWheel, <code>setup()</code> is run once and then the <c
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<aside class="notes">
+<em>The SpinWheel needs a few extra functionalities to be enabled. In different languages that happens in different ways. In the case of the language used by Arduino (C++), you need the <code>#include</code> and <code>using</code> invocations. They make a lot of extra SpinWheel commands available to you. You also need to use a particular <code>setup</code> command that turns on much of the SpinWheel hardware.</em>
+</aside>
 </section>
 <section class="slide level2">
 
@@ -702,12 +723,18 @@ When you turn on the SpinWheel, <code>setup()</code> is run once and then the <c
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// based on the instructions provided up to here.</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>drawFrame<span class="op">();</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<aside class="notes">
+<em>Finally, we get to remake the simple program we saw previous that just turns on one LED. Shortly we will make it a bit more interesting. Here <code>setLargeLED</code> sets the collor, and <code>drawFrame</code> heeds all previous <code>set</code> commands and updates the actual LEDs with the given colors. Be careful with semicolons, computers can be stupid about typos.</em>
+</aside>
 </section>
 <section class="slide level2">
 
 <figure>
 <img data-src="/images/spinwheel_with_numbers.png" title="SpinWheel LED numbering" alt="SpinWheel LED numbering." /><figcaption aria-hidden="true">SpinWheel LED numbering.</figcaption>
 </figure>
+<aside class="notes">
+This diagram of LEDs and their indices is available in the booklet or on the website as well.
+</aside>
 </section>
 <section class="slide level2">
 
@@ -726,12 +753,18 @@ void loop() {
 }
 </pre>
 </div>
+<aside class="notes">
+Just another interactive example to drill the idea down. Feel free to skip it.
+</aside>
 </section>
 <section id="creating-changing-patterns" class="slide level2">
 <h2>Creating changing patterns</h2>
 <p>To begin writing more complex code, we need to introduce the idea of <em>variables</em>. Variables allow us to store information in the program and change that information as needed.</p>
 <p>To <strong>define</strong> a new variable we can add the following line to the loop block:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> which_LED <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span></code></pre></div>
+<aside class="notes">
+<em>Finally, we will make something that is dynamic and changes. To track and update values that we want to change, we will put these values in variables, e.g., a variable that contains which LED should be on. In this particular language <code>int</code> denotes a variable that contains integer numbers.</em>
+</aside>
 </section>
 <section class="slide level2">
 
@@ -747,6 +780,9 @@ void loop() {
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>setLargeLED<span class="op">(</span>which_LED<span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>drawFrame<span class="op">();</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<aside class="notes">
+<em>Compared to the previous function implementatation, this does not do anything new, but we will see how story the number of the LED in a variable lets us change that value if we wish.</em>
+</aside>
 </section>
 <section class="slide level2">
 
@@ -776,11 +812,17 @@ void loop() {
 <span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">500</span><span class="op">);</span></span>
 <span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<aside class="notes">
+<em>We had to define the variable <strong>outside</strong> of the <code>loop</code> block in order to have it retain its value in between each <code>loop</code> run. But now, in each loop we are incrementing the value of <code>which_LED</code> and we can see how it cause the LED which is on to change when we upload it to the SpinWheel. We had to also use the <code>delay</code> function to make this happen slowly enough so that we can see it with our eyes. We also use the <code>clearAllLEDs</code> function to erase the state of the LEDs that was set up to now.</em>
+</aside>
 </section>
 <section class="slide level2">
 
 <video src="/images/bookpics/brightness_loop.mp4" muted playsinline loop>
 </video>
+<aside class="notes">
+Right click to get the play menu for this video. You can reprise the previous explanation of the similar visualization: <em>First we have <code>setup</code> and then in each <code>loop</code> we increment <code>which_LED</code>.</em>
+</aside>
 </section>
 <section class="slide level2">
 

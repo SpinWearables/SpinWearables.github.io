@@ -19,6 +19,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -130,11 +131,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="colors">Colors</h2>
 <p>When light comes from the Sun (or most other sources of illumination), we perceive it as lacking a hue (or, white light). In reality, white light is a mixture of many colors. This mixture can be seen by using a prism to separate the components of the mixture. A prism works by bending, or “refracting”, light at different angles depending on its color, thereby allowing us to see all of the colors that make up white light. This is why if you let sunlight shine through a prism, you can see a rainbow.</p>
 <figure>
-<img src="/images/bookpics/optical_glass_triangular_prism.jpg" title="Picture of a white light being split into colors by a prism" alt="" /><figcaption>White light being split into colors by a prism. The white light shines on the prism from the bottom left, and a big part of it is refracted and split as it passes through the prism. <a class="imagecredit" href="https://www.pexels.com/photo/optical-glass-triangular-prism-3845161/">image credit Pexels</a></figcaption>
+<img src="/images/bookpics/optical_glass_triangular_prism.jpg" title="Picture of a white light being split into colors by a prism" alt="White light being split into colors by a prism. The white light shines on the prism from the bottom left, and a big part of it is refracted and split as it passes through the prism. image credit Pexels" /><figcaption aria-hidden="true">White light being split into colors by a prism. The white light shines on the prism from the bottom left, and a big part of it is refracted and split as it passes through the prism. <a class="imagecredit" href="https://www.pexels.com/photo/optical-glass-triangular-prism-3845161/">image credit Pexels</a></figcaption>
 </figure>
 <p>The light-sensing tissue in the back of our eyes, the retina, has small cells that respond to some of these colors. They are called “cone cells” and are classified into three separate groups by the color that they sense the best: red, green, or blue. Each of these cells responds only to one of these three colors, but not the others. For instance, the blue-sensing cones respond to blue light, but do not respond to red light, and vice versa.</p>
 <figure>
-<img src="/images/bookpics/rods_cones.png" title="Close-up cartoon of rods and cones in an eye" alt="" /><figcaption>An artistic rendering of a close-up of the back of the eye illustrating the rods (black) and cones (triangles colored by type). <a class="imagecredit" href="https://johnhegarty8.wixsite.com/johnhegarty">image credit Jack Hegarty</a></figcaption>
+<img src="/images/bookpics/rods_cones.png" title="Close-up cartoon of rods and cones in an eye" alt="An artistic rendering of a close-up of the back of the eye illustrating the rods (black) and cones (triangles colored by type). image credit Jack Hegarty" /><figcaption aria-hidden="true">An artistic rendering of a close-up of the back of the eye illustrating the rods (black) and cones (triangles colored by type). <a class="imagecredit" href="https://johnhegarty8.wixsite.com/johnhegarty">image credit Jack Hegarty</a></figcaption>
 </figure>
 <p>This leads to a problem… If our eyes can sense only red, green, and blue, how come we can see yellow? Our eyes and brains have evolved so that our red- and green-sensing cones both respond slightly to yellow. If our brain detects that both groups of cones are activated, it knows to interpret the color as yellow. And similar compromises are made for the other colors we can detect. For instance, purple activates both red- and blue-sensing cones.</p>
 <div class="further-reading">
@@ -143,7 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can exploit this imperfection of our eyes to make rich colorful displays (such as the screen you are viewing this on!) while using only three colors. For instance, since our eyes cannot distinguish between true purple and a mixture of blue and red, we don’t need a purple light source, only blue and red lights (and green for the other color combinations).</p>
 <p>If you look at a TV screen displaying a white page with a magnifying glass, you will see that it is made out of red, blue, and green dots. Combinations of these red, blue, and green dots make up the colorful displays you are looking at on your screen.</p>
 <figure>
-<img src="/images/bookpics/LED_close-up.jpg" title="An up-close picture of five SpinWheel LEDs, showing the red, green, and blue subpixels." alt="" /><figcaption>An up-close picture of some of the SpinWheel’s LEDs, showing the red, green, and blue subpixels.</figcaption>
+<img src="/images/bookpics/LED_close-up.jpg" title="An up-close picture of five SpinWheel LEDs, showing the red, green, and blue subpixels." alt="An up-close picture of some of the SpinWheel’s LEDs, showing the red, green, and blue subpixels." /><figcaption aria-hidden="true">An up-close picture of some of the SpinWheel’s LEDs, showing the red, green, and blue subpixels.</figcaption>
 </figure>
 <p>The SpinWheel’s colorful display uses a similar method. If you look closely at a LED light on the SpinWheel or in the above image, you can see that it contain 3 small light sources: one red, one green, and one blue. Combining these lights in different intensities allows for a wide variety of colors to be displayed on the LEDs. This will allow us to program the SpinWheel to display beautiful colorful patterns (while using only a small set of hardware components). 0-255 is the range used by the SpinWheel for the minimum and maximum of red, green, and blue allowed in the mixture (while these numbers look strange to a human, who would probably prefer the range 0-100, computers use binary numbers and it is more efficient to use ranges that are powers of 2, as in <span class="math inline">\(256=2^8\)</span>).</p>
 <p>Below, you can move the sliders to see how all the colors of the rainbow can be made by mixing just red, green, and blue (or our eyes can be convinced of this, even if it is not true).</p>
@@ -306,34 +307,34 @@ getT();
 </script>
 </div>
 <p>Since web browsers are not particularly well adapted to this type of rapid color change, the flicker at high speeds is rather unpleasant. However, as you speed up the color changes, you will start to see purple, and the original red and blue will become less clearly distinct. Unlike web browsers, the SpinWheel is up to this task. The following program will cycle between red and blue at variable delays. You can find this code in the examples menu under <code>File → Examples → SpinWearables → Biology_of_Sight →  Persistence_of_Vision</code>. Upload it to your SpinWheel and experiment with the value for the delay time by changing the line <code>int delay_time_in_milliseconds = 500;</code>. Changing <code>delay_time_in_milliseconds</code> changes the delay time on your SpinWheel like dragging the slider above changed the delay time for the demo above. At what delay time do you stop distinguishing the two original colors and start seeing only purple?</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">// BE CAREFUL IF YOU HAVE EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>  SpinWheel.begin();</span>
-<span id="cb1-8"><a href="#cb1-8"></a>}</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co">// BE CAREFUL IF YOU HAVE EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co">// Change this value! Experiment!</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="dt">int</span> delay_time_in_milliseconds = <span class="dv">500</span>;</span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-15"><a href="#cb1-15"></a>  <span class="co">// Show red...</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>);</span>
-<span id="cb1-17"><a href="#cb1-17"></a>  SpinWheel.drawFrame();</span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="co">// Wait...</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a>  delay(delay_time_in_milliseconds);</span>
-<span id="cb1-20"><a href="#cb1-20"></a>  <span class="co">// Show blue...</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>);</span>
-<span id="cb1-22"><a href="#cb1-22"></a>  SpinWheel.drawFrame();</span>
-<span id="cb1-23"><a href="#cb1-23"></a>  <span class="co">// Wait...</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>  delay(delay_time_in_milliseconds);  </span>
-<span id="cb1-25"><a href="#cb1-25"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// BE CAREFUL IF YOU HAVE EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Initialize all of the hardware on the SpinWheel.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">// BE CAREFUL IF YOU HAVE EPILEPSY AS THIS WILL CAUSE FLASHING COLORS!!!</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Change this value! Experiment!</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> delay_time_in_milliseconds <span class="op">=</span> <span class="dv">500</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Show red...</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>setLargeLEDsUniform<span class="op">(</span><span class="dv">255</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>drawFrame<span class="op">();</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Wait...</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span>delay_time_in_milliseconds<span class="op">);</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Show blue...</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>setLargeLEDsUniform<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">255</span><span class="op">);</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>drawFrame<span class="op">();</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Wait...</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span>delay_time_in_milliseconds<span class="op">);</span>  </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Right at the point where the red and blue stop being observable on their own, you can perform another experiment that showcases the persistence of vision effect. Instead of keeping the SpinWheel still, start shaking it back and forth rapidly. By doing this, the light emitters will be in different locations in space when they emit either red or blue, and this will let you once again distinguish the two colors (and stop seeing purple). Once you stop shaking the device, it will once again look purple.</p>
 <figure>
-<img src="/images/bookpics/fast_pov_streak.jpg" title="Picture of a fast-moving SpinWheel" alt="" /><figcaption>If you move the SpinWheel rapidly in front of your eyes, you will see the purple color separate in two distinct streaks of red and blue.</figcaption>
+<img src="/images/bookpics/fast_pov_streak.jpg" title="Picture of a fast-moving SpinWheel" alt="If you move the SpinWheel rapidly in front of your eyes, you will see the purple color separate in two distinct streaks of red and blue." /><figcaption aria-hidden="true">If you move the SpinWheel rapidly in front of your eyes, you will see the purple color separate in two distinct streaks of red and blue.</figcaption>
 </figure>
 <p>These two tools – faking rich colors by combining just red, green, and blue, and faking one complete image by rapidly cycling through partial images – are the basis for many technologies, and are tools we’ll keep using as we program the SpinWheel in more advanced ways.</p>
 <!--TODO: This further reading box seems inappropriate. Use different format for this block-->

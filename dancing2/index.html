@@ -19,6 +19,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -122,11 +123,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In the first part of the <a href="/dancing">Dancing with Color</a> adventure, we talked about moving through space in a line, but now imagine a dancer’s feet doing turn after turn and their arms being outstretched in different configurations. Can you picture how their arms and legs move through space in small tight turns, like chaînés turns, and wide turns, like an attitude or a fouetté?</p>
 <p>There are many different ways we can describe dances mathematically! A dancer moving side to side is a type of translational motion. A dancer turning in a circle is a type of rotational motion.</p>
 <figure>
-<img src="/images/bookpics/dance_turn.png" alt="" /><figcaption>Notice how in tight turns or wide turns, a dancer’s feet create different size circles on the floor. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
+<img src="/images/bookpics/dance_turn.png" alt="Notice how in tight turns or wide turns, a dancer’s feet create different size circles on the floor. image credit Mariya Krastanova" /><figcaption aria-hidden="true">Notice how in tight turns or wide turns, a dancer’s feet create different size circles on the floor. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
 </figure>
 <p>A simple way to describe rotational motion is as the movement around an axis. When a dancer spins, without moving around the stage, they are rotating around the axis of their body. There are special sensors in your SpinWheel, called gyroscopes, that allow it to detect rotational motion. We can use the output from these sensors to program the SpinWheel to respond to spinning!</p>
 <figure>
-<img src="/images/bookpics/dance_axis.png" alt="" /><figcaption>This picture demonstrates the three axes that the SpinWheel can detect rotation around. We’ll dive into what this means more in the rest of the lesson! <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
+<img src="/images/bookpics/dance_axis.png" alt="This picture demonstrates the three axes that the SpinWheel can detect rotation around. We’ll dive into what this means more in the rest of the lesson! image credit Mariya Krastanova" /><figcaption aria-hidden="true">This picture demonstrates the three axes that the SpinWheel can detect rotation around. We’ll dive into what this means more in the rest of the lesson! <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
 </figure>
 <h2 id="rotation-around-one-axis">Rotation Around One Axis</h2>
 <p>To begin, we can program the SpinWheel to light up when it detects rotation around one axis. This is similar to the dancer spinning in place where their body represents the axis of each turn. In this case, we’re measuring the rotation around the SpinWheel’s x-axis, which is stored in the variable <code>SpinWheel.gx</code>. <code>SpinWheel.gx</code> provides us with the angular velocity of the SpinWheel around the <span class="footnote">x-axis of the device.<span>To visualize what this represents on the SpinWheel, scroll up to the image of the SpinWheel and its axes.</span></span></p>
@@ -134,15 +135,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In our <a href="/vectors">Vectors and Motion</a> lesson, we cover in more depth the velocity you are probably already familiar with: velocity along a straight line (like a car moving down a straight stretch of highway). Above we reference another type of velocity, angular velocity, which is often used for describing rotatonal motion like that of our dancer spinning or a car speeding along a circular racetrack. You can read our <a href="/rotation">Rotation</a> lesson to learn more about angular velocity.</p>
 </div>
 <p>As the SpinWheel’s sensors are very sensitive to even small motions of the device, we only want to change color if the rotation is fast enough. This ensures that the lights don’t turn on when you are just holding it in your hand without intentionally moving it. In this case, we will only have the color change <code>if</code> the absolute value of the rotation is greater than 100 degrees per second, <code>abs(SpinWheel.gx) &gt; 100</code>. Below is the essential piece of code, where we tell the SpinWheel to light up only when motion is detected (<code>if (abs(SpinWheel.gx) &gt; 100)</code> and to otherwise (<code>else</code>) turn off all of the LEDs.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">// if there is enough rotation, then light up the </span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co">// LEDs a light blue</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="cf">if</span> (abs(SpinWheel.gx) &gt; <span class="dv">100</span>) {</span>
-<span id="cb1-4"><a href="#cb1-4"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>);</span>
-<span id="cb1-5"><a href="#cb1-5"></a>}</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co">// otherwise, keep the LEDs turned off</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="cf">else</span> {</span>
-<span id="cb1-8"><a href="#cb1-8"></a>  SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>);</span>
-<span id="cb1-9"><a href="#cb1-9"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// if there is enough rotation, then light up the </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">// LEDs a light blue</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>abs<span class="op">(</span>SpinWheel<span class="op">.</span>gx<span class="op">)</span> <span class="op">&gt;</span> <span class="dv">100</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>setLargeLEDsUniform<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">);</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">// otherwise, keep the LEDs turned off</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>setLargeLEDsUniform<span class="op">(</span><span class="dv">0</span><span class="op">,</span><span class="dv">0</span><span class="op">,</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>To see your SpinWheel light up in response to rotional motion, upload the full sketch (<code>File → Examples → SpinWearables → Dancing_with_Color → 1D_Rotation_Light_Up_Basic</code>) to your SpinWheel and explore what happens when you rotate your SpinWheel. You can can also read more about what each command in <a href="/codedoc/examples/Dancing_with_Color/1D_Rotation_Light_Up_Basic/1D_Rotation_Light_Up_Basic.ino.html">this 1D Rotation sketch</a> does.</p>
 <p>If you prefer other colors to the light blue that we chose, then you can modify the code for this example to light up your SpinWheel a different color.</p>
 <div class="further-reading">
@@ -150,24 +151,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <h2 id="changing-color-with-the-direction-of-rotation">Changing Color with the Direction of Rotation</h2>
 <p>Now let’s modify the <code>1D_Rotation_Light_Up_Basic</code> sketch to have the LEDs change color based on the direction of rotation. We include the important new elements of the code below, including defining new variables <code>pos_spin</code> and <code>neg_spin</code> to store the direction that the SpinWheel is rotating around the x-axis.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">// If the x rotation (gx) is big enough, then </span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co">// change the color of the big LEDs based on the</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="co">// direction of the spin</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="cf">if</span> (SpinWheel.gx &gt; <span class="dv">100</span>) {</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  pos_spin = <span class="dv">255</span>;</span>
-<span id="cb2-6"><a href="#cb2-6"></a>  neg_spin = <span class="dv">0</span>;</span>
-<span id="cb2-7"><a href="#cb2-7"></a>}</span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="cf">else</span> <span class="cf">if</span> (SpinWheel.gx &lt; -<span class="dv">100</span>) {</span>
-<span id="cb2-9"><a href="#cb2-9"></a>  neg_spin = <span class="dv">255</span>;</span>
-<span id="cb2-10"><a href="#cb2-10"></a>  pos_spin = <span class="dv">0</span>;</span>
-<span id="cb2-11"><a href="#cb2-11"></a>}</span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="cf">else</span> {</span>
-<span id="cb2-13"><a href="#cb2-13"></a>  pos_spin = <span class="dv">0</span>;</span>
-<span id="cb2-14"><a href="#cb2-14"></a>  neg_spin = <span class="dv">0</span>;</span>
-<span id="cb2-15"><a href="#cb2-15"></a>}</span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co">// If gx is positive, set the big LEDs to light up green</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="co">// If gx is negative, set the big LEDs to light up blue</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a>SpinWheel.setLargeLEDsUniform(<span class="dv">0</span>, pos_spin, neg_spin);</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// If the x rotation (gx) is big enough, then </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">// change the color of the big LEDs based on the</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">// direction of the spin</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>SpinWheel<span class="op">.</span>gx <span class="op">&gt;</span> <span class="dv">100</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  pos_spin <span class="op">=</span> <span class="dv">255</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  neg_spin <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>SpinWheel<span class="op">.</span>gx <span class="op">&lt;</span> <span class="op">-</span><span class="dv">100</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  neg_spin <span class="op">=</span> <span class="dv">255</span><span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  pos_spin <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  pos_spin <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  neg_spin <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">// If gx is positive, set the big LEDs to light up green</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">// If gx is negative, set the big LEDs to light up blue</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>SpinWheel<span class="op">.</span>setLargeLEDsUniform<span class="op">(</span><span class="dv">0</span><span class="op">,</span> pos_spin<span class="op">,</span> neg_spin<span class="op">);</span></span></code></pre></div>
 <p>In this script, the LEDs light up green when the device is spun around the x-axis in one direction (<code>if (SpinWheel.gx &gt; 100)</code>), and blue when spun in the other direction (<code>else if (SpinWheel.gx &lt; -100)</code>). The <code>else</code> statment ensures that the SpinWheel’s LEDs turn off when not enough rotation is detected. You can upload the sketch from: <code>Examples → SpinWearables → Dancing_with_Color → 1D_Rotation_Light_Up_Advanced</code> to give it a try on your own SpinWheel. For a more detailed explanation of this code, you can also check out <a href="/codedoc/examples/Dancing_with_Color/1D_Rotation_Light_Up_Advanced/1D_Rotation_Light_Up_Advanced.ino.html">this script</a>.</p>
 <h2 id="modifying-animation-adventure-sketches-to-respond-to-motion">Modifying Animation Adventure Sketches to Respond to Motion</h2>
 <p>In the <a href="/animation">Intro to Animation</a> and <a href="/animation2">Animations and Patterns</a> adventures, you created animations for the SpinWheel that relied on time. It is possible to use those same sketches, but only have them change color when rotational motion is detected. For instance, check out <a href="/codedoc/examples/Dancing_with_Color/Rainbow_Chase_Advanced/Rainbow_Chase_Advanced.ino.html">this version of the rainbow chase sketch</a> to see how you can use rotation around the z-axis of the SpinWheel instead of time to update the animation. You can also upload the full sketch onto your SpinWheel from here: full sketch (<code>Examples → SpinWearables → Dancing_with_Color → Rainbow_Chase_Advanced</code>.</p>
@@ -192,7 +193,7 @@ What about making it respond to motion in all three directions? For a hint of ho
 <p>Using the code we’ve presented as an inspiration, try writing your own sketch where the SpinWheel’s LEDs respond to your motion!</p>
 <p>Here is the diagram of the SpinWheel again, if you want a reminder of what number corresponds to which LED as you are creating your own dancing companion sketches:</p>
 <figure>
-<img src="/images/spinwheel_with_numbers.png" title="SpinWheel LED numbering" alt="" /><figcaption>SpinWheel LED numbering.</figcaption>
+<img src="/images/spinwheel_with_numbers.png" title="SpinWheel LED numbering" alt="SpinWheel LED numbering." /><figcaption aria-hidden="true">SpinWheel LED numbering.</figcaption>
 </figure>
 <p><a class="imagecredit" href="https://johnhegarty8.wixsite.com/johnhegarty">Header image credit: Jack Hegarty</a></p>
 <script data-isso="//comments.spinwearables.com/"

@@ -8,8 +8,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="/reveal.js/css/reset.css">
-  <link rel="stylesheet" href="/reveal.js/css/reveal.css">
+  <link rel="stylesheet" href="/reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="/reveal.js/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,7 @@
     pre > code.sourceCode { white-space: pre; position: relative; }
     pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
     div.sourceCode { margin: 1em 0; }
     pre.sourceCode { margin: 0; }
@@ -79,20 +80,10 @@
     code span.va { color: #19177c; } /* Variable */
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
-  <link rel="stylesheet" href="/reveal.js/css/theme/black.css" id="theme">
+  <link rel="stylesheet" href="/reveal.js/dist/theme/black.css" id="theme">
   <link rel="stylesheet" href="/custom_slides.css"/>
-  <!-- Printing and PDF exports -->
-  <script>
-    var link = document.createElement( 'link' );
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = window.location.search.match( /print-pdf/gi ) ? '/reveal.js/css/print/pdf.css' : '/reveal.js/css/print/paper.css';
-    document.getElementsByTagName( 'head' )[0].appendChild( link );
-  </script>
-  <!--[if lt IE 9]>
-  <script src="/reveal.js/lib/js/html5shiv.js"></script>
-  <![endif]-->
 </head>
 <body>
   <div class="reveal">
@@ -115,7 +106,7 @@
 <section id="simple-levels" class="title-slide slide level1">
 <h1>Simple Levels</h1>
 <figure>
-<img data-src="/images/bookpics/round_maze.jpg" alt="" /><figcaption>A toy in which the tilt can force a ball to roll in a given direction. <a class="imagecredit" href="https://commons.wikimedia.org/wiki/File:Round_maze.jpg">image credit Wikimedia</a></figcaption>
+<img data-src="/images/bookpics/round_maze.jpg" alt="A toy in which the tilt can force a ball to roll in a given direction. image credit Wikimedia" /><figcaption aria-hidden="true">A toy in which the tilt can force a ball to roll in a given direction. <a class="imagecredit" href="https://commons.wikimedia.org/wiki/File:Round_maze.jpg">image credit Wikimedia</a></figcaption>
 </figure>
 </section>
 <section class="slide level2">
@@ -130,18 +121,17 @@ Bubbles rise against gravity, both in the cylinder of the level and in a glass o
 <section class="slide level2">
 
 <figure>
-<img data-src="/images/bookpics/onebubble.jpg" alt="" /><figcaption>A bubble level. <a class="imagecredit" href="https://publiclab.org/notes/mathew/10-26-2015/deploying-passive-particle-monitors">image credit Public Lab</a></figcaption>
+<img data-src="/images/bookpics/onebubble.jpg" alt="A bubble level. image credit Public Lab" /><figcaption aria-hidden="true">A bubble level. <a class="imagecredit" href="https://publiclab.org/notes/mathew/10-26-2015/deploying-passive-particle-monitors">image credit Public Lab</a></figcaption>
 </figure>
 </section>
 <section class="slide level2">
 
-</section>
-</section>
+</section></section>
 <section>
 <section id="in-two-dimensions" class="title-slide slide level1">
 <h1>In Two Dimensions</h1>
 <figure>
-<img data-src="/images/bookpics/twobubble.jpg" alt="" /><figcaption>A bubble level with separate sensors for each axis of tilt. <a class="imagecredit" href="https://publiclab.org/notes/mathew/10-26-2015/deploying-passive-particle-monitors">image credit Public Lab</a></figcaption>
+<img data-src="/images/bookpics/twobubble.jpg" alt="A bubble level with separate sensors for each axis of tilt. image credit Public Lab" /><figcaption aria-hidden="true">A bubble level with separate sensors for each axis of tilt. <a class="imagecredit" href="https://publiclab.org/notes/mathew/10-26-2015/deploying-passive-particle-monitors">image credit Public Lab</a></figcaption>
 </figure>
 </section>
 <section class="slide level2">
@@ -509,109 +499,114 @@ animate();
 <section class="slide level2">
 
 <figure>
-<img data-src="/images/bookpics/dance_axis.png" alt="" /><figcaption>These are the three axes that the SpinWheel can detect acceleration and gravity along. In the interactive 3D diagram you can see how the vector of gravitational acceleration (in grey) is decomposed along these three axes. You can drag, ctrl+drag, or scroll on the 3D image to rotate, pan, or zoom the camera.<a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
+<img data-src="/images/bookpics/dance_axis.png" alt="These are the three axes that the SpinWheel can detect acceleration and gravity along. In the interactive 3D diagram you can see how the vector of gravitational acceleration (in grey) is decomposed along these three axes. You can drag, ctrl+drag, or scroll on the 3D image to rotate, pan, or zoom the camera.image credit Mariya Krastanova" /><figcaption aria-hidden="true">These are the three axes that the SpinWheel can detect acceleration and gravity along. In the interactive 3D diagram you can see how the vector of gravitational acceleration (in grey) is decomposed along these three axes. You can drag, ctrl+drag, or scroll on the 3D image to rotate, pan, or zoom the camera.<a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
 </figure>
 </section>
 <section class="slide level2">
 
 <h3 id="programming-your-own-tilt-sensor">Programming your own Tilt Sensor</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables;</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="co">// Connect to the computer, so we can read status messages.</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>  Serial.begin(<span class="dv">115200</span>);</span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="co">// Ensure the special SpinWheel hardware is working.</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>  SpinWheel.begin();  </span>
-<span id="cb1-9"><a href="#cb1-9"></a>}</span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="dt">void</span> loop() {</span>
-<span id="cb1-12"><a href="#cb1-12"></a>  <span class="co">// Send a confirmation message over and over.</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>  Serial.println(<span class="st">&quot;I am working!&quot;</span>); </span>
-<span id="cb1-14"><a href="#cb1-14"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Connect to the computer, so we can read status messages.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">115200</span><span class="op">);</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Ensure the special SpinWheel hardware is working.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>begin<span class="op">();</span>  </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Send a confirmation message over and over.</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;I am working!&quot;</span><span class="op">);</span> </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section class="slide level2">
 
 <h3 id="measuring-tilt">Measuring Tilt</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">void</span> setup() {</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>  SpinWheel.begin();</span>
-<span id="cb2-7"><a href="#cb2-7"></a>}</span>
-<span id="cb2-8"><a href="#cb2-8"></a></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="dt">void</span> loop() {</span>
-<span id="cb2-10"><a href="#cb2-10"></a>  <span class="co">// Read all sensor data.</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>  SpinWheel.readIMU();</span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a>  <span class="co">// Save the x-axis measurement in a variable.</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
-<span id="cb2-15"><a href="#cb2-15"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables<span class="op">;</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Read all sensor data.</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>readIMU<span class="op">();</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Save the x-axis measurement in a variable.</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> x <span class="op">=</span> SpinWheel<span class="op">.</span>ax<span class="op">*</span><span class="dv">255</span><span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section class="slide level2">
 
 <h3 id="responding-to-tilt-along-the-x-axis">Responding to Tilt Along the X-axis</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables; </span>
-<span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="dt">void</span> setup() {</span>
-<span id="cb3-5"><a href="#cb3-5"></a>  <span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>  SpinWheel.begin();</span>
-<span id="cb3-7"><a href="#cb3-7"></a>}</span>
-<span id="cb3-8"><a href="#cb3-8"></a></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="dt">void</span> loop() {</span>
-<span id="cb3-10"><a href="#cb3-10"></a>  <span class="co">// Read all sensor data.</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a>  SpinWheel.readIMU();</span>
-<span id="cb3-12"><a href="#cb3-12"></a></span>
-<span id="cb3-13"><a href="#cb3-13"></a>  <span class="co">// Save the x-axis measurement in a variable.</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a>  <span class="dt">int</span> x = SpinWheel.ax*<span class="dv">255</span>;</span>
-<span id="cb3-15"><a href="#cb3-15"></a></span>
-<span id="cb3-16"><a href="#cb3-16"></a>  <span class="co">// Turn off all LEDs.</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a>  SpinWheel.clearAllLEDs();</span>
-<span id="cb3-18"><a href="#cb3-18"></a></span>
-<span id="cb3-19"><a href="#cb3-19"></a>  <span class="co">// If the tilt is in a given direction,</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a>  <span class="co">// turn on the corresponding LED.</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a>  <span class="co">// We only want the SpinWheel to register</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a>  <span class="co">// if the tilt is sufficiently large.</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a>  <span class="cf">if</span> (x &gt; <span class="dv">10</span>) {</span>
-<span id="cb3-24"><a href="#cb3-24"></a>    SpinWheel.setLargeLED(<span class="dv">5</span>, x, x, x);</span>
-<span id="cb3-25"><a href="#cb3-25"></a>  }</span>
-<span id="cb3-26"><a href="#cb3-26"></a>  <span class="cf">else</span> <span class="cf">if</span> (x &lt; -<span class="dv">10</span>) {</span>
-<span id="cb3-27"><a href="#cb3-27"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>,-x,-x,-x);</span>
-<span id="cb3-28"><a href="#cb3-28"></a>  }</span>
-<span id="cb3-29"><a href="#cb3-29"></a></span>
-<span id="cb3-30"><a href="#cb3-30"></a>  SpinWheel.drawFrame();</span>
-<span id="cb3-31"><a href="#cb3-31"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;SpinWearables.h&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> SpinWearables<span class="op">;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Ensure all of the SpinWheel hardware is on.</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Read all sensor data.</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>readIMU<span class="op">();</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Save the x-axis measurement in a variable.</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> x <span class="op">=</span> SpinWheel<span class="op">.</span>ax<span class="op">*</span><span class="dv">255</span><span class="op">;</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Turn off all LEDs.</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>clearAllLEDs<span class="op">();</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">// If the tilt is in a given direction,</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// turn on the corresponding LED.</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">// We only want the SpinWheel to register</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="co">// if the tilt is sufficiently large.</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    SpinWheel<span class="op">.</span>setLargeLED<span class="op">(</span><span class="dv">5</span><span class="op">,</span> x<span class="op">,</span> x<span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>x <span class="op">&lt;</span> <span class="op">-</span><span class="dv">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    SpinWheel<span class="op">.</span>setLargeLED<span class="op">(</span><span class="dv">7</span><span class="op">,-</span>x<span class="op">,-</span>x<span class="op">,-</span>x<span class="op">);</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  SpinWheel<span class="op">.</span>drawFrame<span class="op">();</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a>  <span class="cf">if</span> (x &gt; <span class="dv">10</span>) {</span>
-<span id="cb4-2"><a href="#cb4-2"></a>    SpinWheel.setLargeLED(<span class="dv">5</span>, x, x, x);</span>
-<span id="cb4-3"><a href="#cb4-3"></a>  }</span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="cf">else</span> <span class="cf">if</span> (x &lt; -<span class="dv">10</span>) {</span>
-<span id="cb4-5"><a href="#cb4-5"></a>    SpinWheel.setLargeLED(<span class="dv">7</span>,-x,-x,-x);</span>
-<span id="cb4-6"><a href="#cb4-6"></a>  }</span></code></pre></div>
-</section>
-</section>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    SpinWheel<span class="op">.</span>setLargeLED<span class="op">(</span><span class="dv">5</span><span class="op">,</span> x<span class="op">,</span> x<span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>x <span class="op">&lt;</span> <span class="op">-</span><span class="dv">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    SpinWheel<span class="op">.</span>setLargeLED<span class="op">(</span><span class="dv">7</span><span class="op">,-</span>x<span class="op">,-</span>x<span class="op">,-</span>x<span class="op">);</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
+</section></section>
     </div>
   </div>
 
-  <script src="/reveal.js/js/reveal.js"></script>
+  <script src="/reveal.js/dist/reveal.js"></script>
+
+  // reveal.js plugins
+  <script src="/reveal.js/plugin/notes/notes.js"></script>
+  <script src="/reveal.js/plugin/search/search.js"></script>
+  <script src="/reveal.js/plugin/zoom/zoom.js"></script>
 
   <script>
 
       // Full list of configuration options available at:
-      // https://github.com/hakimel/reveal.js#configuration
+      // https://revealjs.com/config/
       Reveal.initialize({
+      
         // Push each slide change to the browser history
         history: true,
 
-        // Optional reveal.js plugins
-        dependencies: [
-          { src: '/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-          { src: '/reveal.js/plugin/zoom-js/zoom.js', async: true },
-          { src: '/reveal.js/plugin/notes/notes.js', async: true }
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
         ]
       });
     </script>
