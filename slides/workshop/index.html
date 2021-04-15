@@ -927,30 +927,47 @@ Mention that comments will be used a lot for explanations in the example pieces 
 <section id="intro-to-animation" class="title-slide slide level1">
 <h1>Intro to Animation</h1>
 <p>How to use code to light up the display and make properly timed animation frames.</p>
+<aside class="notes">
+<h3>
+To be done in Session 2 (10ish minutes of mostly instructing students)
+</h3>
+<p><em>We learnt how to make static images and we were introduced to the very basics of creating a program in this language. Now we will join the two skills into making a image that changes through time.</em></p>
+See the <a href="/animation">Intro to Animation</a> and <a href="/animation2">Animations and Patterns</a> pages for details.
+</aside>
 </section>
 <section class="slide level2">
 
-<link rel="stylesheet" href="/simspinwheel/simspinwheel.css">
-<script src='/simspinwheel/simspinwheel.js'></script>
 <video src="/images/behindthescenes/pretty_device.mp4" muted autoplay playsinline loop>
 </video>
+<aside class="notes">
+Just a pretty video showing what is possible.
+</aside>
 </section>
 <section class="slide level2">
 
 <figure>
 <img data-src="/images/bookpics/generative_art.png" alt="We will create “generative” art. Instead of having pre-drawn animation frames, we will let the computer generate them from scratch. image credit Mariya Krastanova" /><figcaption aria-hidden="true">We will create “generative” art. Instead of having pre-drawn animation frames, we will let the computer generate them from scratch. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
 </figure>
+<aside class="notes">
+<em>There is a caveat to what we call “animation” here. We are not making a sequence of cartoon drawings, rather we will be making more abstract colorful patterns. This type of art is frequently called <strong>generative art</strong>, because we programmed a computer to generate the artwork, instead of creating the artwork directly. It is a great way to create an infinite family of art.</em>
+</aside>
 </section>
 <section id="timing" class="slide level2">
 <h2>Timing</h2>
 <video src="/images/bookpics/simple_blink.mp4" muted autoplay playsinline loop>
 </video>
 <p>How does the computer keep time so that it knows when to change a frame?</p>
+<aside class="notes">
+<em>We want our image to change through time, i.e. to depend on the current time. Therefore we need to find a way to <strong>measure</strong> time in our program.</em>
+</aside>
 </section>
 <section id="timing-1" class="slide level2">
 <h2>Timing</h2>
 <div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> t <span class="op">=</span> millis<span class="op">();</span></span></code></pre></div>
 <p><code>millis()</code> gives the number of milliseconds since the device was turned on.</p>
+<aside class="notes">
+<em>Storing the result of the function <code>millis</code> (the number of millisecondds since startup) lets us use it later to make brightness or color depend on time.</em>
+</aside>
 </section>
 <section class="slide level2">
 
@@ -961,13 +978,20 @@ Mention that comments will be used a lot for explanations in the example pieces 
 Every time the <code>loop()</code> block is run, <code>millis()</code> determines the number of milliseconds since <code>setup()</code> was run and stores it in the variable <code>t</code>.
 </figcaption>
 </figure>
+<aside class="notes">
+Similar to previous videos that showcase the <code>setup</code> and many consecutive <code>loop</code> executions, here we repeat this demonstration to show how the value of <code>t</code> changes as each <code>loop</code> function is executed. Mention that there is some mismatch here in the numbers: <code>t</code> will grow at each execution, but depending on how fast each <code>loop</code> is, <code>t</code> would be growing by different amounts.
+</aside>
 </section>
 <section class="slide level2">
 
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> t_repeating <span class="op">=</span> t <span class="op">%</span> <span class="dv">2500</span><span class="op">;</span></span></code></pre></div>
 <figure>
 <img data-src="/images/Modular_division_timeline.png" title="Division of time (shown in blue) into intervals of 2500 (shown in orange)" alt="Division of time into intervals of 2500. In this example, 5600 milliseconds have passed, which is 2 full cycles of 2500 milliseconds with a remainder of 600." /><figcaption aria-hidden="true">Division of time into intervals of 2500. In this example, 5600 milliseconds have passed, which is 2 full cycles of 2500 milliseconds with a remainder of 600.</figcaption>
 </figure>
-<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> t_repeating <span class="op">=</span> t <span class="op">%</span> <span class="dv">2500</span><span class="op">;</span></span></code></pre></div>
+<aside class="notes">
+<p><em>If we want to have images that repeat, we need to divide the measured time in equal intervals and see how much time has passed since the start of the current interval (not since powering on the device). We can do that by performing division with remainder, and retaining the remainder. The <code>%</code> sign is used in this language to denote this remainder calculation.</em></p>
+Spend some time showing through the graphical representation of this operation, and stress that we do this only if we want repeating patterns (where we will use <code>t_repeating</code> instead of <code>t</code>)
+</aside>
 </section>
 <section class="slide level2">
 
@@ -979,9 +1003,15 @@ Every time the <code>loop()</code> block is run, <code>millis()</code> determine
 Using time to create a repeating pattern: the value returned by <code>millis()</code> (in blue) is divided into equal intervals. The remainder of that division (in orange) provides a steady repeating sequence of numbers on which we can base a repeating animation.
 </figcaption>
 </figure>
+<aside class="notes">
+Play the video and reprise a similar explanation of the intervals and remainders, but in the new graphical context.
+</aside>
 </section>
 <section id="a-picture-that-depends-on-time" class="slide level2">
 <h2>A picture that depends on time</h2>
+<aside class="notes">
+<em>And now, finally, a simple changing image.</em>
+</aside>
 </section>
 <section class="slide level2">
 
@@ -1000,17 +1030,33 @@ void loop() {
 }
 </pre>
 </div>
+<aside class="notes">
+<p><em>And now, finally, a simple changing image.</em></p>
+<p>Go line by line in it. Stress that the brightness ramps up gently but then turns of abruptly (we will do more pleasing patterns soon). The students can also get this code from the examples menu at <a href="/codedoc/examples/Animations_and_Patterns/Simple_Blink/"><code>Animaitions_and_Patterns Simple_Blink</code></a>, which is a very heavily commented version. Be sure to be showing your own Arduino editor if you go that route.</p>
+We are sweeping under the rug the fact that we aim for <code>b</code> to always be between 0 and 255, because those are the permitted scales. Feel free to talk a bit more about it.
+</aside>
 </section>
 <section class="slide level2">
 
 <figure>
 <img data-src="/images/bookpics/creating_own_functions.png" alt="Check out our lesson on the building blocks of coding to learn more about the essential pieces of writing a sketch. image credit Mariya Krastanova" /><figcaption aria-hidden="true">Check out our lesson on the building blocks of coding to learn more about the essential pieces of writing a sketch. <a class="imagecredit" href="https://monochra.com/">image credit Mariya Krastanova</a></figcaption>
 </figure>
+<aside class="notes">
+A little inspirational image about making your own fancier patterns.
+</aside>
 </section></section>
 <section>
 <section id="animations-and-patterns" class="title-slide slide level1">
 <h1>Animations and Patterns</h1>
 <p>Common tools for more pleasant animations</p>
+<aside class="notes">
+<h3>
+To be done in Session 2 (20ish minutes with a lot of interaction from students)
+</h3>
+<p><em>To the aforementioned simple idea of “measuring repeating intervals of time” we will now add a few <strong>suggested</strong> extra patterns that might be of interest. They are not speical in any way, but they are pleasant and convenient. You can use them directly or even create completely new patterns).</em></p>
+<p>See <a href="/animation2">Animations and Patterns</a> pages for details.</p>
+Just follow along with the slide content and code for the next few slides, going through examples. Each example is also available from the examples menu in the Arduino software (the sketch name is given on each slide).
+</aside>
 </section>
 <section id="smoother-pulsing" class="slide level2">
 <h2>Smoother pulsing</h2>
@@ -1071,6 +1117,9 @@ void loop() {
 </section>
 <section id="non-uniform-patterns-and-accessing-separate-leds" class="slide level2">
 <h2>Non-uniform patterns and accessing separate LEDs</h2>
+<aside class="notes">
+Here we will slowly transition to examples that the students will be modifying and experimenting with. Go through the first one relatively quickly, just stressing the idea that we can calculate new variables from the old variables, such that some relationship is imposed between LEDs (e.g., that they are the opposite brightness of each other).
+</aside>
 </section>
 <section class="slide level2">
 
@@ -1119,6 +1168,9 @@ void loop() {
 </pre>
 </div>
 <p><a href="/codedoc/examples/Animations_and_Patterns/Rainbow_Chase"><code>Rainbow_Chase</code></a></p>
+<aside class="notes">
+Here we also started adding arbitrary artificial delays between LEDs so that it looks like the colors are chasing each other. Spend the rest of the session simply experimenting with this sketch and making it fancier and weirder. Use the small LEDs too. A lot of copy-pasting is fine too!
+</aside>
 </section>
 <section class="slide level2">
 
